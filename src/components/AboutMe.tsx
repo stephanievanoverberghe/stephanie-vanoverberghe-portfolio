@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Button from './Button';
 
-export default function Contact() {
+export default function AboutMe() {
     return (
         <div className="flex flex-col h-full justify-between items-center text-center text-[#003962]">
             {/* Haut : photo + nom + infos */}

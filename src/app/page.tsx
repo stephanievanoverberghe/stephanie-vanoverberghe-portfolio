@@ -1,4 +1,4 @@
-import Contact from '@/components/Contact';
+import AboutMe from '@/components/AboutMe';
 
 export default function HomePage() {
     return (
@@ -6,7 +6,7 @@ export default function HomePage() {
             {/* Mobile + Tablette = 1 grille, Desktop = 2 lignes flex */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:hidden">
                 <section className="bg-white rounded-xl p-4 border-r border-b border-[#0384E0]">
-                    <Contact />
+                    <AboutMe />
                 </section>
                 <section className="bg-white rounded-xl p-4 shadow-md h-[473px]" />
                 <section className="bg-white rounded-xl p-4 shadow-md h-[473px]" />
@@ -19,7 +19,7 @@ export default function HomePage() {
                 {/* Ligne du haut */}
                 <section className="flex gap-6 w-full">
                     <section className="bg-white rounded-xl p-4 border-r border-b border-[#0384E0] flex-[1]">
-                        <Contact />
+                        <AboutMe />
                     </section>
                     <section className="bg-white rounded-xl p-4 shadow-md h-[473px] flex-[2.5]" />
                     <section className="bg-white rounded-xl p-4 shadow-md h-[473px] flex-[1.3]" />

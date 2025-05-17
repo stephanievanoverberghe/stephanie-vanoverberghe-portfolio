@@ -13,9 +13,9 @@ export default function Header() {
             const currentScrollY = window.scrollY;
 
             if (currentScrollY > lastScrollY && currentScrollY > 50) {
-                setShowMobileBar(false); // vers le bas → cache
+                setShowMobileBar(false);
             } else {
-                setShowMobileBar(true); // vers le haut → montre
+                setShowMobileBar(true);
             }
 
             setLastScrollY(currentScrollY);
