@@ -19,7 +19,7 @@ export default function RootLayout({
                 {/* Font Awesome Kit */}
                 <Script src="https://kit.fontawesome.com/e5228146fd.js" crossOrigin="anonymous" strategy="beforeInteractive" />
                 <Header />
-                <main className="container mx-auto">{children}</main>
+                <main className="w-full">{children}</main>
             </body>
         </html>
     );
