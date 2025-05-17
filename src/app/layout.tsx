@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className="bg-[#bddaee] text-[#003962] mx-14 min-h-screen">
+            <body className="bg-[#bddaee] text-[#003962] mx-2.5 md:mx-5 lg:mx-14 min-h-screen mb-2.5 =">
                 {/* Font Awesome Kit */}
                 <Script src="https://kit.fontawesome.com/e5228146fd.js" crossOrigin="anonymous" strategy="beforeInteractive" />
                 <Header />
