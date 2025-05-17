@@ -38,10 +38,10 @@ export default function Header() {
                     </div>
 
                     <div className="flex gap-2">
-                        <button className="rounded-full w-10 h-10 bg-[#dde6ec] text-blue-500 hover:bg-blue-500 hover:text-white shadow-[3px_3px_12px_0px_#0384e0]">
+                        <button className="rounded-full w-10 h-10 bg-[#dde6ec] cursor-pointer text-[#0384E0] hover:bg-[#0384E0] hover:text-white shadow-[3px_3px_12px_0px_#0384e0] transition-all duration-200">
                             <i className="fas fa-moon" />
                         </button>
-                        <button className="rounded-full w-10 h-10 bg-[#dde6ec] text-blue-500 hover:bg-blue-500 hover:text-white font-bold shadow-[3px_3px_12px_0px_#0384e0]">
+                        <button className="rounded-full w-10 h-10 bg-[#dde6ec] cursor-pointer text-[#0384E0] hover:bg-[#0384E0] hover:text-white font-bold shadow-[3px_3px_12px_0px_#0384e0] transition-all duration-200">
                             EN
                         </button>
                     </div>
