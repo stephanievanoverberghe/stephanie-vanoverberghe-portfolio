@@ -5,7 +5,7 @@ export default function Footer() {
 
     return (
         <footer role="contentinfo" className="mt-14 border-t" style={{ borderColor: 'var(--border-soft)' }}>
-            {/* Ruban harmonique (écho du header) */}
+            {/* Ruban */}
             <div
                 aria-hidden
                 className="h-[3px] w-full"
@@ -25,13 +25,7 @@ export default function Footer() {
                             <p className="mt-2 opacity-80">Je recherche un poste front-end React/Next.js. Parlons de vos besoins.</p>
                         </div>
                         <div className="flex flex-wrap gap-3 sm:justify-end">
-                            <Link
-                                href="/contact"
-                                className="btn btn-cta"
-                                aria-label="Me contacter"
-                                title="Me contacter"
-                                style={{ color: '#FDFDFD' }} /* texte clair, pas blanc pur */
-                            >
+                            <Link href="/contact" className="btn btn-cta" aria-label="Me contacter" title="Me contacter" style={{ color: '#FDFDFD' }}>
                                 Me contacter
                             </Link>
                             <a href="/cv-vanoverberghe-stephanie.pdf" className="btn btn-secondary" aria-label="Télécharger mon CV en PDF" title="Télécharger mon CV">
@@ -69,17 +63,17 @@ export default function Footer() {
 
                     {/* Raccourcis utiles */}
                     <div className="grid gap-2 content-start">
-                        <a href="/cv-vanoverberghe-stephanie.pdf" className="text-sm hover:opacity-90">
+                        <a href="/cv-vanoverberghe-stephanie.pdf" target="_blank" rel="noopener noreferrer" className="text-sm hover:opacity-90">
                             CV (PDF)
                         </a>
                         <Link href="/contact" className="text-sm hover:opacity-90">
                             Me contacter
                         </Link>
 
-                        <a href="https://github.com/stephanievanoverberghe" className="text-sm hover:opacity-90">
+                        <a href="https://github.com/stephanievanoverberghe" target="_blank" rel="noopener noreferrer" className="text-sm hover:opacity-90">
                             GitHub
                         </a>
-                        <a href="https://www.linkedin.com/in/stephanie-vanoverberghe/" className="text-sm hover:opacity-90">
+                        <a href="https://www.linkedin.com/in/stephanie-vanoverberghe/" target="_blank" rel="noopener noreferrer" className="text-sm hover:opacity-90">
                             LinkedIn
                         </a>
                     </div>

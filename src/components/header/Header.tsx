@@ -137,7 +137,7 @@ export default function Header() {
                 </div>
             </motion.div>
 
-            {/* Menu mobile (tiroir) */}
+            {/* Menu mobile*/}
             <AnimatePresence>
                 {open && (
                     <motion.nav
@@ -153,7 +153,7 @@ export default function Header() {
                             background: 'color-mix(in oklab, var(--paper) 94%, black)',
                         }}
                     >
-                        {/* Carte identité brève */}
+                        {/* Carte identité */}
                         <div className="container-page py-3">
                             <div
                                 className="rounded-2xl p-4 border"
