@@ -1,0 +1,47 @@
+{
+    "slug": "mysteres-a-la-carte",
+    "title": "Mystères à la carte",
+    "subtitle": "Escape game culinaire - Bastille, Paris",
+    "year": 2025,
+    "role": ["Front-end", "UI/UX", "Intégration"],
+    "stack": ["React", "Next.js", "TypeScript", "Tailwind", "Framer Motion"],
+    "context": "Expérience immersive mêlant jeu d’enquête et gastronomie, avec indices cachés dans les menus et les plats, et un service complice en salle.",
+    "objectives": [
+        "Mettre en avant les 4 menus (tarifs, public) et guider vite vers la réservation (mobile-first).",
+        "Assurer lisibilité/contraste en thème sombre premium (tokens or/ivoire/accents).",
+        "Structurer une one-page scannable : Concept → Expériences → À quoi s’attendre → Réserver → FAQ → Accès."
+    ],
+    "challenges": [
+        "Équilibrer narration et clarté des informations (durée, joueurs, tarifs).",
+        "Conserver de bonnes perfs et une lecture confortable en dark mode.",
+        "Réaliser une hiérarchie visuelle cohérente sans noir/blanc purs."
+    ],
+    "solutions": [
+        "Système de design via Tailwind (v4) et tokens du globals : background #0B0B0E, foreground #EDE9E0, primary #D4AF37, accent #0F1A1A.",
+        "Sections courtes, CTA visibles, ancrages internes et formulaire de demande de réservation.",
+        "Micro-interactions sobres et squelettes de chargement (UX rapide perçue)."
+    ],
+    "highlights": [
+        "4 menus clairs : Carn Hivor (60€), Botanique (50€), Évasion (50€), Aventure gourmande enfants (30€).",
+        "Informations clés lisibles : 60–90 min, 2–6 joueurs, difficulté modulable.",
+        "Dark UI premium, typographie lisible et contenu scannable."
+    ],
+    "links": {
+        "demo": "https://mysteres-a-la-carte.vercel.app/",
+        "repo": "https://github.com/stephanievanoverberghe/mysteres-a-la-carte"
+    },
+    "log": {
+        "image": "/images/projects/mysteres-a-la-carte/cover.png",
+        "alt": "Logo Mystères à la carte"
+    },
+    "hero": {
+        "image": "/images/projects/mysteres-a-la-carte/desktop-hero.png",
+        "alt": "Vue d’ensemble — Mystères à la carte"
+    },
+    "gallery": [
+        { "src": "/images/projects/mysteres-a-la-carte/desktop-2.png", "alt": "Écran 1" },
+        { "src": "/images/projects/mysteres-a-la-carte/mobile-1.png", "alt": "Écran 2" },
+        { "src": "/images/projects/mysteres-a-la-carte/mobile-2.png", "alt": "Écran 3" },
+        { "src": "/images/projects/mysteres-a-la-carte/mobile-menu.png", "alt": "Écran 4" }
+    ]
+}

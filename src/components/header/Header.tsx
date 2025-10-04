@@ -9,8 +9,8 @@ import { Menu, X, Mail } from 'lucide-react';
 /** Nav principale */
 const NAV = [
     { href: '/', label: 'Accueil' },
-    { href: '/projets', label: 'Projets' },
-    { href: '/competences', label: 'Compétences' },
+    { href: '/projects', label: 'Projets' },
+    { href: '/skills', label: 'Compétences' },
     { href: '/contact', label: 'Contact' },
 ] as const;
 type NavItem = (typeof NAV)[number];

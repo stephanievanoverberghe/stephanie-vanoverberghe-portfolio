@@ -11,28 +11,28 @@ const display = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-displa
 
 export const metadata: Metadata = {
     metadataBase: new URL('https://www.vanoverberghe-stephanie.dev'),
-    title: 'Vanoverberghe Stéphanie — Développeuse Front-End (React/Next)',
-    description: 'Portfolio front-end React / Next.js — créative, dynamique, sensible et professionnelle. Études de cas, UI/UX, TypeScript, Tailwind.',
+    title: 'Vanoverberghe Stéphanie - Développeuse Front-End (React/Next)',
+    description: 'Portfolio front-end React / Next.js - créative, dynamique, sensible et professionnelle. Études de cas, UI/UX, TypeScript, Tailwind.',
     keywords: ['Développeuse Front-End', 'React', 'Next.js', 'TypeScript', 'Tailwind', 'UI/UX', 'Portfolio'],
     authors: [{ name: 'Vanoverberghe Stéphanie' }],
     openGraph: {
         type: 'website',
-        title: 'Vanoverberghe Stéphanie — Développeuse Front-End',
-        description: 'Portfolio front-end React / Next.js — études de cas (Mystères à la carte, Alchimiste Créations, Ancre-toi).',
+        title: 'Vanoverberghe Stéphanie - Développeuse Front-End',
+        description: 'Portfolio front-end React / Next.js - études de cas (Mystères à la carte, Alchimiste Créations, Ancre-toi).',
         url: '/',
-        siteName: 'Portfolio — Vanoverberghe Stéphanie',
-        images: [{ url: '/og-cover.jpg', width: 1200, height: 630, alt: 'Portfolio — couverture' }],
+        siteName: 'Portfolio - Vanoverberghe Stéphanie',
+        images: [{ url: '/og-cover.jpg', width: 1200, height: 630, alt: 'Portfolio - couverture' }],
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Vanoverberghe Stéphanie — Développeuse Front-End',
-        description: 'Portfolio front-end React / Next.js — créatif & technique, études de cas, UI/UX.',
+        title: 'Vanoverberghe Stéphanie - Développeuse Front-End',
+        description: 'Portfolio front-end React / Next.js - créatif & technique, études de cas, UI/UX.',
         images: ['/og-cover.jpg'],
     },
     robots: { index: true, follow: true },
 };
 
-export const viewport: Viewport = { themeColor: '#FF5A3C' }; // --accent
+export const viewport: Viewport = { themeColor: '#FF5A3C' };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     const ldJson = {
