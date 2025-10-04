@@ -1,0 +1,50 @@
+{
+    "slug": "ancre-toi",
+    "title": "Ancre-toi",
+    "subtitle": "Développement personnel - modules de formation + dashboard",
+    "year": 2025,
+    "role": ["Front-end", "UX Writing", "Conception pédagogique"],
+    "stack": ["React", "Next.js", "TypeScript", "Tailwind", "MongoDB", "Stripe", "Auth", "Webhooks", "Dashboard"],
+    "context": "Plateforme de formation avec parcours pédagogique structuré, compte utilisateur et espace tableau de bord. Achat de formations via Stripe, gestion des inscriptions/désinscriptions et suivi côté dashboard.",
+    "objectives": [
+        "Rendre l’inscription/désinscription simple et claire (mobile-first).",
+        "Permettre l’achat de formation en paiement sécurisé (Stripe) avec confirmation fiable.",
+        "Offrir un dashboard pour gérer contenus, utilisateurs/commandes et accès aux modules.",
+        "Préserver lisibilité, accessibilité et performances malgré la logique applicative."
+    ],
+    "challenges": [
+        "Synchroniser l’état de paiement et l’activation d’un accès (webhooks Stripe).",
+        "Concevoir un modèle de données simple mais évolutif dans MongoDB.",
+        "Assurer l’authentification et la suppression de compte de manière explicite et sûre.",
+        "Garder une expérience douce (UX writing) malgré les étapes techniques."
+    ],
+    "solutions": [
+        "Stripe Checkout + Webhooks pour valider les commandes et activer l’accès aux formations.",
+        "Schéma MongoDB pour utilisateurs, commandes et accès (collections séparées + index).",
+        "Flux Auth clair (inscription, connexion, désinscription) avec mails/états explicites.",
+        "Dashboard dédié (liste des achats, gestion des accès, aperçu des modules) avec filtres et recherches.",
+        "Design tokens globaux, composants réutilisables (ModuleCard, ResourceItem), focus visibles et contrastes conformes."
+    ],
+    "highlights": [
+        "Achat/activation/annulation gérés de bout en bout.",
+        "Dashboard de suivi (utilisateurs, commandes, accès).",
+        "Parcours pédagogique clair et lisible sur mobile."
+    ],
+    "links": {
+        "demo": "https://ancretoi.vercel.app/"
+    },
+    "logo": {
+        "image": "/images/projects/ancre-toi/logo.png",
+        "alt": "Logo Ancre-toi"
+    },
+    "hero": {
+        "image": "/images/projects/ancre-toi/desktop-hero.png",
+        "alt": "Vue d’ensemble — Ancre-toi"
+    },
+    "gallery": [
+        { "src": "/images/projects/ancre-toi/desktop-1.png", "alt": "Dashboard — commandes & accès" },
+        { "src": "/images/projects/ancre-toi/desktop-2.png", "alt": "Page module — objectifs & ressources" },
+        { "src": "/images/projects/ancre-toi/mobile-1.png", "alt": "Mobile — checkout & confirmation" },
+        { "src": "/images/projects/ancre-toi/mobile-2.png", "alt": "Mobile — navigation des modules" }
+    ]
+}

@@ -39,16 +39,12 @@ export default function SkillsPage() {
                         Front-End
                     </h2>
                     <div className="mt-3 flex flex-wrap gap-2">
-                        <Chip tone="subtle">React</Chip>
-                        <Chip tone="subtle">Next.js (App Router)</Chip>
-                        <Chip tone="subtle">TypeScript</Chip>
-                        <Chip color="accent" tone="subtle">
-                            Tailwind CSS
-                        </Chip>
-                        <Chip color="lilac" tone="subtle">
-                            Framer Motion
-                        </Chip>
-                        <Chip tone="subtle">Next/Image</Chip>
+                        <Chip kind="tech">React</Chip>
+                        <Chip kind="tech">Next.js (App Router)</Chip>
+                        <Chip kind="tech">TypeScript</Chip>
+                        <Chip kind="tech">Tailwind CSS</Chip>
+                        <Chip kind="tech">Framer Motion</Chip>
+                        <Chip kind="tech">Next/Image</Chip>
                     </div>
                 </div>
 
@@ -57,19 +53,11 @@ export default function SkillsPage() {
                         UI/UX
                     </h2>
                     <div className="mt-3 flex flex-wrap gap-2">
-                        <Chip color="lilac" tone="subtle">
-                            Design system
-                        </Chip>
-                        <Chip color="lilac" tone="subtle">
-                            Micro-interactions
-                        </Chip>
-                        <Chip color="sage" tone="subtle">
-                            Accessibilité
-                        </Chip>
-                        <Chip tone="subtle">Mobile-first</Chip>
-                        <Chip color="lilac" tone="subtle">
-                            Rédaction UX
-                        </Chip>
+                        <Chip kind="design">Design system</Chip>
+                        <Chip kind="design">Micro-interactions</Chip>
+                        <Chip kind="design">Accessibilité</Chip>
+                        <Chip kind="design">Mobile-first</Chip>
+                        <Chip kind="design">Rédaction UX</Chip>
                     </div>
                 </div>
 
@@ -78,14 +66,12 @@ export default function SkillsPage() {
                         Workflow
                     </h2>
                     <div className="mt-3 flex flex-wrap gap-2">
-                        <Chip tone="subtle">Git</Chip>
-                        <Chip tone="subtle">Vercel</Chip>
-                        <Chip tone="subtle">ESLint/Prettier</Chip>
-                        <Chip tone="subtle">pnpm/npm</Chip>
-                        <Chip color="sage" tone="subtle">
-                            Lighthouse
-                        </Chip>
-                        <Chip tone="subtle">Analytics (optionnel)</Chip>
+                        <Chip kind="tool">Git</Chip>
+                        <Chip kind="tool">Vercel</Chip>
+                        <Chip kind="tool">ESLint/Prettier</Chip>
+                        <Chip kind="tool">pnpm/npm</Chip>
+                        <Chip kind="tool">Lighthouse</Chip>
+                        <Chip kind="tool">Analytics (optionnel)</Chip>
                     </div>
                 </div>
 
@@ -94,15 +80,11 @@ export default function SkillsPage() {
                         Architecture
                     </h2>
                     <div className="mt-3 flex flex-wrap gap-2">
-                        <Chip appearance="outline" color="accent" tone="subtle">
-                            RSC + Suspense
-                        </Chip>
-                        <Chip tone="subtle">SSG/ISR</Chip>
-                        <Chip tone="subtle">SEO technique</Chip>
-                        <Chip tone="subtle">Optimisation images</Chip>
-                        <Chip color="sage" tone="subtle">
-                            Accessibilité AA
-                        </Chip>
+                        <Chip kind="architecture">RSC + Suspense</Chip>
+                        <Chip kind="architecture">SSG/ISR</Chip>
+                        <Chip kind="architecture">SEO technique</Chip>
+                        <Chip kind="architecture">Optimisation images</Chip>
+                        <Chip kind="architecture">Accessibilité AA</Chip>
                     </div>
                 </div>
             </section>
@@ -121,17 +103,11 @@ export default function SkillsPage() {
                             Mystères à la carte - escape game culinaire (Bastille)
                         </h3>
                         <div className="flex flex-wrap gap-2">
-                            <Chip tone="subtle">Next.js</Chip>
-                            <Chip tone="subtle">TypeScript</Chip>
-                            <Chip color="accent" tone="subtle">
-                                Tailwind
-                            </Chip>
-                            <Chip color="lilac" tone="subtle">
-                                UI/UX
-                            </Chip>
-                            <Chip color="lilac" tone="subtle">
-                                Framer Motion
-                            </Chip>
+                            <Chip kind="tech">Next.js</Chip>
+                            <Chip kind="tech">TypeScript</Chip>
+                            <Chip kind="tech">Tailwind</Chip>
+                            <Chip kind="design">UI/UX</Chip>
+                            <Chip kind="tech">Framer Motion</Chip>
                         </div>
                     </div>
 
@@ -176,7 +152,7 @@ export default function SkillsPage() {
                         <a href="https://mysteres-a-la-carte.vercel.app/" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
                             Voir la démo
                         </a>
-                        <Link href="/projets/mysteres-a-la-carte" className="btn btn-cta" style={{ color: '#FDFDFD' }}>
+                        <Link href="/projects/mysteres-a-la-carte" className="btn btn-cta" style={{ color: '#FDFDFD' }}>
                             Étude de cas
                         </Link>
                     </div>
@@ -189,14 +165,10 @@ export default function SkillsPage() {
                             Alchimiste Créations - site vitrine freelance
                         </h3>
                         <div className="flex flex-wrap gap-2">
-                            <Chip tone="subtle">Next.js</Chip>
-                            <Chip tone="subtle">TypeScript</Chip>
-                            <Chip color="accent" tone="subtle">
-                                Tailwind
-                            </Chip>
-                            <Chip color="lilac" tone="subtle">
-                                UI/UX
-                            </Chip>
+                            <Chip kind="tech">Next.js</Chip>
+                            <Chip kind="tech">TypeScript</Chip>
+                            <Chip kind="tech">Tailwind</Chip>
+                            <Chip kind="design">UI/UX</Chip>
                         </div>
                     </div>
 
@@ -241,7 +213,7 @@ export default function SkillsPage() {
                         <a href="https://alchimiste-creations.vercel.app/" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
                             Voir la démo
                         </a>
-                        <Link href="/projets/mysteres-a-la-carte" className="btn btn-cta" style={{ color: '#FDFDFD' }}>
+                        <Link href="/projects/alchimiste-creations" className="btn btn-cta" style={{ color: '#FDFDFD' }}>
                             Étude de cas
                         </Link>
                     </div>
@@ -254,17 +226,11 @@ export default function SkillsPage() {
                             Ancre-toi - site de développement personnel / formation
                         </h3>
                         <div className="flex flex-wrap gap-2">
-                            <Chip tone="subtle">Next.js</Chip>
-                            <Chip tone="subtle">TypeScript</Chip>
-                            <Chip color="accent" tone="subtle">
-                                Tailwind
-                            </Chip>
-                            <Chip color="lilac" tone="subtle">
-                                UX Writing
-                            </Chip>
-                            <Chip color="lilac" tone="subtle">
-                                Pédagogie
-                            </Chip>
+                            <Chip kind="tech">Next.js</Chip>
+                            <Chip kind="tech">TypeScript</Chip>
+                            <Chip kind="tech">MongoDB</Chip>
+                            <Chip kind="tool">Stripe</Chip>
+                            <Chip kind="architecture">Dashboard</Chip>
                         </div>
                     </div>
 
@@ -309,7 +275,7 @@ export default function SkillsPage() {
                         <a href="https://ancretoi.vercel.app/" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
                             Voir la démo
                         </a>
-                        <Link href="/projets/mysteres-a-la-carte" className="btn btn-cta" style={{ color: '#FDFDFD' }}>
+                        <Link href="/projects/ancre-toi" className="btn btn-cta" style={{ color: '#FDFDFD' }}>
                             Étude de cas
                         </Link>
                     </div>

@@ -30,8 +30,8 @@
         "demo": "https://mysteres-a-la-carte.vercel.app/",
         "repo": "https://github.com/stephanievanoverberghe/mysteres-a-la-carte"
     },
-    "log": {
-        "image": "/images/projects/mysteres-a-la-carte/cover.png",
+    "logo": {
+        "image": "/images/projects/mysteres-a-la-carte/logo.png",
         "alt": "Logo Mystères à la carte"
     },
     "hero": {

@@ -1,32 +1,42 @@
+// src/components/ui/Chip.tsx
 'use client';
 
 import Link from 'next/link';
 import * as React from 'react';
 
-/** --- Nouvelle classification --- */
-type ChipColor = 'neutral' | 'accent' | 'sage' | 'lilac' | 'gold';
-type ChipAppearance = 'soft' | 'solid' | 'outline' | 'ghost';
-type ChipSize = 'xs' | 'sm' | 'md';
-type ChipTone = 'subtle' | 'normal' | 'bold'; // ← contrôle la “force” visuelle (par défaut: subtle)
+/** Catégories simples */
+type ChipKind = 'neutral' | 'tech' | 'design' | 'tool' | 'architecture';
 
-/** --- Ancienne API (toujours supportée) --- */
+/** Palette directe (override éventuel) */
+type ChipColor = 'neutral' | 'accent' | 'sage' | 'lilac' | 'gold';
+
+/** Anciennes props (tolérées mais ignorées) */
+type LegacyAppearance = 'soft' | 'solid' | 'outline' | 'ghost';
+type LegacyTone = 'subtle' | 'normal' | 'bold';
 type LegacyVariant = 'default' | 'accent' | 'lilac' | 'outline';
+
+type ChipSize = 'xs' | 'sm' | 'md';
 
 type BaseProps = {
     children: React.ReactNode;
     className?: string;
 
-    /** API recommandée */
-    color?: ChipColor; // default: 'neutral'
-    appearance?: ChipAppearance; // default: 'soft'
-    tone?: ChipTone; // default: 'subtle'
+    /** NOUVEAU : catégorie → couleur automatique */
+    kind?: ChipKind;
 
-    /** API legacy mappée en interne */
-    variant?: LegacyVariant;
+    /** Option : couleur directe si tu veux forcer */
+    color?: ChipColor;
+
+    /** Optionnels et ignorés (compat) */
+    appearance?: LegacyAppearance; // ignoré
+    tone?: LegacyTone; // ignoré
+    variant?: LegacyVariant; // ignoré
 
     size?: ChipSize; // default: 'md'
+    dot?: boolean; // petit point coloré
     leading?: React.ReactNode;
     trailing?: React.ReactNode;
+
     active?: boolean;
     disabled?: boolean;
     onRemove?: () => void;
@@ -39,28 +49,29 @@ type ButtonProps = { as?: 'button'; onClick?: React.MouseEventHandler<HTMLButton
 
 export type ChipProps = BaseProps & LinkProps & ButtonProps;
 
-/** utilitaire minimal */
+/* ---------- utils ---------- */
 function cn(...parts: (string | false | null | undefined)[]) {
     return parts.filter(Boolean).join(' ');
 }
 
-/** Rétrocompatibilité (variant -> color/appearance) */
-function mapLegacy(variant?: LegacyVariant): { color: ChipColor; appearance: ChipAppearance } | null {
-    if (!variant) return null;
-    switch (variant) {
-        case 'accent':
-            return { color: 'accent', appearance: 'soft' };
-        case 'lilac':
-            return { color: 'lilac', appearance: 'soft' };
-        case 'outline':
-            return { color: 'accent', appearance: 'outline' };
-        case 'default':
+/** mapping Catégorie → Couleur palette */
+function colorFromKind(kind?: ChipKind): ChipColor {
+    switch (kind) {
+        case 'tech':
+            return 'accent';
+        case 'design':
+            return 'lilac';
+        case 'tool':
+            return 'sage';
+        case 'architecture':
+            return 'gold';
+        case 'neutral':
         default:
-            return { color: 'neutral', appearance: 'soft' };
+            return 'neutral';
     }
 }
 
-/** Couleur de base */
+/** token palette */
 function token(color: ChipColor) {
     switch (color) {
         case 'accent':
@@ -77,57 +88,24 @@ function token(color: ChipColor) {
     }
 }
 
-/** Coefficients (plus doux en "subtle") */
-function coeffs(tone: ChipTone) {
-    // Pourcentage de la couleur dans le fond (soft) et le bord
-    if (tone === 'bold') return { bg: 22, border: 60, borderActive: 72, outlineMix: 50 };
-    if (tone === 'normal') return { bg: 16, border: 48, borderActive: 64, outlineMix: 42 };
-    // subtle (par défaut) — très doux
-    return { bg: 11, border: 36, borderActive: 54, outlineMix: 34 };
+/** désaturation légère pour un rendu feutré */
+function calm(base: string) {
+    return `color-mix(in oklab, ${base} 86%, var(--text) 14%)`;
 }
 
-/** Styles appearance × color × tone */
-function styleByAppearance(appearance: ChipAppearance, color: ChipColor, tone: ChipTone, active?: boolean): React.CSSProperties {
-    const base = token(color);
-    const surface = 'var(--surface-1)';
+/** style unique “soft” (ultra simple) */
+function softStyle(base: string, active?: boolean): React.CSSProperties {
+    const blendSurface = 'var(--surface-1)';
     const borderSoft = 'var(--border-soft)';
-    const { bg, border, borderActive, outlineMix } = coeffs(tone);
-
-    if (appearance === 'solid') {
-        // Solid assourdi (pas flashy) : on mélange la couleur avec la surface pour la calmer
-        // Texte sombre en subtle/normal, clair seulement en bold.
-        return {
-            background: `color-mix(in oklab, ${base} ${tone === 'bold' ? 72 : 58}%, ${surface})`,
-            borderColor: `color-mix(in oklab, ${base} ${tone === 'bold' ? 68 : 46}%, ${borderSoft})`,
-            color: tone === 'bold' ? '#FDFDFD' : 'var(--text-strong)',
-        };
-    }
-
-    if (appearance === 'outline') {
-        return {
-            background: 'transparent',
-            borderColor: active ? `color-mix(in oklab, ${base} ${outlineMix}%, ${borderSoft})` : borderSoft,
-            color: 'var(--text)',
-        };
-    }
-
-    if (appearance === 'ghost') {
-        return {
-            background: 'transparent',
-            borderColor: 'transparent',
-            color: `color-mix(in oklab, ${base} 48%, var(--text))`, // teinte légère dans le texte
-        };
-    }
-
-    // soft (par défaut) — extrêmement discret
+    const bgPct = 7; // teinte très douce
+    const borderPct = active ? 28 : 20; // bordure légèrement teintée
     return {
-        background: `color-mix(in oklab, ${base} ${bg}%, ${surface})`,
-        borderColor: `color-mix(in oklab, ${base} ${active ? borderActive : border}%, ${borderSoft})`,
+        background: `color-mix(in oklab, ${base} ${bgPct}%, ${blendSurface})`,
+        borderColor: `color-mix(in oklab, ${base} ${borderPct}%, ${borderSoft})`,
         color: 'var(--text)',
     };
 }
 
-/** Sizing */
 function sizeClasses(size: ChipSize) {
     switch (size) {
         case 'xs':
@@ -140,40 +118,34 @@ function sizeClasses(size: ChipSize) {
     }
 }
 
+/* ---------- component ---------- */
 export default function Chip(props: ChipProps) {
-    const { children, className, size = 'md', leading, trailing, active, disabled, onRemove, ariaLabel } = props;
+    const { children, className, size = 'md', kind, color: colorOverride, dot, leading, trailing, active, disabled, onRemove, ariaLabel } = props;
 
-    // Résolution API + fallback legacy
-    const legacy = mapLegacy(props.variant);
-    const color = (props.color ?? legacy?.color ?? 'neutral') as ChipColor;
-    const appearance = (props.appearance ?? legacy?.appearance ?? 'soft') as ChipAppearance;
-    const tone = (props.tone ?? 'subtle') as ChipTone;
+    // couleur finale : override > kind > neutral
+    const color = colorOverride ?? colorFromKind(kind);
+    const base = calm(token(color));
 
     const styles: React.CSSProperties = {
-        ...styleByAppearance(appearance, color, tone, active),
+        ...softStyle(base, active),
         outlineColor: 'var(--ring-focus)',
         opacity: disabled ? 0.6 : 1,
         cursor: disabled ? 'not-allowed' : undefined,
         transition: 'border-color .2s, background-color .2s, color .2s',
     };
 
-    const base = (
+    const body = (
         <span
-            className={cn(
-                'chip inline-flex items-center gap-2 select-none',
-                sizeClasses(size),
-                'focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2',
-                className
-            )}
+            className={cn('chip inline-flex items-center gap-2 select-none', sizeClasses(size), className)}
             style={styles}
             aria-label={ariaLabel}
             aria-pressed={props.as === 'button' ? !!active : undefined}
             aria-disabled={disabled || undefined}
-            data-appearance={appearance}
+            data-kind={kind ?? 'neutral'}
             data-color={color}
-            data-tone={tone}
             data-state={active ? 'active' : 'inactive'}
         >
+            {dot ? <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full" style={{ background: `color-mix(in oklab, ${base} 54%, var(--surface-1))` }} /> : null}
             {leading ? (
                 <span aria-hidden className="inline-flex">
                     {leading}
@@ -185,6 +157,7 @@ export default function Chip(props: ChipProps) {
                     {trailing}
                 </span>
             ) : null}
+
             {onRemove ? (
                 <button
                     type="button"
@@ -195,7 +168,7 @@ export default function Chip(props: ChipProps) {
                     className="ml-1 -mr-1 inline-flex h-5 w-5 items-center justify-center rounded-full border"
                     style={{
                         borderColor: 'var(--border-soft)',
-                        background: 'color-mix(in oklab, var(--accent) 6%, var(--surface-1))',
+                        background: 'color-mix(in oklab, var(--accent) 3%, var(--surface-1))',
                         color: 'var(--text)',
                         opacity: disabled ? 0.6 : 1,
                     }}
@@ -209,29 +182,30 @@ export default function Chip(props: ChipProps) {
         </span>
     );
 
-    // Liens
+    // wrappers interactifs
+    const focusCls = 'inline-block focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2';
+    const focusStyle = { outlineColor: 'var(--ring-focus)' } as React.CSSProperties;
+
     if ('href' in props && props.href) {
         const external = props.external ?? false;
         return external ? (
-            <a href={props.href} target="_blank" rel="noopener noreferrer" className="inline-block" aria-disabled={disabled || undefined}>
-                {base}
+            <a href={props.href} target="_blank" rel="noopener noreferrer" className={focusCls} style={focusStyle} aria-disabled={disabled || undefined}>
+                {body}
             </a>
         ) : (
-            <Link href={props.href} className="inline-block" aria-disabled={disabled || undefined}>
-                {base}
+            <Link href={props.href} className={focusCls} style={focusStyle} aria-disabled={disabled || undefined}>
+                {body}
             </Link>
         );
     }
 
-    // Bouton
     if (props.as === 'button') {
         return (
-            <button type="button" className="inline-block bg-transparent border-0 p-0" disabled={disabled}>
-                {base}
+            <button type="button" className={focusCls + ' bg-transparent border-0 p-0'} style={focusStyle} disabled={disabled}>
+                {body}
             </button>
         );
     }
 
-    // Span
-    return base;
+    return body; // span
 }

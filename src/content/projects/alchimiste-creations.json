@@ -1,0 +1,42 @@
+{
+    "slug": "alchimiste-creations",
+    "title": "Alchimiste Créations",
+    "subtitle": "Site vitrine freelance - prestations & processus",
+    "year": 2025,
+    "role": ["Front-end", "UI/UX", "Intégration"],
+    "stack": ["React", "Next.js", "TypeScript", "Tailwind"],
+    "context": "Vitrine freelance claire et rassurante pour présenter les prestations, le processus de collaboration et un contact évident.",
+    "objectives": [
+        "Structurer une offre scannable (prestations, process, FAQ) en mobile-first.",
+        "Installer un ton professionnel sans lourdeur visuelle, en respectant les tokens globaux (zéro noir/blanc purs).",
+        "Clarifier les CTA (devis / contact) et réduire la friction.",
+        "Assurer les bases SEO (metas, OG) et performances (images optimisées, SSG)."
+    ],
+    "challenges": [
+        "Équilibrer crédibilité, sobriété et personnalité créative.",
+        "Rendre l’offre compréhensible en quelques secondes (titres utiles, listes, niveaux de lecture).",
+        "Garder une cohérence visuelle sur toutes les sections sans alourdir."
+    ],
+    "solutions": [
+        "Architecture éditoriale en blocs: Prestations → Processus → Réalisations → FAQ → Contact.",
+        "Composants réutilisables (cards, FAQ, bandeaux CTA) et design system basé sur les tokens globaux.",
+        "Next.js (App Router) en SSG, images responsives, metas/OG et sitemap.",
+        "Micro-interactions très discrètes pour indiquer l’interactivité sans distraire."
+    ],
+    "highlights": ["CTA visibles et cohérents (mobile & desktop).", "Sections scannables avec hiérarchie typographique nette.", "Base SEO/Perf propre (SSG + images optimisées)."],
+    "links": {},
+    "logo": {
+        "image": "/images/projects/alchimiste-creations/logo.png",
+        "alt": "Logo Alchimiste Créations"
+    },
+    "hero": {
+        "image": "/images/projects/alchimiste-creations/desktop-hero.png",
+        "alt": "Vue d’ensemble — Alchimiste Créations"
+    },
+    "gallery": [
+        { "src": "/images/projects/alchimiste-creations/desktop-1.png", "alt": "Accueil — Prestations" },
+        { "src": "/images/projects/alchimiste-creations/desktop-2.png", "alt": "Processus — Étapes" },
+        { "src": "/images/projects/alchimiste-creations/mobile-1.png", "alt": "Mobile — Prestations" },
+        { "src": "/images/projects/alchimiste-creations/mobile-2.png", "alt": "Mobile — FAQ & CTA" }
+    ]
+}
