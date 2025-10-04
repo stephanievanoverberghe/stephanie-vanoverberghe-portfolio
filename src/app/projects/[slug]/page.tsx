@@ -23,8 +23,10 @@ export async function generateStaticParams() {
     return slugs.map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-    const data = await getProjectBySlug(params.slug);
+// NOTE: Next 15 → params est une Promise
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+    const { slug } = await params;
+    const data = await getProjectBySlug(slug);
     if (!data) return { title: 'Projet introuvable' };
 
     const title = `${data.title} — Étude de cas`;
@@ -39,9 +41,16 @@ export async function generateMetadata({ params }: { params: { slug: string } })
             type: 'article',
             title,
             description,
-            url: `/projects/${data.slug}`, // ← garde /projets si ta liste est là
+            url: `/projects/${data.slug}`, // si ta liste est en /projets, change ici
             siteName: 'Portfolio — Vanoverberghe Stéphanie',
-            images: [{ url: ogImage, width: 1200, height: 630, alt: data.hero?.alt ?? data.logo?.alt ?? data.title }],
+            images: [
+                {
+                    url: ogImage,
+                    width: 1200,
+                    height: 630,
+                    alt: data.hero?.alt ?? data.logo?.alt ?? data.title,
+                },
+            ],
         },
         twitter: {
             card: 'summary_large_image',
@@ -53,8 +62,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 }
 
 /* ---------- Page ---------- */
-export default async function ProjectPage({ params }: { params: { slug: string } }) {
-    const data = await getProjectBySlug(params.slug);
+// NOTE: Next 15 → params est une Promise
+export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params;
+    const data = await getProjectBySlug(slug);
     if (!data) notFound();
 
     const ldJson = {
@@ -65,7 +76,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
         author: { '@type': 'Person', name: 'Vanoverberghe Stéphanie' },
         datePublished: data.year ? `${data.year}-01-01` : undefined,
         image: data.hero?.image ?? data.logo?.image,
-        url: `https://www.vanoverberghe-stephanie.dev/projets/${data.slug}`,
+        url: `https://www.vanoverberghe-stephanie.dev/projects/${data.slug}`,
         keywords: [...(data.stack ?? []), ...(data.role ?? [])].join(', '),
     };
 
@@ -110,18 +121,17 @@ export default async function ProjectPage({ params }: { params: { slug: string }
             <div className="overflow-hidden rounded-2xl border" style={{ borderColor: 'var(--border-soft)', background: 'var(--surface-1)', boxShadow: 'var(--shadow-card)' }}>
                 {data.hero?.image ? (
                     <div className="relative aspect-[16/8] w-full">
-                        <Image src={data.hero.image} alt={data.hero.alt ?? data.title /* <- string garanti */} fill sizes="100vw" className="object-cover" priority={false} />
+                        <Image src={data.hero.image} alt={data.hero.alt ?? data.title} fill sizes="100vw" className="object-cover" priority={false} />
                     </div>
                 ) : data.logo?.image ? (
                     <div className="relative aspect-[16/8] w-full flex items-center justify-center">
-                        <Image src={data.logo.image} alt={data.logo?.alt ?? `${data.title} logo` /* <- string garanti */} fill sizes="100vw" className="object-contain p-10" />
+                        <Image src={data.logo.image} alt={data.logo.alt ?? `${data.title} logo`} fill sizes="100vw" className="object-contain p-10" />
                     </div>
                 ) : null}
             </div>
 
-            {/* Grille 2 colonnes (contexte + méta) */}
+            {/* Contexte + Liens */}
             <div className="grid gap-6 md:grid-cols-[1.2fr_.8fr]">
-                {/* Contexte */}
                 <article className="card p-6">
                     <h2 className="text-lg font-semibold" style={{ color: 'var(--text-strong)' }}>
                         Contexte
@@ -129,7 +139,6 @@ export default async function ProjectPage({ params }: { params: { slug: string }
                     {data.context ? <p className="mt-2 opacity-90">{data.context}</p> : null}
                 </article>
 
-                {/* Liens / Actions */}
                 <aside className="card p-6">
                     <h2 className="text-lg font-semibold" style={{ color: 'var(--text-strong)' }}>
                         Liens
@@ -152,7 +161,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
                 </aside>
             </div>
 
-            {/* Sections structurées */}
+            {/* Sections */}
             <div className="grid gap-6 md:grid-cols-3">
                 {data.objectives?.length ? (
                     <section className="card p-6">
@@ -194,7 +203,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
                 ) : null}
             </div>
 
-            {/* Highlights */}
+            {/* Points forts */}
             {data.highlights?.length ? (
                 <section className="card p-6">
                     <h3 className="text-base font-semibold" style={{ color: 'var(--text-strong)' }}>
