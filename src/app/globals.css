@@ -1,0 +1,252 @@
+@import "tailwindcss";
+
+/* =========================
+   Design tokens (CSS vars)
+   ========================= */
+:root {
+  /* Palette */
+  --ink: #121314;
+  /* texte principal */
+  --paper: #F8FAFC;
+  /* fond général */
+  --accent: #FF5A3C;
+  /* corail dynamisant = CTA */
+  --sage: #8BAA9A;
+  /* vert sauge (accent doux) */
+  --lilac: #C9B8E5;
+  /* lilas / améthyste premium */
+  --gold: #E1C16E;
+  /* doré subtil pour highlights */
+
+  /* Surfaces & textes sémantiques */
+  --bg: var(--paper);
+  --surface-1: #FDFDFD;
+  --surface-2: #F3F0F9;
+  --text-strong: #1C1E21;
+  --text: #2C2F33;
+  --text-muted: #6B7280;
+
+  /* UI tokens */
+  --radius-card: 1.25rem;
+  --radius-pill: 999px;
+  --shadow-card: 0 8px 30px rgba(2, 8, 23, 0.06);
+  --border-soft: #E2E6EA;
+  --ring-focus: color-mix(in oklab, var(--accent) 60%, transparent);
+}
+
+/* =========================
+   Base + typographie
+   ========================= */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  /* Polices injectées via next/font -> variables définies dans layout.tsx */
+  font-family: var(--font-inter, ui-sans-serif), system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--text-strong);
+  font-family: var(--font-display, ui-sans-serif), system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+p {
+  line-height: 1.7;
+}
+
+a {
+  text-underline-offset: 4px;
+  text-decoration-color: transparent;
+  transition: text-decoration-color .2s, color .2s, opacity .2s;
+}
+
+a:hover {
+  text-decoration-color: currentColor;
+}
+
+/* =========================
+   Grille & rythme vertical
+   ========================= */
+.container-page {
+  /* 1280 max / ≈1140 utile */
+  margin-inline: auto;
+  max-width: 1152px;
+  padding-inline: 1rem;
+  /* 16 */
+}
+
+@media (min-width: 640px) {
+  .container-page {
+    padding-inline: 1.5rem;
+  }
+}
+
+/* 24 */
+@media (min-width: 768px) {
+  .container-page {
+    padding-inline: 2rem;
+  }
+}
+
+/* 32 */
+
+.section {
+  padding-block: 3rem;
+  /* 48 – échelle basée sur 4px */
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding-block: 4rem;
+  }
+}
+
+/* 64 */
+
+/* =========================
+   Cartes & surfaces
+   ========================= */
+.card {
+  background: var(--surface-1);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.surface-2 {
+  background: var(--surface-2);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-card);
+}
+
+/* =========================
+   Boutons
+   ========================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: .625rem 1rem;
+  /* 10px 16px */
+  border-radius: .75rem;
+  /* 12px */
+  font-weight: 600;
+  transition: background-color .2s, transform .06s, opacity .2s, border-color .2s, color .2s;
+  will-change: transform;
+}
+
+.btn-cta {
+  background: var(--accent);
+  /* terracotta/corail */
+  color: #fff;
+}
+
+.btn-cta:hover {
+  opacity: .92;
+}
+
+.btn-cta:active {
+  transform: translateY(1px);
+}
+
+.btn-secondary {
+  background: var(--surface-1);
+  color: var(--text-strong);
+  border: 1px solid var(--border-soft);
+}
+
+.btn-secondary:hover {
+  background: #F3F4F6;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-strong);
+  border: 1px dashed var(--border-soft);
+}
+
+.btn-ghost:hover {
+  border-color: color-mix(in oklab, var(--accent) 45%, var(--border-soft));
+}
+
+/* =========================
+   Chips / badges
+   ========================= */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-pill);
+  padding: .25rem .75rem;
+  /* 4px 12px */
+  font-size: .75rem;
+  color: var(--text);
+  background: var(--surface-1);
+}
+
+.chip--accent {
+  background: color-mix(in oklab, var(--sage) 18%, white);
+  border-color: color-mix(in oklab, var(--sage) 46%, var(--border-soft));
+}
+
+.chip--lilac {
+  background: color-mix(in oklab, var(--lilac) 18%, white);
+  border-color: color-mix(in oklab, var(--lilac) 46%, var(--border-soft));
+}
+
+/* =========================
+   Focus visible (a11y)
+   ========================= */
+.focusable:focus-visible,
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--ring-focus);
+  outline-offset: 2px;
+  border-radius: .5rem;
+}
+
+/* =========================
+   Micro-motion accessible
+   ========================= */
+@media (prefers-reduced-motion: no-preference) {
+  .hover-scale:hover {
+    transform: translateZ(0) scale(1.02);
+    transition: transform .2s cubic-bezier(.22, .61, .36, 1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* =========================
+   Helpers visuels rapides
+   ========================= */
+.text-gradient-accent {
+  background: linear-gradient(90deg,
+      color-mix(in oklab, var(--accent) 92%, #fff),
+      color-mix(in oklab, var(--gold) 70%, #fff));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hr-soft {
+  height: 1px;
+  width: 100%;
+  background: var(--border-soft);
+  opacity: .7;
+}
