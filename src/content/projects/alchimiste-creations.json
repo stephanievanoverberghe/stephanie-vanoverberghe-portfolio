@@ -24,7 +24,7 @@
         "Micro-interactions très discrètes pour indiquer l’interactivité sans distraire."
     ],
     "highlights": ["CTA visibles et cohérents (mobile & desktop).", "Sections scannables avec hiérarchie typographique nette.", "Base SEO/Perf propre (SSG + images optimisées)."],
-    "links": {},
+    "links": { "demo": "https://alchimiste-creations.vercel.app/", "repo": "https://github.com/stephanievanoverberghe/alchimiste-creations" },
     "logo": {
         "image": "/images/projects/alchimiste-creations/logo.png",
         "alt": "Logo Alchimiste Créations"

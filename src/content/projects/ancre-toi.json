@@ -31,7 +31,8 @@
         "Parcours pédagogique clair et lisible sur mobile."
     ],
     "links": {
-        "demo": "https://ancretoi.vercel.app/"
+        "demo": "https://ancretoi.vercel.app/",
+        "repo": "https://github.com/stephanievanoverberghe/ancretoi"
     },
     "logo": {
         "image": "/images/projects/ancre-toi/logo.png",

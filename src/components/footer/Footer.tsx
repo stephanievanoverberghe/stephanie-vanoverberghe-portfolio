@@ -50,10 +50,10 @@ export default function Footer() {
                         <Link href="/" className="text-sm hover:opacity-90">
                             Accueil
                         </Link>
-                        <Link href="/projets" className="text-sm hover:opacity-90">
+                        <Link href="/projects" className="text-sm hover:opacity-90">
                             Projets
                         </Link>
-                        <Link href="/competences" className="text-sm hover:opacity-90">
+                        <Link href="/skills" className="text-sm hover:opacity-90">
                             Compétences
                         </Link>
                         <Link href="/contact" className="text-sm hover:opacity-90">
