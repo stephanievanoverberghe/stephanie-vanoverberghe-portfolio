@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getProjectBySlug, getProjectSlugs } from '@/lib/projects';
 import Chip from '@/components/ui/Chip';
+import GalleryLightbox from '@/components/projects/GalleryLightbox';
 
 export const dynamic = 'force-static';
 
@@ -223,20 +224,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                     <h3 className="text-base font-semibold mb-3" style={{ color: 'var(--text-strong)' }}>
                         Galerie
                     </h3>
-                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                        {data.gallery.map((g) => (
-                            <figure key={g.src} className="overflow-hidden rounded-xl border" style={{ borderColor: 'var(--border-soft)', background: 'var(--surface-1)' }}>
-                                <div className="relative aspect-[4/3] w-full">
-                                    <Image src={g.src} alt={g.alt ?? data.title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
-                                </div>
-                                {g.alt ? (
-                                    <figcaption className="p-2 text-xs opacity-70" style={{ color: 'var(--text)' }}>
-                                        {g.alt}
-                                    </figcaption>
-                                ) : null}
-                            </figure>
-                        ))}
-                    </div>
+                    <GalleryLightbox images={data.gallery} title={data.title} />
                 </section>
             ) : null}
 

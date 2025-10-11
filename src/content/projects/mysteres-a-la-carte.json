@@ -39,9 +39,9 @@
         "alt": "Vue d’ensemble — Mystères à la carte"
     },
     "gallery": [
-        { "src": "/images/projects/mysteres-a-la-carte/desktop-2.png", "alt": "Écran 1" },
-        { "src": "/images/projects/mysteres-a-la-carte/mobile-1.png", "alt": "Écran 2" },
-        { "src": "/images/projects/mysteres-a-la-carte/mobile-2.png", "alt": "Écran 3" },
-        { "src": "/images/projects/mysteres-a-la-carte/mobile-menu.png", "alt": "Écran 4" }
+        { "src": "/images/projects/mysteres-a-la-carte/desktop-2.png", "alt": "Concept" },
+        { "src": "/images/projects/mysteres-a-la-carte/mobile-1.png", "alt": "Expérience" },
+        { "src": "/images/projects/mysteres-a-la-carte/mobile-2.png", "alt": "Déroulement" },
+        { "src": "/images/projects/mysteres-a-la-carte/mobile-menu.png", "alt": "Réservation" }
     ]
 }

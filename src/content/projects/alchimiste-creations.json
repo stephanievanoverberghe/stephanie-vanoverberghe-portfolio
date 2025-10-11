@@ -34,9 +34,9 @@
         "alt": "Vue d’ensemble — Alchimiste Créations"
     },
     "gallery": [
-        { "src": "/images/projects/alchimiste-creations/desktop-1.png", "alt": "Accueil — Prestations" },
-        { "src": "/images/projects/alchimiste-creations/desktop-2.png", "alt": "Processus — Étapes" },
-        { "src": "/images/projects/alchimiste-creations/mobile-1.png", "alt": "Mobile — Prestations" },
-        { "src": "/images/projects/alchimiste-creations/mobile-2.png", "alt": "Mobile — FAQ & CTA" }
+        { "src": "/images/projects/alchimiste-creations/desktop-1.png", "alt": "Offres" },
+        { "src": "/images/projects/alchimiste-creations/desktop-2.png", "alt": "Processus" },
+        { "src": "/images/projects/alchimiste-creations/mobile-1.png", "alt": "Projets" },
+        { "src": "/images/projects/alchimiste-creations/mobile-2.png", "alt": "Devis" }
     ]
 }
