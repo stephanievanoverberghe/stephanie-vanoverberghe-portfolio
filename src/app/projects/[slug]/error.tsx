@@ -1,3 +1,4 @@
+// src/app/projects/[slug]/error.tsx
 'use client';
 
 export default function ProjectError({ reset }: { error: Error & { digest?: string }; reset: () => void }) {

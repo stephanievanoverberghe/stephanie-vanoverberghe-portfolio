@@ -1,4 +1,5 @@
 // src/components/ui/Chip.tsx
+
 'use client';
 
 import Link from 'next/link';

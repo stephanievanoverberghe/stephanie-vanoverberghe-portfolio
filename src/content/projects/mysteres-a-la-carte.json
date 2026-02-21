@@ -1,47 +1,37 @@
 {
     "slug": "mysteres-a-la-carte",
     "title": "Mystères à la carte",
-    "subtitle": "Escape game culinaire - Bastille, Paris",
+    "subtitle": "Escape game culinaire — site immersif & réservation",
     "year": 2025,
     "role": ["Front-end", "UI/UX", "Intégration"],
     "stack": ["React", "Next.js", "TypeScript", "Tailwind", "Framer Motion"],
-    "context": "Expérience immersive mêlant jeu d’enquête et gastronomie, avec indices cachés dans les menus et les plats, et un service complice en salle.",
+    "context": "Un site immersif, mais clair : donner envie tout en rendant les infos pratiques immédiates.",
     "objectives": [
-        "Mettre en avant les 4 menus (tarifs, public) et guider vite vers la réservation (mobile-first).",
-        "Assurer lisibilité/contraste en thème sombre premium (tokens or/ivoire/accents).",
-        "Structurer une one-page scannable : Concept → Expériences → À quoi s’attendre → Réserver → FAQ → Accès."
+        "Mettre en avant les menus et guider vers la réservation (mobile-first).",
+        "Créer une interface dark premium avec contrastes lisibles.",
+        "Structurer une one-page scannable : Concept → Expérience → Infos → Réserver → FAQ."
     ],
     "challenges": [
-        "Équilibrer narration et clarté des informations (durée, joueurs, tarifs).",
-        "Conserver de bonnes perfs et une lecture confortable en dark mode.",
-        "Réaliser une hiérarchie visuelle cohérente sans noir/blanc purs."
+        "Garder l’équilibre entre ambiance et clarté (tarifs, durée, joueurs).",
+        "Préserver de bonnes perfs malgré les effets visuels.",
+        "Construire une hiérarchie nette en thème sombre."
     ],
     "solutions": [
-        "Système de design via Tailwind (v4) et tokens du globals : background #0B0B0E, foreground #EDE9E0, primary #D4AF37, accent #0F1A1A.",
-        "Sections courtes, CTA visibles, ancrages internes et formulaire de demande de réservation.",
-        "Micro-interactions sobres et squelettes de chargement (UX rapide perçue)."
+        "Tokens dark premium (or/ivoire/accents) + contrastes vérifiés.",
+        "Sections courtes + ancres pour une navigation rapide.",
+        "Animations Framer Motion sobres + CTA placés aux bons moments."
     ],
-    "highlights": [
-        "4 menus clairs : Carn Hivor (60€), Botanique (50€), Évasion (50€), Aventure gourmande enfants (30€).",
-        "Informations clés lisibles : 60–90 min, 2–6 joueurs, difficulté modulable.",
-        "Dark UI premium, typographie lisible et contenu scannable."
-    ],
+    "highlights": ["Infos clés visibles d’un coup d’œil (60–90 min, 2–6 joueurs).", "Dark UI lisible et cohérente.", "Parcours orienté réservation."],
     "links": {
         "demo": "https://mysteres-a-la-carte.vercel.app/",
         "repo": "https://github.com/stephanievanoverberghe/mysteres-a-la-carte"
     },
-    "logo": {
-        "image": "/images/projects/mysteres-a-la-carte/logo.png",
-        "alt": "Logo Mystères à la carte"
-    },
-    "hero": {
-        "image": "/images/projects/mysteres-a-la-carte/desktop-hero.png",
-        "alt": "Vue d’ensemble — Mystères à la carte"
-    },
+    "logo": { "image": "/images/projects/mysteres-a-la-carte/logo.png", "alt": "Logo Mystères à la carte" },
+    "hero": { "image": "/images/projects/mysteres-a-la-carte/desktop-hero.png", "alt": "Page d’accueil — Mystères à la carte" },
     "gallery": [
-        { "src": "/images/projects/mysteres-a-la-carte/desktop-2.png", "alt": "Concept" },
-        { "src": "/images/projects/mysteres-a-la-carte/mobile-1.png", "alt": "Expérience" },
+        { "src": "/images/projects/mysteres-a-la-carte/desktop-2.png", "alt": "Section Concept" },
+        { "src": "/images/projects/mysteres-a-la-carte/mobile-1.png", "alt": "Expérience mobile" },
         { "src": "/images/projects/mysteres-a-la-carte/mobile-2.png", "alt": "Déroulement" },
-        { "src": "/images/projects/mysteres-a-la-carte/mobile-menu.png", "alt": "Réservation" }
+        { "src": "/images/projects/mysteres-a-la-carte/mobile-menu.png", "alt": "Réservation mobile" }
     ]
 }
