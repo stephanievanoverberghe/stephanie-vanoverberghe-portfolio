@@ -50,31 +50,6 @@ export default function HomeHero() {
                 boxShadow: 'var(--shadow-card)',
             }}
         >
-            {/* fond décoratif (très léger) */}
-            <span
-                aria-hidden
-                className="pointer-events-none absolute inset-0 opacity-[0.06]"
-                style={{ backgroundImage: 'radial-gradient(1px 1px at 24px 24px, var(--text) 12%, transparent 13%)' }}
-            />
-            <span
-                aria-hidden
-                className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full"
-                style={{
-                    background: 'radial-gradient(circle, color-mix(in oklab, var(--lilac) 38%, transparent), transparent 60%)',
-                    filter: 'blur(2px)',
-                    opacity: 0.5,
-                }}
-            />
-            <span
-                aria-hidden
-                className="pointer-events-none absolute -left-24 -bottom-24 h-72 w-72 rounded-full"
-                style={{
-                    background: 'radial-gradient(circle, color-mix(in oklab, var(--sage) 34%, transparent), transparent 60%)',
-                    filter: 'blur(2px)',
-                    opacity: 0.5,
-                }}
-            />
-
             <div className="relative grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
                 {/* Col gauche */}
                 <div>

@@ -24,21 +24,6 @@ export default function ProjectHero({ project }: { project: Project }) {
                 className="relative overflow-hidden rounded-2xl border"
                 style={{ borderColor: 'var(--border-soft)', background: 'var(--surface-1)', boxShadow: 'var(--shadow-card)' }}
             >
-                {/* texture */}
-                <span
-                    aria-hidden
-                    className="pointer-events-none absolute inset-0 opacity-[0.06]"
-                    style={{ backgroundImage: 'radial-gradient(1px 1px at 24px 24px, var(--text) 12%, transparent 13%)' }}
-                />
-                {/* halo */}
-                <span
-                    aria-hidden
-                    className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full opacity-50"
-                    style={{
-                        background: 'radial-gradient(circle, color-mix(in oklab, var(--lilac) 36%, transparent), transparent 62%)',
-                    }}
-                />
-
                 <div className="relative grid gap-6 p-6 sm:p-8 md:grid-cols-[1.35fr_.65fr]">
                     {/* colonne texte */}
                     <div>
