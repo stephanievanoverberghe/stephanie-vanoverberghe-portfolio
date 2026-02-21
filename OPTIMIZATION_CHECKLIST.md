@@ -4,14 +4,15 @@
 
 ## 1) Priorité haute (à faire en premier)
 
-- [ ] **Refactor `api/contact` en 3 fichiers**: `validation.ts`, `rate-limit.ts`, `mail.ts` dans `src/lib/contact/`.
-- [ ] **Uniformiser les statuts HTTP** dans `/api/contact`: `400` (payload invalide), `429` (rate limit), `500` (erreur interne).
-- [ ] **Ajouter logs serveurs minimaux** sur l’API contact (erreur mail, rate-limit hit).
-- [ ] **Mettre à jour `README.md`** avec:
-    - [ ] scripts (`dev`, `lint`, `build`)
-    - [ ] variables d’environnement (`RESEND_API_KEY`, `CONTACT_TO`, `CONTACT_FROM`)
-    - [ ] procédure d’ajout d’un projet JSON.
-- [ ] **Créer une CI GitHub Actions minimale**: `npm ci` + `npm run lint` + `npm run build`.
+[x] **Refactor `api/contact` en 3 fichiers**: `validation.ts`, `rate-limit.ts`, `mail.ts` dans `src/lib/contact/`.
+
+- [x] **Uniformiser les statuts HTTP** dans `/api/contact`: `400` (payload invalide), `429` (rate limit), `500` (erreur interne).
+- [x] **Ajouter logs serveurs minimaux** sur l’API contact (erreur mail, rate-limit hit).
+- [x] **Mettre à jour `README.md`** avec:
+    - [x] scripts (`dev`, `lint`, `build`)
+    - [x] variables d’environnement (`RESEND_API_KEY`, `CONTACT_TO`, `CONTACT_FROM`)
+    - [x] procédure d’ajout d’un projet JSON.
+- [x] **Créer une CI GitHub Actions minimale**: `npm ci` + `npm run lint` + `npm run build`.
 
 ## 2) Priorité moyenne (stabilité et qualité)
 

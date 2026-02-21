@@ -2,14 +2,6 @@
 
 Portfolio professionnel développé avec Next.js (App Router) et TypeScript, présentant mes projets, études de cas et mon approche produit.
 
-Ce projet met l’accent sur :
-
-- 🧠 Architecture propre
-- ⚡ Performance
-- 🔒 Typage strict
-- 🎨 Expérience utilisateur soignée
-- 🧩 Code maintenable et scalable
-
 ---
 
 ## 🚀 Stack Technique
@@ -18,56 +10,26 @@ Ce projet met l’accent sur :
 - React
 - TypeScript (strict mode)
 - Tailwind CSS
-- Node.js
 - Resend (API d’envoi d’emails)
 - Contenu structuré via fichiers JSON typés
 
 ---
 
-## 🎯 Objectifs du Projet
+## 📁 Architecture du Projet (résumé)
 
-- Construire un portfolio professionnel prêt pour entretien
-- Présenter des études de cas complètes et structurées
-- Appliquer une architecture propre (séparation UI / data / logique)
-- Implémenter une API sécurisée
-- Optimiser SEO et performance
-
----
-
-## 📁 Architecture du Projet
-
-```code
+```txt
 src/
  ├── app/
- │    ├── api/contact/        → Route handler sécurisé (email + validation)
- │    ├── (admin)/            → Espace admin protégé
- │    ├── projets/[slug]/     → Pages dynamiques projets
- │    └── layout.tsx
- │
- ├── lib/
- │    ├── projects.ts         → Parsing typé et sécurisé des JSON
+ │    ├── api/contact/        # Route handler contact
+ │    ├── projects/           # Pages projets
  │    └── ...
  │
- ├── content/
- │    └── projects/           → Données des études de cas (JSON)
- │
- └── components/              → UI modulaire et réutilisable
+ ├── lib/
+ │   ├── contact/            # validation, rate-limit, mail
+ │   └── projects.ts         # Parsing typé des projets JSON
+ ├── content/projects/       # Données des projets
+ └── components/             # Composants UI
 ```
-
----
-
-## 🛡 API Contact
-
-Route : `POST /api/contact`
-
-Fonctionnalités implémentées :
-
-- Validation stricte des données
-- Honeypot anti-spam
-- Rate limiting
-- Envoi sécurisé via Resend
-- Gestion propre des erreurs
-- Aucun `any` (TypeScript strict)
 
 ---
 
@@ -75,9 +37,17 @@ Fonctionnalités implémentées :
 
 ```bash
 git clone https://github.com/stephanievanoverberghe/stephanie-vanoverberghe-portfolio
-cd ton-repo
+cd stephanie-vanoverberghe-portfolio
 npm install
 ```
+
+---
+
+## 📜 Scripts npm
+
+- `npm run dev` : démarre le serveur de développement (http://localhost:3000)
+- `npm run lint` : lance ESLint
+- `npm run build` : build de production Next.js
 
 ---
 
@@ -85,60 +55,59 @@ npm install
 
 Créer un fichier `.env.local` :
 
-```code
+```env
 RESEND_API_KEY=your_api_key
 CONTACT_TO=your@email.com
 CONTACT_FROM=portfolio@yourdomain.com
 ```
 
+- `RESEND_API_KEY` : clé API Resend.
+- `CONTACT_TO` : adresse qui reçoit les messages du formulaire.
+- `CONTACT_FROM` : expéditeur utilisé par Resend (doit être validé côté domaine Resend).
+
 ---
 
-## ▶️ Lancer le projet
+## 🛡 API Contact
+
+Route : `POST /api/contact`
+
+Comportements principaux :
+
+- Validation stricte du payload
+- Honeypot anti-spam
+- Rate limit en mémoire
+- Envoi d’email via Resend
+- Statuts HTTP uniformes :
+    - `400` : payload invalide
+    - `429` : rate limit dépassé
+    - `500` : erreur interne (configuration/mail)
+
+---
+
+## ➕ Ajouter un nouveau projet JSON
+
+1. Créer un fichier dans `src/content/projects/` (ex: `mon-projet.json`).
+2. Respecter la structure des autres fichiers JSON existants (slug, metadata, sections, images, etc.).
+3. Ajouter les assets image dans `public/images/projects/<slug>/`.
+4. Vérifier localement :
 
 ```bash
-npm run dev
+npm run lint
+npm run build
 ```
 
-Accès :
-http://localhost:3000
+5. Ouvrir `/projects` puis `/projects/<slug>` en local pour valider le rendu.
+
+```bash
+npm run lint
+npm run build
+```
 
 ---
 
-## 🧪 Qualité & Bonnes Pratiques
+## ✅ Qualité
 
 - TypeScript strict
-- Zéro utilisation de `any`
-- Parsing sécurisé des données JSON
-- Séparation des responsabilités
+- Parsing JSON robuste
 - Composants modulaires
-- Code prêt production
-
----
-
-## 📈 Améliorations Futures
-
-- Tests unitaires (Vitest)
-- Dockerisation
-- CI/CD (GitHub Actions)
-- Optimisation Lighthouse avancée
-- Validation runtime plus stricte des données
-
----
-
-## 👩‍💻 À propos
-
-Développeuse front-end spécialisée en React, avec une approche structurée orientée produit.
-
-Je m’intéresse particulièrement à :
-
-- L’architecture propre
-- La performance web
-- L’expérience utilisateur
-- La maintenabilité du code
-- Les projets SaaS structurés comme en entreprise
-
----
-
-## 📬 Contact
-
-Via le formulaire du site ou directement par email.
+- CI GitHub Actions (lint + build)
