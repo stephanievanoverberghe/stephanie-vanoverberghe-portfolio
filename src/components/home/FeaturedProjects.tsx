@@ -22,6 +22,12 @@ function coverAlt(p: Project) {
     return p.hero?.alt ?? p.logo?.alt ?? p.title;
 }
 
+function getYearScore(p: Project) {
+    // si year est string/number : on force en number
+    const n = Number((p as any).year ?? 0);
+    return Number.isFinite(n) ? n : 0;
+}
+
 function BrowserFrame({ p, tone }: { p: Project; tone: Tone }) {
     const src = coverSrc(p);
     const alt = coverAlt(p);
@@ -76,27 +82,73 @@ function BrowserFrame({ p, tone }: { p: Project; tone: Tone }) {
     );
 }
 
-function MiniRow({ label, value }: { label: string; value?: string }) {
-    if (!value) return null;
+function CompactCard({ p }: { p: Project }) {
+    const src = coverSrc(p);
+    const alt = coverAlt(p);
+    const picked = pickStack(p.stack, 2);
+
     return (
-        <div className="flex gap-2 text-sm">
-            <span className="font-semibold" style={{ color: 'var(--text-strong)' }}>
-                {label}
-            </span>
-            <span className="opacity-85">{value}</span>
-        </div>
+        <Link
+            href={`/projects/${p.slug}`}
+            className="group rounded-2xl border p-4 transition hover:shadow-[0_14px_40px_rgba(2,8,23,0.08)]"
+            style={{ borderColor: 'var(--border-soft)', background: 'var(--surface-1)', boxShadow: 'var(--shadow-card)' }}
+        >
+            <div className="flex gap-4">
+                <div
+                    className="relative h-20 w-28 shrink-0 overflow-hidden rounded-2xl border"
+                    style={{ borderColor: 'var(--border-soft)', background: 'color-mix(in oklab, var(--surface-2) 70%, var(--surface-1))' }}
+                >
+                    {src ? <Image src={src} alt={alt} fill sizes="120px" className="object-cover" /> : null}
+                    <span aria-hidden className="pointer-events-none absolute inset-0" style={{ boxShadow: 'inset 0 0 0 1px rgba(2,8,23,0.04)' }} />
+                </div>
+
+                <div className="min-w-0 flex-1">
+                    <div className="flex items-start justify-between gap-3">
+                        <div className="min-w-0">
+                            <div className="truncate text-sm font-semibold" style={{ color: 'var(--text-strong)' }}>
+                                {p.title}
+                            </div>
+                            {p.subtitle ? <div className="mt-1 line-clamp-2 text-xs opacity-75">{p.subtitle}</div> : null}
+                        </div>
+
+                        {p.year ? (
+                            <Chip size="xs" color="gold">
+                                {p.year}
+                            </Chip>
+                        ) : null}
+                    </div>
+
+                    <div className="mt-2 flex flex-wrap gap-2">
+                        {picked.map((s) => (
+                            <Chip key={s} {...chipPropsByKind(kindFor(s))} size="xs">
+                                {s}
+                            </Chip>
+                        ))}
+                    </div>
+
+                    <div className="mt-2 text-xs font-semibold inline-flex items-center gap-2 opacity-85 group-hover:opacity-100" style={{ color: 'var(--text-strong)' }}>
+                        Voir
+                        <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+                    </div>
+                </div>
+            </div>
+        </Link>
     );
 }
 
-export default function FeaturedProjects({ projects }: { projects: Project[] }) {
+export default function FeaturedProjects({ projects, featuredCount = 2 }: { projects: Project[]; featuredCount?: number }) {
+    const sorted = [...projects].sort((a, b) => getYearScore(b) - getYearScore(a));
+    const featured = sorted.slice(0, featuredCount);
+    const rest = sorted.slice(featuredCount);
+
     return (
-        <section className="space-y-4">
+        <section className="space-y-6">
             <div className="flex flex-wrap items-end justify-between gap-3">
                 <div>
                     <h2 className="text-xl font-semibold" style={{ color: 'var(--text-strong)' }}>
-                        Études de cas
+                        Projets
                     </h2>
-                    <p className="mt-1 text-sm opacity-80">Ancre-toi & Alchimiste Créations — UX + technique, démo + repo.</p>
+                    <p className="mt-1 text-sm opacity-80">Les {featuredCount} derniers en avant · puis tous les autres.</p>
                 </div>
 
                 <Link href="/projects" className="text-sm font-semibold hover:opacity-90" style={{ color: 'var(--text-strong)' }}>
@@ -104,8 +156,9 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
                 </Link>
             </div>
 
+            {/* ✅ 2 derniers (featured) */}
             <div className="grid gap-6 lg:grid-cols-2">
-                {projects.map((p, idx) => {
+                {featured.map((p, idx) => {
                     const picked = pickStack(p.stack, 3);
                     const tone: Tone = idx % 2 === 0 ? 'sage' : 'lilac';
 
@@ -134,7 +187,7 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
                                                 </Chip>
                                             ) : null}
                                             <Chip size="xs" color="accent">
-                                                Case study
+                                                Featured
                                             </Chip>
                                         </div>
                                     </div>
@@ -187,6 +240,26 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
                     );
                 })}
             </div>
+
+            {/* ✅ Tous les autres */}
+            {rest.length ? (
+                <div className="space-y-3">
+                    <div className="flex items-center justify-between gap-3">
+                        <h3 className="text-sm font-semibold" style={{ color: 'var(--text-strong)' }}>
+                            Tous les autres projets
+                        </h3>
+                        <span className="text-xs opacity-70">
+                            {rest.length} projet{rest.length > 1 ? 's' : ''}
+                        </span>
+                    </div>
+
+                    <div className="grid gap-4 md:grid-cols-2">
+                        {rest.map((p) => (
+                            <CompactCard key={p.slug} p={p} />
+                        ))}
+                    </div>
+                </div>
+            ) : null}
         </section>
     );
 }

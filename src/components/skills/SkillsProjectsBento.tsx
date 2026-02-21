@@ -1,7 +1,50 @@
 // src/components/skills/SkillsProjectsBento.tsx
+import type { Project } from '@/lib/projects';
 import SkillsProjectTile from '@/components/skills/SkillsProjectTile';
 
-export default function SkillsProjectsBento() {
+type Props = {
+    projects: Project[];
+};
+
+function coverSrc(p: Project) {
+    return p.hero?.image ?? p.logo?.image ?? '/images/projects/placeholder.png';
+}
+
+function coverAlt(p: Project) {
+    return p.hero?.alt ?? p.logo?.alt ?? p.title;
+}
+
+function pickTags(p: Project) {
+    // On privilégie stack, sinon role
+    const tags = [...(p.stack ?? []), ...(p.role ?? [])].filter(Boolean);
+    return tags.slice(0, 6);
+}
+
+function pickHighlights(p: Project) {
+    const h = (p.highlights ?? []).filter(Boolean);
+    return h.length ? h.slice(0, 3) : ['UI/UX', 'Perf/SEO', 'Accessibilité'];
+}
+
+function sortMostRecentFirst(projects: Project[]) {
+    // Si tu as `year` (number) : c’est parfait
+    // Sinon on retombe sur l’ordre d’entrée
+    return [...projects].sort((a, b) => {
+        const ay = typeof a.year === 'number' ? a.year : -1;
+        const by = typeof b.year === 'number' ? b.year : -1;
+        return by - ay;
+    });
+}
+
+export default function SkillsProjectsBento({ projects }: Props) {
+    const ordered = sortMostRecentFirst(projects);
+    const last3 = ordered.slice(0, 3);
+
+    const p0 = last3[0];
+    const p1 = last3[1];
+    const p2 = last3[2];
+
+    if (!p0) return null;
+
     return (
         <section className="space-y-5">
             <div className="space-y-2">
@@ -17,49 +60,53 @@ export default function SkillsProjectsBento() {
             </div>
 
             <div className="grid gap-6 lg:grid-cols-3">
-                {/* big */}
+                {/* big (le plus récent) */}
                 <div className="lg:col-span-2">
                     <SkillsProjectTile
                         size="lg"
-                        title="Mystères à la carte"
-                        subtitle="Escape game culinaire — landing immersive & conversion"
-                        hrefCase="/projects/mysteres-a-la-carte"
-                        demoUrl="https://mysteres-a-la-carte.vercel.app/"
-                        cover="/images/projects/mysteres-a-la-carte/desktop-hero.png"
-                        coverAlt="Aperçu Mystères à la carte"
-                        tags={['Next.js', 'TypeScript', 'Tailwind', 'UI/UX', 'Framer Motion']}
-                        highlights={['Dark UI lisible', 'Parcours vers réservation', 'Micro-interactions sobres']}
+                        title={p0.title}
+                        subtitle={p0.subtitle ?? 'Étude de cas'}
+                        hrefCase={`/projects/${p0.slug}`}
+                        demoUrl={p0.links?.demo}
+                        cover={coverSrc(p0)}
+                        coverAlt={coverAlt(p0)}
+                        tags={pickTags(p0)}
+                        highlights={pickHighlights(p0)}
                         tone="accent"
                     />
                 </div>
 
-                {/* small column */}
+                {/* small column (2 suivants) */}
                 <div className="grid gap-6">
-                    <SkillsProjectTile
-                        size="sm"
-                        title="Alchimiste Créations"
-                        subtitle="Vitrine freelance — offre claire & crédible"
-                        hrefCase="/projects/alchimiste-creations"
-                        demoUrl="https://alchimiste-creations.vercel.app/"
-                        cover="/images/projects/alchimiste-creations/desktop-hero.png"
-                        coverAlt="Aperçu Alchimiste Créations"
-                        tags={['Next.js', 'TypeScript', 'Tailwind', 'SSG/SEO']}
-                        highlights={['Structure scannable', 'CTA cohérents', 'Base SEO/OG']}
-                        tone="lilac"
-                    />
+                    {p1 ? (
+                        <SkillsProjectTile
+                            size="sm"
+                            title={p1.title}
+                            subtitle={p1.subtitle ?? 'Étude de cas'}
+                            hrefCase={`/projects/${p1.slug}`}
+                            demoUrl={p1.links?.demo}
+                            cover={coverSrc(p1)}
+                            coverAlt={coverAlt(p1)}
+                            tags={pickTags(p1)}
+                            highlights={pickHighlights(p1)}
+                            tone="lilac"
+                        />
+                    ) : null}
 
-                    <SkillsProjectTile
-                        size="sm"
-                        title="Ancre-toi"
-                        subtitle="Formation — Stripe & accès via logique produit"
-                        hrefCase="/projects/ancre-toi"
-                        demoUrl="https://ancretoi.vercel.app/"
-                        cover="/images/projects/ancre-toi/desktop-hero.png"
-                        coverAlt="Aperçu Ancre-toi"
-                        tags={['Next.js', 'MongoDB', 'Stripe', 'Webhooks']}
-                        highlights={['Parcours pédagogique', 'Activation accès', 'Espace membre clair']}
-                        tone="sage"
-                    />
+                    {p2 ? (
+                        <SkillsProjectTile
+                            size="sm"
+                            title={p2.title}
+                            subtitle={p2.subtitle ?? 'Étude de cas'}
+                            hrefCase={`/projects/${p2.slug}`}
+                            demoUrl={p2.links?.demo}
+                            cover={coverSrc(p2)}
+                            coverAlt={coverAlt(p2)}
+                            tags={pickTags(p2)}
+                            highlights={pickHighlights(p2)}
+                            tone="sage"
+                        />
+                    ) : null}
                 </div>
             </div>
         </section>

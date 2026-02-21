@@ -1,0 +1,91 @@
+{
+    "slug": "explorart",
+    "title": "Explor’Art",
+    "subtitle": "Blog d’art éditorial — pédagogie douce, UX lumineuse et architecture structurée",
+    "year": 2026,
+    "role": ["Product Design", "Front-end", "UI/UX", "Architecture", "Fullstack"],
+    "stack": ["Next.js 16 (App Router)", "TypeScript", "Tailwind CSS v4", "MongoDB", "Mongoose", "Vercel"],
+    "context": "Créer un blog d’art moderne, humain et accessible, structuré autour de 7 piliers éditoriaux forts, avec une architecture propre et un admin minimal.",
+    "vision": "Faire d’Explor’Art une école d’art moderne et chaleureuse sans murs : apprendre à voir, comprendre et créer, sans jargon ni intimidation.",
+    "objectives": [
+        "Décomplexer l’apprentissage artistique avec une pédagogie claire et incarnée.",
+        "Structurer le contenu autour de 7 piliers cohérents et reconnaissables.",
+        "Créer une UX lumineuse et respirante, pensée comme une déambulation.",
+        "Mettre en place une architecture maintenable (App Router + MongoDB).",
+        "Permettre une création d’articles fluide via un admin minimal."
+    ],
+    "editorialFoundations": [
+        "7 piliers éditoriaux distincts (pratique, regard, culture, émotion).",
+        "Formats d’articles officiels (tutorial, artwork-analysis, artist-story, art-history, color-guide, inspiration, art-psychology).",
+        "Vidéo YouTube optionnelle, jamais obligatoire.",
+        "Aucune logique de parcours ou de niveau imposé."
+    ],
+    "challenges": [
+        "Créer un blog pédagogique sans tomber dans le ton scolaire.",
+        "Maintenir une forte identité éditoriale tout en restant minimaliste.",
+        "Concilier respiration visuelle et richesse de contenu.",
+        "Construire un admin simple mais extensible."
+    ],
+    "solutions": [
+        "Navigation hybride : 4 piliers visibles + menu 'Explorer'.",
+        "Design system basé sur une palette papier chaud + 7 couleurs piliers.",
+        "Composants éditoriaux dédiés (Callout, PillarBadge, SectionLabel, YouTubeEmbed).",
+        "Architecture modulaire : routes publiques / admin / API séparées.",
+        "Modèle Post structuré avec format + youtubeId optionnel."
+    ],
+    "uxHighlights": [
+        "Hero éditorial sans CTA agressif.",
+        "Home en blocs fins, rythme vertical fluide.",
+        "Pages piliers avec introduction incarnée.",
+        "Articles aérés avec encarts pédagogiques.",
+        "Lecture optimisée mobile (priorité confort)."
+    ],
+    "uiHighlights": [
+        "Palette papier chaud (#F9F5EF) + encres piliers feutrées.",
+        "Playfair Display (titres) + Inter (texte courant).",
+        "Cartes douces, ombres subtiles, badges piliers colorés.",
+        "Navbar sticky translucide avec blur léger.",
+        "Animations lentes et organiques (fade-up, float, parallax doux)."
+    ],
+    "architecture": {
+        "publicRoutes": ["/", "/articles", "/articles/[slug]", "/piliers", "/piliers/[slug]", "/a-propos", "/recherche", "/legal/*"],
+        "adminFeatures": ["CRUD articles", "Gestion piliers", "Statut draft/published", "isFeatured", "SEO fields", "youtubeId optionnel"],
+        "seo": ["Metadata par page", "OpenGraph dynamique", "Sitemap", "Images optimisées avec next/image", "Revalidation côté lecture"]
+    },
+    "highlights": [
+        "Projet éditorial complet (vision + ligne + UX + UI + archi).",
+        "Design system cohérent basé sur les 7 piliers.",
+        "Admin minimal pensé pour la fluidité.",
+        "Expérience émotionnelle priorisée autant que la performance."
+    ],
+    "links": {
+        "demo": "https://explorart.vercel.app/",
+        "repo": "https://github.com/stephanievanoverberghe/explorart"
+    },
+    "logo": {
+        "image": "/images/projects/explorart/logo.png",
+        "alt": "Logo Explor’Art"
+    },
+    "hero": {
+        "image": "/images/projects/explorart/desktop-hero.png",
+        "alt": "Hero éditorial — Explor’Art"
+    },
+    "gallery": [
+        {
+            "src": "/images/projects/explorart/desktop-articles.png",
+            "alt": "Page catalogue des articles avec filtres piliers"
+        },
+        {
+            "src": "/images/projects/explorart/desktop-article.png",
+            "alt": "Page article avec encarts pédagogiques"
+        },
+        {
+            "src": "/images/projects/explorart/desktop-admin.png",
+            "alt": "Dashboard admin minimal"
+        },
+        {
+            "src": "/images/projects/explorart/desktop-admin-commentaires.png",
+            "alt": "Admin commentaires avec modération simple"
+        }
+    ]
+}
