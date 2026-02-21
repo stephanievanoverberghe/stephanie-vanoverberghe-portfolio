@@ -1,36 +1,144 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ✨ Portfolio – Développeuse Front-End React
 
-## Getting Started
+Portfolio professionnel développé avec Next.js (App Router) et TypeScript, présentant mes projets, études de cas et mon approche produit.
 
-First, run the development server:
+Ce projet met l’accent sur :
+
+- 🧠 Architecture propre
+- ⚡ Performance
+- 🔒 Typage strict
+- 🎨 Expérience utilisateur soignée
+- 🧩 Code maintenable et scalable
+
+---
+
+## 🚀 Stack Technique
+
+- Next.js 16+ (App Router)
+- React
+- TypeScript (strict mode)
+- Tailwind CSS
+- Node.js
+- Resend (API d’envoi d’emails)
+- Contenu structuré via fichiers JSON typés
+
+---
+
+## 🎯 Objectifs du Projet
+
+- Construire un portfolio professionnel prêt pour entretien
+- Présenter des études de cas complètes et structurées
+- Appliquer une architecture propre (séparation UI / data / logique)
+- Implémenter une API sécurisée
+- Optimiser SEO et performance
+
+---
+
+## 📁 Architecture du Projet
+
+```code
+src/
+ ├── app/
+ │    ├── api/contact/        → Route handler sécurisé (email + validation)
+ │    ├── (admin)/            → Espace admin protégé
+ │    ├── projets/[slug]/     → Pages dynamiques projets
+ │    └── layout.tsx
+ │
+ ├── lib/
+ │    ├── projects.ts         → Parsing typé et sécurisé des JSON
+ │    └── ...
+ │
+ ├── content/
+ │    └── projects/           → Données des études de cas (JSON)
+ │
+ └── components/              → UI modulaire et réutilisable
+```
+
+---
+
+## 🛡 API Contact
+
+Route : `POST /api/contact`
+
+Fonctionnalités implémentées :
+
+- Validation stricte des données
+- Honeypot anti-spam
+- Rate limiting
+- Envoi sécurisé via Resend
+- Gestion propre des erreurs
+- Aucun `any` (TypeScript strict)
+
+---
+
+## ⚙️ Installation
+
+```bash
+git clone https://github.com/stephanievanoverberghe/stephanie-vanoverberghe-portfolio
+cd ton-repo
+npm install
+```
+
+---
+
+## 🔐 Variables d’environnement
+
+Créer un fichier `.env.local` :
+
+```code
+RESEND_API_KEY=your_api_key
+CONTACT_TO=your@email.com
+CONTACT_FROM=portfolio@yourdomain.com
+```
+
+---
+
+## ▶️ Lancer le projet
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Accès :
+http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🧪 Qualité & Bonnes Pratiques
 
-## Learn More
+- TypeScript strict
+- Zéro utilisation de `any`
+- Parsing sécurisé des données JSON
+- Séparation des responsabilités
+- Composants modulaires
+- Code prêt production
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📈 Améliorations Futures
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Tests unitaires (Vitest)
+- Dockerisation
+- CI/CD (GitHub Actions)
+- Optimisation Lighthouse avancée
+- Validation runtime plus stricte des données
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 👩‍💻 À propos
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Développeuse front-end spécialisée en React, avec une approche structurée orientée produit.
+
+Je m’intéresse particulièrement à :
+
+- L’architecture propre
+- La performance web
+- L’expérience utilisateur
+- La maintenabilité du code
+- Les projets SaaS structurés comme en entreprise
+
+---
+
+## 📬 Contact
+
+Via le formulaire du site ou directement par email.

@@ -23,8 +23,7 @@ function coverAlt(p: Project) {
 }
 
 function getYearScore(p: Project) {
-    // si year est string/number : on force en number
-    const n = Number((p as any).year ?? 0);
+    const n = Number(p.year ?? 0);
     return Number.isFinite(n) ? n : 0;
 }
 
