@@ -105,6 +105,30 @@ npm run build
 
 ---
 
+## 🧪 Tests
+
+Des tests ont été ajoutés pour la logique projets (`src/lib/projects.test.ts`) et l’API contact (`src/app/api/contact/route.test.ts`).
+
+> ⚠️ Si `vitest` n’est pas encore installé dans ton environnement, installe-le avec `npm i -D vitest` avant exécution.
+
+Commande recommandée :
+
+```bash
+npx vitest run
+```
+
+---
+
+## 🏷 Convention de naming (simple)
+
+- **Composants React** : `PascalCase.tsx` (ex: `ProjectCard.tsx`).
+- **Utilitaires / librairies** : `kebab-case.ts` ou `<feature>.utils.ts` (ex: `projects.utils.ts`, `rate-limit.ts`).
+- **Données de contenu** : `kebab-case.json` et slug cohérent (ex: `ancre-toi.json`).
+- **Routes App Router** : dossiers en `kebab-case`, fichiers Next.js standards (`page.tsx`, `layout.tsx`, `loading.tsx`, `error.tsx`, `route.ts`).
+- **Constantes locales** : `UPPER_SNAKE_CASE` pour les constantes globales, `camelCase` sinon.
+
+---
+
 ## ✅ Qualité
 
 - TypeScript strict

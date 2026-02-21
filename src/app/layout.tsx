@@ -1,6 +1,3 @@
-// src/app/layout.tsx
-
-// src/app/layout.tsx
 import type { Metadata, Viewport } from 'next';
 import { Suspense } from 'react';
 import Script from 'next/script';

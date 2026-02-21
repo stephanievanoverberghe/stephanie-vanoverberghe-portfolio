@@ -4,7 +4,7 @@
 
 ## 1) Priorité haute (à faire en premier)
 
-[x] **Refactor `api/contact` en 3 fichiers**: `validation.ts`, `rate-limit.ts`, `mail.ts` dans `src/lib/contact/`.
+- [x] **Refactor `api/contact` en 3 fichiers**: `validation.ts`, `rate-limit.ts`, `mail.ts` dans `src/lib/contact/`.
 
 - [x] **Uniformiser les statuts HTTP** dans `/api/contact`: `400` (payload invalide), `429` (rate limit), `500` (erreur interne).
 - [x] **Ajouter logs serveurs minimaux** sur l’API contact (erreur mail, rate-limit hit).
@@ -16,16 +16,16 @@
 
 ## 2) Priorité moyenne (stabilité et qualité)
 
-- [ ] **Ajouter tests unitaires (Vitest)** pour `src/lib/projects.ts`:
-    - [ ] parsing JSON valide
-    - [ ] fallback de slug
-    - [ ] tri par année.
-- [ ] **Ajouter tests d’intégration API contact**:
-    - [ ] payload invalide -> `400`
-    - [ ] honeypot rempli -> `200`
-    - [ ] dépassement rate limit -> `429`.
-- [ ] **Nettoyer les commentaires incohérents** (ex: commentaires de path obsolètes).
-- [ ] **Créer une convention simple de naming** (composants, utilitaires, fichiers de contenu).
+- [x] **Ajouter tests unitaires (Vitest)** pour `src/lib/projects.ts`:
+    - [x] parsing JSON valide
+    - [x] fallback de slug
+    - [x] tri par année.
+- [x] **Ajouter tests d’intégration API contact**:
+    - [x] payload invalide -> `400`
+    - [x] honeypot rempli -> `200`
+    - [x] dépassement rate limit -> `429`.
+- [x] **Nettoyer les commentaires incohérents** (ex: commentaires de path obsolètes).
+- [x] **Créer une convention simple de naming** (composants, utilitaires, fichiers de contenu).
 
 ## 3) Priorité optimisation UX / perf
 
