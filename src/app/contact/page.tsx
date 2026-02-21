@@ -18,7 +18,7 @@ function Kicker({ children }: { children: React.ReactNode }) {
 export default function ContactPage() {
     return (
         <section className="container-page py-12 space-y-8">
-            {/* HERO (pro, sobre) */}
+            {/* HERO */}
             <header
                 className="relative overflow-hidden rounded-2xl border p-6 sm:p-10"
                 style={{
