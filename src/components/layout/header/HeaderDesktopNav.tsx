@@ -11,7 +11,6 @@ import { cn } from './header.utils';
 export function HeaderDesktopNav({ isActive }: { isActive: (href: string) => boolean }) {
     return (
         <nav aria-label="Navigation principale" className="hidden md:flex items-center gap-4">
-            {/* Pill nav */}
             <div
                 className="relative flex items-center gap-1 rounded-full border p-1"
                 style={{ borderColor: 'var(--border-soft)', background: 'color-mix(in oklab, var(--surface-1) 80%, transparent)' }}
@@ -40,7 +39,7 @@ export function HeaderDesktopNav({ isActive }: { isActive: (href: string) => boo
                                         border: '1px solid',
                                         borderColor: 'color-mix(in oklab, var(--accent) 28%, var(--border-soft))',
                                     }}
-                                    transition={{ type: 'spring', stiffness: 500, damping: 40 }}
+                                    transition={{ type: 'spring', stiffness: 420, damping: 36 }}
                                 />
                             )}
                         </div>

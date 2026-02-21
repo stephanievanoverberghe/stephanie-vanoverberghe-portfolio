@@ -2,23 +2,26 @@
 
 'use client';
 
+import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { AnimatePresence, motion } from 'framer-motion';
 
 export default function RouteTransition({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
+    const [motionAllowed, setMotionAllowed] = useState(false);
+
+    useEffect(() => {
+        const media = window.matchMedia('(prefers-reduced-motion: no-preference)');
+        const updateMotion = () => setMotionAllowed(media.matches);
+
+        updateMotion();
+        media.addEventListener('change', updateMotion);
+
+        return () => media.removeEventListener('change', updateMotion);
+    }, []);
 
     return (
-        <AnimatePresence mode="wait">
-            <motion.div
-                key={pathname}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.28, ease: [0.22, 0.61, 0.36, 1] }}
-            >
-                {children}
-            </motion.div>
-        </AnimatePresence>
+        <div key={pathname} className={motionAllowed ? 'route-transition-enter' : undefined}>
+            {children}
+        </div>
     );
 }

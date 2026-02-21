@@ -29,9 +29,9 @@
 
 ## 3) Priorité optimisation UX / perf
 
-- [ ] **Réduire le JS client global**:
-    - [ ] garder `Header` interactif mais isoler les parties purement statiques côté server component quand possible
-    - [ ] alléger/conditionner `RouteTransition` si nécessaire.
+- [x] **Réduire le JS client global**:
+    - [x] garder `Header` interactif mais isoler les parties purement statiques côté server component quand possible
+    - [x] alléger/conditionner `RouteTransition` si nécessaire.
 - [ ] **Optimiser les images projets**:
     - [ ] convertir/valider en WebP/AVIF quand pertinent
     - [ ] vérifier poids de chaque image hero
