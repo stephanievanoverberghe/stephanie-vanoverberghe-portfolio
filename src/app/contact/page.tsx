@@ -1,13 +1,12 @@
 // src/app/contact/page.tsx
-'use client';
 
-import * as React from 'react';
+import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { Sparkles } from 'lucide-react';
 import ContactForm from '@/components/contact/ContactForm';
 import ContactAside from '@/components/contact/ContactAside';
 
-function Kicker({ children }: { children: React.ReactNode }) {
+function Kicker({ children }: { children: ReactNode }) {
     return (
         <span className="text-xs uppercase tracking-[0.14em]" style={{ color: 'var(--accent)' }}>
             {children}

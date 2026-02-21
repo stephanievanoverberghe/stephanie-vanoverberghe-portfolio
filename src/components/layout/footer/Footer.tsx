@@ -1,6 +1,5 @@
 // src/components/layout/footer/Footer.tsx
 
-import Link from 'next/link';
 import { FooterCta } from './FooterCta';
 import { FooterLinks } from './FooterLinks';
 

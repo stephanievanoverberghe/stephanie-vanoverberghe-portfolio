@@ -25,8 +25,6 @@ export default function Header() {
 
     const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
 
-    useEffect(() => setOpen(false), [pathname]);
-
     // ESC close
     useEffect(() => {
         if (!open) return;
