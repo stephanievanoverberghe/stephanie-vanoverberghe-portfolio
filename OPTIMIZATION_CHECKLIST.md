@@ -37,8 +37,8 @@
     - [ ] vérifier poids de chaque image hero
     - [ ] conserver `next/image` + tailles adaptées.
 - [ ] **Audit Lighthouse rapide** (mobile + desktop) et noter:
-    - [ ] LCP
-    - [ ] CLS
+    - [ ] LCP desktop : 0.6s mobile : 2.5s
+    - [ ] CLS desktop : 0 mobile : 0
     - [ ] recommandations top 3.
 
 ## 4) Anti-spam progressif (uniquement si besoin réel)
