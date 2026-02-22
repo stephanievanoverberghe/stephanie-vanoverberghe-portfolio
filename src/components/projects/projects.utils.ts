@@ -52,3 +52,34 @@ export function coverSrc(p: Project) {
 export function coverAlt(p: Project) {
     return p.hero?.alt ?? p.logo?.alt ?? p.title;
 }
+
+function normalize(text: string): string {
+    return text
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, ' ')
+        .trim();
+}
+
+function excerpt(text: string, max = 120): string {
+    if (text.length <= max) return text;
+    return text.slice(0, max).replace(/\s+\S*$/, '') + '…';
+}
+
+export function cardBlurb(project: Project): string {
+    const candidates = [project.subtitle, project.context, project.highlights?.[0]].filter((value): value is string => Boolean(value?.trim()));
+    const unique: string[] = [];
+    const seen = new Set<string>();
+
+    for (const text of candidates) {
+        const key = normalize(text);
+        if (!key || seen.has(key)) continue;
+        seen.add(key);
+        unique.push(text.trim());
+        if (unique.length === 2) break;
+    }
+
+    if (!unique.length) return '';
+    return excerpt(unique.join(' — '), 130);
+}

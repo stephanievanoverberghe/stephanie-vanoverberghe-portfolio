@@ -7,15 +7,14 @@ import { excerpt } from './project.utils';
 export default function ProjectOverview({ project }: { project: Project }) {
     const p = project;
 
-    const rows = [
-        { label: 'Contexte', value: excerpt(p.context, 150) },
-        { label: 'Objectif', value: excerpt(p.objectives?.[0], 150) },
-        { label: 'Livrable', value: excerpt(p.highlights?.[0], 150) },
-    ].filter((x) => x.value);
+    const quickFacts = [
+        p.year ? { label: 'Année', value: String(p.year) } : null,
+        p.role?.length ? { label: 'Rôle', value: p.role.slice(0, 2).join(' · ') } : null,
+        p.stack?.length ? { label: 'Stack', value: p.stack.slice(0, 3).join(' · ') } : null,
+    ].filter((item): item is { label: string; value: string } => Boolean(item));
 
     return (
         <section className="grid gap-6 md:grid-cols-[1.25fr_.75fr] items-start">
-            {/* main */}
             <article className="panel p-6">
                 <h2 className="text-lg section-title">Contexte</h2>
                 {p.context ? <p className="mt-2 opacity-90 max-w-[80ch]">{p.context}</p> : null}
@@ -38,7 +37,6 @@ export default function ProjectOverview({ project }: { project: Project }) {
                 ) : null}
             </article>
 
-            {/* sticky sidebar */}
             <aside className="space-y-4 md:sticky md:top-24">
                 <div className="panel p-6">
                     <div className="flex items-center justify-between gap-3">
@@ -72,16 +70,16 @@ export default function ProjectOverview({ project }: { project: Project }) {
                     }}
                 >
                     <div className="text-sm font-semibold" style={{ color: 'var(--text-strong)' }}>
-                        Infos rapides
+                        Fiche rapide
                     </div>
 
                     <div className="mt-4 grid gap-y-3 text-sm">
-                        {rows.map((row) => (
+                        {quickFacts.map((row) => (
                             <div key={row.label} className="grid grid-cols-[92px_1fr] gap-3">
                                 <div className="font-semibold" style={{ color: 'var(--text-strong)' }}>
                                     {row.label}
                                 </div>
-                                <div className="opacity-85">{row.value}</div>
+                                <div className="opacity-85">{excerpt(row.value, 120)}</div>
                             </div>
                         ))}
                     </div>

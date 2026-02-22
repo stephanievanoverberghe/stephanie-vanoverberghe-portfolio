@@ -3,13 +3,14 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Chip from '@/components/ui/Chip';
 import type { Project } from '@/lib/projects';
-import { coverAlt, coverSrc, kindFor, pickStackChips } from './projects.utils';
+import { cardBlurb, coverAlt, coverSrc, kindFor, pickStackChips } from './projects.utils';
 
 export default function ProjectCard({ project }: { project: Project }) {
     const p = project;
     const src = coverSrc(p);
     const alt = coverAlt(p);
     const stackChips = pickStackChips(p.stack ?? [], 2);
+    const blurb = cardBlurb(p);
 
     return (
         <article
@@ -95,7 +96,7 @@ export default function ProjectCard({ project }: { project: Project }) {
                                 <h2 className="text-base sm:text-lg font-semibold truncate" style={{ color: 'var(--text-strong)' }}>
                                     {p.title}
                                 </h2>
-                                {p.subtitle ? <p className="mt-1 text-sm opacity-80 line-clamp-2">{p.subtitle}</p> : null}
+                                {blurb ? <p className="mt-1 text-sm opacity-80 line-clamp-2">{blurb}</p> : null}
                             </div>
 
                             <span
@@ -111,7 +112,7 @@ export default function ProjectCard({ project }: { project: Project }) {
                         </div>
 
                         <div className="mt-3 flex flex-wrap gap-2">
-                            {(p.role ?? []).slice(0, 2).map((r) => (
+                            {(p.role ?? []).slice(0, 1).map((r) => (
                                 <Chip key={r} kind="design">
                                     {r}
                                 </Chip>
