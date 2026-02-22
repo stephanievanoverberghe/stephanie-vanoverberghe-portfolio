@@ -1,19 +1,8 @@
-// src/app/api/contact/route.test.ts
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-vi.mock('@/lib/contact/mail', () => ({
-    sendContactMail: vi.fn(),
-}));
-
-vi.mock('@/lib/contact/rate-limit', () => ({
-    getClientKey: vi.fn(),
-    isRateLimited: vi.fn(),
-}));
-
-vi.mock('@/lib/contact/validation', () => ({
-    parseJsonBody: vi.fn(),
-    parseContactPayload: vi.fn(),
-}));
+vi.mock('@/lib/contact/mail', () => ({ sendContactMail: vi.fn() }));
+vi.mock('@/lib/contact/rate-limit', () => ({ getClientKey: vi.fn(), isRateLimited: vi.fn() }));
+vi.mock('@/lib/contact/validation', () => ({ parseJsonBody: vi.fn(), parseContactPayload: vi.fn() }));
 
 import { POST } from './route';
 import { sendContactMail } from '@/lib/contact/mail';
@@ -55,7 +44,6 @@ describe('POST /api/contact', () => {
         mockedParseContactPayload.mockReturnValue(null);
 
         const response = await POST(createRequest());
-
         expect(response.status).toBe(400);
     });
 
@@ -79,7 +67,6 @@ describe('POST /api/contact', () => {
         mockedIsRateLimited.mockReturnValue(true);
 
         const response = await POST(createRequest());
-
         expect(response.status).toBe(429);
     });
 

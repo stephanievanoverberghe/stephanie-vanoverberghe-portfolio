@@ -1,4 +1,3 @@
-// src/lib/projects.test.ts
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { getAllProjects, getProjectBySlug } from './projects';
@@ -10,8 +9,10 @@ vi.mock('node:fs/promises', () => ({
 
 import { readdir, readFile } from 'node:fs/promises';
 
-const mockedReaddir = vi.mocked(readdir);
-const mockedReadFile = vi.mocked(readFile);
+// ⚠️ Node a des overloads ici : vi.mocked peut rester "trop strict".
+// Donc on caste la version "mockée" via unknown, sans any, juste pour TS.
+const mockedReaddir = vi.mocked(readdir as unknown as ReturnType<typeof vi.fn>);
+const mockedReadFile = vi.mocked(readFile as unknown as ReturnType<typeof vi.fn>);
 
 describe('projects loader', () => {
     beforeEach(() => {
@@ -50,11 +51,7 @@ describe('projects loader', () => {
     });
 
     it('falls back to file slug when slug is missing from JSON', async () => {
-        mockedReadFile.mockResolvedValueOnce(
-            JSON.stringify({
-                title: 'Projet Sans Slug',
-            }),
-        );
+        mockedReadFile.mockResolvedValueOnce(JSON.stringify({ title: 'Projet Sans Slug' }));
 
         const project = await getProjectBySlug('slug-fallback');
         expect(project?.slug).toBe('slug-fallback');
