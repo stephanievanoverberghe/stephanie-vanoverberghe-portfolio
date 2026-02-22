@@ -1,13 +1,12 @@
 // src/app/projects/[slug]/page.tsx
 import type { Metadata } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getProjectBySlug, getProjectSlugs } from '@/lib/projects';
 import ProjectHero from '@/components/project/ProjectHero';
 import ProjectOverview from '@/components/project/ProjectOverview';
 import ProjectSections from '@/components/project/ProjectSections';
 import GalleryPreview from '@/components/project/GalleryPreview';
+import ProjectActions from '@/components/project/ProjectActions';
 import { coverAlt, coverSrc } from '@/components/project/project.utils';
 
 export const dynamic = 'force-static';
@@ -38,12 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             siteName: 'Portfolio — Vanoverberghe Stéphanie',
             images: [{ url: ogImage, width: 1200, height: 630, alt: coverAlt(data) }],
         },
-        twitter: {
-            card: 'summary_large_image',
-            title,
-            description,
-            images: [ogImage],
-        },
+        twitter: { card: 'summary_large_image', title, description, images: [ogImage] },
     };
 }
 
@@ -53,7 +47,6 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
     if (!data) notFound();
 
     const src = coverSrc(data);
-    const alt = coverAlt(data);
 
     const ldJson = {
         '@context': 'https://schema.org',
@@ -71,62 +64,25 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         <section className="container-page py-12 space-y-10">
             <ProjectHero project={data} />
 
-            {src ? (
-                <section
-                    className="overflow-hidden rounded-2xl border"
-                    style={{
-                        borderColor: 'var(--border-soft)',
-                        background: 'color-mix(in oklab, var(--surface-2) 72%, var(--surface-1))',
-                        boxShadow: 'var(--shadow-card)',
-                    }}
-                >
-                    <div
-                        className="flex items-center gap-2 px-3 py-2 border-b"
-                        style={{
-                            borderColor: 'var(--border-soft)',
-                            background: 'color-mix(in oklab, var(--surface-1) 88%, var(--surface-2))',
-                        }}
-                    >
-                        <span className="h-2.5 w-2.5 rounded-full" style={{ background: 'color-mix(in oklab, var(--accent) 60%, #fff)' }} />
-                        <span className="h-2.5 w-2.5 rounded-full" style={{ background: 'color-mix(in oklab, var(--gold) 60%, #fff)' }} />
-                        <span className="h-2.5 w-2.5 rounded-full" style={{ background: 'color-mix(in oklab, var(--sage) 60%, #fff)' }} />
-                        <div className="ml-2 h-2.5 flex-1 rounded-full border" style={{ borderColor: 'var(--border-soft)', background: 'var(--surface-1)' }} />
-                    </div>
+            <section id="overview" className="scroll-mt-24">
+                <ProjectOverview project={data} />
+            </section>
 
-                    <div className="relative aspect-21/9">
-                        <div
-                            aria-hidden
-                            className="absolute inset-0 opacity-[0.95]"
-                            style={{
-                                background:
-                                    'radial-gradient(1200px 420px at 18% 10%, color-mix(in oklab, var(--lilac) 18%, transparent), transparent 60%),' +
-                                    'radial-gradient(1000px 420px at 85% 5%, color-mix(in oklab, var(--accent) 12%, transparent), transparent 60%)',
-                            }}
-                        />
-                        <Image src={src} alt={alt} fill sizes="100vw" className="object-cover" style={{ objectPosition: '50% 12%' }} priority={false} />
-                        <div aria-hidden className="pointer-events-none absolute inset-0" style={{ boxShadow: 'inset 0 -160px 200px rgba(2,8,23,0.18)' }} />
-                    </div>
+            <section id="details" className="scroll-mt-24">
+                <ProjectSections project={data} />
+            </section>
+
+            {data.gallery?.length ? (
+                <section id="gallery" className="scroll-mt-24">
+                    <GalleryPreview images={data.gallery} title={data.title} />
                 </section>
             ) : null}
 
-            <ProjectOverview project={data} />
-            <ProjectSections project={data} />
-
-            {data.gallery?.length ? <GalleryPreview images={data.gallery} title={data.title} /> : null}
-
+            {/* Footer CTA plus léger (pas répétitif) */}
             <section className="card p-6 sm:p-8">
                 <div className="flex flex-wrap items-center justify-between gap-4">
-                    <p className="opacity-90">Tu veux une version plus détaillée (perf, a11y, décisions) ? Je peux te la présenter comme en entretien.</p>
-                    <div className="flex flex-wrap gap-3">
-                        {data.links?.demo ? (
-                            <a href={data.links.demo} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
-                                Voir la démo
-                            </a>
-                        ) : null}
-                        <Link href="/contact" className="btn btn-cta" style={{ color: '#FDFDFD' }}>
-                            Me contacter
-                        </Link>
-                    </div>
+                    <p className="opacity-90">Envie d’un échange ? Je peux te présenter ce projet comme en entretien (choix techniques, perf, a11y).</p>
+                    <ProjectActions project={data} variant="footer" />
                 </div>
             </section>
 
