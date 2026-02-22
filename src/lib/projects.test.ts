@@ -1,18 +1,18 @@
-// @ts-nocheck
+// src/lib/projects.test.ts
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import type { Mock } from 'vitest';
 
 import { getAllProjects, getProjectBySlug } from './projects';
 
 vi.mock('node:fs/promises', () => ({
-    default: {
-        readdir: vi.fn(),
-        readFile: vi.fn(),
-    },
+    readdir: vi.fn(),
+    readFile: vi.fn(),
 }));
 
-import fs from 'node:fs/promises';
+import { readdir, readFile } from 'node:fs/promises';
 
-const mockedFs = vi.mocked(fs);
+const mockedReaddir = readdir as unknown as Mock<[...unknown[]], Promise<string[]>>;
+const mockedReadFile = readFile as unknown as Mock<[...unknown[]], Promise<string>>;
 
 describe('projects loader', () => {
     beforeEach(() => {
@@ -20,7 +20,7 @@ describe('projects loader', () => {
     });
 
     it('parses a valid JSON project', async () => {
-        mockedFs.readFile.mockResolvedValueOnce(
+        mockedReadFile.mockResolvedValueOnce(
             JSON.stringify({
                 slug: 'demo-projet',
                 title: 'Demo Projet',
@@ -51,27 +51,26 @@ describe('projects loader', () => {
     });
 
     it('falls back to file slug when slug is missing from JSON', async () => {
-        mockedFs.readFile.mockResolvedValueOnce(
+        mockedReadFile.mockResolvedValueOnce(
             JSON.stringify({
                 title: 'Projet Sans Slug',
             }),
         );
 
         const project = await getProjectBySlug('slug-fallback');
-
         expect(project?.slug).toBe('slug-fallback');
     });
 
     it('sorts projects by descending year', async () => {
-        mockedFs.readdir.mockResolvedValueOnce(['alpha.json', 'beta.json', 'gamma.json'] as never);
+        mockedReaddir.mockResolvedValueOnce(['alpha.json', 'beta.json', 'gamma.json']);
 
-        mockedFs.readFile
+        mockedReadFile
             .mockResolvedValueOnce(JSON.stringify({ title: 'Alpha', year: 2022 }))
             .mockResolvedValueOnce(JSON.stringify({ title: 'Beta', year: 2025 }))
             .mockResolvedValueOnce(JSON.stringify({ title: 'Gamma', year: 2024 }));
 
         const projects = await getAllProjects();
 
-        expect(projects.map((project) => `${project.title}-${project.year}`)).toEqual(['Beta-2025', 'Gamma-2024', 'Alpha-2022']);
+        expect(projects.map((p) => `${p.title}-${p.year}`)).toEqual(['Beta-2025', 'Gamma-2024', 'Alpha-2022']);
     });
 });
