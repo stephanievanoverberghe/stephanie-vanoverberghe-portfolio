@@ -77,24 +77,24 @@
         "alt": "Logo Rivage Photo"
     },
     "hero": {
-        "image": "/images/projects/rivage-photo/desktop-hero.png",
+        "image": "/images/projects/rivage-photo/desktop-hero.webp",
         "alt": "Homepage Rivage Photo — portfolio photo"
     },
     "gallery": [
         {
-            "src": "/images/projects/rivage-photo/desktop-series.png",
+            "src": "/images/projects/rivage-photo/desktop-series.webp",
             "alt": "Édition série — infos, cover, images, publication guidée"
         },
         {
-            "src": "/images/projects/rivage-photo/desktop-lightbox.png",
+            "src": "/images/projects/rivage-photo/desktop-lightbox.webp",
             "alt": "Lightbox — visualisation images et navigation"
         },
         {
-            "src": "/images/projects/rivage-photo/desktop-admin.png",
+            "src": "/images/projects/rivage-photo/desktop-admin.webp",
             "alt": "Dashboard admin — vue d’ensemble et prochaines actions"
         },
         {
-            "src": "/images/projects/rivage-photo/desktop-admin-series.png",
+            "src": "/images/projects/rivage-photo/desktop-admin-series.webp",
             "alt": "Gestion des séries — liste avec statuts, filtres, actions rapides"
         }
     ]

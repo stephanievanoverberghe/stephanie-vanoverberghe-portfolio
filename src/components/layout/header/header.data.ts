@@ -13,5 +13,5 @@ export const BRAND = {
     initials: 'VS',
     name: 'Vanoverberghe Stéphanie',
     title: 'Développeuse Front-End — React / Next.js',
-    avatarSrc: '/images/stephanie-vanoverberghe.jpeg',
+    avatarSrc: '/images/stephanie-vanoverberghe.webp',
 } as const;

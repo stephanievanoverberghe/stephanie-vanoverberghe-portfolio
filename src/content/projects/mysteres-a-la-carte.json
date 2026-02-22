@@ -27,11 +27,11 @@
         "repo": "https://github.com/stephanievanoverberghe/mysteres-a-la-carte"
     },
     "logo": { "image": "/images/projects/mysteres-a-la-carte/logo.png", "alt": "Logo Mystères à la carte" },
-    "hero": { "image": "/images/projects/mysteres-a-la-carte/desktop-hero.png", "alt": "Page d’accueil — Mystères à la carte" },
+    "hero": { "image": "/images/projects/mysteres-a-la-carte/desktop-hero.webp", "alt": "Page d’accueil — Mystères à la carte" },
     "gallery": [
-        { "src": "/images/projects/mysteres-a-la-carte/desktop-2.png", "alt": "Section Concept" },
-        { "src": "/images/projects/mysteres-a-la-carte/mobile-1.png", "alt": "Expérience mobile" },
-        { "src": "/images/projects/mysteres-a-la-carte/mobile-2.png", "alt": "Déroulement" },
-        { "src": "/images/projects/mysteres-a-la-carte/mobile-menu.png", "alt": "Réservation mobile" }
+        { "src": "/images/projects/mysteres-a-la-carte/desktop-2.webp", "alt": "Section Concept" },
+        { "src": "/images/projects/mysteres-a-la-carte/mobile-1.webp", "alt": "Expérience mobile" },
+        { "src": "/images/projects/mysteres-a-la-carte/mobile-2.webp", "alt": "Déroulement" },
+        { "src": "/images/projects/mysteres-a-la-carte/mobile-menu.webp", "alt": "Réservation mobile" }
     ]
 }

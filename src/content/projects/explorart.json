@@ -67,24 +67,24 @@
         "alt": "Logo Explor’Art"
     },
     "hero": {
-        "image": "/images/projects/explorart/desktop-hero.png",
+        "image": "/images/projects/explorart/desktop-hero.webp",
         "alt": "Hero éditorial — Explor’Art"
     },
     "gallery": [
         {
-            "src": "/images/projects/explorart/desktop-articles.png",
+            "src": "/images/projects/explorart/desktop-articles.webp",
             "alt": "Page catalogue des articles avec filtres piliers"
         },
         {
-            "src": "/images/projects/explorart/desktop-article.png",
+            "src": "/images/projects/explorart/desktop-article.webp",
             "alt": "Page article avec encarts pédagogiques"
         },
         {
-            "src": "/images/projects/explorart/desktop-admin.png",
+            "src": "/images/projects/explorart/desktop-admin.webp",
             "alt": "Dashboard admin minimal"
         },
         {
-            "src": "/images/projects/explorart/desktop-admin-commentaires.png",
+            "src": "/images/projects/explorart/desktop-admin-commentaires.webp",
             "alt": "Admin commentaires avec modération simple"
         }
     ]

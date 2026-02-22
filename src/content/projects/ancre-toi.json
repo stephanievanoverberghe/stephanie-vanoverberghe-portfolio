@@ -27,11 +27,11 @@
         "repo": "https://github.com/stephanievanoverberghe/ancretoi"
     },
     "logo": { "image": "/images/projects/ancre-toi/logo.png", "alt": "Logo Ancre-toi" },
-    "hero": { "image": "/images/projects/ancre-toi/desktop-hero.png", "alt": "Espace membre — Ancre-toi" },
+    "hero": { "image": "/images/projects/ancre-toi/desktop-hero.webp", "alt": "Espace membre — Ancre-toi" },
     "gallery": [
-        { "src": "/images/projects/ancre-toi/desktop-1.png", "alt": "Espace membre — commandes & accès" },
-        { "src": "/images/projects/ancre-toi/desktop-2.png", "alt": "Module — objectifs & ressources" },
-        { "src": "/images/projects/ancre-toi/mobile-1.png", "alt": "Mobile — checkout & confirmation" },
-        { "src": "/images/projects/ancre-toi/mobile-2.png", "alt": "Mobile — navigation des modules" }
+        { "src": "/images/projects/ancre-toi/desktop-1.webp", "alt": "Espace membre — commandes & accès" },
+        { "src": "/images/projects/ancre-toi/desktop-2.webp", "alt": "Module — objectifs & ressources" },
+        { "src": "/images/projects/ancre-toi/mobile-1.webp", "alt": "Mobile — checkout & confirmation" },
+        { "src": "/images/projects/ancre-toi/mobile-2.webp", "alt": "Mobile — navigation des modules" }
     ]
 }

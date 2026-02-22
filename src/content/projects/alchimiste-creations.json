@@ -23,11 +23,11 @@
         "repo": "https://github.com/stephanievanoverberghe/alchimiste-creations"
     },
     "logo": { "image": "/images/projects/alchimiste-creations/logo.png", "alt": "Logo Alchimiste Créations" },
-    "hero": { "image": "/images/projects/alchimiste-creations/desktop-hero.png", "alt": "Accueil — Alchimiste Créations" },
+    "hero": { "image": "/images/projects/alchimiste-creations/desktop-hero.webp", "alt": "Accueil — Alchimiste Créations" },
     "gallery": [
-        { "src": "/images/projects/alchimiste-creations/desktop-1.png", "alt": "Offres" },
-        { "src": "/images/projects/alchimiste-creations/desktop-2.png", "alt": "Processus" },
-        { "src": "/images/projects/alchimiste-creations/mobile-1.png", "alt": "Projets" },
-        { "src": "/images/projects/alchimiste-creations/mobile-2.png", "alt": "Devis" }
+        { "src": "/images/projects/alchimiste-creations/desktop-1.webp", "alt": "Offres" },
+        { "src": "/images/projects/alchimiste-creations/desktop-2.webp", "alt": "Processus" },
+        { "src": "/images/projects/alchimiste-creations/mobile-1.webp", "alt": "Projets" },
+        { "src": "/images/projects/alchimiste-creations/mobile-2.webp", "alt": "Devis" }
     ]
 }
