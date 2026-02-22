@@ -1,6 +1,5 @@
 // src/app/api/contact/route.test.ts
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import type { Mock } from 'vitest';
 
 vi.mock('@/lib/contact/mail', () => ({
     sendContactMail: vi.fn(),
@@ -21,22 +20,11 @@ import { sendContactMail } from '@/lib/contact/mail';
 import { getClientKey, isRateLimited } from '@/lib/contact/rate-limit';
 import { parseContactPayload, parseJsonBody } from '@/lib/contact/validation';
 
-// 👇 TS ne sait pas que c'est mocké → on caste proprement en Mock
-type GetClientKey = typeof getClientKey;
-type IsRateLimited = typeof isRateLimited;
-type ParseJsonBody = typeof parseJsonBody;
-type ParseContactPayload = typeof parseContactPayload;
-type SendContactMail = typeof sendContactMail;
-
-const mockedSendContactMail = sendContactMail as unknown as Mock<Parameters<SendContactMail>, ReturnType<SendContactMail>>;
-
-const mockedGetClientKey = getClientKey as unknown as Mock<Parameters<GetClientKey>, ReturnType<GetClientKey>>;
-
-const mockedIsRateLimited = isRateLimited as unknown as Mock<Parameters<IsRateLimited>, ReturnType<IsRateLimited>>;
-
-const mockedParseJsonBody = parseJsonBody as unknown as Mock<Parameters<ParseJsonBody>, ReturnType<ParseJsonBody>>;
-
-const mockedParseContactPayload = parseContactPayload as unknown as Mock<Parameters<ParseContactPayload>, ReturnType<ParseContactPayload>>;
+const mockedSendContactMail = vi.mocked(sendContactMail);
+const mockedGetClientKey = vi.mocked(getClientKey);
+const mockedIsRateLimited = vi.mocked(isRateLimited);
+const mockedParseJsonBody = vi.mocked(parseJsonBody);
+const mockedParseContactPayload = vi.mocked(parseContactPayload);
 
 function createRequest(body: unknown = {}) {
     return new Request('http://localhost:3000/api/contact', {

@@ -1,6 +1,5 @@
 // src/lib/projects.test.ts
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import type { Mock } from 'vitest';
 
 import { getAllProjects, getProjectBySlug } from './projects';
 
@@ -11,8 +10,8 @@ vi.mock('node:fs/promises', () => ({
 
 import { readdir, readFile } from 'node:fs/promises';
 
-const mockedReaddir = readdir as unknown as Mock<[...unknown[]], Promise<string[]>>;
-const mockedReadFile = readFile as unknown as Mock<[...unknown[]], Promise<string>>;
+const mockedReaddir = vi.mocked(readdir);
+const mockedReadFile = vi.mocked(readFile);
 
 describe('projects loader', () => {
     beforeEach(() => {
