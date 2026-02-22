@@ -1,4 +1,4 @@
-// src/app/projects/[slug]/page.tsx
+import { cache, type ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getProjectBySlug, getProjectSlugs } from '@/lib/projects';
@@ -11,14 +11,48 @@ import { coverAlt, coverSrc } from '@/components/project/project.utils';
 
 export const dynamic = 'force-static';
 
+type ProjectPageParams = { slug: string };
+type ProjectPageProps = { params: Promise<ProjectPageParams> };
+
+const getProjectData = cache(async (slug: string) => getProjectBySlug(slug));
+
+function getProjectSeo(slug: string) {
+    return `https://www.vanoverberghe-stephanie.dev/projects/${slug}`;
+}
+
+function buildProjectLdJson(slug: string, data: NonNullable<Awaited<ReturnType<typeof getProjectBySlug>>>) {
+    const src = coverSrc(data);
+
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'CreativeWork',
+        name: data.title,
+        description: data.context,
+        author: { '@type': 'Person', name: 'Vanoverberghe Stéphanie' },
+        datePublished: data.year ? `${data.year}-01-01` : undefined,
+        image: src ?? undefined,
+        url: getProjectSeo(slug),
+        keywords: [...(data.stack ?? []), ...(data.role ?? [])].join(', '),
+    };
+}
+
+function AnchorSection({ id, children }: { id: string; children: ReactNode }) {
+    return (
+        <section id={id} className="scroll-mt-24">
+            {children}
+        </section>
+    );
+}
+
 export async function generateStaticParams() {
     const slugs = await getProjectSlugs();
     return slugs.map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
     const { slug } = await params;
-    const data = await getProjectBySlug(slug);
+    const data = await getProjectData(slug);
+
     if (!data) return { title: 'Projet introuvable' };
 
     const title = `${data.title} — Étude de cas`;
@@ -41,41 +75,30 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     };
 }
 
-export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function ProjectPage({ params }: ProjectPageProps) {
     const { slug } = await params;
-    const data = await getProjectBySlug(slug);
+    const data = await getProjectData(slug);
+
     if (!data) notFound();
 
-    const src = coverSrc(data);
-
-    const ldJson = {
-        '@context': 'https://schema.org',
-        '@type': 'CreativeWork',
-        name: data.title,
-        description: data.context,
-        author: { '@type': 'Person', name: 'Vanoverberghe Stéphanie' },
-        datePublished: data.year ? `${data.year}-01-01` : undefined,
-        image: src ?? undefined,
-        url: `https://www.vanoverberghe-stephanie.dev/projects/${data.slug}`,
-        keywords: [...(data.stack ?? []), ...(data.role ?? [])].join(', '),
-    };
+    const ldJson = buildProjectLdJson(data.slug, data);
 
     return (
         <section className="container-page py-12 space-y-10">
             <ProjectHero project={data} />
 
-            <section id="overview" className="scroll-mt-24">
+            <AnchorSection id="overview">
                 <ProjectOverview project={data} />
-            </section>
+            </AnchorSection>
 
-            <section id="details" className="scroll-mt-24">
+            <AnchorSection id="details">
                 <ProjectSections project={data} />
-            </section>
+            </AnchorSection>
 
             {data.gallery?.length ? (
-                <section id="gallery" className="scroll-mt-24">
+                <AnchorSection id="gallery">
                     <GalleryPreview images={data.gallery} title={data.title} />
-                </section>
+                </AnchorSection>
             ) : null}
 
             {/* Footer CTA plus léger (pas répétitif) */}
