@@ -1,6 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-
-import { getAllProjects, getProjectBySlug } from './projects';
+import type { MockInstance } from '@vitest/spy';
 
 vi.mock('node:fs/promises', () => ({
     readdir: vi.fn(),
@@ -8,11 +7,10 @@ vi.mock('node:fs/promises', () => ({
 }));
 
 import { readdir, readFile } from 'node:fs/promises';
+import { getAllProjects, getProjectBySlug } from './projects';
 
-// ⚠️ Node a des overloads ici : vi.mocked peut rester "trop strict".
-// Donc on caste la version "mockée" via unknown, sans any, juste pour TS.
-const mockedReaddir = vi.mocked(readdir as unknown as ReturnType<typeof vi.fn>);
-const mockedReadFile = vi.mocked(readFile as unknown as ReturnType<typeof vi.fn>);
+const mockedReaddir = readdir as unknown as MockInstance<typeof readdir>;
+const mockedReadFile = readFile as unknown as MockInstance<typeof readFile>;
 
 describe('projects loader', () => {
     beforeEach(() => {
@@ -58,7 +56,7 @@ describe('projects loader', () => {
     });
 
     it('sorts projects by descending year', async () => {
-        mockedReaddir.mockResolvedValueOnce(['alpha.json', 'beta.json', 'gamma.json']);
+        mockedReaddir.mockResolvedValueOnce(['alpha.json', 'beta.json', 'gamma.json'] as unknown as Awaited<ReturnType<typeof readdir>>);
 
         mockedReadFile
             .mockResolvedValueOnce(JSON.stringify({ title: 'Alpha', year: 2022 }))

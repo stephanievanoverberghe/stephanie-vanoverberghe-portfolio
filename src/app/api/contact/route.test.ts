@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import type { MockInstance } from '@vitest/spy';
 
 vi.mock('@/lib/contact/mail', () => ({ sendContactMail: vi.fn() }));
 vi.mock('@/lib/contact/rate-limit', () => ({ getClientKey: vi.fn(), isRateLimited: vi.fn() }));
@@ -9,11 +10,11 @@ import { sendContactMail } from '@/lib/contact/mail';
 import { getClientKey, isRateLimited } from '@/lib/contact/rate-limit';
 import { parseContactPayload, parseJsonBody } from '@/lib/contact/validation';
 
-const mockedSendContactMail = vi.mocked(sendContactMail);
-const mockedGetClientKey = vi.mocked(getClientKey);
-const mockedIsRateLimited = vi.mocked(isRateLimited);
-const mockedParseJsonBody = vi.mocked(parseJsonBody);
-const mockedParseContactPayload = vi.mocked(parseContactPayload);
+const mockedSendContactMail = sendContactMail as unknown as MockInstance<typeof sendContactMail>;
+const mockedGetClientKey = getClientKey as unknown as MockInstance<typeof getClientKey>;
+const mockedIsRateLimited = isRateLimited as unknown as MockInstance<typeof isRateLimited>;
+const mockedParseJsonBody = parseJsonBody as unknown as MockInstance<typeof parseJsonBody>;
+const mockedParseContactPayload = parseContactPayload as unknown as MockInstance<typeof parseContactPayload>;
 
 function createRequest(body: unknown = {}) {
     return new Request('http://localhost:3000/api/contact', {
