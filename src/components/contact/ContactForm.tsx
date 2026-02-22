@@ -59,6 +59,7 @@ function TextareaBase(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) 
 type Status = { state: 'idle' } | { state: 'loading' } | { state: 'success' } | { state: 'error'; message: string };
 
 export default function ContactForm() {
+    const [formStartedAt] = React.useState(() => Date.now());
     const [name, setName] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [subject, setSubject] = React.useState('Demande de contact');
@@ -77,7 +78,7 @@ export default function ContactForm() {
             const res = await fetch('/api/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email, subject, message, company }),
+                body: JSON.stringify({ name, email, subject, message, company, formStartedAt }),
             });
 
             const data = (await res.json()) as { ok: boolean; error?: string };

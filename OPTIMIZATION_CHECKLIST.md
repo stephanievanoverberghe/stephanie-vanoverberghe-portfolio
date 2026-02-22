@@ -32,20 +32,20 @@
 - [x] **Réduire le JS client global**:
     - [x] garder `Header` interactif mais isoler les parties purement statiques côté server component quand possible
     - [x] alléger/conditionner `RouteTransition` si nécessaire.
-- [ ] **Optimiser les images projets**:
-    - [ ] convertir/valider en WebP/AVIF quand pertinent
-    - [ ] vérifier poids de chaque image hero
-    - [ ] conserver `next/image` + tailles adaptées.
-- [ ] **Audit Lighthouse rapide** (mobile + desktop) et noter:
-    - [ ] LCP desktop : 0.6s mobile : 2.5s
-    - [ ] CLS desktop : 0 mobile : 0
-    - [ ] recommandations top 3.
+- [x] **Optimiser les images projets**:
+    - [x] convertir/valider en WebP/AVIF quand pertinent
+    - [x] vérifier poids de chaque image hero
+    - [x] conserver `next/image` + tailles adaptées.
+- [x] **Audit Lighthouse rapide** (mobile + desktop) et noter:
+    - [x] LCP desktop : 0.6s mobile : 2.5s
+    - [x] CLS desktop : 0 mobile : 0
+    - [x] recommandations top 3.
 
 ## 4) Anti-spam progressif (uniquement si besoin réel)
 
-- [ ] Garder honeypot actuel.
-- [ ] Ajouter contrôle `Origin`/`Referer` sur l’API contact.
-- [ ] Ajouter délai minimum avant soumission.
+- [x] Garder honeypot actuel.
+- [x] Ajouter contrôle `Origin`/`Referer` sur l’API contact.
+- [x] Ajouter délai minimum avant soumission.
 - [ ] **Si spam réel**: intégrer Cloudflare Turnstile.
 - [ ] **Si trafic/abus augmente**: externaliser rate-limit (Upstash/Vercel KV).
 

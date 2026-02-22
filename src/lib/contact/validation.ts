@@ -4,6 +4,7 @@ export type ContactPayload = {
     subject: string;
     message: string;
     company: string;
+    formStartedAt: number;
 };
 
 function isEmail(value: string): boolean {
@@ -32,11 +33,13 @@ export function parseContactPayload(value: unknown): ContactPayload | null {
     const subject = asString(body.subject) || 'Demande de contact via le portfolio';
     const message = asString(body.message);
     const company = asString(body.company);
+    const formStartedAt = typeof body.formStartedAt === 'number' ? body.formStartedAt : NaN;
 
     if (name.length < 2 || name.length > 120) return null;
     if (!isEmail(email)) return null;
     if (subject.length < 3 || subject.length > 200) return null;
     if (message.length < 10 || message.length > 5000) return null;
+    if (!Number.isFinite(formStartedAt)) return null;
 
-    return { name, email, subject, message, company };
+    return { name, email, subject, message, company, formStartedAt };
 }

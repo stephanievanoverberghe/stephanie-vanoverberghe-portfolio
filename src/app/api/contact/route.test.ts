@@ -29,6 +29,10 @@ const mockedParseContactPayload = vi.mocked(parseContactPayload);
 function createRequest() {
     return new Request('http://localhost:3000/api/contact', {
         method: 'POST',
+        headers: {
+            origin: 'http://localhost:3000',
+            referer: 'http://localhost:3000/contact',
+        },
     });
 }
 
@@ -60,6 +64,7 @@ describe('POST /api/contact', () => {
             subject: 'Sujet de test',
             message: 'Ceci est un message valide de test.',
             company: 'bot-field',
+            formStartedAt: Date.now() - 5_000,
         });
 
         const response = await POST(createRequest());
@@ -74,5 +79,33 @@ describe('POST /api/contact', () => {
         const response = await POST(createRequest());
 
         expect(response.status).toBe(429);
+    });
+
+    it('returns 400 when origin header is invalid', async () => {
+        const response = await POST(
+            new Request('http://localhost:3000/api/contact', {
+                method: 'POST',
+                headers: { origin: 'https://evil.example' },
+            }),
+        );
+
+        expect(response.status).toBe(400);
+        expect(mockedIsRateLimited).not.toHaveBeenCalled();
+    });
+
+    it('returns 400 when submission delay is too short', async () => {
+        mockedParseContactPayload.mockReturnValue({
+            name: 'Test User',
+            email: 'test@example.com',
+            subject: 'Sujet de test',
+            message: 'Ceci est un message valide de test.',
+            company: '',
+            formStartedAt: Date.now() - 500,
+        });
+
+        const response = await POST(createRequest());
+
+        expect(response.status).toBe(400);
+        expect(mockedSendContactMail).not.toHaveBeenCalled();
     });
 });
