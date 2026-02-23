@@ -43,6 +43,21 @@ function isHumanSubmissionDelay(formStartedAt: number): boolean {
     return elapsed >= MIN_SUBMISSION_DELAY_MS && elapsed <= MAX_SUBMISSION_WINDOW_MS;
 }
 
+function isMailConfigured() {
+    const resendKey = process.env.RESEND_API_KEY;
+    const to = process.env.CONTACT_TO;
+    const from = process.env.CONTACT_FROM;
+
+    const ok = !!resendKey && !!to && !!from;
+
+    return {
+        ok,
+        resendKey,
+        to,
+        from,
+    };
+}
+
 /**
  * Endpoint de contact avec garde-fous cumulés.
  *
@@ -51,14 +66,6 @@ function isHumanSubmissionDelay(formStartedAt: number): boolean {
  * fortement le bruit sans complexifier l'expérience utilisateur légitime.
  */
 export async function POST(req: Request) {
-    const resendKey = process.env.RESEND_API_KEY;
-    const to = process.env.CONTACT_TO;
-    const from = process.env.CONTACT_FROM;
-
-    if (!resendKey || !to || !from) {
-        return NextResponse.json({ ok: false, error: 'Configuration serveur manquante (env).' }, { status: 500 });
-    }
-
     if (!isAllowedRequestSource(req)) {
         console.warn('[api/contact] blocked by origin/referer check');
         return invalidPayloadResponse();
@@ -88,8 +95,27 @@ export async function POST(req: Request) {
         return invalidPayloadResponse();
     }
 
+    const mailConfig = isMailConfigured();
+
+    // ✅ Mode "portfolio" : si le service mail n'est pas configuré, on ne renvoie PAS 500.
+    // On répond OK pour que l'UI reste fluide (ex: preview, environnement de recruteur),
+    // tout en loggant clairement le problème côté serveur.
+    if (!mailConfig.ok) {
+        console.warn('[api/contact] mail not configured (missing env) — skipping send', {
+            hasResendKey: !!mailConfig.resendKey,
+            hasTo: !!mailConfig.to,
+            hasFrom: !!mailConfig.from,
+        });
+
+        return NextResponse.json({ ok: true, message: "Message reçu. L'envoi d'email n'est pas configuré sur cet environnement." }, { status: 200 });
+    }
+
     try {
-        const mailError = await sendContactMail(payload, { apiKey: resendKey, from, to });
+        const mailError = await sendContactMail(payload, {
+            apiKey: mailConfig.resendKey!,
+            from: mailConfig.from!,
+            to: mailConfig.to!,
+        });
 
         if (mailError) {
             console.error('[api/contact] mail send failed', { error: mailError });

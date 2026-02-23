@@ -1,5 +1,5 @@
 // src/lib/projects.ts
-import fs from 'node:fs/promises';
+import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 type ProjectLinkMap = { demo?: string; repo?: string };
@@ -129,7 +129,7 @@ function parseProject(raw: unknown, fallbackSlug: string): Project | null {
 /** ---------- public API ---------- */
 export async function getProjectSlugs(): Promise<string[]> {
     try {
-        const files = await fs.readdir(DIR);
+        const files = await readdir(DIR);
         return files.filter((f) => f.endsWith('.json')).map((f) => f.slice(0, -'.json'.length));
     } catch {
         return [];
@@ -138,7 +138,7 @@ export async function getProjectSlugs(): Promise<string[]> {
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
     try {
-        const file = await fs.readFile(path.join(DIR, `${slug}.json`), 'utf8');
+        const file = await readFile(path.join(DIR, `${slug}.json`), 'utf8');
         const raw: unknown = JSON.parse(file);
         return parseProject(raw, slug);
     } catch {

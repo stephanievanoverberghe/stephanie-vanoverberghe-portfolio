@@ -191,7 +191,7 @@ export default function ContactForm() {
             <div className="mt-6 flex flex-wrap gap-3">
                 <button
                     type="submit"
-                    className="btn btn-cta inline-flex items-center gap-2"
+                    className="btn btn-cta inline-flex items-center gap-2 cursor-pointer"
                     style={{ color: '#FDFDFD' }}
                     disabled={status.state === 'loading'}
                     aria-disabled={status.state === 'loading'}
