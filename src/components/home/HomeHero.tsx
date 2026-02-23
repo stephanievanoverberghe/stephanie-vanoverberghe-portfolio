@@ -137,7 +137,7 @@ export default function HomeHero() {
                     <div className="flex items-center gap-4">
                         <div className="relative h-14 w-14 overflow-hidden rounded-2xl border" style={{ borderColor: 'var(--border-soft)', background: 'var(--surface-1)' }}>
                             <Image
-                                src="/images/stephanie-vanoverberghe.jpeg"
+                                src="/images/stephanie-vanoverberghe.webp"
                                 alt="Portrait de Stéphanie Vanoverberghe"
                                 fill
                                 sizes="56px"

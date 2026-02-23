@@ -5,7 +5,6 @@ import { getAllProjects } from '@/lib/projects';
 import HomeHero from '@/components/home/HomeHero';
 import FeaturedProjects from '@/components/home/FeaturedProjects';
 import SkillsSnapshot from '@/components/home/SkillsSnapshot';
-import HomeCta from '@/components/home/HomeCta';
 
 export const metadata: Metadata = {
     title: 'Vanoverberghe Stéphanie - Développeuse Front-End (React/Next)',
@@ -21,7 +20,6 @@ export default async function HomePage() {
             <HomeHero />
             <FeaturedProjects projects={projects} featuredCount={2} />
             <SkillsSnapshot />
-            <HomeCta />
         </section>
     );
 }

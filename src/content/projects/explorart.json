@@ -59,8 +59,8 @@
         "Expérience émotionnelle priorisée autant que la performance."
     ],
     "links": {
-        "demo": "https://explorart.vercel.app/",
-        "repo": "https://github.com/stephanievanoverberghe/explorart"
+        "demo": "https://explorart-blog.vercel.app/",
+        "repo": "https://github.com/stephanievanoverberghe/explorart-blog"
     },
     "logo": {
         "image": "/images/projects/explorart/logo.png",

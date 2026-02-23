@@ -209,7 +209,7 @@ export default function GalleryLightbox({ images, title, className, open, startI
                                                       alt={current.alt ?? title ?? 'Image'}
                                                       fill
                                                       sizes="100vw"
-                                                      className="object-contain"
+                                                      className="object-cover"
                                                       priority
                                                   />
                                               </div>
