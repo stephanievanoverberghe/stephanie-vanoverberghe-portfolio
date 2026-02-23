@@ -1,5 +1,6 @@
 /* Styleguide privé pour QA visuelle — non indexé */
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 export const metadata: Metadata = {
     title: 'Styleguide — Portfolio',
@@ -7,6 +8,11 @@ export const metadata: Metadata = {
 };
 
 export const dynamic = 'force-static';
+
+function isStyleguideEnabled() {
+    if (process.env.STYLEGUIDE_ENABLED === 'true') return true;
+    return process.env.NODE_ENV !== 'production';
+}
 
 function Swatch({ name, style }: { name: string; style: React.CSSProperties }) {
     return (
@@ -23,6 +29,10 @@ function Swatch({ name, style }: { name: string; style: React.CSSProperties }) {
 }
 
 export default function StyleguidePage() {
+    if (!isStyleguideEnabled()) {
+        notFound();
+    }
+
     return (
         <div className="container-page py-10 space-y-10">
             <header>

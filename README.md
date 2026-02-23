@@ -77,10 +77,34 @@ Comportements principaux :
 - Honeypot anti-spam
 - Rate limit en mémoire
 - Envoi d’email via Resend
-- Statuts HTTP uniformes :
-    - `400` : payload invalide
+- Dégradation contrôlée si la config mail est absente (retour `200` sans envoi réel)
+- Statuts HTTP :
+    - `200` : message accepté (envoyé, ou accepté sans envoi email si variables manquantes)
+    - `400` : payload invalide (ou origine/référent non autorisé, délai anti-bot trop court)
     - `429` : rate limit dépassé
-    - `500` : erreur interne (configuration/mail)
+    - `500` : erreur interne lors de l’envoi mail
+
+Variables attendues pour l’envoi réel :
+
+- `RESEND_API_KEY`
+- `CONTACT_TO`
+- `CONTACT_FROM`
+
+> Sans ces variables, l’UI de contact reste fluide mais aucun email n’est envoyé.
+
+---
+
+## 🔒 Route `/styleguide`
+
+La route de QA visuelle `/styleguide` est :
+
+- non indexée (`noindex`),
+- **désactivée en production** par défaut (retourne 404),
+- activable explicitement avec :
+
+```env
+STYLEGUIDE_ENABLED=true
+```
 
 ---
 
