@@ -49,7 +49,7 @@ function BrowserFrame({ p, tone }: { p: Project; tone: Tone }) {
                 <span className="h-2.5 w-2.5 rounded-full" style={{ background: 'color-mix(in oklab, var(--accent) 60%, #fff)' }} />
                 <span className="h-2.5 w-2.5 rounded-full" style={{ background: 'color-mix(in oklab, var(--gold) 60%, #fff)' }} />
                 <span className="h-2.5 w-2.5 rounded-full" style={{ background: 'color-mix(in oklab, var(--sage) 60%, #fff)' }} />
-                <div className="ml-2 h-2.5 flex-1 rounded-full border" style={{ borderColor: 'var(--border-soft)', background: 'var(--surface-1)' }} />
+                <div className="ml-2 h-2.5 flex-1 rounded-full border border-(--border-soft) bg-(--surface-1)" />
             </div>
 
             <div className="relative aspect-video">
@@ -71,11 +71,7 @@ function BrowserFrame({ p, tone }: { p: Project; tone: Tone }) {
                     <Image src={src} alt={alt} fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover" style={{ objectPosition: '50% 10%' }} priority={false} />
                 ) : null}
 
-                <div
-                    aria-hidden
-                    className="pointer-events-none absolute inset-0"
-                    style={{ boxShadow: 'inset 0 0 0 1px rgba(2,8,23,0.04), inset 0 -80px 120px rgba(2,8,23,0.08)' }}
-                />
+                <div aria-hidden className="pointer-events-none absolute inset-0 shadow-[inset_0_0_0_1px_rgba(2,8,23,0.04),inset_0_-80px_120px_rgba(2,8,23,0.08)] rounded-2xl" />
             </div>
         </div>
     );
@@ -89,24 +85,21 @@ function CompactCard({ p }: { p: Project }) {
     return (
         <Link
             href={`/projects/${p.slug}`}
-            className="group rounded-2xl border p-4 transition hover:shadow-[0_14px_40px_rgba(2,8,23,0.08)]"
-            style={{ borderColor: 'var(--border-soft)', background: 'var(--surface-1)', boxShadow: 'var(--shadow-card)' }}
+            className="group rounded-2xl border p-4 transition hover:shadow-[0_14px_40px_rgba(2,8,23,0.08)] border-(--border-soft) bg-(--surface-1) shadow-(--shadow-card)"
         >
             <div className="flex gap-4">
                 <div
-                    className="relative h-20 w-28 shrink-0 overflow-hidden rounded-2xl border"
-                    style={{ borderColor: 'var(--border-soft)', background: 'color-mix(in oklab, var(--surface-2) 70%, var(--surface-1))' }}
+                    className="relative h-20 w-28 shrink-0 overflow-hidden rounded-2xl border border-(--border-soft)"
+                    style={{ background: 'color-mix(in oklab, var(--surface-2) 70%, var(--surface-1))' }}
                 >
                     {src ? <Image src={src} alt={alt} fill sizes="120px" className="object-cover" /> : null}
-                    <span aria-hidden className="pointer-events-none absolute inset-0" style={{ boxShadow: 'inset 0 0 0 1px rgba(2,8,23,0.04)' }} />
+                    <span aria-hidden className="pointer-events-none absolute inset-0 shadow-[inset_0_0_0_1px_rgba(2,8,23,0.04)] rounded-2xl" />
                 </div>
 
                 <div className="min-w-0 flex-1">
                     <div className="flex items-start justify-between gap-3">
                         <div className="min-w-0">
-                            <div className="truncate text-sm font-semibold" style={{ color: 'var(--text-strong)' }}>
-                                {p.title}
-                            </div>
+                            <div className="truncate text-sm font-semibold text-(--text-strong)">{p.title}</div>
                             {p.subtitle ? <div className="mt-1 line-clamp-2 text-xs opacity-75">{p.subtitle}</div> : null}
                         </div>
 
@@ -125,7 +118,7 @@ function CompactCard({ p }: { p: Project }) {
                         ))}
                     </div>
 
-                    <div className="mt-2 text-xs font-semibold inline-flex items-center gap-2 opacity-85 group-hover:opacity-100" style={{ color: 'var(--text-strong)' }}>
+                    <div className="mt-2 text-xs font-semibold inline-flex items-center gap-2 opacity-85 group-hover:opacity-100 text-(--text-strong)">
                         Voir
                         <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
                     </div>
@@ -144,18 +137,16 @@ export default function FeaturedProjects({ projects, featuredCount = 2 }: { proj
         <section className="space-y-6">
             <div className="flex flex-wrap items-end justify-between gap-3">
                 <div>
-                    <h2 className="text-xl font-semibold" style={{ color: 'var(--text-strong)' }}>
-                        Projets
-                    </h2>
+                    <h2 className="text-xl font-semibold text-(--text-strong)">Projets</h2>
                     <p className="mt-1 text-sm opacity-80">Les {featuredCount} derniers en avant · puis tous les autres.</p>
                 </div>
 
-                <Link href="/projects" className="text-sm font-semibold hover:opacity-90" style={{ color: 'var(--text-strong)' }}>
+                <Link href="/projects" className="text-sm font-semibold hover:opacity-90 text-(--text-strong)">
                     Voir tous les projets →
                 </Link>
             </div>
 
-            {/* ✅ 2 derniers (featured) */}
+            {/* 2 derniers (featured) */}
             <div className="grid gap-6 lg:grid-cols-2">
                 {featured.map((p, idx) => {
                     const picked = pickStack(p.stack, 3);
@@ -164,8 +155,7 @@ export default function FeaturedProjects({ projects, featuredCount = 2 }: { proj
                     return (
                         <article
                             key={p.slug}
-                            className="group rounded-2xl border p-4 sm:p-5 transition hover:shadow-[0_16px_40px_rgba(2,8,23,0.08)]"
-                            style={{ borderColor: 'var(--border-soft)', background: 'var(--surface-1)', boxShadow: 'var(--shadow-card)' }}
+                            className="group rounded-2xl border p-4 sm:p-5 transition hover:shadow-[0_16px_40px_rgba(2,8,23,0.08)] border-(--border-soft) bg-(--surface-1) shadow-(--shadow-card)"
                         >
                             <Link href={`/projects/${p.slug}`} className="block">
                                 <BrowserFrame p={p} tone={tone} />
@@ -173,9 +163,7 @@ export default function FeaturedProjects({ projects, featuredCount = 2 }: { proj
                                 <div className="mt-5 space-y-4">
                                     <div className="flex items-start justify-between gap-4">
                                         <div>
-                                            <h3 className="text-lg font-semibold" style={{ color: 'var(--text-strong)' }}>
-                                                {p.title}
-                                            </h3>
+                                            <h3 className="text-lg font-semibold text-(--text-strong)">{p.title}</h3>
                                             {p.subtitle ? <p className="mt-1 text-sm opacity-80">{p.subtitle}</p> : null}
                                         </div>
 
@@ -192,26 +180,19 @@ export default function FeaturedProjects({ projects, featuredCount = 2 }: { proj
                                     </div>
 
                                     <div
-                                        className="rounded-2xl border p-4"
+                                        className="rounded-2xl border p-4 border-(--border-soft)"
                                         style={{
-                                            borderColor: 'var(--border-soft)',
                                             background: 'color-mix(in oklab, var(--surface-2) 52%, var(--surface-1))',
                                         }}
                                     >
                                         <div className="grid sm:grid-cols-[110px_1fr] grid-cols-1 gap-x-4 gap-y-2 text-sm">
-                                            <span className="font-semibold" style={{ color: 'var(--text-strong)' }}>
-                                                Contexte
-                                            </span>
+                                            <span className="font-semibold text-(--text-strong)">Contexte</span>
                                             <span className="opacity-85">{excerpt(p.context) || excerpt(p.subtitle)}</span>
 
-                                            <span className="font-semibold" style={{ color: 'var(--text-strong)' }}>
-                                                Objectif
-                                            </span>
+                                            <span className="font-semibold text-(--text-strong)">Objectif</span>
                                             <span className="opacity-85">{excerpt(p.objectives?.[0])}</span>
 
-                                            <span className="font-semibold" style={{ color: 'var(--text-strong)' }}>
-                                                Stack
-                                            </span>
+                                            <span className="font-semibold text-(--text-strong)">Stack</span>
                                             <span className="opacity-85">{picked.join(' · ')}</span>
                                         </div>
                                     </div>
@@ -229,7 +210,7 @@ export default function FeaturedProjects({ projects, featuredCount = 2 }: { proj
                                         ))}
                                     </div>
 
-                                    <div className="text-sm font-semibold inline-flex items-center gap-2" style={{ color: 'var(--text-strong)' }}>
+                                    <div className="text-sm font-semibold inline-flex items-center gap-2 text-(--text-strong)">
                                         Voir l’étude de cas
                                         <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
                                     </div>
@@ -240,13 +221,11 @@ export default function FeaturedProjects({ projects, featuredCount = 2 }: { proj
                 })}
             </div>
 
-            {/* ✅ Tous les autres */}
+            {/* Tous les autres */}
             {rest.length ? (
                 <div className="space-y-3">
                     <div className="flex items-center justify-between gap-3">
-                        <h3 className="text-sm font-semibold" style={{ color: 'var(--text-strong)' }}>
-                            Tous les autres projets
-                        </h3>
+                        <h3 className="text-sm font-semibold text-(--text-strong)">Tous les autres projets</h3>
                         <span className="text-xs opacity-70">
                             {rest.length} projet{rest.length > 1 ? 's' : ''}
                         </span>

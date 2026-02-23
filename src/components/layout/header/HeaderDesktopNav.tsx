@@ -12,8 +12,8 @@ export function HeaderDesktopNav({ isActive }: { isActive: (href: string) => boo
     return (
         <nav aria-label="Navigation principale" className="hidden md:flex items-center gap-4">
             <div
-                className="relative flex items-center gap-1 rounded-full border p-1"
-                style={{ borderColor: 'var(--border-soft)', background: 'color-mix(in oklab, var(--surface-1) 80%, transparent)' }}
+                className="relative flex items-center gap-1 rounded-full border p-1 border-(--border-soft)"
+                style={{ background: 'color-mix(in oklab, var(--surface-1) 80%, transparent)' }}
             >
                 {NAV.map((item: NavItem) => {
                     const active = isActive(item.href);

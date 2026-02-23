@@ -29,13 +29,9 @@ export default function SkillsProjectTile({
     const isLg = size === 'lg';
 
     return (
-        <article
-            className="group overflow-hidden rounded-2xl border"
-            style={{ borderColor: 'var(--border-soft)', background: 'var(--surface-1)', boxShadow: 'var(--shadow-card)' }}
-        >
+        <article className="group overflow-hidden rounded-2xl border border-(--border-soft), bg-(--surface-1) shadow-(--shadow-card)">
             <div
-                className={isLg ? 'relative aspect-video border-b overflow-hidden' : 'relative aspect-16/10 border-b overflow-hidden'}
-                style={{ borderColor: 'var(--border-soft)' }}
+                className={isLg ? 'relative aspect-video border-b overflow-hidden border-(--border-soft)' : 'relative aspect-16/10 border-b overflow-hidden border-(--border-soft)'}
             >
                 <Image
                     src={cover}
@@ -70,9 +66,7 @@ export default function SkillsProjectTile({
 
             <div className={isLg ? 'p-6 space-y-4' : 'p-5 space-y-4'}>
                 <div>
-                    <h3 className={isLg ? 'text-lg sm:text-xl font-semibold' : 'text-base sm:text-lg font-semibold'} style={{ color: 'var(--text-strong)' }}>
-                        {title}
-                    </h3>
+                    <h3 className={isLg ? 'text-lg sm:text-xl font-semibold text-(--text-strong)' : 'text-base sm:text-lg font-semibold text-(--text-strong)'}>{title}</h3>
                     <p className="mt-1 text-sm opacity-80">{subtitle}</p>
                 </div>
 

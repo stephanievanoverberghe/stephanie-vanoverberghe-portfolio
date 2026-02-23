@@ -14,7 +14,7 @@ export default function ProjectHero({ project }: { project: Project }) {
     return (
         <header className="space-y-5">
             <div className="flex items-center justify-between gap-4">
-                <Link href="/projects" className="text-sm font-semibold hover:opacity-90" style={{ color: 'var(--text-strong)' }}>
+                <Link href="/projects" className="text-sm font-semibold hover:opacity-90 text-(--text-strong)">
                     ← Retour aux projets
                 </Link>
                 {p.year ? (
@@ -24,16 +24,11 @@ export default function ProjectHero({ project }: { project: Project }) {
                 ) : null}
             </div>
 
-            <section
-                className="relative overflow-hidden rounded-2xl border"
-                style={{ borderColor: 'var(--border-soft)', background: 'var(--surface-1)', boxShadow: 'var(--shadow-card)' }}
-            >
+            <section className="relative overflow-hidden rounded-2xl border border-(--border-soft) bg-(--surface-1) shadow-(--shadow-card)">
                 <div className="grid gap-6 p-6 sm:p-8 lg:grid-cols-[1.1fr_.9fr]">
                     {/* Texte */}
                     <div>
-                        <p className="text-xs uppercase tracking-[0.14em]" style={{ color: 'var(--accent)' }}>
-                            Étude de cas
-                        </p>
+                        <p className="text-xs uppercase tracking-[0.14em] text-(--accent)">Étude de cas</p>
 
                         <h1 className="mt-2 text-2xl sm:text-3xl md:text-4xl section-title">{p.title}</h1>
                         {p.subtitle ? <p className="mt-2 text-sm sm:text-base opacity-85 max-w-[70ch]">{p.subtitle}</p> : null}
@@ -73,15 +68,12 @@ export default function ProjectHero({ project }: { project: Project }) {
 
                     {/* Cover + quick facts */}
                     <aside className="space-y-4">
-                        <div
-                            className="rounded-2xl border overflow-hidden"
-                            style={{ borderColor: 'var(--border-soft)', background: 'var(--surface-1)', boxShadow: 'var(--shadow-card)' }}
-                        >
+                        <div className="rounded-2xl border overflow-hidden border-(--border-soft) bg-(--surface-1) shadow-(--shadow-card)">
                             {src ? (
                                 <>
                                     <div
-                                        className="flex items-center gap-2 px-3 py-2 border-b"
-                                        style={{ borderColor: 'var(--border-soft)', background: 'color-mix(in oklab, var(--surface-1) 88%, var(--surface-2))' }}
+                                        className="flex items-center gap-2 px-3 py-2 border-b border-(--border-soft) bg-(--surface-2)"
+                                        style={{ background: 'color-mix(in oklab, var(--surface-1) 88%)' }}
                                     >
                                         <span className="h-2.5 w-2.5 rounded-full" style={{ background: 'color-mix(in oklab, var(--accent) 60%, #fff)' }} />
                                         <span className="h-2.5 w-2.5 rounded-full" style={{ background: 'color-mix(in oklab, var(--gold) 60%, #fff)' }} />
@@ -99,38 +91,27 @@ export default function ProjectHero({ project }: { project: Project }) {
                             )}
                         </div>
 
-                        {/* Mini résumé (pas un duplicata du Overview) */}
-                        <div
-                            className="rounded-2xl border p-4 sm:p-5"
-                            style={{ borderColor: 'var(--border-soft)', background: 'color-mix(in oklab, var(--surface-2) 52%, var(--surface-1))' }}
-                        >
-                            <div className="text-sm font-semibold" style={{ color: 'var(--text-strong)' }}>
-                                En bref
-                            </div>
+                        {/* Mini résumé */}
+                        <div className="rounded-2xl border p-4 sm:p-5 border-(--border-soft)" style={{ background: 'color-mix(in oklab, var(--surface-2) 52%, var(--surface-1))' }}>
+                            <div className="text-sm font-semibold text-(--text-strong)">En bref</div>
 
                             <dl className="mt-4 grid gap-3 text-sm">
                                 {p.context ? (
                                     <div className="grid grid-cols-[88px_1fr] gap-3">
-                                        <dt className="font-semibold" style={{ color: 'var(--text-strong)' }}>
-                                            Contexte
-                                        </dt>
+                                        <dt className="font-semibold text-(--text-strong)">Contexte</dt>
                                         <dd className="opacity-85">{excerpt(p.context, 120)}</dd>
                                     </div>
                                 ) : null}
 
                                 {p.objectives?.[0] ? (
                                     <div className="grid grid-cols-[88px_1fr] gap-3">
-                                        <dt className="font-semibold" style={{ color: 'var(--text-strong)' }}>
-                                            Objectif
-                                        </dt>
+                                        <dt className="font-semibold text-(--text-strong)">Objectif</dt>
                                         <dd className="opacity-85">{excerpt(p.objectives[0], 120)}</dd>
                                     </div>
                                 ) : null}
 
                                 <div className="grid grid-cols-[88px_1fr] gap-3">
-                                    <dt className="font-semibold" style={{ color: 'var(--text-strong)' }}>
-                                        Focus
-                                    </dt>
+                                    <dt className="font-semibold text-(--text-strong)">Focus</dt>
                                     <dd className="opacity-85">{p.highlights?.[0] ? excerpt(p.highlights[0], 120) : (p.stack ?? []).slice(0, 4).join(' · ')}</dd>
                                 </div>
                             </dl>

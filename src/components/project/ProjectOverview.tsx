@@ -22,9 +22,7 @@ export default function ProjectOverview({ project }: { project: Project }) {
                 {p.highlights?.length ? (
                     <>
                         <div className="mt-6 hr-soft" />
-                        <h3 className="mt-6 text-base font-semibold" style={{ color: 'var(--text-strong)' }}>
-                            Points clés
-                        </h3>
+                        <h3 className="mt-6 text-base font-semibold text-(--text-strong)">Points clés</h3>
                         <ul className="mt-3 grid gap-2 sm:grid-cols-2 text-sm opacity-90">
                             {p.highlights.slice(0, 4).map((it) => (
                                 <li key={it} className="flex gap-2">
@@ -48,7 +46,7 @@ export default function ProjectOverview({ project }: { project: Project }) {
 
                     <div className="mt-4 flex flex-wrap gap-3">
                         {p.links?.demo ? (
-                            <a href={p.links.demo} target="_blank" rel="noopener noreferrer" className="btn btn-cta w-full sm:w-auto" style={{ color: '#FDFDFD' }}>
+                            <a href={p.links.demo} target="_blank" rel="noopener noreferrer" className="btn btn-cta w-full sm:w-auto text-(--surface-1)">
                                 Voir la démo
                             </a>
                         ) : null}
@@ -69,16 +67,12 @@ export default function ProjectOverview({ project }: { project: Project }) {
                         background: 'color-mix(in oklab, var(--surface-2) 52%, var(--surface-1))',
                     }}
                 >
-                    <div className="text-sm font-semibold" style={{ color: 'var(--text-strong)' }}>
-                        Fiche rapide
-                    </div>
+                    <div className="text-sm font-semibold text-(--text-strong)">Fiche rapide</div>
 
                     <div className="mt-4 grid gap-y-3 text-sm">
                         {quickFacts.map((row) => (
                             <div key={row.label} className="grid grid-cols-[92px_1fr] gap-3">
-                                <div className="font-semibold" style={{ color: 'var(--text-strong)' }}>
-                                    {row.label}
-                                </div>
+                                <div className="font-semibold text-(--text-strong)">{row.label}</div>
                                 <div className="opacity-85">{excerpt(row.value, 120)}</div>
                             </div>
                         ))}

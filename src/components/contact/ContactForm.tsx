@@ -10,7 +10,7 @@ function cn(...parts: Array<string | false | null | undefined>) {
 
 function FieldLabel({ htmlFor, children }: { htmlFor: string; children: React.ReactNode }) {
     return (
-        <label htmlFor={htmlFor} className="text-sm font-medium" style={{ color: 'var(--text-strong)' }}>
+        <label htmlFor={htmlFor} className="text-sm font-medium text-(--text-strong)">
             {children}
         </label>
     );
@@ -21,17 +21,11 @@ function InputBase(props: React.InputHTMLAttributes<HTMLInputElement>) {
         <input
             {...props}
             className={cn(
-                'w-full rounded-xl border px-3 py-2.5 text-sm transition',
+                'w-full rounded-xl border px-3 py-2.5 text-sm transition border-(--border-soft) bg-(--surface-2/42) text-(--text) outline-(--ring-focus)',
                 'focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2',
                 'placeholder:opacity-60',
                 props.className,
             )}
-            style={{
-                borderColor: 'var(--border-soft)',
-                background: 'color-mix(in oklab, var(--surface-2) 42%, var(--surface-1))',
-                color: 'var(--text)',
-                outlineColor: 'var(--ring-focus)',
-            }}
         />
     );
 }
@@ -41,17 +35,11 @@ function TextareaBase(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) 
         <textarea
             {...props}
             className={cn(
-                'w-full rounded-xl border px-3 py-2.5 text-sm transition',
+                'w-full rounded-xl border px-3 py-2.5 text-sm transition border-(--border-soft) bg-(--surface-2/42) text-(--text) outline-(--ring-focus)',
                 'focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2',
                 'placeholder:opacity-60',
                 props.className,
             )}
-            style={{
-                borderColor: 'var(--border-soft)',
-                background: 'color-mix(in oklab, var(--surface-2) 42%, var(--surface-1))',
-                color: 'var(--text)',
-                outlineColor: 'var(--ring-focus)',
-            }}
         />
     );
 }
@@ -111,9 +99,7 @@ export default function ContactForm() {
         <form onSubmit={onSubmit} className="panel p-6 sm:p-8">
             <div className="flex items-start justify-between gap-3">
                 <div>
-                    <h2 className="text-lg font-semibold" style={{ color: 'var(--text-strong)' }}>
-                        Envoyer un message
-                    </h2>
+                    <h2 className="text-lg font-semibold text-(--text-strong)">Envoyer un message</h2>
                     <p className="mt-1 text-sm opacity-75">Ton email sert uniquement à te recontacter.</p>
                 </div>
 
@@ -165,13 +151,7 @@ export default function ContactForm() {
 
             {/* Alerts */}
             {status.state === 'error' ? (
-                <div
-                    className="mt-4 rounded-2xl border px-4 py-3 text-sm"
-                    style={{
-                        borderColor: 'color-mix(in oklab, var(--gold) 45%, var(--border-soft))',
-                        background: 'color-mix(in oklab, var(--gold) 10%, var(--surface-1))',
-                    }}
-                >
+                <div className="mt-4 rounded-2xl border px-4 py-3 text-sm border-(--border-soft) bg-(--gold/10) text-(--text) outline-(--ring-focus)">
                     <span style={{ color: 'var(--text-strong)' }}>Erreur :</span> <span className="opacity-85">{status.message}</span>
                 </div>
             ) : null}

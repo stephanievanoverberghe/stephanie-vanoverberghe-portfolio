@@ -7,7 +7,7 @@ export default function Footer() {
     const year = new Date().getFullYear();
 
     return (
-        <footer role="contentinfo" className="mt-14 border-t" style={{ borderColor: 'var(--border-soft)' }}>
+        <footer role="contentinfo" className="mt-14 border-t border-(--border-soft)">
             <div className="container-page py-10 space-y-10">
                 <FooterCta />
                 <FooterLinks />
@@ -15,9 +15,7 @@ export default function Footer() {
                 <hr className="hr-soft" aria-hidden="true" />
 
                 <section className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                    <p className="text-sm" style={{ color: 'var(--text-strong)' }}>
-                        © {year} — Portfolio React/Next.js
-                    </p>
+                    <p className="text-sm text-(--text-strong)">© {year} — Portfolio React/Next.js</p>
 
                     <p className="text-sm opacity-70">Next.js · TypeScript · Tailwind · Framer Motion</p>
 

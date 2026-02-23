@@ -107,8 +107,7 @@ export default function GalleryLightbox({ images, title, className, open, startI
                 {images.map((g, i) => (
                     <figure
                         key={g.src}
-                        className="group overflow-hidden rounded-2xl border hover:shadow-[0_14px_40px_rgba(2,8,23,0.10)] transition"
-                        style={{ borderColor: 'var(--border-soft)', background: 'var(--surface-1)', boxShadow: 'var(--shadow-card)' }}
+                        className="group overflow-hidden rounded-2xl border hover:shadow-[0_14px_40px_rgba(2,8,23,0.10)] transition border-(--border-soft) bg-(--surface-1) shadow-(--shadow-card)"
                     >
                         <button
                             type="button"
@@ -120,7 +119,7 @@ export default function GalleryLightbox({ images, title, className, open, startI
                                     setInternalOpen(true);
                                 }
                             }}
-                            className="relative block w-full aspect-4/3 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2"
+                            className="relative block w-full aspect-4/3 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 outline-(--ring-focus)"
                             style={{ outlineColor: 'var(--ring-focus)' }}
                             aria-label={`Ouvrir l’image ${i + 1} sur ${images.length}`}
                         >

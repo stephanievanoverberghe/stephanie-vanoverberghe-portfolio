@@ -6,9 +6,7 @@ export default function SkillsSnapshot() {
     return (
         <section className="grid gap-6 md:grid-cols-2">
             <div className="card p-6">
-                <h2 className="text-lg font-semibold" style={{ color: 'var(--text-strong)' }}>
-                    Front-end React / Next.js
-                </h2>
+                <h2 className="text-lg font-semibold text-(--text-strong)">Front-end React / Next.js</h2>
                 <p className="mt-2 text-sm opacity-80">Je construis des interfaces propres, maintenables et agréables à utiliser.</p>
 
                 <div className="mt-4 flex flex-wrap gap-2">
@@ -21,9 +19,7 @@ export default function SkillsSnapshot() {
             </div>
 
             <div className="card p-6">
-                <h2 className="text-lg font-semibold" style={{ color: 'var(--text-strong)' }}>
-                    Qualité & livraison
-                </h2>
+                <h2 className="text-lg font-semibold text-(--text-strong)">Qualité & livraison</h2>
                 <p className="mt-2 text-sm opacity-80">Je fais attention aux détails qui comptent : accessibilité, performance et déploiement.</p>
 
                 <div className="mt-4 flex flex-wrap gap-2">

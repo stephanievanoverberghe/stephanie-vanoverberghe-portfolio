@@ -15,13 +15,11 @@ export function FooterLinks() {
     return (
         <section className="grid gap-10 sm:grid-cols-3">
             <div>
-                <div className="text-sm font-semibold" style={{ color: 'var(--text-strong)' }}>
-                    {FOOTER.name}
-                </div>
+                <div className="text-sm font-semibold text-(--text-strong)">{FOOTER.name}</div>
                 <p className="mt-2 text-sm opacity-80">{FOOTER.role}</p>
 
                 <div className="mt-4 inline-flex items-center gap-2 text-xs opacity-70">
-                    <span className="h-2 w-2 rounded-full" style={{ background: 'var(--accent)' }} aria-hidden />
+                    <span className="h-2 w-2 rounded-full bg-(--accent)" aria-hidden />
                     Disponible · France · Remote/Hybride
                 </div>
             </div>

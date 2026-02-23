@@ -13,35 +13,25 @@ export default function ProjectCard({ project }: { project: Project }) {
     const blurb = cardBlurb(p);
 
     return (
-        <article
-            className="group relative overflow-hidden rounded-2xl border transition hover:shadow-[0_18px_50px_rgba(2,8,23,0.10)]"
-            style={{
-                borderColor: 'var(--border-soft)',
-                background: 'var(--surface-1)',
-                boxShadow: 'var(--shadow-card)',
-            }}
-        >
+        <article className="group relative overflow-hidden rounded-2xl border transition hover:shadow-[0_18px_50px_rgba(2,8,23,0.10)] border-(--border-soft) bg-(--surface-1) shadow-(--shadow-card)">
             <Link href={`/projects/${p.slug}`} className="block">
                 <div className="p-3 sm:p-4">
-                    {/* Frame “browser” */}
                     <div
-                        className="overflow-hidden rounded-2xl border"
+                        className="overflow-hidden rounded-2xl border border-(--border-soft)"
                         style={{
-                            borderColor: 'var(--border-soft)',
                             background: 'color-mix(in oklab, var(--surface-2) 72%, var(--surface-1))',
                         }}
                     >
                         <div
-                            className="flex items-center gap-2 px-3 py-2 border-b"
+                            className="flex items-center gap-2 px-3 py-2 border-b border-(--border-soft)"
                             style={{
-                                borderColor: 'var(--border-soft)',
                                 background: 'color-mix(in oklab, var(--surface-1) 88%, var(--surface-2))',
                             }}
                         >
                             <span className="h-2.5 w-2.5 rounded-full" style={{ background: 'color-mix(in oklab, var(--accent) 60%, #fff)' }} />
                             <span className="h-2.5 w-2.5 rounded-full" style={{ background: 'color-mix(in oklab, var(--gold) 60%, #fff)' }} />
                             <span className="h-2.5 w-2.5 rounded-full" style={{ background: 'color-mix(in oklab, var(--sage) 60%, #fff)' }} />
-                            <div className="ml-2 h-2.5 flex-1 rounded-full border" style={{ borderColor: 'var(--border-soft)', background: 'var(--surface-1)' }} />
+                            <div className="ml-2 h-2.5 flex-1 rounded-full border border-(--border-soft) bg-(--surface-1)" />
                         </div>
 
                         <div className="relative aspect-video">
@@ -93,19 +83,13 @@ export default function ProjectCard({ project }: { project: Project }) {
                     <div className="pt-4 px-1">
                         <div className="flex items-start justify-between gap-3">
                             <div className="min-w-0">
-                                <h2 className="text-base sm:text-lg font-semibold truncate" style={{ color: 'var(--text-strong)' }}>
-                                    {p.title}
-                                </h2>
+                                <h2 className="text-base sm:text-lg font-semibold truncate text-(--text-strong)">{p.title}</h2>
                                 {blurb ? <p className="mt-1 text-sm opacity-80 line-clamp-2">{blurb}</p> : null}
                             </div>
 
                             <span
-                                className="hidden sm:inline-flex shrink-0 rounded-full border px-3 py-1 text-xs font-semibold"
-                                style={{
-                                    borderColor: 'var(--border-soft)',
-                                    background: 'color-mix(in oklab, var(--surface-2) 55%, var(--surface-1))',
-                                    color: 'var(--text-strong)',
-                                }}
+                                className="hidden sm:inline-flex shrink-0 rounded-full border px-3 py-1 text-xs font-semibold border-(--border-soft) text-(--text-strong) bg-(--surface-1)"
+                                style={{ background: 'color-mix(in oklab, var(--surface-2) 55%' }}
                             >
                                 Lire →
                             </span>
@@ -124,7 +108,7 @@ export default function ProjectCard({ project }: { project: Project }) {
                             ))}
                         </div>
 
-                        <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: 'var(--text-strong)' }}>
+                        <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-(--text-strong)">
                             Voir le projet <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
                         </div>
                     </div>

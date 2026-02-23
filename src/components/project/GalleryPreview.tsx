@@ -30,9 +30,7 @@ export default function GalleryPreview({ images, title }: Props) {
         <section className="space-y-4">
             <div className="flex items-end justify-between gap-4">
                 <div>
-                    <h3 className="text-base font-semibold" style={{ color: 'var(--text-strong)' }}>
-                        Galerie
-                    </h3>
+                    <h3 className="text-base font-semibold text-(--text-strong)">Galerie</h3>
                     <p className="mt-1 text-sm opacity-75">
                         {count} capture{count > 1 ? 's' : ''}
                     </p>
@@ -47,13 +45,8 @@ export default function GalleryPreview({ images, title }: Props) {
                 <button
                     type="button"
                     onClick={() => openAt(0)}
-                    className="group relative overflow-hidden rounded-2xl border text-left focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer"
-                    style={{
-                        outlineColor: 'var(--ring-focus)',
-                        borderColor: 'var(--border-soft)',
-                        background: 'var(--surface-1)',
-                        boxShadow: 'var(--shadow-card)',
-                    }}
+                    className="group relative overflow-hidden rounded-2xl border text-left focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer border-(--border-soft) bg-(--surface-1) shadow-(--shadow-card)"
+                    style={{ outlineColor: 'var(--ring-focus)' }}
                     aria-label="Ouvrir la galerie"
                 >
                     <div className="relative aspect-video">
@@ -74,13 +67,8 @@ export default function GalleryPreview({ images, title }: Props) {
                         <button
                             type="button"
                             onClick={() => openAt(1)}
-                            className="group relative overflow-hidden rounded-2xl border focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer"
-                            style={{
-                                outlineColor: 'var(--ring-focus)',
-                                borderColor: 'var(--border-soft)',
-                                background: 'var(--surface-1)',
-                                boxShadow: 'var(--shadow-card)',
-                            }}
+                            className="group relative overflow-hidden rounded-2xl border focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer border-(--border-soft) bg-(--surface-1) shadow-(--shadow-card)"
+                            style={{ outlineColor: 'var(--ring-focus)' }}
                             aria-label="Ouvrir la galerie"
                         >
                             <div className="relative aspect-16/10">
@@ -100,12 +88,9 @@ export default function GalleryPreview({ images, title }: Props) {
                         <button
                             type="button"
                             onClick={() => openAt(2)}
-                            className="group relative overflow-hidden rounded-2xl border focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer"
+                            className="group relative overflow-hidden rounded-2xl border focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 cursor-pointer border-(--border-soft) bg-(--surface-1) shadow-(--shadow-card)"
                             style={{
                                 outlineColor: 'var(--ring-focus)',
-                                borderColor: 'var(--border-soft)',
-                                background: 'var(--surface-1)',
-                                boxShadow: 'var(--shadow-card)',
                             }}
                             aria-label="Ouvrir la galerie"
                         >
@@ -123,8 +108,8 @@ export default function GalleryPreview({ images, title }: Props) {
                             {count > 3 ? (
                                 <div
                                     aria-hidden
-                                    className="absolute inset-0 flex items-center justify-center"
-                                    style={{ background: 'color-mix(in oklab, var(--ink) 48%, transparent)', color: 'var(--surface-1)' }}
+                                    className="absolute inset-0 flex items-center justify-center text-(--surface-1)"
+                                    style={{ background: 'color-mix(in oklab, var(--ink) 48%, transparent)' }}
                                 >
                                     <div
                                         className="rounded-full border px-4 py-2 text-sm font-semibold"

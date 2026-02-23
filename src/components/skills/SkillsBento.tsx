@@ -25,20 +25,14 @@ function BentoCard({
 
             <div className="relative flex items-start gap-3">
                 <div
-                    className="shrink-0 h-11 w-11 rounded-2xl border flex items-center justify-center"
-                    style={{
-                        borderColor: 'var(--border-soft)',
-                        background: 'color-mix(in oklab, var(--surface-2) 58%, var(--surface-1))',
-                        boxShadow: 'var(--shadow-card)',
-                    }}
+                    className="shrink-0 h-11 w-11 rounded-2xl border flex items-center justify-center border-(--border-soft) shadow-(--shadow-card)"
+                    style={{ background: 'color-mix(in oklab, var(--surface-2) 58%, var(--surface-1))' }}
                 >
-                    <Icon className="h-5 w-5" style={{ color: 'var(--text-strong)' }} />
+                    <Icon className="h-5 w-5 text-(--text-strong)" />
                 </div>
 
                 <div className="min-w-0">
-                    <h2 className="text-base sm:text-lg font-semibold" style={{ color: 'var(--text-strong)' }}>
-                        {title}
-                    </h2>
+                    <h2 className="text-base sm:text-lg font-semibold text-(--text-strong)">{title}</h2>
                     <p className="mt-1 text-sm opacity-80">{desc}</p>
 
                     <div className="mt-4 flex flex-wrap gap-2">
@@ -57,9 +51,7 @@ function BentoCard({
 export default function SkillsBento() {
     return (
         <section className="space-y-4">
-            <h2 className="text-lg font-semibold" style={{ color: 'var(--text-strong)' }}>
-                Piliers
-            </h2>
+            <h2 className="text-lg font-semibold text-(--text-strong)">Piliers</h2>
 
             <div className="grid gap-6 lg:grid-cols-3">
                 <div className="grid gap-6 lg:col-span-2">

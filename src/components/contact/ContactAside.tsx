@@ -11,31 +11,19 @@ function ActionCard({ href, icon, title, desc, external }: { href: string; icon:
             href={href}
             target={external ? '_blank' : undefined}
             rel={external ? 'noopener noreferrer' : undefined}
-            className={cn('group rounded-2xl border p-4 transition', 'hover:shadow-[0_14px_40px_rgba(2,8,23,0.10)]')}
-            style={{
-                borderColor: 'var(--border-soft)',
-                background: 'var(--surface-1)',
-                boxShadow: 'var(--shadow-card)',
-            }}
+            className={cn('group rounded-2xl border p-4 transition border-(--border-soft) bg-(--surface-1) shadow-(--shadow-card)', 'hover:shadow-[0_14px_40px_rgba(2,8,23,0.10)]')}
         >
             <div className="flex items-start justify-between gap-3">
                 <div className="flex items-start gap-3">
                     <span
                         aria-hidden
-                        className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border"
-                        style={{
-                            borderColor: 'var(--border-soft)',
-                            background: 'color-mix(in oklab, var(--surface-2) 52%, var(--surface-1))',
-                            color: 'var(--text-strong)',
-                        }}
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-(--border-soft) bg-(color-mix(in oklab, var(--surface-2) 52%, var(--surface-1))) text-(--text-strong)"
                     >
                         {icon}
                     </span>
 
                     <div>
-                        <div className="text-sm font-semibold" style={{ color: 'var(--text-strong)' }}>
-                            {title}
-                        </div>
+                        <div className="text-sm font-semibold text-(--text-strong)">{title}</div>
                         {desc ? <div className="mt-0.5 text-xs opacity-75">{desc}</div> : null}
                     </div>
                 </div>
@@ -49,15 +37,8 @@ function ActionCard({ href, icon, title, desc, external }: { href: string; icon:
 export default function ContactAside() {
     return (
         <aside className="space-y-4 md:sticky md:top-24">
-            <div
-                className="panel p-6"
-                style={{
-                    background: 'color-mix(in oklab, var(--surface-2) 52%, var(--surface-1))',
-                }}
-            >
-                <h3 className="text-sm font-semibold" style={{ color: 'var(--text-strong)' }}>
-                    Contact direct
-                </h3>
+            <div className="panel p-6 bg-(color-mix(in oklab, var(--surface-2) 52%, var(--surface-1))) rounded-2xl border border-(--border-soft)">
+                <h3 className="text-sm font-semibold text-(--text-strong)">Contact direct</h3>
 
                 <div className="mt-4 grid gap-3">
                     <ActionCard
@@ -72,16 +53,8 @@ export default function ContactAside() {
                 </div>
 
                 {/* bloc simple, pro, sans “API” */}
-                <div
-                    className="mt-4 rounded-2xl border p-4 text-sm"
-                    style={{
-                        borderColor: 'var(--border-soft)',
-                        background: 'var(--surface-1)',
-                    }}
-                >
-                    <div className="font-semibold" style={{ color: 'var(--text-strong)' }}>
-                        Réponse rapide
-                    </div>
+                <div className="mt-4 rounded-2xl border p-4 text-sm border-(--border-soft) bg-(--surface-1)">
+                    <div className="font-semibold text-(--text-strong)">Réponse rapide</div>
                     <div className="mt-1 opacity-80">Je réponds sous 24–48h (jours ouvrés).</div>
                 </div>
             </div>

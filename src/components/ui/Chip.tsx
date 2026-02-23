@@ -5,13 +5,8 @@
 import Link from 'next/link';
 import * as React from 'react';
 
-/** Catégories simples */
 type ChipKind = 'neutral' | 'tech' | 'design' | 'tool' | 'architecture';
-
-/** Palette directe (override éventuel) */
 type ChipColor = 'neutral' | 'accent' | 'sage' | 'lilac' | 'gold';
-
-/** Anciennes props (tolérées mais ignorées) */
 type LegacyAppearance = 'soft' | 'solid' | 'outline' | 'ghost';
 type LegacyTone = 'subtle' | 'normal' | 'bold';
 type LegacyVariant = 'default' | 'accent' | 'lilac' | 'outline';
@@ -21,20 +16,13 @@ type ChipSize = 'xs' | 'sm' | 'md';
 type BaseProps = {
     children: React.ReactNode;
     className?: string;
-
-    /** NOUVEAU : catégorie → couleur automatique */
     kind?: ChipKind;
-
-    /** Option : couleur directe si tu veux forcer */
     color?: ChipColor;
-
-    /** Optionnels et ignorés (compat) */
-    appearance?: LegacyAppearance; // ignoré
-    tone?: LegacyTone; // ignoré
-    variant?: LegacyVariant; // ignoré
-
-    size?: ChipSize; // default: 'md'
-    dot?: boolean; // petit point coloré
+    appearance?: LegacyAppearance;
+    tone?: LegacyTone;
+    variant?: LegacyVariant;
+    size?: ChipSize;
+    dot?: boolean;
     leading?: React.ReactNode;
     trailing?: React.ReactNode;
 
@@ -55,7 +43,7 @@ function cn(...parts: (string | false | null | undefined)[]) {
     return parts.filter(Boolean).join(' ');
 }
 
-/** mapping Catégorie → Couleur palette */
+/** mapping Catégorie / Couleur palette */
 function colorFromKind(kind?: ChipKind): ChipColor {
     switch (kind) {
         case 'tech':
@@ -94,12 +82,12 @@ function calm(base: string) {
     return `color-mix(in oklab, ${base} 86%, var(--text) 14%)`;
 }
 
-/** style unique “soft” (ultra simple) */
+/** style unique “soft”  */
 function softStyle(base: string, active?: boolean): React.CSSProperties {
     const blendSurface = 'var(--surface-1)';
     const borderSoft = 'var(--border-soft)';
-    const bgPct = 7; // teinte très douce
-    const borderPct = active ? 28 : 20; // bordure légèrement teintée
+    const bgPct = 7;
+    const borderPct = active ? 28 : 20;
     return {
         background: `color-mix(in oklab, ${base} ${bgPct}%, ${blendSurface})`,
         borderColor: `color-mix(in oklab, ${base} ${borderPct}%, ${borderSoft})`,
@@ -123,7 +111,6 @@ function sizeClasses(size: ChipSize) {
 export default function Chip(props: ChipProps) {
     const { children, className, size = 'md', kind, color: colorOverride, dot, leading, trailing, active, disabled, onRemove, ariaLabel } = props;
 
-    // couleur finale : override > kind > neutral
     const color = colorOverride ?? colorFromKind(kind);
     const base = calm(token(color));
 
@@ -183,7 +170,6 @@ export default function Chip(props: ChipProps) {
         </span>
     );
 
-    // wrappers interactifs
     const focusCls = 'inline-block focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2';
     const focusStyle = { outlineColor: 'var(--ring-focus)' } as React.CSSProperties;
 
@@ -208,5 +194,5 @@ export default function Chip(props: ChipProps) {
         );
     }
 
-    return body; // span
+    return body;
 }

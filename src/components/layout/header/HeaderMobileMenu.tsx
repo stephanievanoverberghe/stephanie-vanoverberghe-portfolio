@@ -37,14 +37,9 @@ export function HeaderMobileMenu({ open, onClose, isActive }: { open: boolean; o
                         transition={{ duration: 0.18, ease: [0.22, 0.61, 0.36, 1] }}
                     >
                         <div className="container-page pt-3">
-                            <div className="rounded-2xl border overflow-hidden" style={{ borderColor: 'var(--border-soft)', background: 'var(--surface-1)' }}>
-                                <div
-                                    className="p-4 border-b"
-                                    style={{ borderColor: 'var(--border-soft)', background: 'color-mix(in oklab, var(--surface-2) 72%, var(--surface-1))' }}
-                                >
-                                    <div className="font-semibold" style={{ color: 'var(--text-strong)' }}>
-                                        {BRAND.name}
-                                    </div>
+                            <div className="rounded-2xl border overflow-hidden border-(--border-soft) bg-(--surface-1)">
+                                <div className="p-4 border-b border-(--border-soft)" style={{ background: 'color-mix(in oklab, var(--surface-2) 72%, var(--surface-1))' }}>
+                                    <div className="font-semibold text-(--text-strong)">{BRAND.name}</div>
                                     <div className="mt-1 text-sm opacity-80">{BRAND.title}</div>
                                 </div>
 
@@ -73,12 +68,7 @@ export function HeaderMobileMenu({ open, onClose, isActive }: { open: boolean; o
                                     })}
 
                                     <motion.div variants={item} className="mt-2">
-                                        <Link
-                                            href="/contact"
-                                            onClick={onClose}
-                                            className="btn btn-cta w-full inline-flex items-center justify-center gap-2"
-                                            style={{ color: '#FDFDFD' }}
-                                        >
+                                        <Link href="/contact" onClick={onClose} className="btn btn-cta w-full inline-flex items-center justify-center gap-2 text-(--surface-1)">
                                             <Mail size={16} />
                                             Me contacter / CV
                                         </Link>

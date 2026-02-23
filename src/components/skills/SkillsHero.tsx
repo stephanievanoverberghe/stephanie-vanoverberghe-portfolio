@@ -2,25 +2,18 @@ import Link from 'next/link';
 import Chip from '@/components/ui/Chip';
 
 function Kicker({ children }: { children: React.ReactNode }) {
-    return (
-        <span className="text-xs uppercase tracking-[0.14em]" style={{ color: 'var(--accent)' }}>
-            {children}
-        </span>
-    );
+    return <span className="text-xs uppercase tracking-[0.14em] text-(--accent)">{children}</span>;
 }
 
 function Stat({ label, value }: { label: string; value: string }) {
     return (
         <div
-            className="rounded-2xl border px-4 py-3"
+            className="rounded-2xl border px-4 py-3 border-(--border-soft)"
             style={{
-                borderColor: 'var(--border-soft)',
                 background: 'color-mix(in oklab, var(--surface-2) 58%, var(--surface-1))',
             }}
         >
-            <div className="text-sm font-semibold" style={{ color: 'var(--text-strong)' }}>
-                {value}
-            </div>
+            <div className="text-sm font-semibold text-(--text-strong)">{value}</div>
             <div className="text-xs opacity-75">{label}</div>
         </div>
     );
@@ -28,20 +21,13 @@ function Stat({ label, value }: { label: string; value: string }) {
 
 export default function SkillsHero() {
     return (
-        <header
-            className="relative overflow-hidden rounded-2xl border p-6 sm:p-10"
-            style={{
-                borderColor: 'var(--border-soft)',
-                background: 'var(--surface-1)',
-                boxShadow: 'var(--shadow-card)',
-            }}
-        >
+        <header className="relative overflow-hidden rounded-2xl border p-6 sm:p-10 border-(--border-soft) bg-(--surface-1) shadow-(--shadow-card)">
             <div className="relative space-y-6">
                 {/* Intro (kicker + titre + texte) */}
                 <div className="space-y-2">
                     <Kicker>Expertises</Kicker>
 
-                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold" style={{ color: 'var(--text-strong)' }}>
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-(--text-strong)">
                         Front-end React/Next.js
                         <span className="opacity-70"> · UI/UX · Performance</span>
                     </h1>
@@ -68,15 +54,12 @@ export default function SkillsHero() {
                         </div>
 
                         <div
-                            className="rounded-2xl border p-4 sm:p-5"
+                            className="rounded-2xl border p-4 sm:p-5 border-(--border-soft)"
                             style={{
-                                borderColor: 'var(--border-soft)',
                                 background: 'color-mix(in oklab, var(--surface-2) 54%, var(--surface-1))',
                             }}
                         >
-                            <div className="text-sm font-semibold" style={{ color: 'var(--text-strong)' }}>
-                                Ce que j’apporte
-                            </div>
+                            <div className="text-sm font-semibold text-(--text-strong)">Ce que j’apporte</div>
 
                             <ul className="mt-3 space-y-2 text-sm opacity-85">
                                 <li className="flex gap-2">
@@ -98,7 +81,7 @@ export default function SkillsHero() {
                             <Link href="/projects" className="btn btn-secondary">
                                 Voir les projets
                             </Link>
-                            <Link href="/contact" className="btn btn-cta" style={{ color: '#FDFDFD' }}>
+                            <Link href="/contact" className="btn btn-cta text-(--surface-1)">
                                 Me contacter
                             </Link>
                         </div>

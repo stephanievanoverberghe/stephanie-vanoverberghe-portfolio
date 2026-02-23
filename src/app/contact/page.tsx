@@ -23,25 +23,14 @@ export const metadata: Metadata = {
 };
 
 function Kicker({ children }: { children: ReactNode }) {
-    return (
-        <span className="text-xs uppercase tracking-[0.14em]" style={{ color: 'var(--accent)' }}>
-            {children}
-        </span>
-    );
+    return <span className="text-xs uppercase tracking-[0.14em] text-(--accent)">{children}</span>;
 }
 
 export default function ContactPage() {
     return (
         <section className="container-page py-12 space-y-8">
             {/* HERO */}
-            <header
-                className="relative overflow-hidden rounded-2xl border p-6 sm:p-10"
-                style={{
-                    borderColor: 'var(--border-soft)',
-                    background: 'var(--surface-1)',
-                    boxShadow: 'var(--shadow-card)',
-                }}
-            >
+            <header className="relative overflow-hidden rounded-2xl border p-6 sm:p-10 bg-(--surface-1) border-(--border-soft) shadow-card">
                 <div className="relative space-y-4">
                     <div className="flex flex-wrap items-center gap-3">
                         <Kicker>Contact</Kicker>
@@ -51,9 +40,7 @@ export default function ContactPage() {
                         </span>
                     </div>
 
-                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold" style={{ color: 'var(--text-strong)' }}>
-                        Me contacter
-                    </h1>
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-(--text-strong)">Me contacter</h1>
 
                     <p className="opacity-85 max-w-[75ch]">Un projet, une opportunité, une question ? Laisse-moi un message — je reviens vers toi rapidement.</p>
 
