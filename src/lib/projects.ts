@@ -91,6 +91,12 @@ function parseGallery(value: unknown): ProjectGalleryImage[] | undefined {
     return items.length ? items : undefined;
 }
 
+/**
+ * Construit un objet `Project` tolérant aux champs partiels.
+ *
+ * Règle métier implicite : seul `title` est obligatoire pour conserver
+ * la résilience du site si un JSON contenu est incomplet en production.
+ */
 function parseProject(raw: unknown, fallbackSlug: string): Project | null {
     if (!isRecord(raw)) return null;
 
@@ -126,7 +132,6 @@ export async function getProjectSlugs(): Promise<string[]> {
         const files = await fs.readdir(DIR);
         return files.filter((f) => f.endsWith('.json')).map((f) => f.slice(0, -'.json'.length));
     } catch {
-        // dossier manquant en local/CI => pas d'explosion
         return [];
     }
 }
@@ -141,6 +146,12 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
     }
 }
 
+/**
+ * Retourne tous les projets valides triés pour l'affichage public.
+ *
+ * Tri intentionnel : année décroissante puis titre FR pour garantir une
+ * navigation stable et naturelle.
+ */
 export async function getAllProjects(): Promise<Project[]> {
     const slugs = await getProjectSlugs();
     const all = await Promise.all(slugs.map((s) => getProjectBySlug(s)));

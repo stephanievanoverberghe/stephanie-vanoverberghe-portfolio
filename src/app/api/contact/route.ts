@@ -15,6 +15,8 @@ function invalidPayloadResponse() {
 }
 
 function isAllowedRequestSource(req: Request): boolean {
+    // Défense applicative "low-cost" : on rejette les origines externes pour
+    // limiter les soumissions cross-site opportunistes sur l'endpoint public.
     const expectedOrigin = new URL(req.url).origin;
     const origin = req.headers.get('origin');
     const referer = req.headers.get('referer');
@@ -35,10 +37,19 @@ function isAllowedRequestSource(req: Request): boolean {
 }
 
 function isHumanSubmissionDelay(formStartedAt: number): boolean {
+    // Règle métier anti-spam : un humain ne soumet généralement pas le formulaire
+    // en moins de quelques secondes, et on ignore aussi les timestamps trop anciens.
     const elapsed = Date.now() - formStartedAt;
     return elapsed >= MIN_SUBMISSION_DELAY_MS && elapsed <= MAX_SUBMISSION_WINDOW_MS;
 }
 
+/**
+ * Endpoint de contact avec garde-fous cumulés.
+ *
+ * Pourquoi plusieurs couches ? Chaque mécanisme (origine, rate limit, honeypot,
+ * délai minimal) peut être contourné isolément, mais leur combinaison réduit
+ * fortement le bruit sans complexifier l'expérience utilisateur légitime.
+ */
 export async function POST(req: Request) {
     const resendKey = process.env.RESEND_API_KEY;
     const to = process.env.CONTACT_TO;
@@ -67,6 +78,8 @@ export async function POST(req: Request) {
     }
 
     if (payload.company) {
+        // Honeypot rempli => probable bot. On répond 200 pour ne pas donner de signal
+        // exploitable aux scripts automatisés.
         return NextResponse.json({ ok: true }, { status: 200 });
     }
 

@@ -58,6 +58,14 @@ function TextareaBase(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) 
 
 type Status = { state: 'idle' } | { state: 'loading' } | { state: 'success' } | { state: 'error'; message: string };
 
+/**
+ * Formulaire de contact côté client.
+ *
+ * Points métier notables :
+ * - envoie `formStartedAt` pour permettre un contrôle anti-bot côté API ;
+ * - conserve un honeypot (`company`) invisible afin de filtrer des robots simples ;
+ * - expose un statut explicite pour fiabiliser le feedback utilisateur.
+ */
 export default function ContactForm() {
     const [formStartedAt] = React.useState(() => Date.now());
     const [name, setName] = React.useState('');
@@ -70,6 +78,10 @@ export default function ContactForm() {
 
     const [status, setStatus] = React.useState<Status>({ state: 'idle' });
 
+    /**
+     * Soumet le formulaire à l'API interne en gardant un UX robuste
+     * (état loading, erreurs réseau et erreurs métier distinctes).
+     */
     async function onSubmit(e: React.FormEvent) {
         e.preventDefault();
         setStatus({ state: 'loading' });

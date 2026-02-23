@@ -15,6 +15,13 @@ function asString(value: unknown): string {
     return typeof value === 'string' ? value.trim() : '';
 }
 
+/**
+ * Parse le body JSON sans lever d'exception.
+ *
+ * Pourquoi retourner `null` plutôt qu'une erreur ?
+ * L'API de contact veut un flux de validation uniforme : toute entrée invalide
+ * aboutit à la même réponse 400 pour limiter la fuite d'informations côté attaquant.
+ */
 export async function parseJsonBody(req: Request): Promise<unknown | null> {
     try {
         return await req.json();
@@ -23,6 +30,12 @@ export async function parseJsonBody(req: Request): Promise<unknown | null> {
     }
 }
 
+/**
+ * Valide et normalise le payload de contact côté serveur.
+ *
+ * Cette fonction joue le rôle de barrière métier centrale : on ne dépend pas
+ * uniquement des validations front, car l'endpoint peut être appelé hors UI.
+ */
 export function parseContactPayload(value: unknown): ContactPayload | null {
     if (!value || typeof value !== 'object') return null;
 

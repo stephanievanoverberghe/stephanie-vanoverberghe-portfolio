@@ -4,6 +4,12 @@
 
 import { useEffect, useState } from 'react';
 
+/**
+ * Hook UI pour piloter les variations du header selon le scroll.
+ *
+ * Le listener est passif pour ne pas bloquer le thread principal pendant
+ * le défilement, point sensible pour la fluidité perçue sur mobile.
+ */
 export function useScrollState(offset = 8) {
     const [scrolled, setScrolled] = useState(false);
 
