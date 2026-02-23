@@ -97,8 +97,8 @@ export async function POST(req: Request) {
 
     const mailConfig = isMailConfigured();
 
-    // ✅ Mode "portfolio" : si le service mail n'est pas configuré, on ne renvoie PAS 500.
-    // On répond OK pour que l'UI reste fluide (ex: preview, environnement de recruteur),
+    // si le service mail n'est pas configuré, on ne renvoie PAS 500.
+    // On répond OK pour que l'UI reste fluide,
     // tout en loggant clairement le problème côté serveur.
     if (!mailConfig.ok) {
         console.warn('[api/contact] mail not configured (missing env) — skipping send', {
