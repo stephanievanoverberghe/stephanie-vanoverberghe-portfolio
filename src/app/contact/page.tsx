@@ -1,10 +1,26 @@
 // src/app/contact/page.tsx
 
 import type { ReactNode } from 'react';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Sparkles } from 'lucide-react';
 import ContactForm from '@/components/contact/ContactForm';
 import ContactAside from '@/components/contact/ContactAside';
+
+export const metadata: Metadata = {
+    title: 'Contact — Vanoverberghe Stéphanie',
+    description: 'Contactez Vanoverberghe Stéphanie, développeuse front-end React / Next.js, pour discuter de votre projet ou d’une opportunité.',
+    alternates: { canonical: '/contact' },
+    openGraph: {
+        title: 'Contact — Vanoverberghe Stéphanie',
+        description: 'Contactez Vanoverberghe Stéphanie, développeuse front-end React / Next.js.',
+        url: '/contact',
+    },
+    twitter: {
+        title: 'Contact — Vanoverberghe Stéphanie',
+        description: 'Contactez Vanoverberghe Stéphanie, développeuse front-end React / Next.js.',
+    },
+};
 
 function Kicker({ children }: { children: ReactNode }) {
     return (

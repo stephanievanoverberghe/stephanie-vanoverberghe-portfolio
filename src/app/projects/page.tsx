@@ -6,7 +6,17 @@ import ProjectsGrid from '@/components/projects/ProjectsGrid';
 
 export const metadata: Metadata = {
     title: 'Projets — Vanoverberghe Stéphanie',
-    description: 'Études de cas front-end : Ancre-toi, Alchimiste Créations, Mystères à la carte.',
+    description: 'Études de cas front-end : Ancre-toi, Alchimiste Créations, Mystères à la carte...',
+    alternates: { canonical: '/projects' },
+    openGraph: {
+        title: 'Projets — Vanoverberghe Stéphanie',
+        description: 'Études de cas front-end : Ancre-toi, Alchimiste Créations, Mystères à la carte...',
+        url: '/projects',
+    },
+    twitter: {
+        title: 'Projets — Vanoverberghe Stéphanie',
+        description: 'Études de cas front-end : Ancre-toi, Alchimiste Créations, Mystères à la carte...',
+    },
 };
 
 export const dynamic = 'force-static';

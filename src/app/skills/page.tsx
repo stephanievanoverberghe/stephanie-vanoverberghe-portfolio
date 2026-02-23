@@ -9,6 +9,16 @@ import SkillsProjectsBento from '@/components/skills/SkillsProjectsBento';
 export const metadata: Metadata = {
     title: 'Compétences — Vanoverberghe Stéphanie',
     description: 'Compétences front-end (React, Next.js, TypeScript, Tailwind), UI/UX, performance & accessibilité. Mise en pratique sur des projets concrets.',
+    alternates: { canonical: '/skills' },
+    openGraph: {
+        title: 'Compétences — Vanoverberghe Stéphanie',
+        description: 'Compétences front-end (React, Next.js, TypeScript, Tailwind), UI/UX, performance & accessibilité.',
+        url: '/skills',
+    },
+    twitter: {
+        title: 'Compétences — Vanoverberghe Stéphanie',
+        description: 'Compétences front-end (React, Next.js, TypeScript, Tailwind), UI/UX, performance & accessibilité.',
+    },
 };
 
 export const dynamic = 'force-static';

@@ -7,9 +7,18 @@ import FeaturedProjects from '@/components/home/FeaturedProjects';
 import SkillsSnapshot from '@/components/home/SkillsSnapshot';
 
 export const metadata: Metadata = {
-    title: 'Vanoverberghe Stéphanie - Développeuse Front-End (React/Next)',
+    title: 'Vanoverberghe Stéphanie - développeuse front-end React / Next.js',
     description: 'Portfolio front-end React / Next.js - UI/UX, TypeScript, Tailwind. Études de cas et projets déployés.',
     alternates: { canonical: '/' },
+    openGraph: {
+        title: 'Vanoverberghe Stéphanie - développeuse front-end React / Next.js',
+        description: 'Portfolio front-end React / Next.js - UI/UX, TypeScript, Tailwind. Études de cas et projets déployés.',
+        url: '/',
+    },
+    twitter: {
+        title: 'Vanoverberghe Stéphanie - développeuse front-end React / Next.js',
+        description: 'Portfolio front-end React / Next.js - UI/UX, TypeScript, Tailwind. Études de cas et projets déployés.',
+    },
 };
 
 export default async function HomePage() {

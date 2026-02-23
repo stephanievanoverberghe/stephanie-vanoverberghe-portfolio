@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 
     const title = `${data.title} — Étude de cas`;
     const description = data.context ?? `Étude de cas front-end : ${data.title}${data.subtitle ? ` — ${data.subtitle}` : ''}.`;
-    const ogImage = coverSrc(data) ?? '/og-cover.jpg';
+    const ogImage = coverSrc(data) ?? '/og-cover.webp';
 
     return {
         title,
