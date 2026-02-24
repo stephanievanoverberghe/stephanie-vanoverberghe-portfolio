@@ -1,37 +1,97 @@
 {
     "slug": "mysteres-a-la-carte",
     "title": "Mystères à la carte",
-    "subtitle": "Escape game culinaire — site immersif & réservation",
+    "subtitle": "One-page immersive Next.js orientée conversion vers une demande de réservation",
     "year": 2025,
-    "role": ["Front-end", "UI/UX", "Intégration"],
-    "stack": ["React", "Next.js", "TypeScript", "Tailwind", "Framer Motion"],
-    "context": "Un site immersif, mais clair : donner envie tout en rendant les infos pratiques immédiates.",
+    "role": ["Product Design (UX/UI)", "Architecture Front-end", "Développement React/Next.js", "Accessibilité", "Testing & qualité"],
+    "stack": ["React 19", "Next.js (App Router)", "TypeScript", "Tailwind CSS v4", "Framer Motion", "React Hook Form", "Zod", "Vitest", "Playwright"],
+    "context": "Projet portfolio de démonstration : concevoir une landing one-page premium (escape game culinaire) qui combine narration visuelle et accès immédiat aux informations utiles (durée, capacité, menus, réservation). L’enjeu principal était de conserver une interface immersive sans dégrader lisibilité, accessibilité et robustesse technique.",
     "objectives": [
-        "Mettre en avant les menus et guider vers la réservation (mobile-first).",
-        "Créer une interface dark premium avec contrastes lisibles.",
-        "Structurer une one-page scannable : Concept → Expérience → Infos → Réserver → FAQ."
+        "Réduire la friction vers la section \"Réserver\" via une navigation par ancres, un CTA persistant et une hiérarchie de sections scannable.",
+        "Rendre les informations décisionnelles visibles rapidement (60–90 min, 2–6 joueurs, menus, tarif) pour faciliter l’intention de réservation.",
+        "Sécuriser la saisie du formulaire (validation stricte, feedback inline, états loading/success/error) sans backend.",
+        "Maintenir une qualité de code élevée (TypeScript strict, lint, format, tests unitaires/composants/e2e, script check global)."
     ],
     "challenges": [
-        "Garder l’équilibre entre ambiance et clarté (tarifs, durée, joueurs).",
-        "Préserver de bonnes perfs malgré les effets visuels.",
-        "Construire une hiérarchie nette en thème sombre."
+        "Trouver l’équilibre entre direction artistique dark premium et lisibilité réelle des contenus textuels.",
+        "Multiplier les micro-interactions sans pénaliser le rendu initial ni l’expérience sur appareils modestes.",
+        "Assurer une navigation mobile accessible avec menu feuille (focus trap, fermeture clavier, restauration du focus).",
+        "Conserver un parcours de réservation crédible en mode démo (pas d’API), tout en gérant anti-spam et retours utilisateur."
     ],
     "solutions": [
-        "Tokens dark premium (or/ivoire/accents) + contrastes vérifiés.",
-        "Sections courtes + ancres pour une navigation rapide.",
-        "Animations Framer Motion sobres + CTA placés aux bons moments."
+        "Architecture feature-based (src/features, src/shared, src/content) pour séparer domaine, UI réutilisable et contenu éditorial.",
+        "One-page structurée en sections courtes + ancres actives (IntersectionObserver + fallback scroll) pour guider la lecture et l’action.",
+        "Formulaire piloté par React Hook Form + schéma Zod, messages d’erreur contextualisés, honeypot \"bot\", toasts globaux et modal de confirmation.",
+        "Animations contextualisées : Framer Motion sur interactions à forte valeur perçue, composants ScrollReveal/Pane pour des mouvements progressifs, et respect de prefers-reduced-motion.",
+        "Performance perçue préservée via chargement dynamique de la section Dataviz et scripts de contrôle (fx:size, check:all)."
     ],
-    "highlights": ["Infos clés visibles d’un coup d’œil (60–90 min, 2–6 joueurs).", "Dark UI lisible et cohérente.", "Parcours orienté réservation."],
+    "highlights": [
+        "Parcours principal clarifié : header à ancres + CTA \"Réserver\" disponible en desktop et mobile.",
+        "Formulaire robuste côté client : validation de tous les champs clés, consentement obligatoire et feedback immédiat utilisateur.",
+        "Qualité outillée de bout en bout : lint, typecheck strict, tests unitaires, tests composants (Header, BookingForm, ToastProvider, NotFoundView) et flows e2e Playwright.",
+        "Base maintenable pour itérations produit : contenu centralisé, composants découplés, pages légales et 404 personnalisée prêtes pour production."
+    ],
+    "metrics": [
+        "TypeScript en mode strict avec noUncheckedIndexedAccess et exactOptionalPropertyTypes activés.",
+        "Pipeline local unifié via npm run check:all (format, lint, typecheck, tests, budget FX, build).",
+        "Chargement différé de la dataviz pour limiter le JavaScript initial de la home."
+    ],
+    "notableDecisions": [
+        "Utiliser un App Router Next.js avec composition serveur (page/layout) et composants client ciblés pour les zones interactives.",
+        "Garder le formulaire en démo front-only mais traiter la sécurité de base (honeypot) et la confiance UX (états explicites, confirmation).",
+        "Piloter l’état de navigation active par IntersectionObserver pour refléter la progression réelle dans la page.",
+        "Encadrer les effets visuels via composants dédiés (FXMounts, ScrollOrchestrator, Pane) pour isoler la complexité UI."
+    ],
+    "testing": {
+        "strategy": "Couverture multi-niveaux : unitaires Node test, tests composants Vitest + Testing Library, tests e2e (node:test + Playwright) sur les parcours critiques.",
+        "coverage": [
+            "Unit: tests/unit/site-url.test.ts",
+            "Component: tests/components/BookingForm.test.tsx, Header.test.tsx, ToastProvider.test.tsx, NotFoundView.test.tsx",
+            "E2E: tests/e2e/critical-flows.test.ts, tests/e2e/critical-flows.playwright.spec.ts"
+        ]
+    },
+    "architecture": {
+        "summary": "Le projet suit une architecture modulaire orientée features. Les routes Next.js vivent dans src/app, la logique métier et les écrans sont regroupés par feature, et les briques transverses (UI/fx/lib) sont mutualisées dans shared. Cette organisation réduit le couplage et facilite l’évolution d’une section sans effet de bord global.",
+        "keyPoints": [
+            "Découpage explicite: app / features / shared / content / types.",
+            "Règles ESLint de frontières d’import pour limiter les dépendances inversées.",
+            "Contenus textuels centralisés (navigation, menus, légal) pour itérations éditoriales rapides."
+        ]
+    },
+    "nextSteps": [
+        "Brancher une API de réservation (Route Handler Next.js) avec persistance DB et protection anti-abus renforcée (rate limit, captcha).",
+        "Ajouter l’envoi d’emails transactionnels (confirmation client + notification interne).",
+        "Suivre des métriques produit (taux d’atteinte section réserver, abandon formulaire, conversion CTA) via analytics privacy-friendly.",
+        "Introduire des tests e2e supplémentaires sur accessibilité clavier et régression visuelle."
+    ],
     "links": {
         "demo": "https://mysteres-a-la-carte.vercel.app/",
         "repo": "https://github.com/stephanievanoverberghe/mysteres-a-la-carte"
     },
-    "logo": { "image": "/images/projects/mysteres-a-la-carte/logo.png", "alt": "Logo Mystères à la carte" },
-    "hero": { "image": "/images/projects/mysteres-a-la-carte/desktop-hero.webp", "alt": "Page d’accueil — Mystères à la carte" },
+    "logo": {
+        "image": "/images/projects/mysteres-a-la-carte/logo.png",
+        "alt": "Logo Mystères à la carte"
+    },
+    "hero": {
+        "image": "/images/projects/mysteres-a-la-carte/desktop-hero.webp",
+        "alt": "Landing page Mystères à la carte avec hero immersif et CTA de réservation"
+    },
     "gallery": [
-        { "src": "/images/projects/mysteres-a-la-carte/desktop-2.webp", "alt": "Section Concept" },
-        { "src": "/images/projects/mysteres-a-la-carte/mobile-1.webp", "alt": "Expérience mobile" },
-        { "src": "/images/projects/mysteres-a-la-carte/mobile-2.webp", "alt": "Déroulement" },
-        { "src": "/images/projects/mysteres-a-la-carte/mobile-menu.webp", "alt": "Réservation mobile" }
+        {
+            "src": "/images/projects/mysteres-a-la-carte/desktop-2.webp",
+            "alt": "Section Concept: promesse et fonctionnement de l’expérience"
+        },
+        {
+            "src": "/images/projects/mysteres-a-la-carte/mobile-1.webp",
+            "alt": "Navigation mobile avec accès rapide aux sections clés"
+        },
+        {
+            "src": "/images/projects/mysteres-a-la-carte/mobile-2.webp",
+            "alt": "Section déroulé en étapes pour préparer la réservation"
+        },
+        {
+            "src": "/images/projects/mysteres-a-la-carte/mobile-menu.webp",
+            "alt": "Section Réserver avec formulaire validé côté client"
+        }
     ]
 }

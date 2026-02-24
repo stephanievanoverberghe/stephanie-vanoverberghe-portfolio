@@ -29,7 +29,7 @@ export default function SkillsProjectTile({
     const isLg = size === 'lg';
 
     return (
-        <article className="group overflow-hidden rounded-2xl border border-(--border-soft), bg-(--surface-1) shadow-(--shadow-card)">
+        <article className="group overflow-hidden rounded-2xl border border-(--border-soft) shadow-(--shadow-card) bg-(--surface-1)">
             <div
                 className={isLg ? 'relative aspect-video border-b overflow-hidden border-(--border-soft)' : 'relative aspect-16/10 border-b overflow-hidden border-(--border-soft)'}
             >
