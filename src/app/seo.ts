@@ -23,6 +23,9 @@ export const metadata: Metadata = {
     authors: [{ name: SITE.name }],
     keywords: ['Développeuse Front-End', 'React', 'Next.js', 'TypeScript', 'Tailwind', 'UI/UX', 'Portfolio'],
     alternates: { canonical: '/' },
+    verification: {
+        google: 'oFDtrScBm-skoSL44oyWAPyNOoHo_GiY9jNWa2Q_iTc',
+    },
     icons: {
         icon: '/favicon.ico',
         shortcut: '/favicon.ico',
