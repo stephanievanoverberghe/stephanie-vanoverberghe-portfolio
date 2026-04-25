@@ -6,7 +6,7 @@ export const SITE = {
     name: 'Vanoverberghe Stéphanie',
     title: 'Vanoverberghe Stéphanie - Développeuse Front-End (React/Next)',
     description: 'Portfolio front-end React / Next.js - UI/UX, TypeScript, Tailwind. Études de cas, projets déployés, approche produit.',
-    url: 'https://www.vanoverberghe-stephanie.dev',
+    url: 'https://stephanie-vanoverberghe.dev/',
     ogImage: '/og-cover.webp',
     themeColor: '#FF5A3C',
     social: {
@@ -23,9 +23,6 @@ export const metadata: Metadata = {
     authors: [{ name: SITE.name }],
     keywords: ['Développeuse Front-End', 'React', 'Next.js', 'TypeScript', 'Tailwind', 'UI/UX', 'Portfolio'],
     alternates: { canonical: '/' },
-    verification: {
-        google: 'oFDtrScBm-skoSL44oyWAPyNOoHo_GiY9jNWa2Q_iTc',
-    },
     icons: {
         icon: '/favicon.ico',
         shortcut: '/favicon.ico',

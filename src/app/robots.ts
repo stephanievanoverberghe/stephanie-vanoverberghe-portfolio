@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
             userAgent: '*',
             allow: '/',
         },
-        sitemap: 'https://www.vanoverberghe-stephanie.dev/sitemap.xml',
-        host: 'https://www.vanoverberghe-stephanie.dev',
+        sitemap: 'https://stephanie-vanoverberghe.dev/sitemap.xml',
+        host: 'https://stephanie-vanoverberghe.dev/',
     };
 }

@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { getProjectSlugs } from '@/lib/projects';
 
-const BASE_URL = 'https://www.vanoverberghe-stephanie.dev';
+const BASE_URL = 'https://stephanie-vanoverberghe.dev/';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const staticRoutes = ['', '/projects', '/skills', '/contact'];
