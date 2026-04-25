@@ -1,6 +1,7 @@
 import { cache, type ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+
 import { getProjectBySlug, getProjectSlugs } from '@/lib/projects';
 import ProjectHero from '@/components/project/ProjectHero';
 import ProjectOverview from '@/components/project/ProjectOverview';
@@ -11,13 +12,22 @@ import { coverAlt, coverSrc } from '@/components/project/project.utils';
 
 export const dynamic = 'force-static';
 
+const BASE_URL = 'https://stephanie-vanoverberghe.dev';
+
 type ProjectPageParams = { slug: string };
 type ProjectPageProps = { params: Promise<ProjectPageParams> };
 
 const getProjectData = cache(async (slug: string) => getProjectBySlug(slug));
 
+function absoluteUrl(path?: string | null) {
+    if (!path) return undefined;
+    if (path.startsWith('http')) return path;
+
+    return `${BASE_URL}${path.startsWith('/') ? path : `/${path}`}`;
+}
+
 function getProjectSeo(slug: string) {
-    return `https://www.vanoverberghe-stephanie.dev/projects/${slug}`;
+    return `${BASE_URL}/projects/${slug}`;
 }
 
 function buildProjectLdJson(slug: string, data: NonNullable<Awaited<ReturnType<typeof getProjectBySlug>>>) {
@@ -30,7 +40,7 @@ function buildProjectLdJson(slug: string, data: NonNullable<Awaited<ReturnType<t
         description: data.context,
         author: { '@type': 'Person', name: 'Vanoverberghe Stéphanie' },
         datePublished: data.year ? `${data.year}-01-01` : undefined,
-        image: src ?? undefined,
+        image: absoluteUrl(src),
         url: getProjectSeo(slug),
         keywords: [...(data.stack ?? []), ...(data.role ?? [])].join(', '),
     };
@@ -46,6 +56,7 @@ function AnchorSection({ id, children }: { id: string; children: ReactNode }) {
 
 export async function generateStaticParams() {
     const slugs = await getProjectSlugs();
+
     return slugs.map((slug) => ({ slug }));
 }
 
@@ -71,7 +82,12 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
             siteName: 'Portfolio — Vanoverberghe Stéphanie',
             images: [{ url: ogImage, width: 1200, height: 630, alt: coverAlt(data) }],
         },
-        twitter: { card: 'summary_large_image', title, description, images: [ogImage] },
+        twitter: {
+            card: 'summary_large_image',
+            title,
+            description,
+            images: [ogImage],
+        },
     };
 }
 
@@ -101,10 +117,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </AnchorSection>
             ) : null}
 
-            {/* Footer CTA plus léger (pas répétitif) */}
             <section className="card p-6 sm:p-8">
                 <div className="flex flex-wrap items-center justify-between gap-4">
-                    <p className="opacity-90">Envie d’un échange ? Je peux te présenter ce projet comme en entretien (choix techniques, perf, a11y).</p>
+                    <p className="opacity-90">Envie d’un échange ? Je peux vous présenter ce projet comme en entretien : choix techniques, performance, accessibilité.</p>
+
                     <ProjectActions project={data} variant="footer" />
                 </div>
             </section>
