@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
-import { cn } from './header.utils';
+import { cn } from '@/lib/cn';
 import { useScrollState } from './useScrollState';
 import { ribbonStyle, headerBorderStyle } from './header.styles';
 import { HeaderBrand } from './HeaderBrand';

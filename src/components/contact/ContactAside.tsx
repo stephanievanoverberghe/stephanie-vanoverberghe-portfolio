@@ -1,10 +1,7 @@
 import { ArrowRight, type LucideIcon } from 'lucide-react';
 
 import { CONTACT_ACTIONS } from '@/content/contact';
-
-function cn(...parts: Array<string | false | null | undefined>) {
-    return parts.filter(Boolean).join(' ');
-}
+import { cn } from '@/lib/cn';
 
 function ActionCard({ href, icon: Icon, title, desc, external }: { href: string; icon: LucideIcon; title: string; desc?: string; external?: boolean }) {
     return (

@@ -4,10 +4,7 @@ import * as React from 'react';
 import { Send } from 'lucide-react';
 
 import { useContactForm } from '@/hooks/useContactForm';
-
-function cn(...parts: Array<string | false | null | undefined>) {
-    return parts.filter(Boolean).join(' ');
-}
+import { cn } from '@/lib/cn';
 
 function FieldLabel({ htmlFor, children }: { htmlFor: string; children: React.ReactNode }) {
     return (

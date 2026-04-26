@@ -15,9 +15,9 @@
 
 ## Phase 3 — Qualité architecture (priorité moyenne)
 
-- [ ] Standardiser le helper `cn` dans `lib/cn.ts` et supprimer duplications locales.
-- [ ] Revoir les composants les plus longs (>150 lignes) pour extractions légères et ciblées.
-- [ ] Vérifier qu’aucun composant UI ne fait d’accès data direct (API/fetch).
+- [x] Standardiser le helper `cn` dans `lib/cn.ts` et supprimer duplications locales.
+- [x] Revoir les composants les plus longs (>150 lignes) pour extractions légères et ciblées.
+- [x] Vérifier qu’aucun composant UI ne fait d’accès data direct (API/fetch).
 
 ## Phase 4 — Professionnalisation documentaire
 

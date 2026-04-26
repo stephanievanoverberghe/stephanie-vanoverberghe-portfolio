@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Mail } from 'lucide-react';
 import { NAV, type NavItem } from './header.data';
-import { cn } from './header.utils';
+import { cn } from '@/lib/cn';
 
 export function HeaderDesktopNav({ isActive }: { isActive: (href: string) => boolean }) {
     return (
