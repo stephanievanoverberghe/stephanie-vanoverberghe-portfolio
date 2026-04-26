@@ -40,7 +40,7 @@ export default function Header() {
     }, [open]);
 
     return (
-        <header>
+        <header role="banner">
             <motion.div aria-hidden className="h-0.75 origin-left" style={{ scaleX, ...ribbonStyle }} />
 
             <div

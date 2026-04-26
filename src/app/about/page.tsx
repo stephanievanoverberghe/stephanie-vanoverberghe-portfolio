@@ -7,7 +7,7 @@ const icons = [Eye, Sparkles, Code2];
 
 export default function AboutPage() {
     return (
-        <main className="container-page py-10 sm:py-14 lg:py-16">
+        <div className="container-page py-10 sm:py-14 lg:py-16">
             <section className="relative overflow-hidden rounded-4xl border border-(--border-soft) bg-(--surface-1) p-6 shadow-(--shadow-card) sm:p-8 lg:p-12">
                 <div aria-hidden className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-(--lilac)/30 blur-3xl" />
                 <div aria-hidden className="absolute -left-24 bottom-0 h-64 w-64 rounded-full bg-(--sage)/20 blur-3xl" />
@@ -156,6 +156,6 @@ export default function AboutPage() {
                     </div>
                 </div>
             </section>
-        </main>
+        </div>
     );
 }

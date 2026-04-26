@@ -20,13 +20,11 @@ export default async function SkillsPage() {
     const projects = await getAllProjects();
 
     return (
-        <main className="container-page py-10 sm:py-14 lg:py-16">
-            <div className="space-y-10 sm:space-y-12">
-                <SkillsHero />
-                <SkillsVision />
-                <SkillsBento />
-                <SkillsProjectsBento projects={projects} />
-            </div>
-        </main>
+        <div className="container-page space-y-10 py-10 sm:space-y-12 sm:py-14 lg:py-16">
+            <SkillsHero />
+            <SkillsVision />
+            <SkillsBento />
+            <SkillsProjectsBento projects={projects} />
+        </div>
     );
 }

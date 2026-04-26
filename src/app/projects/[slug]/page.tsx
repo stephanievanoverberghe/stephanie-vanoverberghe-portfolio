@@ -49,9 +49,9 @@ function buildProjectLdJson(slug: string, data: NonNullable<Awaited<ReturnType<t
 
 function AnchorSection({ id, children }: { id: string; children: ReactNode }) {
     return (
-        <section id={id} className="scroll-mt-24">
+        <div id={id} className="scroll-mt-24">
             {children}
-        </section>
+        </div>
     );
 }
 
@@ -102,7 +102,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     const hasDetails = hasProjectDetails(data);
 
     return (
-        <section className="container-page space-y-10 py-12">
+        <div className="container-page space-y-10 py-12">
             <ProjectHero project={data} hasDetails={hasDetails} />
 
             <AnchorSection id="overview">
@@ -121,7 +121,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </AnchorSection>
             ) : null}
 
-            <section className="card p-6 sm:p-8">
+            <section className="card p-6 sm:p-8" aria-label="Aller plus loin sur ce projet">
                 <div className="flex flex-wrap items-center justify-between gap-4">
                     <p className="text-(--text)">{projectsPageContent.detail.finalCta}</p>
 
@@ -130,6 +130,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </section>
 
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
-        </section>
+        </div>
     );
 }

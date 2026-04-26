@@ -17,10 +17,10 @@ export default async function HomePage() {
     const projects = await getAllProjects();
 
     return (
-        <section className="container-page py-10 space-y-12">
+        <div className="container-page py-10 space-y-12">
             <HomeHero />
             <FeaturedProjects projects={projects} featuredCount={2} />
             <SkillsSnapshot />
-        </section>
+        </div>
     );
 }

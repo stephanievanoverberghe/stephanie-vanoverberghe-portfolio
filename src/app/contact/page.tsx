@@ -21,7 +21,7 @@ function Kicker({ children }: { children: ReactNode }) {
 
 export default function ContactPage() {
     return (
-        <section className="container-page py-12 space-y-8">
+        <div className="container-page py-12 space-y-8">
             {/* HERO */}
             <header className="relative overflow-hidden rounded-2xl border p-6 sm:p-10 bg-(--surface-1) border-(--border-soft) shadow-card">
                 <div className="relative space-y-4">
@@ -60,6 +60,6 @@ export default function ContactPage() {
                 <ContactForm />
                 <ContactAside />
             </div>
-        </section>
+        </div>
     );
 }

@@ -2,18 +2,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
+import Chip from '@/components/ui/Chip';
 import { projectsPageContent } from '@/content/projects-page';
 import type { Project } from '@/lib/projects';
-import { Badge } from '../ui';
-import { Card } from '../ui';
-import { Heading } from '../ui';
-import { Text } from '../ui';
-import { Hero } from '../ui';
-import { Stack } from '../ui';
 
 import ProjectActions from './ProjectActions';
 import ProjectJumpLinks from './ProjectJumpLinks';
-import { coverAlt, coverSrc, excerpt } from './project.utils';
+import { coverAlt, coverSrc, excerpt, kindFor } from './project.utils';
 
 type Props = {
     project: Project;
@@ -32,10 +27,48 @@ export default function ProjectHero({ project, hasDetails }: Props) {
                 {detail.backToProjects}
             </Link>
 
-            <Hero
-                kicker={detail.caseStudyLabel}
-                aside={
-                    <Stack gap="sm">
+            <section className="relative overflow-hidden rounded-4xl border border-(--border-soft) bg-(--surface-1) shadow-(--shadow-card)">
+                <div aria-hidden className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-(--lilac)/30 blur-3xl" />
+                <div aria-hidden className="absolute -left-24 bottom-0 h-64 w-64 rounded-full bg-(--sage)/20 blur-3xl" />
+
+                <div className="relative grid gap-8 p-6 sm:p-8 lg:grid-cols-[1fr_420px] lg:p-10">
+                    <div>
+                        <div className="flex flex-wrap items-center gap-3">
+                            <p className="text-xs font-bold uppercase tracking-[0.28em] text-(--gold)">{detail.caseStudyLabel}</p>
+
+                            {project.year ? (
+                                <Chip size="xs" color="gold">
+                                    {project.year}
+                                </Chip>
+                            ) : null}
+                        </div>
+
+                        <h1 className="mt-5 max-w-3xl text-[clamp(2.7rem,5.6vw,5.6rem)] font-semibold leading-[0.95] tracking-[-0.07em] text-(--text-strong)">{project.title}</h1>
+
+                        {project.subtitle ? <p className="mt-5 max-w-2xl text-base leading-7 text-(--text)">{project.subtitle}</p> : null}
+
+                        <div className="mt-6 flex flex-wrap gap-2">
+                            {(project.role ?? []).map((role) => (
+                                <Chip key={role} kind="design">
+                                    {role}
+                                </Chip>
+                            ))}
+
+                            {(project.stack ?? []).slice(0, 7).map((stack) => (
+                                <Chip key={stack} kind={kindFor(stack)}>
+                                    {stack}
+                                </Chip>
+                            ))}
+                        </div>
+
+                        <div className="mt-7">
+                            <ProjectActions project={project} variant="hero" />
+                        </div>
+
+                        <ProjectJumpLinks hasDetails={hasDetails} hasGallery={Boolean(project.gallery?.length)} labels={detail.jumpLinks} />
+                    </div>
+
+                    <aside className="space-y-4">
                         <div className="overflow-hidden rounded-[1.7rem] border border-(--border-soft) bg-(--paper)">
                             <div className="relative aspect-16/10">
                                 {src ? (
@@ -60,10 +93,14 @@ export default function ProjectHero({ project, hasDetails }: Props) {
                             </div>
                         </div>
 
-                        <Card className="rounded-[1.7rem] border-(--border-soft) bg-[color-mix(in_oklab,var(--surface-2)_48%,var(--surface-1))] p-5 shadow-none">
-                            <Text variant="small" className="font-bold uppercase tracking-[0.22em] text-(--accent)">
-                                {detail.shortSummaryLabel}
-                            </Text>
+                        <div
+                            className="rounded-[1.7rem] border p-5"
+                            style={{
+                                borderColor: 'var(--border-soft)',
+                                background: 'color-mix(in oklab, var(--surface-2) 48%, var(--surface-1))',
+                            }}
+                        >
+                            <p className="text-xs font-bold uppercase tracking-[0.22em] text-(--accent)">{detail.shortSummaryLabel}</p>
 
                             <dl className="mt-4 space-y-4 text-sm">
                                 {project.context ? (
@@ -87,42 +124,10 @@ export default function ProjectHero({ project, hasDetails }: Props) {
                                     </dd>
                                 </div>
                             </dl>
-                        </Card>
-                    </Stack>
-                }
-            >
-                <div className="flex flex-wrap items-center gap-3">
-                    {project.year ? <Badge tone="gold">{project.year}</Badge> : null}
-
-                    {(project.role ?? []).map((role) => (
-                        <Badge key={role} tone="sage">
-                            {role}
-                        </Badge>
-                    ))}
-
-                    {(project.stack ?? []).slice(0, 7).map((stack) => (
-                        <Badge key={stack} tone="lilac">
-                            {stack}
-                        </Badge>
-                    ))}
+                        </div>
+                    </aside>
                 </div>
-
-                <Heading as="h1" variant="display" className="mt-5 max-w-4xl">
-                    {project.title}
-                </Heading>
-
-                {project.subtitle ? (
-                    <Text variant="body" className="mt-5 max-w-2xl text-(--text)">
-                        {project.subtitle}
-                    </Text>
-                ) : null}
-
-                <div className="mt-7">
-                    <ProjectActions project={project} variant="hero" />
-                </div>
-
-                <ProjectJumpLinks hasDetails={hasDetails} hasGallery={Boolean(project.gallery?.length)} labels={detail.jumpLinks} />
-            </Hero>
+            </section>
         </header>
     );
 }

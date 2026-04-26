@@ -60,9 +60,9 @@ export default function StyleguidePage() {
             <section className="space-y-4">
                 <h2 className="text-lg font-semibold text-(--text-strong)">Typographie</h2>
                 <div className="card p-5">
-                    <h1 className="text-3xl font-semibold text-(--text-strong)">Titre H1 — identité forte</h1>
-                    <h2 className="mt-3 text-2xl font-semibold text-(--text-strong)">Titre H2 — section</h2>
-                    <h3 className="mt-2 text-xl font-semibold text-(--text-strong)">Titre H3 — sous-section</h3>
+                    <p className="text-3xl font-semibold text-(--text-strong)">Titre H1 — identité forte</p>
+                    <p className="mt-3 text-2xl font-semibold text-(--text-strong)">Titre H2 — section</p>
+                    <p className="mt-2 text-xl font-semibold text-(--text-strong)">Titre H3 — sous-section</p>
                     <p className="mt-3 opacity-90 max-w-[70ch]">
                         Paragraphe de démonstration. On contrôle la lisibilité, le contraste et le rythme. Les couleurs viennent des variables CSS déclarées dans{' '}
                         <code>globals.css</code>.
