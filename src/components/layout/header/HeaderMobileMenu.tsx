@@ -1,131 +1,120 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
-import { BRAND, NAV, type NavItem } from './header.data';
-import { mobilePanelStyle } from './header.styles';
+import { ArrowUpRight, Download, Mail } from 'lucide-react';
 
-const item = {
-    hidden: { opacity: 0, y: 8 },
-    show: { opacity: 1, y: 0 },
+import { BRAND, NAV, type NavItem } from './header.data';
+
+type HeaderMobileMenuProps = {
+    open: boolean;
+    onClose: () => void;
+    isActive: (href: string) => boolean;
 };
 
-export function HeaderMobileMenu({ open, onClose, isActive }: { open: boolean; onClose: () => void; isActive: (href: string) => boolean }) {
-    const drawerRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        if (!open || !drawerRef.current) return;
-
-        const container = drawerRef.current;
-        const selector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
-        const getFocusable = () => Array.from(container.querySelectorAll<HTMLElement>(selector));
-
-        getFocusable()[0]?.focus();
-
-        const onKeyDown = (e: KeyboardEvent) => {
-            if (e.key !== 'Tab') return;
-
-            const focusable = getFocusable();
-            if (focusable.length === 0) return;
-
-            const first = focusable[0];
-            const last = focusable[focusable.length - 1];
-
-            if (e.shiftKey && document.activeElement === first) {
-                e.preventDefault();
-                last.focus();
-            }
-
-            if (!e.shiftKey && document.activeElement === last) {
-                e.preventDefault();
-                first.focus();
-            }
-        };
-
-        container.addEventListener('keydown', onKeyDown);
-        return () => container.removeEventListener('keydown', onKeyDown);
-    }, [open]);
-
+export function HeaderMobileMenu({ open, onClose, isActive }: HeaderMobileMenuProps) {
     return (
         <AnimatePresence>
             {open && (
                 <>
                     <motion.div
-                        aria-hidden
-                        className="fixed inset-0 z-40 md:hidden"
+                        className="fixed inset-0 z-40 bg-(--ink)/45 backdrop-blur-sm lg:hidden"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
-                        style={{ background: 'rgba(18, 19, 20, 0.34)' }}
                     />
 
                     <motion.nav
                         id="primary-mobile-nav"
                         aria-label="Navigation mobile"
-                        className="fixed inset-x-0 top-[calc(env(safe-area-inset-top)+0px)] z-50 md:hidden"
-                        initial={{ y: -14, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        exit={{ y: -14, opacity: 0 }}
-                        transition={{ duration: 0.2, ease: [0.22, 0.61, 0.36, 1] }}
+                        className="fixed inset-x-0 top-[72px] z-50 px-4 lg:hidden"
+                        initial={{ opacity: 0, y: -18 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -18 }}
+                        transition={{ duration: 0.24 }}
                     >
-                        <div className="container-page pt-3">
-                            <div ref={drawerRef} className="relative overflow-hidden rounded-4xl border p-4 shadow-[0_28px_90px_rgba(18,19,20,0.16)]" style={mobilePanelStyle}>
-                                <div aria-hidden className="absolute -right-16 -top-20 h-48 w-48 rounded-full opacity-40 blur-3xl" style={{ background: 'var(--lilac)' }} />
-                                <div aria-hidden className="absolute -bottom-24 -left-16 h-52 w-52 rounded-full opacity-35 blur-3xl" style={{ background: 'var(--sage)' }} />
+                        <div
+                            className="relative overflow-hidden rounded-[2rem] border p-5 shadow-2xl"
+                            style={{
+                                borderColor: 'color-mix(in oklab, var(--sage) 30%, transparent)',
+                                background: 'var(--paper)',
+                            }}
+                        >
+                            <div className="absolute -right-20 -top-20 h-52 w-52 rounded-full bg-(--lilac)/35 blur-2xl" />
+                            <div className="absolute -left-16 bottom-10 h-40 w-40 rounded-full bg-(--sage)/25 blur-2xl" />
 
-                                <div className="relative border-b pb-4" style={{ borderColor: 'color-mix(in oklab, var(--border-soft) 80%, transparent)' }}>
-                                    <p className="text-[10px] uppercase tracking-[0.24em] text-(--sage)">{BRAND.signature}</p>
-                                    <p className="mt-3 text-lg font-semibold text-(--text-strong)">{BRAND.name}</p>
-                                    <p className="mt-1 text-sm text-(--text-muted)">{BRAND.stack}</p>
-                                </div>
+                            <div className="relative">
+                                <p className="text-xs font-bold uppercase tracking-[0.28em] text-(--accent)">Menu</p>
 
-                                <motion.div className="relative mt-4 space-y-1" initial="hidden" animate="show" variants={{ show: { transition: { staggerChildren: 0.05 } } }}>
-                                    {NAV.map((n: NavItem) => {
-                                        const active = isActive(n.href);
+                                <p className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-(--text-strong)">
+                                    Créer.
+                                    <br />
+                                    Comprendre.
+                                    <br />
+                                    <span className="italic text-(--accent)">Construire.</span>
+                                </p>
+
+                                <div className="mt-6 grid gap-2">
+                                    {NAV.map((item: NavItem, index) => {
+                                        const active = isActive(item.href);
 
                                         return (
-                                            <motion.div key={n.href} variants={item}>
-                                                <Link
-                                                    href={n.href}
-                                                    onClick={onClose}
-                                                    className="group flex items-center justify-between rounded-2xl px-3 py-3 text-base font-medium transition"
-                                                    style={{
-                                                        color: active ? 'var(--text-strong)' : 'var(--text)',
-                                                        background: active ? 'color-mix(in oklab, var(--accent) 8%, var(--surface-1))' : 'transparent',
-                                                    }}
-                                                >
-                                                    <span>{n.label}</span>
-                                                    <span
-                                                        aria-hidden
-                                                        className="transition group-hover:translate-x-0.5"
-                                                        style={{ color: active ? 'var(--accent)' : 'var(--text-muted)' }}
-                                                    >
-                                                        →
-                                                    </span>
-                                                </Link>
-                                            </motion.div>
+                                            <Link
+                                                key={item.href}
+                                                href={item.href}
+                                                onClick={onClose}
+                                                aria-current={active ? 'page' : undefined}
+                                                className="group flex items-center justify-between rounded-2xl border px-4 py-4 transition"
+                                                style={{
+                                                    borderColor: active
+                                                        ? 'color-mix(in oklab, var(--accent) 35%, transparent)'
+                                                        : 'color-mix(in oklab, var(--sage) 18%, transparent)',
+                                                    background: active
+                                                        ? 'linear-gradient(135deg, color-mix(in oklab, var(--accent) 10%, var(--paper)), color-mix(in oklab, var(--gold) 14%, var(--paper)))'
+                                                        : 'color-mix(in oklab, var(--surface-1) 82%, transparent)',
+                                                }}
+                                            >
+                                                <span className="flex items-center gap-4">
+                                                    <span className="text-xs font-bold text-(--accent)">0{index + 1}</span>
+
+                                                    <span className="text-sm font-bold uppercase tracking-[0.18em] text-(--text-strong)">{item.label}</span>
+                                                </span>
+
+                                                <ArrowUpRight size={18} className="text-(--text-muted) transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                                            </Link>
                                         );
                                     })}
+                                </div>
 
-                                    <motion.div variants={item} className="pt-4">
-                                        <Link
-                                            href="/contact"
-                                            onClick={onClose}
-                                            className="group inline-flex w-full items-center justify-center gap-2 rounded-2xl border px-4 py-3 text-sm font-semibold transition"
-                                            style={{
-                                                color: 'var(--surface-1)',
-                                                background: 'var(--accent)',
-                                                borderColor: 'var(--accent)',
-                                            }}
-                                        >
-                                            Échanger
-                                            <ArrowUpRight size={16} className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                                        </Link>
-                                    </motion.div>
-                                </motion.div>
+                                <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                                    <Link
+                                        href="/contact"
+                                        onClick={onClose}
+                                        className="inline-flex items-center justify-center gap-2 rounded-2xl px-4 py-4 text-sm font-bold uppercase tracking-[0.16em] text-white"
+                                        style={{
+                                            background: 'linear-gradient(135deg, var(--accent), color-mix(in oklab, var(--accent) 78%, var(--ink)))',
+                                        }}
+                                    >
+                                        <Mail size={16} />
+                                        Contact
+                                    </Link>
+
+                                    <Link
+                                        href={BRAND.resumeHref}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        onClick={onClose}
+                                        className="inline-flex items-center justify-center gap-2 rounded-2xl border px-4 py-4 text-sm font-bold uppercase tracking-[0.16em] text-(--text-strong)"
+                                        style={{
+                                            borderColor: 'color-mix(in oklab, var(--gold) 45%, transparent)',
+                                            background: 'color-mix(in oklab, var(--gold) 14%, var(--surface-1))',
+                                        }}
+                                    >
+                                        <Download size={16} />
+                                        CV
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     </motion.nav>

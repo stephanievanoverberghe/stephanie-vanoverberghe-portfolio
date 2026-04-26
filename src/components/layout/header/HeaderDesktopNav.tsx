@@ -2,60 +2,89 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
-import { NAV, type NavItem } from './header.data';
+import { ArrowUpRight, Download } from 'lucide-react';
 
-export function HeaderDesktopNav({ isActive }: { isActive: (href: string) => boolean }) {
+import { cn } from '@/lib/cn';
+import { BRAND, NAV, type NavItem } from './header.data';
+
+type HeaderDesktopNavProps = {
+    isActive: (href: string) => boolean;
+};
+
+export function HeaderDesktopNav({ isActive }: HeaderDesktopNavProps) {
     return (
-        <nav aria-label="Navigation principale" className="hidden items-center gap-8 md:flex">
-            <div className="flex items-center gap-7">
-                {NAV.map((item: NavItem) => {
-                    const active = isActive(item.href);
+        <nav aria-label="Navigation principale" className="hidden lg:block">
+            <div className="grid grid-cols-[1fr_auto] items-center gap-6 border-t py-4" style={{ borderColor: 'color-mix(in oklab, var(--sage) 22%, transparent)' }}>
+                <div
+                    className="grid grid-cols-5 overflow-hidden rounded-[1.4rem] border bg-(--surface-1)"
+                    style={{ borderColor: 'color-mix(in oklab, var(--sage) 26%, transparent)' }}
+                >
+                    {NAV.map((item: NavItem, index) => {
+                        const active = isActive(item.href);
 
-                    return (
-                        <Link
-                            key={item.href}
-                            href={item.href}
-                            className="group relative py-2 text-sm font-medium tracking-[0.03em] transition"
-                            style={{
-                                color: active ? 'var(--text-strong)' : 'var(--text-muted)',
-                            }}
-                        >
-                            <span className="relative z-10">{item.label}</span>
+                        return (
+                            <Link
+                                key={item.href}
+                                href={item.href}
+                                aria-current={active ? 'page' : undefined}
+                                className={cn(
+                                    'group relative flex min-h-16 items-center justify-between border-r px-5 transition last:border-r-0',
+                                    active ? 'text-(--text-strong)' : 'text-(--text-muted) hover:text-(--text-strong)',
+                                )}
+                                style={{
+                                    borderColor: 'color-mix(in oklab, var(--sage) 18%, transparent)',
+                                }}
+                            >
+                                {active && (
+                                    <motion.span
+                                        layoutId="desktop-nav-block"
+                                        className="absolute inset-0"
+                                        style={{
+                                            background:
+                                                'linear-gradient(135deg, color-mix(in oklab, var(--accent) 10%, var(--surface-1)), color-mix(in oklab, var(--gold) 14%, var(--surface-1)))',
+                                        }}
+                                        transition={{ type: 'spring', stiffness: 420, damping: 36 }}
+                                    />
+                                )}
 
-                            <span
-                                aria-hidden
-                                className="absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"
-                                style={{ background: 'var(--sage)' }}
-                            />
+                                <span className="relative z-10">
+                                    <span className="block text-[10px] font-bold tracking-[0.2em] text-(--accent)">0{index + 1}</span>
+                                    <span className="mt-1 block text-[12px] font-bold uppercase tracking-[0.2em]">{item.label}</span>
+                                </span>
 
-                            {active && (
-                                <motion.span
-                                    layoutId="header-active-line"
-                                    aria-hidden
-                                    className="absolute -bottom-0.5 left-0 h-px w-full"
-                                    style={{ background: 'var(--accent)' }}
-                                    transition={{ type: 'spring', stiffness: 420, damping: 34 }}
-                                />
-                            )}
-                        </Link>
-                    );
-                })}
+                                <span className="relative z-10 text-(--accent) opacity-0 transition group-hover:opacity-100">/</span>
+                            </Link>
+                        );
+                    })}
+                </div>
+
+                <div className="flex items-center gap-3">
+                    <Link
+                        href={BRAND.resumeHref}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex min-h-16 items-center gap-2 rounded-[1.4rem] border px-5 text-xs font-bold uppercase tracking-[0.16em] text-(--text-strong)"
+                        style={{
+                            borderColor: 'color-mix(in oklab, var(--gold) 46%, transparent)',
+                            background: 'color-mix(in oklab, var(--gold) 14%, var(--surface-1))',
+                        }}
+                    >
+                        <Download size={16} />
+                        CV
+                    </Link>
+
+                    <Link
+                        href="/contact"
+                        className="inline-flex min-h-16 items-center gap-2 rounded-[1.4rem] px-5 text-xs font-bold uppercase tracking-[0.16em] text-white"
+                        style={{
+                            background: 'linear-gradient(135deg, var(--accent), color-mix(in oklab, var(--accent) 78%, var(--ink)))',
+                        }}
+                    >
+                        Contact
+                        <ArrowUpRight size={16} />
+                    </Link>
+                </div>
             </div>
-
-            <Link
-                href="/contact"
-                aria-label="Me contacter"
-                className="group inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition duration-300"
-                style={{
-                    color: 'var(--text-strong)',
-                    borderColor: 'color-mix(in oklab, var(--accent) 30%, var(--border-soft))',
-                    background: 'color-mix(in oklab, var(--surface-1) 72%, transparent)',
-                }}
-            >
-                Échanger
-                <ArrowUpRight size={15} className="transition duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </Link>
         </nav>
     );
 }
