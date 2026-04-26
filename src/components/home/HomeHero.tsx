@@ -1,162 +1,102 @@
 // src/components/home/HomeHero.tsx
+
 'use client';
 
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Download } from 'lucide-react';
+
 import { prefaceContent } from '@/content/preface';
 
-function Badge({ children }: { children: React.ReactNode }) {
-    return (
-        <span
-            className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold text-(text-strong)"
-            style={{
-                borderColor: 'color-mix(in oklab, var(--accent) 22%, var(--border-soft))',
-                background: 'color-mix(in oklab, var(--accent) 8%, var(--surface-1))',
-            }}
-        >
-            <span aria-hidden className="h-2 w-2 rounded-full bg-(--accent)" />
-            {children}
-        </span>
-    );
-}
-
-function Stat({ label, value }: { label: string; value: string }) {
-    return (
-        <div
-            className="rounded-2xl border px-4 py-3 border-(--border-soft)"
-            style={{
-                background: 'color-mix(in oklab, var(--surface-2) 58%, var(--surface-1))',
-            }}
-        >
-            <div className="text-xs uppercase tracking-[0.14em] opacity-70">{label}</div>
-            <div className="mt-1 text-sm font-semibold text-(--text-strong)">{value}</div>
-        </div>
-    );
-}
+const fadeUp = {
+    hidden: { opacity: 0, y: 14 },
+    show: { opacity: 1, y: 0 },
+};
 
 export default function HomeHero() {
     return (
-        <header className="relative overflow-hidden rounded-2xl border p-6 sm:p-10 border-(--border-soft) bg-(--surface-1) shadow-(--shadow-card)">
-            <div className="relative grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-                <div>
-                    <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.35, ease: [0.22, 0.61, 0.36, 1] }}
-                        className="flex flex-wrap items-center gap-3"
-                    >
-                        <Badge>{prefaceContent.title}</Badge>
-                        <span className="inline-flex items-center gap-2 text-xs font-semibold opacity-80">
-                            <Sparkles size={14} aria-hidden />
-                            {prefaceContent.availability}
-                        </span>
-                    </motion.div>
+        <section className="relative overflow-hidden rounded-4xl border border-(--border-soft) bg-(--surface-1) px-5 py-8 shadow-(--shadow-card) sm:px-8 sm:py-10 lg:px-12 lg:py-12">
+            <div aria-hidden className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-(--lilac)/30 blur-3xl" />
+            <div aria-hidden className="absolute -left-24 bottom-0 h-64 w-64 rounded-full bg-(--sage)/20 blur-3xl" />
 
-                    <motion.h1
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.42, delay: 0.05, ease: [0.22, 0.61, 0.36, 1] }}
-                        className="mt-4 text-[1.9rem] sm:text-5xl font-semibold leading-[1.05] text-(--text-strong)"
-                    >
-                        {prefaceContent.role} <span className="text-gradient-accent">UI/UX · Perf · A11y</span>
+            <motion.div
+                className="relative grid gap-10 lg:grid-cols-[1fr_320px] lg:items-center"
+                variants={{
+                    hidden: {},
+                    show: { transition: { staggerChildren: 0.07 } },
+                }}
+                initial="hidden"
+                animate="show"
+            >
+                <div>
+                    <motion.p variants={fadeUp} className="text-xs font-bold uppercase tracking-[0.28em] text-(--gold)">
+                        {prefaceContent.heroKicker}
+                    </motion.p>
+
+                    <motion.h1 variants={fadeUp} className="mt-5 max-w-3xl text-[clamp(2.7rem,5.6vw,5.6rem)] font-semibold leading-[0.95] tracking-[-0.07em] text-(--text-strong)">
+                        {prefaceContent.heroTitle.first}
+                        <br />
+                        {prefaceContent.heroTitle.second}
+                        <br />
+                        <span className="italic text-(--accent)">{prefaceContent.heroTitle.third}</span>
                     </motion.h1>
 
-                    <motion.p
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.42, delay: 0.12, ease: [0.22, 0.61, 0.36, 1] }}
-                        className="mt-4 text-base sm:text-lg max-w-[70ch] opacity-90"
-                    >
+                    <motion.p variants={fadeUp} className="mt-6 max-w-2xl text-base leading-7 text-(--text)">
                         {prefaceContent.intro}
                     </motion.p>
 
-                    <motion.ul
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.42, delay: 0.18, ease: [0.22, 0.61, 0.36, 1] }}
-                        className="mt-6 grid gap-2 sm:grid-cols-3 text-sm"
-                    >
-                        {prefaceContent.sections.map((section) => (
-                            <li
-                                key={section.icon}
-                                className="rounded-xl border px-3 py-2 border-(--border-soft)"
-                                style={{
-                                    background: 'color-mix(in oklab, var(--surface-2) 60%, var(--surface-1))',
-                                }}
-                            >
-                                {section.text}
-                            </li>
-                        ))}
-                    </motion.ul>
+                    <motion.div variants={fadeUp} className="mt-7 flex flex-wrap gap-3">
+                        <Link
+                            href="/projects"
+                            className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-white transition hover:-translate-y-0.5"
+                            style={{
+                                background: 'linear-gradient(135deg, var(--accent), color-mix(in oklab, var(--accent) 78%, var(--ink)))',
+                            }}
+                        >
+                            {prefaceContent.heroCtaPrimary}
+                            <ArrowRight size={17} />
+                        </Link>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.42, delay: 0.24, ease: [0.22, 0.61, 0.36, 1] }}
-                        className="mt-7 flex flex-wrap gap-3"
-                    >
-                        <Link href="/projects" className="btn btn-cta text-(--text-surface-1)">
-                            Voir les études de cas <ArrowRight size={16} aria-hidden />
-                        </Link>
-                        <Link href="/skills" className="btn btn-secondary">
-                            Compétences
-                        </Link>
-                        <Link href="/contact" className="btn btn-ghost">
-                            Me contacter
-                        </Link>
+                        <a
+                            href="/cv-vanoverberghe-stephanie.pdf"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-2 rounded-full border px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-(--text-strong) transition hover:-translate-y-0.5"
+                            style={{
+                                borderColor: 'color-mix(in oklab, var(--gold) 46%, var(--border-soft))',
+                                background: 'color-mix(in oklab, var(--gold) 12%, var(--surface-1))',
+                            }}
+                        >
+                            <Download size={17} />
+                            {prefaceContent.heroCtaSecondary}
+                        </a>
                     </motion.div>
                 </div>
 
-                <motion.aside
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.42, delay: 0.14, ease: [0.22, 0.61, 0.36, 1] }}
-                    className="rounded-2xl border p-5 border-(--border-soft)"
-                    style={{
-                        background: 'color-mix(in oklab, var(--surface-2) 42%, var(--surface-1))',
-                    }}
-                >
-                    <div className="flex items-center gap-4">
-                        <div className="relative h-14 w-14 overflow-hidden rounded-2xl border border-(--border-soft) bg-(--surface-1)">
+                <motion.aside variants={fadeUp} className="hidden lg:block">
+                    <div className="rounded-[1.8rem] border border-(--border-soft) bg-(--paper) p-5">
+                        <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-full border-2 border-(--gold)">
                             <Image
                                 src="/images/stephanie-vanoverberghe.webp"
-                                alt="Portrait de Stéphanie Vanoverberghe"
+                                alt={`Portrait de ${prefaceContent.profileName}`}
                                 fill
-                                sizes="56px"
+                                sizes="96px"
                                 className="object-cover"
-                                priority={false}
+                                priority
                             />
                         </div>
 
-                        <div>
-                            <div className="text-sm font-semibold text-(--text-strong)">{prefaceContent.profileName}</div>
-                            <div className="text-sm opacity-80">{prefaceContent.profileStack}</div>
-                        </div>
-                    </div>
+                        <p className="mt-5 text-center text-xs font-bold uppercase tracking-[0.18em] text-(--text-strong)">{prefaceContent.profileName}</p>
 
-                    <div className="mt-5 grid gap-3">
-                        {prefaceContent.stats.map((s) => (
-                            <Stat key={s.label} label={s.label} value={s.value} />
-                        ))}
-                    </div>
+                        <p className="mt-2 text-center text-xs font-bold uppercase tracking-[0.16em] text-(--accent)">{prefaceContent.profileRole}</p>
 
-                    <div className="mt-5 rounded-2xl border p-4 text-sm border-(--border-soft) bg-(--surface-1)">
-                        <div className="font-semibold text-(--text-strong)">Vision</div>
-                        <div className="mt-1 opacity-80">{prefaceContent.quote}</div>
-                    </div>
+                        <div className="mx-auto mt-5 h-px w-20 bg-(--gold)" />
 
-                    <div className="mt-5 flex flex-wrap gap-2">
-                        <a className="btn btn-secondary w-full" href="/cv-vanoverberghe-stephanie.pdf" target="_blank" rel="noopener noreferrer">
-                            Télécharger mon CV
-                        </a>
-                        <Link className="btn btn-cta w-full text-(--text-surface-1)" href="/contact">
-                            Me contacter
-                        </Link>
+                        <p className="mt-5 text-center text-sm italic leading-6 text-(--text-muted)">“{prefaceContent.quote}”</p>
                     </div>
                 </motion.aside>
-            </div>
-        </header>
+            </motion.div>
+        </section>
     );
 }

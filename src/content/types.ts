@@ -10,11 +10,20 @@ export type PrefaceContent = {
     role: string;
     availability: string;
     intro: string;
-    sections: ReadonlyArray<TextSection<'ui' | 'code' | 'learning'>>;
-    stats: ReadonlyArray<{ label: string; value: string }>;
+    heroKicker: string;
+    heroTitle: {
+        first: string;
+        second: string;
+        third: string;
+    };
+    heroCtaPrimary: string;
+    heroCtaSecondary: string;
     profileName: string;
+    profileRole: string;
     profileStack: string;
     quote: string;
+    sections: ReadonlyArray<TextSection<'ui' | 'code' | 'learning'>>;
+    stats: ReadonlyArray<{ label: string; value: string }>;
 };
 
 export type WhyMeContent = {

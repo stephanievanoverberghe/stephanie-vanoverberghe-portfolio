@@ -1,30 +1,35 @@
 import type { PrefaceContent } from './types';
 
 export const prefaceContent: PrefaceContent = {
-    title: 'Préface',
+    title: 'Portfolio frontend',
     role: 'Développeuse Front-End React / Next.js',
     availability: 'Recherche CDI — React / Next.js',
-    intro: 'Je viens d’un univers créatif où dessiner, composer et imaginer font partie de mon quotidien. Aujourd’hui, je mets cette sensibilité au service du web : concevoir des interfaces belles, lisibles et construites avec soin.',
+
+    heroKicker: 'Portfolio frontend · React · Next.js · TypeScript',
+    heroTitle: {
+        first: 'Créer.',
+        second: 'Comprendre.',
+        third: 'Construire.',
+    },
+    heroCtaPrimary: 'Voir mes projets',
+    heroCtaSecondary: 'CV',
+
+    intro: 'Depuis toujours, la création fait partie de mon quotidien. Dessiner, composer, imaginer : c’est ce regard qui m’a naturellement menée vers l’UI design. Puis le JavaScript m’a permis de passer de l’idée à l’interaction.',
+
     sections: [
-        {
-            icon: 'ui',
-            text: 'Design & usage — penser une interface autant pour son esthétique que pour son parcours utilisateur.',
-        },
-        {
-            icon: 'code',
-            text: 'Code & structure — transformer une idée en composants React cohérents, réutilisables et maintenables.',
-        },
-        {
-            icon: 'learning',
-            text: 'Progression — apprendre en construisant, tester, corriger et aller au bout des difficultés.',
-        },
+        { icon: 'ui', text: 'Design & usage' },
+        { icon: 'code', text: 'Code & structure' },
+        { icon: 'learning', text: 'Apprendre en créant' },
     ],
+
     stats: [
         { label: 'Stack', value: 'React · Next.js · TypeScript' },
-        { label: 'Approche', value: 'Design + Code' },
-        { label: 'Objectif', value: 'CDI Front-End' },
+        { label: 'Approche', value: 'Design + Code + UX' },
+        { label: 'Objectif', value: 'Intégrer une équipe frontend' },
     ],
-    profileName: 'Vanoverberghe Stéphanie',
+
+    profileName: 'Stéphanie Vanoverberghe',
+    profileRole: 'Développeuse frontend',
     profileStack: 'React · Next.js · TypeScript',
     quote: 'Créer avec sens. Coder avec passion.',
 };

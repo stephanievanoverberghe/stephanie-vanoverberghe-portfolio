@@ -39,7 +39,7 @@ export default function Header() {
     }, [open]);
 
     return (
-        <header className="sticky top-0 z-50">
+        <header>
             <motion.div aria-hidden className="h-0.75 origin-left" style={{ scaleX, ...ribbonStyle }} />
 
             <div
