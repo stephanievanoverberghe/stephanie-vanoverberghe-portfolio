@@ -1,44 +1,85 @@
-// src/components/layout/footer/FooterLinks.tsx
-
 import Link from 'next/link';
+import { ArrowUpRight } from 'lucide-react';
+
 import { FOOTER } from './footer.data';
 
 function ExternalLink({ href, label }: { href: string; label: string }) {
     return (
-        <a href={href} target="_blank" rel="noopener noreferrer" className="text-sm hover:opacity-90">
+        <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center justify-between gap-3 rounded-2xl border px-4 py-3 text-sm font-semibold text-(--text-strong) transition hover:-translate-y-0.5"
+            style={{
+                borderColor: 'var(--border-soft)',
+                background: 'var(--surface-1)',
+            }}
+        >
             {label}
+            <ArrowUpRight size={15} className="text-(--accent) transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         </a>
     );
 }
 
 export function FooterLinks() {
     return (
-        <section className="grid gap-10 sm:grid-cols-3">
-            <div>
-                <div className="text-sm font-semibold text-(--text-strong)">{FOOTER.name}</div>
-                <p className="mt-2 text-sm opacity-80">{FOOTER.role}</p>
+        <section className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
+            <div className="rounded-[1.6rem] border bg-(--surface-1) p-5" style={{ borderColor: 'var(--border-soft)' }}>
+                <p className="text-xs font-bold uppercase tracking-[0.24em] text-(--accent)">{FOOTER.signature}</p>
 
-                <div className="mt-4 inline-flex items-center gap-2 text-xs opacity-70">
+                <h3 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-(--text-strong)">{FOOTER.name}</h3>
+
+                <p className="mt-2 text-sm font-semibold text-(--text)">{FOOTER.role}</p>
+
+                <p className="mt-4 max-w-md text-sm leading-6 text-(--text)">{FOOTER.intent}</p>
+
+                <div className="mt-5 flex flex-wrap gap-2">
+                    {FOOTER.stack.map((item) => (
+                        <span
+                            key={item}
+                            className="rounded-full border px-3 py-1.5 text-xs font-semibold text-(--text-strong)"
+                            style={{
+                                borderColor: 'color-mix(in oklab, var(--sage) 24%, var(--border-soft))',
+                                background: 'color-mix(in oklab, var(--surface-2) 52%, var(--surface-1))',
+                            }}
+                        >
+                            {item}
+                        </span>
+                    ))}
+                </div>
+
+                <div className="mt-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-(--accent)">
                     <span className="h-2 w-2 rounded-full bg-(--accent)" aria-hidden />
-                    Disponible · France · Remote/Hybride
+                    {FOOTER.availability}
                 </div>
             </div>
 
-            <nav aria-label="Navigation rapide" className="grid gap-2 content-start">
-                <div className="text-xs font-semibold uppercase tracking-[0.14em] opacity-70">Portfolio</div>
-                {FOOTER.links.site.map((l) => (
-                    <Link key={l.href} href={l.href} className="text-sm hover:opacity-90">
-                        {l.label}
-                    </Link>
-                ))}
+            <nav aria-label="Navigation rapide" className="rounded-[1.6rem] border bg-(--surface-1) p-5" style={{ borderColor: 'var(--border-soft)' }}>
+                <p className="text-xs font-bold uppercase tracking-[0.22em] text-(--gold)">Portfolio</p>
+
+                <div className="mt-4 grid gap-2">
+                    {FOOTER.links.site.map((link) => (
+                        <Link
+                            key={link.href}
+                            href={link.href}
+                            className="group flex items-center justify-between rounded-2xl px-3 py-2 text-sm font-semibold text-(--text) transition hover:bg-(--surface-2) hover:text-(--text-strong)"
+                        >
+                            {link.label}
+                            <span className="text-(--accent) opacity-0 transition group-hover:opacity-100">→</span>
+                        </Link>
+                    ))}
+                </div>
             </nav>
 
-            <div className="grid gap-2 content-start">
-                <div className="text-xs font-semibold uppercase tracking-[0.14em] opacity-70">Liens</div>
-                <ExternalLink href={FOOTER.cvHref} label="CV (PDF)" />
-                {FOOTER.links.socials.map((l) => (
-                    <ExternalLink key={l.href} href={l.href} label={l.label} />
-                ))}
+            <div className="rounded-[1.6rem] border bg-(--surface-1) p-5" style={{ borderColor: 'var(--border-soft)' }}>
+                <p className="text-xs font-bold uppercase tracking-[0.22em] text-(--gold)">Liens</p>
+
+                <div className="mt-4 grid gap-3">
+                    <ExternalLink href={FOOTER.cvHref} label="CV PDF" />
+                    {FOOTER.links.socials.map((link) => (
+                        <ExternalLink key={link.href} href={link.href} label={link.label} />
+                    ))}
+                </div>
             </div>
         </section>
     );
