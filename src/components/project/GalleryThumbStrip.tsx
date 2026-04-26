@@ -11,28 +11,30 @@ type Props = {
 
 export function GalleryThumbStrip({ images, title, activeIndex, onSelect }: Props) {
     return (
-        <div className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {images.map((img, i) => {
-                const active = i === activeIndex;
+        <div className="mx-auto flex max-w-4xl gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {images.map((image, index) => {
+                const active = index === activeIndex;
+
                 return (
                     <button
-                        key={img.src}
+                        key={`${image.src}-${index}`}
                         type="button"
-                        onClick={() => onSelect(i)}
-                        className="relative shrink-0 h-14 w-20 md:h-16 md:w-24 overflow-hidden rounded-xl border transition cursor-pointer"
+                        onClick={() => onSelect(index)}
+                        className="relative h-14 w-20 shrink-0 cursor-pointer overflow-hidden rounded-xl border transition md:h-16 md:w-24"
                         style={{
-                            borderColor: active ? 'color-mix(in oklab, var(--accent) 55%, var(--border-soft))' : 'color-mix(in oklab, var(--surface-1) 24%, transparent)',
+                            borderColor: active ? 'color-mix(in oklab, var(--accent) 58%, var(--surface-1))' : 'color-mix(in oklab, var(--surface-1) 22%, transparent)',
                             boxShadow: active ? '0 10px 28px rgba(2,8,23,0.35)' : undefined,
-                            outline: 'none',
                         }}
-                        aria-label={`Voir l’image ${i + 1}`}
+                        aria-label={`Voir l’image ${index + 1}`}
+                        aria-current={active ? 'true' : undefined}
                     >
-                        <Image src={img.src} alt={img.alt ?? title ?? 'Miniature'} fill sizes="160px" className="object-cover" />
+                        <Image src={image.src} alt={image.alt ?? title ?? 'Miniature'} fill sizes="160px" className="object-cover" />
+
                         <span
                             aria-hidden
-                            className="pointer-events-none absolute inset-0"
+                            className="absolute inset-0"
                             style={{
-                                boxShadow: active ? 'inset 0 0 0 2px color-mix(in oklab, var(--accent) 55%, transparent)' : 'inset 0 0 0 1px rgba(255,255,255,0.06)',
+                                boxShadow: active ? 'inset 0 0 0 2px color-mix(in oklab, var(--accent) 65%, transparent)' : 'inset 0 0 0 1px rgba(255,255,255,0.08)',
                             }}
                         />
                     </button>
