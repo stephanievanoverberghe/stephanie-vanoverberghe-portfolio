@@ -3,19 +3,28 @@ import type { PrefaceContent } from './types';
 export const prefaceContent: PrefaceContent = {
     title: 'Préface',
     role: 'Développeuse Front-End React / Next.js',
-    availability: 'Disponible — React/Next.js',
-    intro: 'Je conçois des interfaces claires, rapides et fiables. Mon objectif : transformer une intention produit en expérience concrète, avec des composants propres, une bonne structure et une vraie attention au détail.',
+    availability: 'Recherche CDI — React / Next.js',
+    intro: 'Je viens d’un univers créatif où dessiner, composer et imaginer font partie de mon quotidien. Aujourd’hui, je mets cette sensibilité au service du web : concevoir des interfaces belles, lisibles et construites avec soin.',
     sections: [
-        { icon: 'ui', text: 'UI/UX — parcours lisibles, composants réutilisables, feedbacks utiles.' },
-        { icon: 'performance', text: 'Performance — App Router, images optimisées, rendu adapté au contexte.' },
-        { icon: 'a11y', text: 'Accessibilité — navigation clavier, contrastes maîtrisés, base inclusive.' },
+        {
+            icon: 'ui',
+            text: 'Design & usage — penser une interface autant pour son esthétique que pour son parcours utilisateur.',
+        },
+        {
+            icon: 'code',
+            text: 'Code & structure — transformer une idée en composants React cohérents, réutilisables et maintenables.',
+        },
+        {
+            icon: 'learning',
+            text: 'Progression — apprendre en construisant, tester, corriger et aller au bout des difficultés.',
+        },
     ],
     stats: [
-        { label: 'Stack', value: 'Next.js + TypeScript' },
-        { label: 'Déploiement', value: 'Vercel' },
-        { label: 'Approche', value: 'Produit + Design' },
+        { label: 'Stack', value: 'React · Next.js · TypeScript' },
+        { label: 'Approche', value: 'Design + Code' },
+        { label: 'Objectif', value: 'CDI Front-End' },
     ],
     profileName: 'Vanoverberghe Stéphanie',
     profileStack: 'React · Next.js · TypeScript',
-    quote: 'Créer des interfaces qui inspirent confiance, dès la première interaction.',
+    quote: 'Créer avec sens. Coder avec passion.',
 };

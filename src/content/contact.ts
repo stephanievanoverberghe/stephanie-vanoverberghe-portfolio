@@ -3,16 +3,16 @@ import type { ContactContent } from './types';
 
 export const contactContent: ContactContent = {
     kicker: 'Contact',
-    responseDelay: 'Réponse sous 24–48h',
-    title: 'Me contacter',
-    intro: 'Vous avez un projet, une mission ou une opportunité ? Décrivez le contexte, les objectifs et les contraintes : je vous réponds avec une proposition claire.',
-    quickResponseTitle: 'Réponse rapide',
-    quickResponseText: 'Je réponds sous 24–48h (jours ouvrés).',
+    responseDelay: 'Disponible pour échanger',
+    title: 'Et maintenant ?',
+    intro: 'Vous avez mes coordonnées, j’ai la motivation. Si mon profil vous parle, je serais ravie d’échanger avec vous autour d’une opportunité front-end React / Next.js.',
+    quickResponseTitle: 'À très bientôt',
+    quickResponseText: 'Je réponds avec plaisir aux messages liés à une opportunité CDI, une alternance d’évolution ou un échange professionnel.',
     actions: [
         {
             href: 'mailto:stephanie-vanoverberghe@outlook.fr',
             icon: Mail,
-            title: 'Email direct',
+            title: 'Email',
             description: 'stephanie-vanoverberghe@outlook.fr',
         },
         {
@@ -25,7 +25,7 @@ export const contactContent: ContactContent = {
             href: 'https://www.linkedin.com/in/stephanie-vanoverberghe/',
             icon: Linkedin,
             title: 'LinkedIn',
-            description: 'Échanges professionnels',
+            description: 'Profil professionnel',
             external: true,
         },
         {
@@ -38,8 +38,8 @@ export const contactContent: ContactContent = {
         {
             href: '/cv-vanoverberghe-stephanie.pdf',
             icon: FileText,
-            title: 'CV (PDF)',
-            description: 'Version à jour',
+            title: 'CV',
+            description: 'Version PDF',
             external: true,
         },
     ],

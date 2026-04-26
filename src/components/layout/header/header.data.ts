@@ -1,5 +1,3 @@
-// src/components/layout/header/header.data.ts
-
 export const NAV = [
     { href: '/', label: 'Accueil' },
     { href: '/projects', label: 'Projets' },
@@ -10,8 +8,10 @@ export const NAV = [
 export type NavItem = (typeof NAV)[number];
 
 export const BRAND = {
-    initials: 'VS',
-    name: 'Vanoverberghe Stéphanie',
-    title: 'Développeuse Front-End — React / Next.js',
+    initials: 'SV',
+    name: 'Stéphanie Vanoverberghe',
+    title: 'Développeuse Front-End',
+    signature: 'Créer · Comprendre · Construire',
+    stack: 'React / Next.js / TypeScript',
     avatarSrc: '/images/stephanie-vanoverberghe.webp',
 } as const;

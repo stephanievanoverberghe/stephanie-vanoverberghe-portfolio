@@ -2,7 +2,7 @@ import type { VisionContent } from './types';
 
 export const visionContent: VisionContent = {
     kicker: 'Vision',
-    title: 'Des projets concrets, pensés pour le réel',
-    intro: 'Chaque étude de cas met en avant un objectif précis : structurer un parcours, fiabiliser une interface et livrer un front-end maintenable. Je privilégie les solutions claires, robustes et utiles au quotidien.',
-    quote: 'Une bonne interface ne se remarque pas : elle guide naturellement vers la bonne action.',
+    title: 'Apprendre en construisant',
+    intro: 'Ma vision du développement évolue avec la pratique. Je crois aux projets concrets, aux interfaces utiles et au code que l’on peut relire, maintenir et améliorer. Chaque projet est pour moi une occasion de comprendre plus finement le produit, l’utilisateur et la technique.',
+    quote: 'Le code m’a appris la rigueur. Le design m’a appris le regard.',
 };

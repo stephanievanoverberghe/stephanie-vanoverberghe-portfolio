@@ -10,7 +10,7 @@ export type PrefaceContent = {
     role: string;
     availability: string;
     intro: string;
-    sections: ReadonlyArray<TextSection<'ui' | 'performance' | 'a11y'>>;
+    sections: ReadonlyArray<TextSection<'ui' | 'code' | 'learning'>>;
     stats: ReadonlyArray<{ label: string; value: string }>;
     profileName: string;
     profileStack: string;
