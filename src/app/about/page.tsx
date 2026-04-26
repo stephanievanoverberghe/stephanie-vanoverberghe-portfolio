@@ -16,7 +16,7 @@ export default function AboutPage() {
                     <div>
                         <p className="text-xs font-bold uppercase tracking-[0.28em] text-(--gold)">{aboutContent.hero.kicker}</p>
 
-                        <h1 className="mt-5 text-[clamp(3rem,7vw,7rem)] font-semibold leading-[0.9] tracking-[-0.08em] text-(--text-strong)">
+                        <h1 className="mt-5 max-w-3xl text-[clamp(2.7rem,5.6vw,5.6rem)] font-semibold leading-[0.95] tracking-[-0.07em] text-(--text-strong)">
                             {aboutContent.hero.title.line1}
                             <br />
                             {aboutContent.hero.title.line2}
