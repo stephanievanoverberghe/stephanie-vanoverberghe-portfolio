@@ -1,6 +1,6 @@
 import { Resend } from 'resend';
 
-import type { ContactPayload } from './validation';
+import type { ContactPayload } from '@/types/contact';
 
 export type ContactMailConfig = {
     apiKey: string;
