@@ -65,7 +65,7 @@ export default function ProjectCard({ project }: { project: Project }) {
 
                             <div className="absolute left-3 top-3 flex items-center gap-2">
                                 <Chip size="xs" color="accent">
-                                    Case study
+                                    Étude de cas
                                 </Chip>
                             </div>
 

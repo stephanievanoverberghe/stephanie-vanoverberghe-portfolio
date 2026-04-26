@@ -5,6 +5,8 @@ import path from 'node:path';
 type ProjectLinkMap = { demo?: string; repo?: string };
 type ProjectMedia = { image: string; alt?: string };
 type ProjectGalleryImage = { src: string; alt?: string };
+type ProjectTesting = { strategy?: string; coverage?: string[] };
+type ProjectArchitecture = { summary?: string; keyPoints?: string[]; sections?: Array<{ title: string; items: string[] }> };
 
 export type Project = {
     slug: string;
@@ -14,10 +16,20 @@ export type Project = {
     role?: string[];
     stack?: string[];
     context?: string;
+    vision?: string;
     objectives?: string[];
+    productPrinciples?: string[];
+    editorialFoundations?: string[];
     challenges?: string[];
     solutions?: string[];
     highlights?: string[];
+    uxHighlights?: string[];
+    uiHighlights?: string[];
+    metrics?: string[];
+    notableDecisions?: string[];
+    nextSteps?: string[];
+    testing?: ProjectTesting;
+    architecture?: ProjectArchitecture;
     links?: ProjectLinkMap;
     logo?: ProjectMedia;
     hero?: ProjectMedia;
@@ -91,6 +103,36 @@ function parseGallery(value: unknown): ProjectGalleryImage[] | undefined {
     return items.length ? items : undefined;
 }
 
+function parseTesting(value: unknown): ProjectTesting | undefined {
+    if (!isRecord(value)) return undefined;
+
+    const strategy = getString(value.strategy);
+    const coverage = getStringArray(value.coverage);
+
+    if (!strategy && !coverage?.length) return undefined;
+
+    return { strategy, coverage };
+}
+
+function parseArchitecture(value: unknown): ProjectArchitecture | undefined {
+    if (!isRecord(value)) return undefined;
+
+    const summary = getString(value.summary);
+    const keyPoints = getStringArray(value.keyPoints);
+    const sections: Array<{ title: string; items: string[] }> = [];
+
+    for (const [k, v] of Object.entries(value)) {
+        if (k === 'summary' || k === 'keyPoints') continue;
+        const items = getStringArray(v);
+        if (!items?.length) continue;
+        sections.push({ title: k, items });
+    }
+
+    if (!summary && !keyPoints?.length && !sections.length) return undefined;
+
+    return { summary, keyPoints, sections: sections.length ? sections : undefined };
+}
+
 /**
  * Construit un objet `Project` tolérant aux champs partiels.
  *
@@ -113,10 +155,20 @@ function parseProject(raw: unknown, fallbackSlug: string): Project | null {
         role: getStringArray(raw.role),
         stack: getStringArray(raw.stack),
         context: getString(raw.context),
+        vision: getString(raw.vision),
         objectives: getStringArray(raw.objectives),
+        productPrinciples: getStringArray(raw.productPrinciples),
+        editorialFoundations: getStringArray(raw.editorialFoundations),
         challenges: getStringArray(raw.challenges),
         solutions: getStringArray(raw.solutions),
         highlights: getStringArray(raw.highlights),
+        uxHighlights: getStringArray(raw.uxHighlights),
+        uiHighlights: getStringArray(raw.uiHighlights),
+        metrics: getStringArray(raw.metrics),
+        notableDecisions: getStringArray(raw.notableDecisions),
+        nextSteps: getStringArray(raw.nextSteps),
+        testing: parseTesting(raw.testing),
+        architecture: parseArchitecture(raw.architecture),
         links: parseLinks(raw.links),
         logo: parseMedia(raw.logo),
         hero: parseMedia(raw.hero),

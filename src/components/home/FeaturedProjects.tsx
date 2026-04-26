@@ -174,7 +174,7 @@ export default function FeaturedProjects({ projects, featuredCount = 2 }: { proj
                                                 </Chip>
                                             ) : null}
                                             <Chip size="xs" color="accent">
-                                                Featured
+                                                À la une
                                             </Chip>
                                         </div>
                                     </div>

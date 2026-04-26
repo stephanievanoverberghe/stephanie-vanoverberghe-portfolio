@@ -51,7 +51,7 @@ export default function SkillsProjectTile({
 
                 <div className="absolute left-4 right-4 bottom-4 flex flex-wrap gap-2">
                     <Chip size="xs" color={tone}>
-                        Case study
+                        Étude de cas
                     </Chip>
                     <Chip size="xs" kind="neutral">
                         {tags[0]}
