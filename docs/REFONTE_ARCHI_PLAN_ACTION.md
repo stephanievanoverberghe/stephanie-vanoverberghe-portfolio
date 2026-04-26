@@ -9,9 +9,9 @@
 
 ## Phase 2 — À faire ensuite (priorité haute)
 
-- [ ] Ajouter tests unitaires `useContactForm` (états: idle/loading/success/error).
-- [ ] Ajouter test unitaire `submitContact` (cas `ok`, `res.ok=false`, exception réseau).
-- [ ] Vérifier couverture de non-régression sur route `/api/contact`.
+- [x] Ajouter tests unitaires `useContactForm` (états: idle/loading/success/error).
+- [x] Ajouter test unitaire `submitContact` (cas `ok`, `res.ok=false`, exception réseau).
+- [x] Vérifier couverture de non-régression sur route `/api/contact`.
 
 ## Phase 3 — Qualité architecture (priorité moyenne)
 

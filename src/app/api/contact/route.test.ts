@@ -87,6 +87,56 @@ describe('POST /api/contact', () => {
         expect(mockedIsRateLimited).not.toHaveBeenCalled();
     });
 
+    it('returns 200 when payload is valid and mail is sent', async () => {
+        mockedParseContactPayload.mockReturnValue({
+            name: 'Test User',
+            email: 'test@example.com',
+            subject: 'Sujet de test',
+            message: 'Ceci est un message valide de test.',
+            company: '',
+            formStartedAt: Date.now() - 5_000,
+        });
+        mockedSendContactMail.mockResolvedValue(null);
+
+        const response = await POST(createRequest());
+
+        expect(response.status).toBe(200);
+        expect(mockedSendContactMail).toHaveBeenCalledTimes(1);
+    });
+
+    it('returns 200 and skips send when mail env is missing', async () => {
+        process.env.CONTACT_TO = '';
+        mockedParseContactPayload.mockReturnValue({
+            name: 'Test User',
+            email: 'test@example.com',
+            subject: 'Sujet de test',
+            message: 'Ceci est un message valide de test.',
+            company: '',
+            formStartedAt: Date.now() - 5_000,
+        });
+
+        const response = await POST(createRequest());
+
+        expect(response.status).toBe(200);
+        expect(mockedSendContactMail).not.toHaveBeenCalled();
+    });
+
+    it('returns 500 when mail sender returns an error', async () => {
+        mockedParseContactPayload.mockReturnValue({
+            name: 'Test User',
+            email: 'test@example.com',
+            subject: 'Sujet de test',
+            message: 'Ceci est un message valide de test.',
+            company: '',
+            formStartedAt: Date.now() - 5_000,
+        });
+        mockedSendContactMail.mockResolvedValue('send_failed');
+
+        const response = await POST(createRequest());
+
+        expect(response.status).toBe(500);
+    });
+
     it('returns 400 when submission delay is too short', async () => {
         mockedParseContactPayload.mockReturnValue({
             name: 'Test User',
