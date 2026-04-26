@@ -29,7 +29,7 @@
 
   --shadow-card: 0 8px 30px rgba(2, 8, 23, 0.06);
   --border-soft: #E2E6EA;
-  --ring-focus: color-mix(in oklab, var(--accent) 60%, transparent);
+  --ring-focus: #9F341F;
 }
 
 /* =========================================================
@@ -197,10 +197,25 @@ a:hover {
    ========================================================= */
 .focusable:focus-visible,
 a:focus-visible,
-button:focus-visible {
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+[role="button"]:focus-visible,
+[tabindex]:not([tabindex="-1"]):focus-visible {
   outline: 2px solid var(--ring-focus);
   outline-offset: 2px;
   border-radius: .5rem;
+}
+
+.btn:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring-focus) 26%, transparent);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: .68;
 }
 
 /* =========================================================

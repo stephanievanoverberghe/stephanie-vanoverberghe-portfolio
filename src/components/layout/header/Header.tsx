@@ -2,7 +2,7 @@
 
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
@@ -18,6 +18,8 @@ export default function Header() {
     const pathname = usePathname();
     const scrolled = useScrollState(8);
     const [open, setOpen] = useState(false);
+    const menuButtonRef = useRef<HTMLButtonElement>(null);
+    const wasOpenRef = useRef(false);
 
     // scroll progress ribbon
     const { scrollYProgress } = useScroll();
@@ -43,6 +45,14 @@ export default function Header() {
         };
     }, [open]);
 
+    // restore focus to menu trigger after closing drawer
+    useEffect(() => {
+        if (wasOpenRef.current && !open) {
+            menuButtonRef.current?.focus();
+        }
+        wasOpenRef.current = open;
+    }, [open]);
+
     return (
         <header role="banner" className="sticky top-0 z-50">
             {/* single signature ribbon */}
@@ -64,6 +74,7 @@ export default function Header() {
 
                     <button
                         type="button"
+                        ref={menuButtonRef}
                         className="md:hidden inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-sm font-semibold"
                         style={{
                             borderColor: 'var(--border-soft)',

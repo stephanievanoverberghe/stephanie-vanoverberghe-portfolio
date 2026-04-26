@@ -2,6 +2,7 @@
 
 'use client';
 
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Mail } from 'lucide-react';
@@ -13,6 +14,41 @@ const item = {
 };
 
 export function HeaderMobileMenu({ open, onClose, isActive }: { open: boolean; onClose: () => void; isActive: (href: string) => boolean }) {
+    const drawerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (!open || !drawerRef.current) return;
+
+        const container = drawerRef.current;
+        const selector = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+        const getFocusable = () => Array.from(container.querySelectorAll<HTMLElement>(selector));
+
+        const initialFocusable = getFocusable();
+        initialFocusable[0]?.focus();
+
+        const onKeyDown = (e: KeyboardEvent) => {
+            if (e.key !== 'Tab') return;
+
+            const focusable = getFocusable();
+            if (focusable.length === 0) return;
+
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            const active = document.activeElement;
+
+            if (e.shiftKey && active === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && active === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        };
+
+        container.addEventListener('keydown', onKeyDown);
+        return () => container.removeEventListener('keydown', onKeyDown);
+    }, [open]);
+
     return (
         <AnimatePresence>
             {open && (
@@ -38,7 +74,7 @@ export function HeaderMobileMenu({ open, onClose, isActive }: { open: boolean; o
                     >
                         <div className="container-page pt-3">
                             <div className="rounded-2xl border overflow-hidden border-(--border-soft) bg-(--surface-1)">
-                                <div className="p-4 border-b border-(--border-soft)" style={{ background: 'color-mix(in oklab, var(--surface-2) 72%, var(--surface-1))' }}>
+                                <div ref={drawerRef} className="rounded-2xl border overflow-hidden border-(--border-soft) bg-(--surface-1)">
                                     <div className="font-semibold text-(--text-strong)">{BRAND.name}</div>
                                     <div className="mt-1 text-sm opacity-80">{BRAND.title}</div>
                                 </div>

@@ -65,6 +65,14 @@ export default function ContactForm() {
     const [company, setCompany] = React.useState('');
 
     const [status, setStatus] = React.useState<Status>({ state: 'idle' });
+    const statusMessage =
+        status.state === 'loading'
+            ? 'Envoi du message en cours.'
+            : status.state === 'success'
+              ? 'Message envoyé avec succès. Je reviens vers vous rapidement.'
+              : status.state === 'error'
+                ? `Erreur lors de l’envoi : ${status.message}`
+                : '';
 
     /**
      * Soumet le formulaire à l'API interne en gardant un UX robuste
@@ -97,13 +105,18 @@ export default function ContactForm() {
 
     return (
         <form onSubmit={onSubmit} className="panel p-6 sm:p-8">
+            <div className="sr-only" role={status.state === 'error' ? 'alert' : 'status'} aria-live={status.state === 'error' ? 'assertive' : 'polite'}>
+                {statusMessage}
+            </div>
+
             <div className="flex items-start justify-between gap-3">
                 <div>
                     <h2 className="text-lg font-semibold text-(--text-strong)">Envoyer un message</h2>
-                    <p className="mt-1 text-sm opacity-75">Ton email sert uniquement à te recontacter.</p>
                 </div>
 
-                <div className="text-xs opacity-70">{status.state === 'loading' ? 'Envoi…' : status.state === 'success' ? 'Message envoyé ✓' : ''}</div>
+                <div className="text-xs opacity-70" aria-hidden>
+                    {status.state === 'loading' ? 'Envoi…' : status.state === 'success' ? 'Message envoyé ✓' : ''}
+                </div>
             </div>
 
             {/* honeypot */}
@@ -151,7 +164,11 @@ export default function ContactForm() {
 
             {/* Alerts */}
             {status.state === 'error' ? (
-                <div className="mt-4 rounded-2xl border px-4 py-3 text-sm border-(--border-soft) bg-(--gold/10) text-(--text) outline-(--ring-focus)">
+                <div
+                    className="mt-4 rounded-2xl border px-4 py-3 text-sm border-(--border-soft) bg-(--gold/10) text-(--text) outline-(--ring-focus)"
+                    role="alert"
+                    aria-live="assertive"
+                >
                     <span style={{ color: 'var(--text-strong)' }}>Erreur :</span> <span className="opacity-85">{status.message}</span>
                 </div>
             ) : null}
@@ -159,6 +176,8 @@ export default function ContactForm() {
             {status.state === 'success' ? (
                 <div
                     className="mt-4 rounded-2xl border px-4 py-3 text-sm"
+                    role="status"
+                    aria-live="polite"
                     style={{
                         borderColor: 'color-mix(in oklab, var(--sage) 40%, var(--border-soft))',
                         background: 'color-mix(in oklab, var(--sage) 10%, var(--surface-1))',
