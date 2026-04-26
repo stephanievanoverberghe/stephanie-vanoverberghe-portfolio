@@ -6,21 +6,13 @@ import Link from 'next/link';
 import { Sparkles } from 'lucide-react';
 import ContactForm from '@/components/contact/ContactForm';
 import ContactAside from '@/components/contact/ContactAside';
+import { buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
     title: 'Contact — Vanoverberghe Stéphanie',
     description: 'Contactez Vanoverberghe Stéphanie, développeuse front-end React / Next.js, pour discuter de votre projet ou d’une opportunité.',
-    alternates: { canonical: '/contact' },
-    openGraph: {
-        title: 'Contact — Vanoverberghe Stéphanie',
-        description: 'Contactez Vanoverberghe Stéphanie, développeuse front-end React / Next.js.',
-        url: '/contact',
-    },
-    twitter: {
-        title: 'Contact — Vanoverberghe Stéphanie',
-        description: 'Contactez Vanoverberghe Stéphanie, développeuse front-end React / Next.js.',
-    },
-};
+    canonical: '/contact',
+});
 
 function Kicker({ children }: { children: ReactNode }) {
     return <span className="text-xs uppercase tracking-[0.14em] text-(--accent)">{children}</span>;

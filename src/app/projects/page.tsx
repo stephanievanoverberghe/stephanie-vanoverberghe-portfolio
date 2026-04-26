@@ -1,23 +1,15 @@
 // src/app/projets/page.tsx
 import type { Metadata } from 'next';
 import { getAllProjects } from '@/lib/projects';
+import { buildPageMetadata } from '@/lib/seo';
 import ProjectsHero from '@/components/projects/ProjectsHero';
 import ProjectsGrid from '@/components/projects/ProjectsGrid';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
     title: 'Projets — Vanoverberghe Stéphanie',
     description: 'Études de cas front-end : Ancre-toi, Alchimiste Créations, Mystères à la carte...',
-    alternates: { canonical: '/projects' },
-    openGraph: {
-        title: 'Projets — Vanoverberghe Stéphanie',
-        description: 'Études de cas front-end : Ancre-toi, Alchimiste Créations, Mystères à la carte...',
-        url: '/projects',
-    },
-    twitter: {
-        title: 'Projets — Vanoverberghe Stéphanie',
-        description: 'Études de cas front-end : Ancre-toi, Alchimiste Créations, Mystères à la carte...',
-    },
-};
+    canonical: '/projects',
+});
 
 export const dynamic = 'force-static';
 
