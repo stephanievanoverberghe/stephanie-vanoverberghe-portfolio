@@ -1,15 +1,16 @@
-// src/app/skills/page.tsx
 import type { Metadata } from 'next';
+
+import SkillsBento from '@/components/skills/SkillsBento';
+import SkillsHero from '@/components/skills/SkillsHero';
+import SkillsProjectsBento from '@/components/skills/SkillsProjectsBento';
+import SkillsVision from '@/components/skills/SkillsVision';
+import { skillsPageContent } from '@/content/skills-page';
 import { getAllProjects } from '@/lib/projects';
 import { buildPageMetadata } from '@/lib/seo';
 
-import SkillsHero from '@/components/skills/SkillsHero';
-import SkillsBento from '@/components/skills/SkillsBento';
-import SkillsProjectsBento from '@/components/skills/SkillsProjectsBento';
-
 export const metadata: Metadata = buildPageMetadata({
-    title: 'Compétences — Vanoverberghe Stéphanie',
-    description: 'Compétences front-end (React, Next.js, TypeScript, Tailwind), UI/UX, performance & accessibilité. Mise en pratique sur des projets concrets.',
+    title: skillsPageContent.metadata.title,
+    description: skillsPageContent.metadata.description,
     canonical: '/skills',
 });
 
@@ -19,10 +20,13 @@ export default async function SkillsPage() {
     const projects = await getAllProjects();
 
     return (
-        <section className="container-page py-12 space-y-12">
-            <SkillsHero />
-            <SkillsBento />
-            <SkillsProjectsBento projects={projects} />
-        </section>
+        <main className="container-page py-10 sm:py-14 lg:py-16">
+            <div className="space-y-10 sm:space-y-12">
+                <SkillsHero />
+                <SkillsVision />
+                <SkillsBento />
+                <SkillsProjectsBento projects={projects} />
+            </div>
+        </main>
     );
 }

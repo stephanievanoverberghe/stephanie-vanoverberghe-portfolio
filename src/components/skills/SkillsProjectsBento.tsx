@@ -1,33 +1,32 @@
+// src/components/skills/SkillsProjectsBento.tsx
+
 import type { Project } from '@/lib/projects';
+
 import SkillsProjectTile from '@/components/skills/SkillsProjectTile';
-import { visionContent } from '@/content/vision';
+import { skillsPageContent } from '@/content/skills-page';
 
 type Props = {
     projects: Project[];
 };
 
-function coverSrc(p: Project) {
-    return p.hero?.image ?? p.logo?.image ?? '/images/projects/placeholder.png';
+function coverSrc(project: Project) {
+    return project.hero?.image ?? project.logo?.image ?? '/images/projects/placeholder.png';
 }
 
-function coverAlt(p: Project) {
-    return p.hero?.alt ?? p.logo?.alt ?? p.title;
+function coverAlt(project: Project) {
+    return project.hero?.alt ?? project.logo?.alt ?? project.title;
 }
 
-function pickTags(p: Project) {
-    // On privilégie stack, sinon role
-    const tags = [...(p.stack ?? []), ...(p.role ?? [])].filter(Boolean);
-    return tags.slice(0, 6);
+function pickTags(project: Project) {
+    return [...(project.stack ?? []), ...(project.role ?? [])].filter(Boolean).slice(0, 6);
 }
 
-function pickHighlights(p: Project) {
-    const h = (p.highlights ?? []).filter(Boolean);
-    return h.length ? h.slice(0, 3) : ['UI/UX', 'Perf/SEO', 'Accessibilité'];
+function pickHighlights(project: Project) {
+    const highlights = (project.highlights ?? []).filter(Boolean);
+    return highlights.length ? highlights.slice(0, 3) : ['Interface', 'Structure', 'Expérience utilisateur'];
 }
 
 function sortMostRecentFirst(projects: Project[]) {
-    // Si tu as `year` (number) : c’est parfait
-    // Sinon on retombe sur l’ordre d’entrée
     return [...projects].sort((a, b) => {
         const ay = typeof a.year === 'number' ? a.year : -1;
         const by = typeof b.year === 'number' ? b.year : -1;
@@ -36,72 +35,56 @@ function sortMostRecentFirst(projects: Project[]) {
 }
 
 export default function SkillsProjectsBento({ projects }: Props) {
-    const ordered = sortMostRecentFirst(projects);
-    const last3 = ordered.slice(0, 3);
+    const { projects: content } = skillsPageContent;
+    const ordered = sortMostRecentFirst(projects).slice(0, 3);
 
-    const p0 = last3[0];
-    const p1 = last3[1];
-    const p2 = last3[2];
+    if (!ordered.length) {
+        return (
+            <section className="rounded-[1.7rem] border border-(--border-soft) bg-(--surface-1) p-6 shadow-(--shadow-card)">
+                <p className="text-sm leading-6 text-(--text)">{content.empty}</p>
+            </section>
+        );
+    }
 
-    if (!p0) return null;
+    const labels = {
+        caseStudy: content.caseStudyLabel,
+        demo: content.demoLabel,
+        read: content.readLabel,
+    };
 
     return (
-        <section className="space-y-5">
-            <div className="space-y-2">
-                <span className="text-xs uppercase tracking-[0.14em] text-(--accent)">{visionContent.kicker}</span>
-                <h2 className="text-lg font-semibold text-(--text-strong)">{visionContent.title}</h2>
-                <p className="text-sm opacity-80 max-w-[85ch]">{visionContent.intro}</p>
-                <p className="text-sm italic opacity-75">{visionContent.quote}</p>
-            </div>
+        <section className="relative overflow-hidden rounded-4xl border border-(--border-soft) bg-(--surface-1) p-5 shadow-(--shadow-card) sm:p-6 lg:p-8">
+            <div aria-hidden className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-(--lilac)/25 blur-3xl" />
+            <div aria-hidden className="absolute -left-24 bottom-0 h-64 w-64 rounded-full bg-(--sage)/20 blur-3xl" />
 
-            <div className="grid gap-6 lg:grid-cols-3">
-                {/* big (le plus récent) */}
-                <div className="lg:col-span-2">
-                    <SkillsProjectTile
-                        size="lg"
-                        title={p0.title}
-                        subtitle={p0.subtitle ?? 'Étude de cas'}
-                        hrefCase={`/projects/${p0.slug}`}
-                        demoUrl={p0.links?.demo}
-                        cover={coverSrc(p0)}
-                        coverAlt={coverAlt(p0)}
-                        tags={pickTags(p0)}
-                        highlights={pickHighlights(p0)}
-                        tone="accent"
-                    />
+            <div className="relative space-y-6">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                    <div className="max-w-3xl">
+                        <p className="text-xs font-bold uppercase tracking-[0.24em] text-(--accent)">{content.kicker}</p>
+
+                        <h2 className="mt-3 text-3xl font-semibold tracking-[-0.05em] text-(--text-strong) sm:text-4xl">{content.title}</h2>
+
+                        <p className="mt-3 text-sm leading-6 text-(--text)">{content.intro}</p>
+                    </div>
                 </div>
 
-                {/* small column (2 suivants) */}
-                <div className="grid gap-6">
-                    {p1 ? (
+                <div className="grid gap-4 md:grid-cols-3">
+                    {ordered.map((project, index) => (
                         <SkillsProjectTile
+                            key={project.slug}
                             size="sm"
-                            title={p1.title}
-                            subtitle={p1.subtitle ?? 'Étude de cas'}
-                            hrefCase={`/projects/${p1.slug}`}
-                            demoUrl={p1.links?.demo}
-                            cover={coverSrc(p1)}
-                            coverAlt={coverAlt(p1)}
-                            tags={pickTags(p1)}
-                            highlights={pickHighlights(p1)}
-                            tone="lilac"
+                            title={project.title}
+                            subtitle={project.subtitle ?? content.caseStudyLabel}
+                            hrefCase={`/projects/${project.slug}`}
+                            demoUrl={project.links?.demo}
+                            cover={coverSrc(project)}
+                            coverAlt={coverAlt(project)}
+                            tags={pickTags(project)}
+                            highlights={pickHighlights(project)}
+                            tone={index === 0 ? 'accent' : index === 1 ? 'lilac' : 'sage'}
+                            labels={labels}
                         />
-                    ) : null}
-
-                    {p2 ? (
-                        <SkillsProjectTile
-                            size="sm"
-                            title={p2.title}
-                            subtitle={p2.subtitle ?? 'Étude de cas'}
-                            hrefCase={`/projects/${p2.slug}`}
-                            demoUrl={p2.links?.demo}
-                            cover={coverSrc(p2)}
-                            coverAlt={coverAlt(p2)}
-                            tags={pickTags(p2)}
-                            highlights={pickHighlights(p2)}
-                            tone="sage"
-                        />
-                    ) : null}
+                    ))}
                 </div>
             </div>
         </section>

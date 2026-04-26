@@ -1,46 +1,63 @@
-import { Code2, LayoutGrid, Workflow, Boxes } from 'lucide-react';
+import { Code2, Eye, Gauge, Workflow } from 'lucide-react';
 import Chip from '@/components/ui/Chip';
+import { skillsPageContent } from '@/content/skills-page';
 
-function BentoCard({
-    icon: Icon,
-    title,
-    desc,
-    tone,
-    items,
-}: {
-    icon: React.ElementType;
-    title: string;
-    desc: string;
-    tone: 'accent' | 'sage' | 'lilac' | 'gold';
-    items: Array<{ kind: 'tech' | 'design' | 'tool' | 'architecture'; label: string }>;
-}) {
+const iconByKey = {
+    frontend: Code2,
+    design: Eye,
+    quality: Gauge,
+    workflow: Workflow,
+} as const;
+
+function SkillCard({ item, size = 'md' }: { item: (typeof skillsPageContent.pillars.items)[number]; size?: 'lg' | 'md' }) {
+    const Icon = iconByKey[item.key];
+
+    const isLarge = size === 'lg';
+
     return (
-        <article className="panel p-6 relative overflow-hidden">
+        <article
+            className={[
+                'group relative overflow-hidden rounded-[1.8rem] border bg-(--surface-1) shadow-(--shadow-card) transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(18,19,20,0.08)]',
+                isLarge ? 'p-7 lg:p-8' : 'p-5',
+            ].join(' ')}
+            style={{ borderColor: 'var(--border-soft)' }}
+        >
+            {/* glow */}
             <span
                 aria-hidden
-                className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full opacity-35"
-                style={{ background: `radial-gradient(circle, color-mix(in oklab, var(--${tone}) 30%, transparent), transparent 62%)` }}
+                className="pointer-events-none absolute -right-20 -top-20 h-52 w-52 rounded-full opacity-35"
+                style={{
+                    background: `radial-gradient(circle, color-mix(in oklab, var(--${item.tone}) 30%, transparent), transparent 65%)`,
+                }}
             />
 
-            <div className="relative flex items-start gap-3">
+            <div className="relative">
+                {/* icon */}
                 <div
-                    className="shrink-0 h-11 w-11 rounded-2xl border flex items-center justify-center border-(--border-soft) shadow-(--shadow-card)"
-                    style={{ background: 'color-mix(in oklab, var(--surface-2) 58%, var(--surface-1))' }}
+                    className="grid h-12 w-12 place-items-center rounded-2xl border"
+                    style={{
+                        borderColor: `color-mix(in oklab, var(--${item.tone}) 30%, var(--border-soft))`,
+                        background: `color-mix(in oklab, var(--${item.tone}) 10%, var(--surface-1))`,
+                    }}
                 >
-                    <Icon className="h-5 w-5 text-(--text-strong)" />
+                    <Icon size={22} className="text-(--text-strong)" />
                 </div>
 
-                <div className="min-w-0">
-                    <h2 className="text-base sm:text-lg font-semibold text-(--text-strong)">{title}</h2>
-                    <p className="mt-1 text-sm opacity-80">{desc}</p>
+                {/* title */}
+                <h3 className={['mt-5 font-semibold leading-tight tracking-[-0.04em] text-(--text-strong)', isLarge ? 'text-3xl sm:text-4xl' : 'text-xl'].join(' ')}>
+                    {item.title}
+                </h3>
 
-                    <div className="mt-4 flex flex-wrap gap-2">
-                        {items.map((c) => (
-                            <Chip key={c.label} kind={c.kind} size="sm">
-                                {c.label}
-                            </Chip>
-                        ))}
-                    </div>
+                {/* desc */}
+                <p className="mt-3 text-sm leading-6 text-(--text)">{item.desc}</p>
+
+                {/* chips */}
+                <div className="mt-5 flex flex-wrap gap-2">
+                    {item.chips.map((chip) => (
+                        <Chip key={chip.label} kind={chip.kind} size="sm">
+                            {chip.label}
+                        </Chip>
+                    ))}
                 </div>
             </div>
         </article>
@@ -48,66 +65,33 @@ function BentoCard({
 }
 
 export default function SkillsBento() {
+    const { pillars } = skillsPageContent;
+
+    const [a, b, c, d] = pillars.items;
+
     return (
-        <section className="space-y-4">
-            <h2 className="text-lg font-semibold text-(--text-strong)">Piliers</h2>
+        <section className="space-y-8">
+            {/* Header */}
+            <div className="max-w-3xl">
+                <p className="text-xs font-bold uppercase tracking-[0.24em] text-(--accent)">{pillars.kicker}</p>
 
-            <div className="grid gap-6 lg:grid-cols-3">
-                <div className="grid gap-6 lg:col-span-2">
-                    <BentoCard
-                        icon={Code2}
-                        title="Front-end"
-                        desc="Composants solides, App Router, rendu, patterns de pages."
-                        tone="accent"
-                        items={[
-                            { kind: 'tech', label: 'React' },
-                            { kind: 'tech', label: 'Next.js' },
-                            { kind: 'tech', label: 'TypeScript' },
-                            { kind: 'tech', label: 'Tailwind' },
-                            { kind: 'tech', label: 'next/image' },
-                        ]}
-                    />
+                <h2 className="mt-3 text-3xl sm:text-4xl font-semibold tracking-[-0.05em] text-(--text-strong)">{pillars.title}</h2>
 
-                    <BentoCard
-                        icon={LayoutGrid}
-                        title="UI/UX"
-                        desc="Lisibilité, hiérarchie, micro-interactions, empathie produit."
-                        tone="lilac"
-                        items={[
-                            { kind: 'design', label: 'Design system' },
-                            { kind: 'design', label: 'Micro-interactions' },
-                            { kind: 'design', label: 'Accessibilité' },
-                            { kind: 'design', label: 'UX writing' },
-                        ]}
-                    />
-                </div>
+                <p className="mt-3 text-sm leading-6 text-(--text)">{pillars.intro}</p>
+            </div>
 
-                <div className="grid gap-6">
-                    <BentoCard
-                        icon={Workflow}
-                        title="Workflow"
-                        desc="Qualité front + déploiement, vérifs, hygiène repo."
-                        tone="sage"
-                        items={[
-                            { kind: 'tool', label: 'Git' },
-                            { kind: 'tool', label: 'Vercel' },
-                            { kind: 'tool', label: 'ESLint/Prettier' },
-                            { kind: 'tool', label: 'Lighthouse' },
-                        ]}
-                    />
+            {/* Grid */}
+            <div className="grid gap-5 lg:grid-cols-3">
+                {/* LEFT BIG */}
+                <div className="lg:col-span-2">{a && <SkillCard item={a} size="lg" />}</div>
 
-                    <BentoCard
-                        icon={Boxes}
-                        title="Architecture"
-                        desc="Perf, SEO technique, patterns de rendu, images."
-                        tone="gold"
-                        items={[
-                            { kind: 'architecture', label: 'RSC + Suspense' },
-                            { kind: 'architecture', label: 'SSG/ISR' },
-                            { kind: 'architecture', label: 'SEO technique' },
-                            { kind: 'architecture', label: 'A11y AA' },
-                        ]}
-                    />
+                {/* RIGHT TOP */}
+                <div>{b && <SkillCard item={b} />}</div>
+
+                {/* BOTTOM ROW */}
+                <div className="lg:col-span-3 grid gap-5 sm:grid-cols-2">
+                    {c && <SkillCard item={c} />}
+                    {d && <SkillCard item={d} />}
                 </div>
             </div>
         </section>

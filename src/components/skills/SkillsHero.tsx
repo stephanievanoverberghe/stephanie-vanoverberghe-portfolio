@@ -1,85 +1,66 @@
 import Link from 'next/link';
-import Chip from '@/components/ui/Chip';
-import { whyMeContent } from '@/content/why-me';
+import { ArrowRight } from 'lucide-react';
 
-function Kicker({ children }: { children: React.ReactNode }) {
-    return <span className="text-xs uppercase tracking-[0.14em] text-(--accent)">{children}</span>;
-}
-
-function Stat({ label, value }: { label: string; value: string }) {
-    return (
-        <div
-            className="rounded-2xl border px-4 py-3 border-(--border-soft)"
-            style={{
-                background: 'color-mix(in oklab, var(--surface-2) 58%, var(--surface-1))',
-            }}
-        >
-            <div className="text-sm font-semibold text-(--text-strong)">{value}</div>
-            <div className="text-xs opacity-75">{label}</div>
-        </div>
-    );
-}
+import { skillsPageContent } from '@/content/skills-page';
 
 export default function SkillsHero() {
+    const { hero } = skillsPageContent;
+
     return (
-        <header className="relative overflow-hidden rounded-2xl border p-6 sm:p-10 border-(--border-soft) bg-(--surface-1) shadow-(--shadow-card)">
-            <div className="relative space-y-6">
-                <div className="space-y-2">
-                    <Kicker>{whyMeContent.kicker}</Kicker>
+        <header className="relative overflow-hidden rounded-4xl border border-(--border-soft) bg-(--surface-1) p-6 shadow-(--shadow-card) sm:p-8 lg:p-12">
+            <div aria-hidden className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-(--lilac)/30 blur-3xl" />
+            <div aria-hidden className="absolute -left-24 bottom-0 h-64 w-64 rounded-full bg-(--sage)/20 blur-3xl" />
 
-                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-(--text-strong)">
-                        {whyMeContent.title}
-                        <span className="opacity-70"> · {whyMeContent.subtitle}</span>
-                    </h1>
+            <div className="relative max-w-4xl">
+                <p className="text-xs font-bold uppercase tracking-[0.28em] text-(--gold)">{hero.kicker}</p>
 
-                    <p className="opacity-80 max-w-[80ch]">{whyMeContent.intro}</p>
-                </div>
+                <h1 className="mt-5 text-[clamp(2.8rem,6vw,6rem)] font-semibold leading-[0.95] tracking-[-0.075em] text-(--text-strong)">
+                    {hero.title.first}
+                    <br />
+                    {hero.title.second}
+                    <br />
+                    <span className="italic text-(--accent)">{hero.title.third}</span>
+                </h1>
 
-                <div className="hr-soft" />
+                <p className="mt-6 max-w-2xl text-base leading-7 text-(--text)">{hero.intro}</p>
 
-                <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
-                    <div className="space-y-5">
-                        <div className="flex flex-wrap gap-2">
-                            {whyMeContent.chips.map((chip) => (
-                                <Chip key={chip.label} kind={chip.kind}>
-                                    {chip.label}
-                                </Chip>
-                            ))}
-                        </div>
-
-                        <div
-                            className="rounded-2xl border p-4 sm:p-5 border-(--border-soft)"
+                <div className="mt-7 flex flex-wrap gap-2">
+                    {hero.tags.map((tag) => (
+                        <span
+                            key={tag}
+                            className="rounded-full border px-3 py-1.5 text-xs font-semibold text-(--text-strong)"
                             style={{
-                                background: 'color-mix(in oklab, var(--surface-2) 54%, var(--surface-1))',
+                                borderColor: 'color-mix(in oklab, var(--sage) 28%, var(--border-soft))',
+                                background: 'color-mix(in oklab, var(--surface-2) 52%, var(--surface-1))',
                             }}
                         >
-                            <div className="text-sm font-semibold text-(--text-strong)">{whyMeContent.contributionTitle}</div>
+                            {tag}
+                        </span>
+                    ))}
+                </div>
 
-                            <ul className="mt-3 space-y-2 text-sm opacity-85">
-                                {whyMeContent.sections.map((section) => (
-                                    <li key={section.icon} className="flex gap-2">
-                                        <span aria-hidden>•</span>
-                                        <span>{section.text}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                <div className="mt-8 flex flex-wrap gap-3">
+                    <Link
+                        href="/projects"
+                        className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-white transition hover:-translate-y-0.5"
+                        style={{
+                            background: 'linear-gradient(135deg, var(--accent), color-mix(in oklab, var(--accent) 78%, var(--ink)))',
+                        }}
+                    >
+                        {hero.ctaPrimary}
+                        <ArrowRight size={17} />
+                    </Link>
 
-                        <div className="flex flex-wrap gap-3">
-                            <Link href="/projects" className="btn btn-secondary">
-                                Voir les projets
-                            </Link>
-                            <Link href="/contact" className="btn btn-cta text-(--surface-1)">
-                                Me contacter
-                            </Link>
-                        </div>
-                    </div>
-
-                    <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-                        {whyMeContent.stats.map((stat) => (
-                            <Stat key={stat.label} label={stat.label} value={stat.value} />
-                        ))}
-                    </div>
+                    <Link
+                        href="/contact"
+                        className="inline-flex items-center gap-2 rounded-full border px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-(--text-strong) transition hover:-translate-y-0.5"
+                        style={{
+                            borderColor: 'color-mix(in oklab, var(--gold) 46%, var(--border-soft))',
+                            background: 'color-mix(in oklab, var(--gold) 12%, var(--surface-1))',
+                        }}
+                    >
+                        {hero.ctaSecondary}
+                    </Link>
                 </div>
             </div>
         </header>

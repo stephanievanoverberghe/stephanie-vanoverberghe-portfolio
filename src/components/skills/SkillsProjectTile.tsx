@@ -1,20 +1,12 @@
-// src/components/skills/SkillsProjectTile.tsx
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowUpRight } from 'lucide-react';
+
 import Chip from '@/components/ui/Chip';
 
-export default function SkillsProjectTile({
-    size,
-    title,
-    subtitle,
-    hrefCase,
-    demoUrl,
-    cover,
-    coverAlt,
-    tags,
-    highlights,
-    tone,
-}: {
+type Tone = 'accent' | 'lilac' | 'sage' | 'gold';
+
+type Props = {
     size: 'lg' | 'sm';
     title: string;
     subtitle: string;
@@ -24,81 +16,79 @@ export default function SkillsProjectTile({
     coverAlt: string;
     tags: string[];
     highlights: string[];
-    tone: 'accent' | 'lilac' | 'sage' | 'gold';
-}) {
-    const isLg = size === 'lg';
+    tone: Tone;
+    labels: {
+        caseStudy: string;
+        demo: string;
+        read: string;
+    };
+};
 
+export default function SkillsProjectTile({ title, subtitle, hrefCase, cover, coverAlt, tags, tone, labels }: Props) {
     return (
-        <article className="group overflow-hidden rounded-2xl border border-(--border-soft) shadow-(--shadow-card) bg-(--surface-1)">
-            <div
-                className={isLg ? 'relative aspect-video border-b overflow-hidden border-(--border-soft)' : 'relative aspect-16/10 border-b overflow-hidden border-(--border-soft)'}
-            >
-                <Image
-                    src={cover}
-                    alt={coverAlt}
-                    fill
-                    sizes={isLg ? '(max-width: 1024px) 100vw, 66vw' : '(max-width: 1024px) 100vw, 33vw'}
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                />
+        <article
+            className="group overflow-hidden rounded-[1.6rem] border bg-(--surface-1) shadow-(--shadow-card) transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(18,19,20,0.08)]"
+            style={{ borderColor: 'var(--border-soft)' }}
+        >
+            <Link href={hrefCase} className="block">
+                <div className="relative aspect-16/10 overflow-hidden border-b border-(--border-soft)">
+                    <Image
+                        src={cover}
+                        alt={coverAlt}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-cover transition duration-700 group-hover:scale-[1.035]"
+                        style={{ objectPosition: '50% 10%' }}
+                    />
 
-                {/* overlay premium */}
-                <span aria-hidden className="absolute inset-0" style={{ boxShadow: 'inset 0 -160px 220px rgba(2,8,23,0.26)' }} />
-                <span
-                    aria-hidden
-                    className="absolute -right-24 -top-24 h-72 w-72 rounded-full opacity-35"
-                    style={{ background: `radial-gradient(circle, color-mix(in oklab, var(--${tone}) 34%, transparent), transparent 62%)` }}
-                />
+                    <div
+                        aria-hidden
+                        className="absolute inset-0"
+                        style={{
+                            background: 'linear-gradient(to top, rgba(18,19,20,0.34), transparent 58%)',
+                        }}
+                    />
 
-                <div className="absolute left-4 right-4 bottom-4 flex flex-wrap gap-2">
-                    <Chip size="xs" color={tone}>
-                        Étude de cas
-                    </Chip>
-                    <Chip size="xs" kind="neutral">
-                        {tags[0]}
-                    </Chip>
-                    {isLg && tags[1] ? (
-                        <Chip size="xs" kind="neutral">
-                            {tags[1]}
+                    <div className="absolute left-3 top-3">
+                        <Chip size="xs" color={tone}>
+                            {labels.caseStudy}
                         </Chip>
-                    ) : null}
-                </div>
-            </div>
-
-            <div className={isLg ? 'p-6 space-y-4' : 'p-5 space-y-4'}>
-                <div>
-                    <h3 className={isLg ? 'text-lg sm:text-xl font-semibold text-(--text-strong)' : 'text-base sm:text-lg font-semibold text-(--text-strong)'}>{title}</h3>
-                    <p className="mt-1 text-sm opacity-80">{subtitle}</p>
+                    </div>
                 </div>
 
-                <div className="flex flex-wrap gap-2">
-                    {tags.slice(0, isLg ? 6 : 5).map((t) => (
-                        <Chip key={t} kind="tech" size="sm">
-                            {t}
-                        </Chip>
-                    ))}
+                <div className="p-5">
+                    <div className="flex items-start justify-between gap-4">
+                        <div>
+                            <h3 className="text-lg font-semibold leading-tight tracking-[-0.035em] text-(--text-strong)">{title}</h3>
+
+                            <p className="mt-2 line-clamp-2 text-sm leading-6 text-(--text)">{subtitle}</p>
+                        </div>
+
+                        <span
+                            className="grid h-9 w-9 shrink-0 place-items-center rounded-full border transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                            style={{
+                                borderColor: `color-mix(in oklab, var(--${tone}) 38%, var(--border-soft))`,
+                                background: `color-mix(in oklab, var(--${tone}) 10%, var(--surface-1))`,
+                            }}
+                        >
+                            <ArrowUpRight size={16} className="text-(--text-strong)" />
+                        </span>
+                    </div>
+
+                    <div className="mt-4 flex flex-wrap gap-2">
+                        {tags.slice(0, 3).map((tag) => (
+                            <Chip key={tag} kind="tech" size="xs">
+                                {tag}
+                            </Chip>
+                        ))}
+                    </div>
+
+                    <div className="mt-5 text-xs font-bold uppercase tracking-[0.14em] text-(--accent)">
+                        {labels.read}
+                        <span className="ml-2 inline-block transition group-hover:translate-x-1">→</span>
+                    </div>
                 </div>
-
-                <ul className="text-sm opacity-90 space-y-2">
-                    {highlights.slice(0, 3).map((h) => (
-                        <li key={h} className="flex gap-2">
-                            <span aria-hidden>•</span>
-                            <span>{h}</span>
-                        </li>
-                    ))}
-                </ul>
-
-                <div className="flex flex-wrap gap-3 pt-1">
-                    {demoUrl ? (
-                        <a href={demoUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
-                            Voir la démo
-                        </a>
-                    ) : null}
-
-                    <Link href={hrefCase} className="btn btn-cta" style={{ color: '#FDFDFD' }}>
-                        Étude de cas
-                    </Link>
-                </div>
-            </div>
+            </Link>
         </article>
     );
 }

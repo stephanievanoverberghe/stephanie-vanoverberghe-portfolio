@@ -7,6 +7,7 @@ import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { GalleryGrid } from './GalleryGrid';
 import { GalleryThumbStrip } from './GalleryThumbStrip';
+import { getGalleryAlt } from './gallery.utils';
 import type { GalleryItem } from './gallery.types';
 
 export type { GalleryItem } from './gallery.types';
@@ -120,7 +121,7 @@ export default function GalleryLightbox({ images, title, className, open, startI
                     <div className="relative mx-auto flex h-full max-w-6xl flex-col px-3 py-4 md:px-6 md:py-6">
                         <div className="flex items-center justify-between gap-3">
                             <div
-                                className="text-xs md:text-sm opacity-85 px-3 py-1 rounded-full border"
+                                className="rounded-full border px-3 py-1 text-xs opacity-85 md:text-sm"
                                 style={{
                                     color: 'var(--surface-1)',
                                     borderColor: 'color-mix(in oklab, var(--surface-1) 28%, transparent)',
@@ -130,27 +131,41 @@ export default function GalleryLightbox({ images, title, className, open, startI
                                 {idx + 1} / {images.length}
                             </div>
 
-                            <button type="button" onClick={close} className={cn(ctrlCls, 'h-10 w-10 md:h-12 md:w-12 cursor-pointer')} style={ctrlStyle} aria-label="Fermer">
+                            <button
+                                type="button"
+                                onClick={close}
+                                className={cn(ctrlCls, 'h-10 w-10 cursor-pointer md:h-12 md:w-12')}
+                                style={ctrlStyle}
+                                aria-label="Fermer la visionneuse"
+                            >
                                 <X className="h-5 w-5" />
                             </button>
                         </div>
 
                         <div className="relative mt-3 flex-1">
                             <div
-                                className="absolute inset-0 rounded-2xl border overflow-hidden"
+                                className="absolute inset-0 overflow-hidden rounded-2xl border"
                                 style={{
                                     borderColor: 'color-mix(in oklab, var(--surface-1) 24%, transparent)',
                                     background: 'color-mix(in oklab, var(--ink) 18%, transparent)',
                                     boxShadow: '0 30px 90px rgba(2,8,23,0.45)',
                                 }}
                             />
-                            <div className="relative h-full rounded-2xl overflow-hidden">
+                            <div className="relative h-full overflow-hidden rounded-2xl">
                                 <div className="absolute inset-0 flex items-center justify-center p-3 md:p-6">
                                     <div
-                                        className="relative w-full h-full rounded-xl overflow-hidden"
+                                        className="relative h-full w-full overflow-hidden rounded-xl"
                                         style={{ background: 'color-mix(in oklab, var(--surface-1) 70%, transparent)' }}
                                     >
-                                        <Image key={current.src} src={current.src} alt={current.alt ?? title ?? 'Image'} fill sizes="100vw" className="object-cover" priority />
+                                        <Image
+                                            key={current.src}
+                                            src={current.src}
+                                            alt={getGalleryAlt(current, title, 'Image en grand format')}
+                                            fill
+                                            sizes="100vw"
+                                            className="object-contain"
+                                            priority
+                                        />
                                     </div>
                                 </div>
 
@@ -161,9 +176,9 @@ export default function GalleryLightbox({ images, title, className, open, startI
                                             e.stopPropagation();
                                             prev();
                                         }}
-                                        className={cn(ctrlCls, 'h-10 w-10 md:h-12 md:w-12 cursor-pointer')}
+                                        className={cn(ctrlCls, 'h-10 w-10 cursor-pointer md:h-12 md:w-12')}
                                         style={ctrlStyle}
-                                        aria-label="Précédent"
+                                        aria-label="Image précédente"
                                     >
                                         <ChevronLeft className="h-5 w-5" />
                                     </button>
@@ -174,9 +189,9 @@ export default function GalleryLightbox({ images, title, className, open, startI
                                             e.stopPropagation();
                                             next();
                                         }}
-                                        className={cn(ctrlCls, 'h-10 w-10 md:h-12 md:w-12 cursor-pointer')}
+                                        className={cn(ctrlCls, 'h-10 w-10 cursor-pointer md:h-12 md:w-12')}
                                         style={ctrlStyle}
-                                        aria-label="Suivant"
+                                        aria-label="Image suivante"
                                     >
                                         <ChevronRight className="h-5 w-5" />
                                     </button>
