@@ -1,10 +1,9 @@
-// src/components/home/FeaturedProjects.tsx
-
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 
 import Chip from '@/components/ui/Chip';
+import { featuredProjectsContent } from '@/content/home';
 import type { Project } from '@/lib/projects';
 import { chipPropsByKind, kindFor, pickStack } from './home.utils';
 
@@ -93,7 +92,9 @@ function FeaturedProjectCard({ project, index }: { project: Project; index: numb
             <div className="flex flex-col p-5 sm:p-6">
                 <div className="flex items-start justify-between gap-4">
                     <div>
-                        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-(--accent)">Projet 0{index + 1}</p>
+                        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-(--accent)">
+                            {featuredProjectsContent.indexLabel} 0{index + 1}
+                        </p>
 
                         <h3 className="mt-3 text-2xl font-semibold leading-tight tracking-[-0.04em] text-(--text-strong)">{project.title}</h3>
 
@@ -134,7 +135,7 @@ function FeaturedProjectCard({ project, index }: { project: Project; index: numb
                 </div>
 
                 <div className="mt-auto pt-6 text-sm font-bold uppercase tracking-[0.14em] text-(--text-strong)">
-                    Voir l’étude de cas
+                    {featuredProjectsContent.cardCta}
                     <span className="ml-2 inline-block transition group-hover:translate-x-1">→</span>
                 </div>
             </div>
@@ -155,7 +156,7 @@ function SmallProjectCard({ project, index }: { project: Project; index: number 
             <div className="flex items-start justify-between gap-4">
                 <div>
                     <p className="text-[10px] font-bold uppercase tracking-[0.22em]" style={{ color: `var(--${tone})` }}>
-                        Projet
+                        {featuredProjectsContent.indexLabel}
                     </p>
 
                     <h3 className="mt-2 text-base font-semibold leading-snug text-(--text-strong)">{project.title}</h3>
@@ -181,22 +182,20 @@ export default function FeaturedProjects({ projects, featuredCount = 2 }: { proj
     const sorted = [...projects].sort((a, b) => getYearScore(b) - getYearScore(a));
     const featured = sorted.slice(0, featuredCount);
     const rest = sorted.slice(featuredCount);
+    const [featuredTitleStart, featuredTitleEnd = ''] = featuredProjectsContent.title.split(' rencontre ');
 
     return (
         <section className="space-y-8">
             <div className="flex flex-wrap items-end justify-between gap-4">
                 <div>
-                    <p className="text-xs font-bold uppercase tracking-[0.28em] text-(--accent)">Études de cas</p>
+                    <p className="text-xs font-bold uppercase tracking-[0.28em] text-(--accent)">{featuredProjectsContent.kicker}</p>
 
                     <h2 className="mt-3 text-3xl font-semibold tracking-[-0.05em] text-(--text-strong) sm:text-4xl">
-                        Des projets où le regard
-                        <br className="hidden sm:block" /> rencontre la structure.
+                        {featuredTitleStart}
+                        <br className="hidden sm:block" /> rencontre {featuredTitleEnd}
                     </h2>
 
-                    <p className="mt-3 max-w-2xl text-sm leading-6 text-(--text)">
-                        Chaque projet raconte une manière de transformer une intention en interface : comprendre le besoin, poser une direction visuelle, puis construire des
-                        composants React propres et maintenables.
-                    </p>
+                    <p className="mt-3 max-w-2xl text-sm leading-6 text-(--text)">{featuredProjectsContent.intro}</p>
                 </div>
 
                 <Link
@@ -207,7 +206,7 @@ export default function FeaturedProjects({ projects, featuredCount = 2 }: { proj
                         background: 'color-mix(in oklab, var(--accent) 8%, var(--surface-1))',
                     }}
                 >
-                    Tous les projets
+                    {featuredProjectsContent.allProjectsLabel}
                     <ArrowUpRight size={15} />
                 </Link>
             </div>
@@ -221,7 +220,7 @@ export default function FeaturedProjects({ projects, featuredCount = 2 }: { proj
             {rest.length ? (
                 <div className="space-y-4">
                     <div className="flex items-center justify-between gap-4">
-                        <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-(--text-muted)">Autres réalisations</h3>
+                        <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-(--text-muted)">{featuredProjectsContent.otherProjectsLabel}</h3>
 
                         <span className="text-xs text-(--text-muted)">
                             {rest.length} projet{rest.length > 1 ? 's' : ''}

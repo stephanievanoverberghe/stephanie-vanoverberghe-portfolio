@@ -1,73 +1,26 @@
-// src/components/home/SkillsSnapshot.tsx
-
 import { Code2, Eye, Gauge, Layers3 } from 'lucide-react';
 
 import Chip from '@/components/ui/Chip';
+import { skillsSnapshotContent } from '@/content/home';
 import { chipPropsByKind } from './home.utils';
 
-const skillsGroups = [
-    {
-        icon: Eye,
-        kicker: 'Regard',
-        title: 'Interface, usage & direction visuelle',
-        text: 'Je pense l’interface comme un espace à lire, à comprendre et à parcourir : hiérarchie, rythme, contraste, cohérence et expérience utilisateur.',
-        chips: [
-            { label: 'UI/UX', kind: 'design' },
-            { label: 'Design system', kind: 'design' },
-            { label: 'Responsive', kind: 'design' },
-            { label: 'Accessibilité', kind: 'architecture' },
-        ],
-    },
-    {
-        icon: Code2,
-        kicker: 'Structure',
-        title: 'Frontend React / Next.js',
-        text: 'Je transforme une intention visuelle en composants React propres, maintenables et réutilisables, avec une attention particulière à la qualité du code.',
-        chips: [
-            { label: 'React', kind: 'tech' },
-            { label: 'Next.js App Router', kind: 'tech' },
-            { label: 'TypeScript', kind: 'tech' },
-            { label: 'Tailwind CSS', kind: 'tech' },
-        ],
-    },
-    {
-        icon: Gauge,
-        kicker: 'Qualité',
-        title: 'Performance, accessibilité & finition',
-        text: 'Je fais attention aux détails invisibles qui changent l’expérience : temps de chargement, rendu fluide, lisibilité, accessibilité et cohérence responsive.',
-        chips: [
-            { label: 'Performance Web', kind: 'architecture' },
-            { label: 'A11y', kind: 'architecture' },
-            { label: 'SEO technique', kind: 'architecture' },
-            { label: 'Vercel', kind: 'tool' },
-        ],
-    },
-    {
-        icon: Layers3,
-        kicker: 'Produit',
-        title: 'Logique projet & livraison',
-        text: 'J’aime comprendre le besoin avant de coder : clarifier l’objectif, organiser les contenus, découper les composants et livrer une interface solide.',
-        chips: [
-            { label: 'Git', kind: 'tool' },
-            { label: 'Zod', kind: 'tech' },
-            { label: 'MongoDB', kind: 'tech' },
-            { label: 'Stripe', kind: 'tool' },
-        ],
-    },
-] as const;
+const iconByKey = { eye: Eye, code2: Code2, gauge: Gauge, layers3: Layers3 } as const;
+const skillsGroups = skillsSnapshotContent.groups.map((group) => ({ ...group, icon: iconByKey[group.icon] }));
 
 export default function SkillsSnapshot() {
+    const [skillsTitleStart, skillsTitleEnd = ''] = skillsSnapshotContent.title.split(' à ');
+
     return (
         <section className="space-y-6">
             <div className="max-w-2xl">
-                <p className="text-xs font-bold uppercase tracking-[0.28em] text-(--accent)">Compétences</p>
+                <p className="text-xs font-bold uppercase tracking-[0.28em] text-(--accent)">{skillsSnapshotContent.kicker}</p>
 
                 <h2 className="mt-3 text-3xl font-semibold tracking-[-0.05em] text-(--text-strong) sm:text-4xl">
-                    Du regard créatif
-                    <br className="hidden sm:block" /> à la structure front-end.
+                    {skillsTitleStart}
+                    <br className="hidden sm:block" /> à {skillsTitleEnd}
                 </h2>
 
-                <p className="mt-3 text-sm leading-6 text-(--text)">Mon approche mélange sensibilité visuelle, logique produit et construction React propre.</p>
+                <p className="mt-3 text-sm leading-6 text-(--text)">{skillsSnapshotContent.intro}</p>
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">

@@ -10,6 +10,7 @@ import { HeaderDesktopNav } from './HeaderDesktopNav';
 import { HeaderMobileMenu } from './HeaderMobileMenu';
 import { ribbonStyle } from './header.styles';
 import { useScrollState } from './useScrollState';
+import { headerContent } from '@/content/navigation';
 
 export default function Header() {
     const pathname = usePathname();
@@ -58,7 +59,7 @@ export default function Header() {
                             ref={menuButtonRef}
                             type="button"
                             onClick={() => setOpen((value) => !value)}
-                            aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
+                            aria-label={open ? headerContent.closeMenuLabel : headerContent.openMenuLabel}
                             aria-expanded={open}
                             aria-controls="primary-mobile-nav"
                             className="header-mobile-toggle inline-flex items-center gap-2 rounded-full border px-4 py-2.5 text-xs font-bold uppercase tracking-[0.18em] text-(--text-strong)"
@@ -68,7 +69,7 @@ export default function Header() {
                             }}
                         >
                             {open ? <X size={18} /> : <Menu size={18} />}
-                            Menu
+                            {headerContent.menuLabel}
                         </button>
                     </div>
 

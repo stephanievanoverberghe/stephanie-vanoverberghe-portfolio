@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 
-import { FOOTER } from './footer.data';
+import { footerContent } from '@/content/footer';
 
 function ExternalLink({ href, label }: { href: string; label: string }) {
     return (
@@ -25,16 +25,15 @@ export function FooterLinks() {
     return (
         <section className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
             <div className="rounded-[1.6rem] border bg-(--surface-1) p-5" style={{ borderColor: 'var(--border-soft)' }}>
-                <p className="text-xs font-bold uppercase tracking-[0.24em] text-(--accent)">{FOOTER.signature}</p>
+                <p className="text-xs font-bold uppercase tracking-[0.24em] text-(--accent)">{footerContent.profile.signature}</p>
+                <h3 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-(--text-strong)">{footerContent.profile.name}</h3>
 
-                <h3 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-(--text-strong)">{FOOTER.name}</h3>
+                <p className="mt-2 text-sm font-semibold text-(--text)">{footerContent.profile.role}</p>
 
-                <p className="mt-2 text-sm font-semibold text-(--text)">{FOOTER.role}</p>
-
-                <p className="mt-4 max-w-md text-sm leading-6 text-(--text)">{FOOTER.intent}</p>
+                <p className="mt-4 max-w-md text-sm leading-6 text-(--text)">{footerContent.profile.intent}</p>
 
                 <div className="mt-5 flex flex-wrap gap-2">
-                    {FOOTER.stack.map((item) => (
+                    {footerContent.profile.stack.map((item) => (
                         <span
                             key={item}
                             className="rounded-full border px-3 py-1.5 text-xs font-semibold text-(--text-strong)"
@@ -50,15 +49,15 @@ export function FooterLinks() {
 
                 <div className="mt-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-(--accent)">
                     <span className="h-2 w-2 rounded-full bg-(--accent)" aria-hidden />
-                    {FOOTER.availability}
+                    {footerContent.profile.availability}
                 </div>
             </div>
 
             <nav aria-label="Navigation rapide" className="rounded-[1.6rem] border bg-(--surface-1) p-5" style={{ borderColor: 'var(--border-soft)' }}>
-                <p className="text-xs font-bold uppercase tracking-[0.22em] text-(--gold)">Portfolio</p>
+                <p className="text-xs font-bold uppercase tracking-[0.22em] text-(--gold)">{footerContent.navigation.title}</p>
 
                 <div className="mt-4 grid gap-2">
-                    {FOOTER.links.site.map((link) => (
+                    {footerContent.navigation.links.map((link) => (
                         <Link
                             key={link.href}
                             href={link.href}
@@ -72,11 +71,11 @@ export function FooterLinks() {
             </nav>
 
             <div className="rounded-[1.6rem] border bg-(--surface-1) p-5" style={{ borderColor: 'var(--border-soft)' }}>
-                <p className="text-xs font-bold uppercase tracking-[0.22em] text-(--gold)">Liens</p>
+                <p className="text-xs font-bold uppercase tracking-[0.22em] text-(--gold)">{footerContent.links.title}</p>
 
                 <div className="mt-4 grid gap-3">
-                    <ExternalLink href={FOOTER.cvHref} label="CV PDF" />
-                    {FOOTER.links.socials.map((link) => (
+                    <ExternalLink href={footerContent.links.resume.href} label={footerContent.links.resume.label} />
+                    {footerContent.links.socials.map((link) => (
                         <ExternalLink key={link.href} href={link.href} label={link.label} />
                     ))}
                 </div>

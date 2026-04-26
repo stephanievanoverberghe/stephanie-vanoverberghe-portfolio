@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUpRight, Download, Mail } from 'lucide-react';
 
-import { BRAND, NAV, type NavItem } from './header.data';
+import { headerContent, primaryNavigation } from '@/content/navigation';
+import { siteProfile } from '@/content/site';
 
 type HeaderMobileMenuProps = {
     open: boolean;
@@ -27,7 +28,7 @@ export function HeaderMobileMenu({ open, onClose, isActive }: HeaderMobileMenuPr
 
                     <motion.nav
                         id="primary-mobile-nav"
-                        aria-label="Navigation mobile"
+                        aria-label={headerContent.mobileNavAriaLabel}
                         className="header-mobile-menu fixed inset-x-0 top-18 z-50 px-4"
                         initial={{ opacity: 0, y: -18 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -45,7 +46,7 @@ export function HeaderMobileMenu({ open, onClose, isActive }: HeaderMobileMenuPr
                             <div className="absolute -left-16 bottom-10 h-40 w-40 rounded-full bg-(--sage)/25 blur-2xl" />
 
                             <div className="relative">
-                                <p className="text-xs font-bold uppercase tracking-[0.28em] text-(--accent)">Menu</p>
+                                <p className="text-xs font-bold uppercase tracking-[0.28em] text-(--accent)">{headerContent.menuLabel}</p>
 
                                 <p className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-(--text-strong)">
                                     Créer.
@@ -56,7 +57,7 @@ export function HeaderMobileMenu({ open, onClose, isActive }: HeaderMobileMenuPr
                                 </p>
 
                                 <div className="mt-6 grid gap-2">
-                                    {NAV.map((item: NavItem, index) => {
+                                    {primaryNavigation.map((item, index) => {
                                         const active = isActive(item.href);
 
                                         return (
@@ -97,13 +98,13 @@ export function HeaderMobileMenu({ open, onClose, isActive }: HeaderMobileMenuPr
                                         }}
                                     >
                                         <Mail size={16} />
-                                        Contact
+                                        {headerContent.contactLabel}
                                     </Link>
 
                                     <Link
-                                        href={BRAND.resumeHref}
+                                        href={siteProfile.resumeHref}
                                         target="_blank"
-                                        rel="noreferrer"
+                                        rel="noopener noreferrer"
                                         onClick={onClose}
                                         className="inline-flex items-center justify-center gap-2 rounded-2xl border px-4 py-4 text-sm font-bold uppercase tracking-[0.16em] text-(--text-strong)"
                                         style={{
@@ -112,7 +113,7 @@ export function HeaderMobileMenu({ open, onClose, isActive }: HeaderMobileMenuPr
                                         }}
                                     >
                                         <Download size={16} />
-                                        CV
+                                        {headerContent.resumeLabel}
                                     </Link>
                                 </div>
                             </div>

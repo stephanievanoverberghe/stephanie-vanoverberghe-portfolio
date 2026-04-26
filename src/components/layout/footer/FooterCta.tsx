@@ -1,12 +1,13 @@
 import Link from 'next/link';
 import { ArrowRight, Download } from 'lucide-react';
 
-import { FOOTER } from './footer.data';
+import { footerContent } from '@/content/footer';
+import { siteProfile } from '@/content/site';
 
 export function FooterCta() {
     return (
         <section
-            aria-label="Appel à l'action"
+            aria-label={footerContent.cta.ariaLabel}
             className="relative overflow-hidden rounded-4xl border bg-(--surface-1) p-6 shadow-(--shadow-card) sm:p-8 lg:p-10"
             style={{ borderColor: 'var(--border-soft)' }}
         >
@@ -15,15 +16,11 @@ export function FooterCta() {
 
             <div className="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
                 <div>
-                    <p className="text-xs font-bold uppercase tracking-[0.28em] text-(--gold)">Une interface à construire ?</p>
+                    <p className="text-xs font-bold uppercase tracking-[0.28em] text-(--gold)">{footerContent.cta.kicker}</p>
 
-                    <h2 className="mt-4 max-w-3xl text-3xl font-semibold leading-[0.98] tracking-[-0.06em] text-(--text-strong) sm:text-5xl">
-                        Créons quelque chose
-                        <br />
-                        de clair, utile et bien pensé.
-                    </h2>
+                    <h2 className="mt-4 max-w-3xl text-3xl font-semibold leading-[0.98] tracking-[-0.06em] text-(--text-strong) sm:text-5xl">{footerContent.cta.title}</h2>
 
-                    <p className="mt-5 max-w-2xl text-sm leading-6 text-(--text)">{FOOTER.intent}</p>
+                    <p className="mt-5 max-w-2xl text-sm leading-6 text-(--text)">{footerContent.profile.intent}</p>
                 </div>
 
                 <div className="flex flex-wrap gap-3 lg:justify-end">
@@ -34,12 +31,12 @@ export function FooterCta() {
                             background: 'linear-gradient(135deg, var(--accent), color-mix(in oklab, var(--accent) 78%, var(--ink)))',
                         }}
                     >
-                        Me contacter
+                        {footerContent.cta.contactLabel}
                         <ArrowRight size={17} />
                     </Link>
 
                     <a
-                        href={FOOTER.cvHref}
+                        href={siteProfile.resumeHref}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 rounded-full border px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-(--text-strong) transition hover:-translate-y-0.5"
@@ -49,7 +46,7 @@ export function FooterCta() {
                         }}
                     >
                         <Download size={17} />
-                        CV
+                        {footerContent.cta.resumeLabel}
                     </a>
                 </div>
             </div>

@@ -1,26 +1,13 @@
-// src/app/seo.ts
-
 import type { Metadata, Viewport } from 'next';
 
-export const SITE = {
-    name: 'Vanoverberghe Stéphanie',
-    title: 'Vanoverberghe Stéphanie - Développeuse Front-End (React/Next)',
-    description: 'Portfolio front-end React / Next.js - UI/UX, TypeScript, Tailwind. Études de cas, projets déployés, approche produit.',
-    url: 'https://stephanie-vanoverberghe.dev/',
-    ogImage: '/og-cover.webp',
-    themeColor: '#FF5A3C',
-    social: {
-        github: 'https://github.com/stephanievanoverberghe',
-        linkedin: 'https://www.linkedin.com/in/stephanie-vanoverberghe/',
-    },
-} as const;
+import { siteMeta, siteProfile } from '@/content/site';
 
 export const metadata: Metadata = {
-    metadataBase: new URL(SITE.url),
-    title: SITE.title,
-    description: SITE.description,
+    metadataBase: new URL(siteMeta.url),
+    title: siteMeta.portfolioTitle,
+    description: siteMeta.description,
     applicationName: 'Portfolio',
-    authors: [{ name: SITE.name }],
+    authors: [{ name: siteProfile.name }],
     keywords: ['Développeuse Front-End', 'React', 'Next.js', 'TypeScript', 'Tailwind', 'UI/UX', 'Portfolio'],
     alternates: { canonical: '/' },
     icons: {
@@ -30,30 +17,30 @@ export const metadata: Metadata = {
     },
     openGraph: {
         type: 'website',
-        title: SITE.title,
-        description: SITE.description,
+        title: siteMeta.portfolioTitle,
+        description: siteMeta.description,
         url: '/',
-        siteName: `Portfolio — ${SITE.name}`,
-        images: [{ url: SITE.ogImage, width: 1200, height: 630, alt: 'Portfolio — couverture' }],
+        siteName: siteMeta.siteName,
+        images: [{ url: siteMeta.ogImage, width: 1200, height: 630, alt: 'Portfolio — couverture' }],
     },
     twitter: {
         card: 'summary_large_image',
-        title: SITE.title,
-        description: SITE.description,
-        images: [SITE.ogImage],
+        title: siteMeta.portfolioTitle,
+        description: siteMeta.description,
+        images: [siteMeta.ogImage],
     },
     robots: { index: true, follow: true },
 };
 
-export const viewport: Viewport = { themeColor: SITE.themeColor };
+export const viewport: Viewport = { themeColor: siteMeta.themeColor };
 
 export function personJsonLd() {
     return {
         '@context': 'https://schema.org',
         '@type': 'Person',
-        name: SITE.name,
+        name: siteProfile.name,
         jobTitle: 'Développeuse Front-End',
-        url: SITE.url,
-        sameAs: [SITE.social.github, SITE.social.linkedin],
+        url: siteMeta.url,
+        sameAs: [siteProfile.socials.github.href, siteProfile.socials.linkedin.href],
     };
 }

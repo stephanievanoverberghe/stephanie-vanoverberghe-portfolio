@@ -1,5 +1,6 @@
 import { FooterCta } from './FooterCta';
 import { FooterLinks } from './FooterLinks';
+import { footerContent } from '@/content/footer';
 
 export default function Footer() {
     const year = new Date().getFullYear();
@@ -12,10 +13,12 @@ export default function Footer() {
                     <FooterLinks />
 
                     <div className="flex flex-col gap-3 border-t border-(--border-soft) pt-6 text-sm sm:flex-row sm:items-center sm:justify-between">
-                        <p className="font-medium text-(--text)">© {year} — Portfolio conçu avec Next.js, TypeScript et Tailwind.</p>
+                        <p className="font-medium text-(--text)">
+                            © {year} — {footerContent.legal.copyrightTemplate}
+                        </p>
 
-                        <a href="#top" className="font-semibold text-(--accent)" aria-label="Revenir en haut de page">
-                            Revenir en haut ↑
+                        <a href="#top" className="font-semibold text-(--accent)" aria-label={footerContent.legal.backToTopAriaLabel}>
+                            {footerContent.legal.backToTopLabel}
                         </a>
                     </div>
                 </div>

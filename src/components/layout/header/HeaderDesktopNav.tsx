@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { ArrowUpRight, Download } from 'lucide-react';
 
 import { cn } from '@/lib/cn';
-import { BRAND, NAV, type NavItem } from './header.data';
+import { headerContent, primaryNavigation } from '@/content/navigation';
 
 type HeaderDesktopNavProps = {
     isActive: (href: string) => boolean;
@@ -13,13 +13,13 @@ type HeaderDesktopNavProps = {
 
 export function HeaderDesktopNav({ isActive }: HeaderDesktopNavProps) {
     return (
-        <nav aria-label="Navigation principale" className="header-desktop-nav">
+        <nav aria-label={headerContent.desktopNavAriaLabel} className="header-desktop-nav">
             <div className="grid grid-cols-[1fr_auto] items-center gap-6 border-t py-4" style={{ borderColor: 'color-mix(in oklab, var(--sage) 22%, transparent)' }}>
                 <div
                     className="grid grid-cols-4 overflow-hidden rounded-[1.4rem] border bg-(--surface-1)"
                     style={{ borderColor: 'color-mix(in oklab, var(--sage) 26%, transparent)' }}
                 >
-                    {NAV.map((item: NavItem, index) => {
+                    {primaryNavigation.map((item, index) => {
                         const active = isActive(item.href);
 
                         return (
@@ -60,9 +60,9 @@ export function HeaderDesktopNav({ isActive }: HeaderDesktopNavProps) {
 
                 <div className="flex items-center gap-3">
                     <Link
-                        href={BRAND.resumeHref}
+                        href={headerContent.resumeHref}
                         target="_blank"
-                        rel="noreferrer"
+                        rel="noopener noreferrer"
                         className="inline-flex min-h-16 items-center gap-2 rounded-[1.4rem] border px-5 text-xs font-bold uppercase tracking-[0.16em] text-(--text-strong)"
                         style={{
                             borderColor: 'color-mix(in oklab, var(--gold) 46%, transparent)',
@@ -70,7 +70,7 @@ export function HeaderDesktopNav({ isActive }: HeaderDesktopNavProps) {
                         }}
                     >
                         <Download size={16} />
-                        CV
+                        {headerContent.resumeLabel}
                     </Link>
 
                     <Link
@@ -80,7 +80,7 @@ export function HeaderDesktopNav({ isActive }: HeaderDesktopNavProps) {
                             background: 'linear-gradient(135deg, var(--accent), color-mix(in oklab, var(--accent) 78%, var(--ink)))',
                         }}
                     >
-                        Contact
+                        {headerContent.contactLabel}
                         <ArrowUpRight size={16} />
                     </Link>
                 </div>

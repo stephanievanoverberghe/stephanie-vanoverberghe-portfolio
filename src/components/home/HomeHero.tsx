@@ -1,5 +1,3 @@
-// src/components/home/HomeHero.tsx
-
 'use client';
 
 import Image from 'next/image';
@@ -7,7 +5,8 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, Download } from 'lucide-react';
 
-import { prefaceContent } from '@/content/preface';
+import { homeHeroContent } from '@/content/home';
+import { siteProfile } from '@/content/site';
 
 const fadeUp = {
     hidden: { opacity: 0, y: 14 },
@@ -31,19 +30,19 @@ export default function HomeHero() {
             >
                 <div>
                     <motion.p variants={fadeUp} className="text-xs font-bold uppercase tracking-[0.28em] text-(--gold)">
-                        {prefaceContent.title} · {prefaceContent.availability}
+                        {homeHeroContent.title} · {homeHeroContent.availability}
                     </motion.p>
 
                     <motion.h1 variants={fadeUp} className="mt-5 max-w-3xl text-[clamp(2.7rem,5.6vw,5.6rem)] font-semibold leading-[0.95] tracking-[-0.07em] text-(--text-strong)">
-                        {prefaceContent.heroTitle.first}
+                        {homeHeroContent.heroTitle.first}
                         <br />
-                        {prefaceContent.heroTitle.second}
+                        {homeHeroContent.heroTitle.second}
                         <br />
-                        <span className="italic text-(--accent)">{prefaceContent.heroTitle.third}</span>
+                        <span className="italic text-(--accent)">{homeHeroContent.heroTitle.third}</span>
                     </motion.h1>
 
                     <motion.p variants={fadeUp} className="mt-6 max-w-2xl text-base leading-7 text-(--text)">
-                        {prefaceContent.intro}
+                        {homeHeroContent.intro}
                     </motion.p>
 
                     <motion.div variants={fadeUp} className="mt-7 flex flex-wrap gap-3">
@@ -54,7 +53,7 @@ export default function HomeHero() {
                                 background: 'linear-gradient(135deg, var(--accent), color-mix(in oklab, var(--accent) 78%, var(--ink)))',
                             }}
                         >
-                            {prefaceContent.heroCtaPrimary}
+                            {homeHeroContent.heroCtaPrimary}
                             <ArrowRight size={17} />
                         </Link>
 
@@ -69,7 +68,7 @@ export default function HomeHero() {
                             }}
                         >
                             <Download size={17} />
-                            {prefaceContent.heroCtaSecondary}
+                            {homeHeroContent.heroCtaSecondary}
                         </a>
                     </motion.div>
                 </div>
@@ -77,23 +76,16 @@ export default function HomeHero() {
                 <motion.aside variants={fadeUp} className="hidden lg:block">
                     <div className="rounded-[1.8rem] border border-(--border-soft) bg-(--paper) p-5">
                         <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-full border-2 border-(--gold)">
-                            <Image
-                                src="/images/stephanie-vanoverberghe.webp"
-                                alt={`Portrait de ${prefaceContent.profileName}`}
-                                fill
-                                sizes="96px"
-                                className="object-cover"
-                                priority
-                            />
+                            <Image src={siteProfile.avatar.src} alt={siteProfile.avatar.alt} fill sizes="96px" className="object-cover" priority />
                         </div>
 
-                        <p className="mt-5 text-center text-xs font-bold uppercase tracking-[0.18em] text-(--text-strong)">{prefaceContent.profileName}</p>
+                        <p className="mt-5 text-center text-xs font-bold uppercase tracking-[0.18em] text-(--text-strong)">{homeHeroContent.profileName}</p>
 
-                        <p className="mt-2 text-center text-xs font-bold uppercase tracking-[0.16em] text-(--accent)">{prefaceContent.profileRole}</p>
+                        <p className="mt-2 text-center text-xs font-bold uppercase tracking-[0.16em] text-(--accent)">{homeHeroContent.profileRole}</p>
 
                         <div className="mx-auto mt-5 h-px w-20 bg-(--gold)" />
 
-                        <p className="mt-5 text-center text-sm italic leading-6 text-(--text-muted)">“{prefaceContent.quote}”</p>
+                        <p className="mt-5 text-center text-sm italic leading-6 text-(--text)">“{homeHeroContent.quote}”</p>
                     </div>
                 </motion.aside>
             </motion.div>

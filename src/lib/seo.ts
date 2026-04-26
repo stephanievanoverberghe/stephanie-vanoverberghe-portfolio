@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
+import { siteMeta } from '@/content/site';
 
-const DEFAULT_OG_IMAGE = '/og-cover.webp';
-const SITE_NAME = 'Portfolio — Vanoverberghe Stéphanie';
+const DEFAULT_OG_IMAGE = siteMeta.ogImage;
 
 type PageMetadataArgs = {
     title: string;
@@ -20,7 +20,7 @@ export function buildPageMetadata({ title, description, canonical, image = DEFAU
             title,
             description,
             url: canonical,
-            siteName: SITE_NAME,
+            siteName: siteMeta.siteName,
             images: [{ url: image, width: 1200, height: 630, alt: title }],
         },
         twitter: {

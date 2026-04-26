@@ -5,7 +5,7 @@ export const contactContent: ContactContent = {
     kicker: 'Contact',
     responseDelay: 'Disponible pour échanger',
     title: 'Et maintenant ?',
-    intro: 'Vous avez mes coordonnées, j’ai la motivation. Si mon profil vous parle, je serais ravie d’échanger avec vous autour d’une opportunité front-end React / Next.js.',
+    intro: 'Vous avez mes coordonnées, j’ai la motivation. Si mon profil vous parle, je serais ravie d’échanger avec vous autour d’une opportunité frontend React / Next.js.',
     quickResponseTitle: 'À très bientôt',
     quickResponseText: 'Je réponds avec plaisir aux messages liés à une opportunité CDI, une alternance d’évolution ou un échange professionnel.',
     actions: [
