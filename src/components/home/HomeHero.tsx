@@ -31,7 +31,7 @@ export default function HomeHero() {
             >
                 <div>
                     <motion.p variants={fadeUp} className="text-xs font-bold uppercase tracking-[0.28em] text-(--gold)">
-                        {prefaceContent.heroKicker}
+                        {prefaceContent.title} · {prefaceContent.availability}
                     </motion.p>
 
                     <motion.h1 variants={fadeUp} className="mt-5 max-w-3xl text-[clamp(2.7rem,5.6vw,5.6rem)] font-semibold leading-[0.95] tracking-[-0.07em] text-(--text-strong)">
