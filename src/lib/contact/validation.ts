@@ -1,11 +1,4 @@
-export type ContactPayload = {
-    name: string;
-    email: string;
-    subject: string;
-    message: string;
-    company: string;
-    formStartedAt: number;
-};
+import type { ContactPayload } from '@/types/contact';
 
 function isEmail(value: string): boolean {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);

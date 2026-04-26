@@ -1,8 +1,9 @@
-// src/components/contact/ContactForm.tsx
 'use client';
 
 import * as React from 'react';
 import { Send } from 'lucide-react';
+
+import { useContactForm } from '@/hooks/useContactForm';
 
 function cn(...parts: Array<string | false | null | undefined>) {
     return parts.filter(Boolean).join(' ');
@@ -44,64 +45,14 @@ function TextareaBase(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) 
     );
 }
 
-type Status = { state: 'idle' } | { state: 'loading' } | { state: 'success' } | { state: 'error'; message: string };
-
 /**
  * Formulaire de contact côté client.
  *
- * Points métier notables :
- * - envoie `formStartedAt` pour permettre un contrôle anti-bot côté API ;
- * - conserve un honeypot (`company`) invisible afin de filtrer des robots simples ;
- * - expose un statut explicite pour fiabiliser le feedback utilisateur.
+ * L'affichage reste local à ce composant, tandis que la logique métier
+ * (state + soumission) est externalisée dans `useContactForm`.
  */
 export default function ContactForm() {
-    const [formStartedAt] = React.useState(() => Date.now());
-    const [name, setName] = React.useState('');
-    const [email, setEmail] = React.useState('');
-    const [subject, setSubject] = React.useState('Demande de contact');
-    const [message, setMessage] = React.useState('');
-
-    // honeypot
-    const [company, setCompany] = React.useState('');
-
-    const [status, setStatus] = React.useState<Status>({ state: 'idle' });
-    const statusMessage =
-        status.state === 'loading'
-            ? 'Envoi du message en cours.'
-            : status.state === 'success'
-              ? 'Message envoyé avec succès. Je reviens vers vous rapidement.'
-              : status.state === 'error'
-                ? `Erreur lors de l’envoi : ${status.message}`
-                : '';
-
-    /**
-     * Soumet le formulaire à l'API interne en gardant un UX robuste
-     * (état loading, erreurs réseau et erreurs métier distinctes).
-     */
-    async function onSubmit(e: React.FormEvent) {
-        e.preventDefault();
-        setStatus({ state: 'loading' });
-
-        try {
-            const res = await fetch('/api/contact', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email, subject, message, company, formStartedAt }),
-            });
-
-            const data = (await res.json()) as { ok: boolean; error?: string };
-
-            if (!res.ok || !data.ok) {
-                setStatus({ state: 'error', message: data.error ?? 'Erreur lors de l’envoi.' });
-                return;
-            }
-
-            setStatus({ state: 'success' });
-            setMessage('');
-        } catch {
-            setStatus({ state: 'error', message: 'Impossible de contacter le serveur.' });
-        }
-    }
+    const { values, status, statusMessage, updateField, onSubmit } = useContactForm();
 
     return (
         <form onSubmit={onSubmit} className="panel p-6 sm:p-8">
@@ -119,16 +70,15 @@ export default function ContactForm() {
                 </div>
             </div>
 
-            {/* honeypot */}
             <div className="hidden" aria-hidden>
                 <label htmlFor="company">Company</label>
-                <input id="company" value={company} onChange={(e) => setCompany(e.target.value)} />
+                <input id="company" value={values.company} onChange={(e) => updateField('company', e.target.value)} />
             </div>
 
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
                 <div className="grid gap-2">
                     <FieldLabel htmlFor="name">Nom</FieldLabel>
-                    <InputBase id="name" value={name} onChange={(e) => setName(e.target.value)} required placeholder="Ex : Marie Dupont" autoComplete="name" />
+                    <InputBase id="name" value={values.name} onChange={(e) => updateField('name', e.target.value)} required placeholder="Ex : Marie Dupont" autoComplete="name" />
                 </div>
 
                 <div className="grid gap-2">
@@ -136,8 +86,8 @@ export default function ContactForm() {
                     <InputBase
                         id="email"
                         type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        value={values.email}
+                        onChange={(e) => updateField('email', e.target.value)}
                         required
                         placeholder="Ex : marie@domaine.com"
                         autoComplete="email"
@@ -147,22 +97,21 @@ export default function ContactForm() {
 
             <div className="mt-4 grid gap-2">
                 <FieldLabel htmlFor="subject">Sujet</FieldLabel>
-                <InputBase id="subject" value={subject} onChange={(e) => setSubject(e.target.value)} />
+                <InputBase id="subject" value={values.subject} onChange={(e) => updateField('subject', e.target.value)} />
             </div>
 
             <div className="mt-4 grid gap-2">
                 <FieldLabel htmlFor="message">Message</FieldLabel>
                 <TextareaBase
                     id="message"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
+                    value={values.message}
+                    onChange={(e) => updateField('message', e.target.value)}
                     required
                     rows={7}
                     placeholder="Contexte, objectifs, contraintes, liens (si besoin)…"
                 />
             </div>
 
-            {/* Alerts */}
             {status.state === 'error' ? (
                 <div
                     className="mt-4 rounded-2xl border px-4 py-3 text-sm border-(--border-soft) bg-(--gold/10) text-(--text) outline-(--ring-focus)"

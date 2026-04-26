@@ -1,11 +1,12 @@
-// src/components/contact/ContactAside.tsx
-import { Mail, Phone, FileText, Github, Linkedin, ArrowRight } from 'lucide-react';
+import { ArrowRight, type LucideIcon } from 'lucide-react';
+
+import { CONTACT_ACTIONS } from '@/content/contact';
 
 function cn(...parts: Array<string | false | null | undefined>) {
     return parts.filter(Boolean).join(' ');
 }
 
-function ActionCard({ href, icon, title, desc, external }: { href: string; icon: React.ReactNode; title: string; desc?: string; external?: boolean }) {
+function ActionCard({ href, icon: Icon, title, desc, external }: { href: string; icon: LucideIcon; title: string; desc?: string; external?: boolean }) {
     return (
         <a
             href={href}
@@ -19,7 +20,7 @@ function ActionCard({ href, icon, title, desc, external }: { href: string; icon:
                         aria-hidden
                         className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-(--border-soft) bg-(color-mix(in oklab, var(--surface-2) 52%, var(--surface-1))) text-(--text-strong)"
                     >
-                        {icon}
+                        <Icon size={18} aria-hidden />
                     </span>
 
                     <div>
@@ -41,25 +42,18 @@ export default function ContactAside() {
                 <h3 className="text-sm font-semibold text-(--text-strong)">Contact direct</h3>
 
                 <div className="mt-4 grid gap-3">
-                    <ActionCard
-                        href="mailto:stephanie-vanoverberghe@outlook.fr"
-                        icon={<Mail size={18} aria-hidden />}
-                        title="Email direct"
-                        desc="stephanie-vanoverberghe@outlook.fr"
-                    />
-                    <ActionCard href="tel:+33624874771" icon={<Phone size={18} aria-hidden />} title="Téléphone" desc="06 24 87 47 71" />
-                    <ActionCard
-                        href="https://www.linkedin.com/in/stephanie-vanoverberghe/"
-                        external
-                        icon={<Linkedin size={18} aria-hidden />}
-                        title="LinkedIn"
-                        desc="Message / opportunités"
-                    />
-                    <ActionCard href="https://github.com/stephanievanoverberghe" external icon={<Github size={18} aria-hidden />} title="GitHub" desc="Code & projets" />
-                    <ActionCard href="/cv-vanoverberghe-stephanie.pdf" external icon={<FileText size={18} aria-hidden />} title="CV (PDF)" desc="Téléchargement" />
+                    {CONTACT_ACTIONS.map((action) => (
+                        <ActionCard
+                            key={`${action.title}-${action.href}`}
+                            href={action.href}
+                            icon={action.icon}
+                            title={action.title}
+                            desc={action.description}
+                            external={action.external}
+                        />
+                    ))}
                 </div>
 
-                {/* bloc simple, pro, sans “API” */}
                 <div className="mt-4 rounded-2xl border p-4 text-sm border-(--border-soft) bg-(--surface-1)">
                     <div className="font-semibold text-(--text-strong)">Réponse rapide</div>
                     <div className="mt-1 opacity-80">Je réponds sous 24–48h (jours ouvrés).</div>
