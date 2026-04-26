@@ -1,6 +1,6 @@
 import { ArrowRight, type LucideIcon } from 'lucide-react';
 
-import { CONTACT_ACTIONS } from '@/content/contact';
+import { contactContent } from '@/content/contact';
 import { cn } from '@/lib/cn';
 
 function ActionCard({ href, icon: Icon, title, desc, external }: { href: string; icon: LucideIcon; title: string; desc?: string; external?: boolean }) {
@@ -39,7 +39,7 @@ export default function ContactAside() {
                 <h3 className="text-sm font-semibold text-(--text-strong)">Contact direct</h3>
 
                 <div className="mt-4 grid gap-3">
-                    {CONTACT_ACTIONS.map((action) => (
+                    {contactContent.actions.map((action) => (
                         <ActionCard
                             key={`${action.title}-${action.href}`}
                             href={action.href}
@@ -52,8 +52,8 @@ export default function ContactAside() {
                 </div>
 
                 <div className="mt-4 rounded-2xl border p-4 text-sm border-(--border-soft) bg-(--surface-1)">
-                    <div className="font-semibold text-(--text-strong)">Réponse rapide</div>
-                    <div className="mt-1 opacity-80">Je réponds sous 24–48h (jours ouvrés).</div>
+                    <div className="font-semibold text-(--text-strong)">{contactContent.quickResponseTitle}</div>
+                    <div className="mt-1 opacity-80">{contactContent.quickResponseText}</div>
                 </div>
             </div>
         </aside>

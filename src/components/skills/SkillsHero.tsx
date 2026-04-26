@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Chip from '@/components/ui/Chip';
+import { whyMeContent } from '@/content/why-me';
 
 function Kicker({ children }: { children: React.ReactNode }) {
     return <span className="text-xs uppercase tracking-[0.14em] text-(--accent)">{children}</span>;
@@ -23,34 +24,27 @@ export default function SkillsHero() {
     return (
         <header className="relative overflow-hidden rounded-2xl border p-6 sm:p-10 border-(--border-soft) bg-(--surface-1) shadow-(--shadow-card)">
             <div className="relative space-y-6">
-                {/* Intro (kicker + titre + texte) */}
                 <div className="space-y-2">
-                    <Kicker>Expertises</Kicker>
+                    <Kicker>{whyMeContent.kicker}</Kicker>
 
                     <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-(--text-strong)">
-                        Front-end React/Next.js
-                        <span className="opacity-70"> · UI/UX · Performance</span>
+                        {whyMeContent.title}
+                        <span className="opacity-70"> · {whyMeContent.subtitle}</span>
                     </h1>
 
-                    <p className="opacity-80 max-w-[80ch]">
-                        Je construis des interfaces scannables et rassurantes, avec une exécution front solide : composants réutilisables, design system léger, accessibilité, SEO
-                        et perf.
-                    </p>
+                    <p className="opacity-80 max-w-[80ch]">{whyMeContent.intro}</p>
                 </div>
 
                 <div className="hr-soft" />
 
-                {/* Contenu bento (exact logique HomeHero : 2 colonnes) */}
                 <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
-                    {/* left */}
                     <div className="space-y-5">
                         <div className="flex flex-wrap gap-2">
-                            <Chip kind="tech">React</Chip>
-                            <Chip kind="tech">Next.js</Chip>
-                            <Chip kind="tech">TypeScript</Chip>
-                            <Chip kind="design">UI/UX</Chip>
-                            <Chip kind="architecture">Perf/SEO</Chip>
-                            <Chip kind="tool">Git/Vercel</Chip>
+                            {whyMeContent.chips.map((chip) => (
+                                <Chip key={chip.label} kind={chip.kind}>
+                                    {chip.label}
+                                </Chip>
+                            ))}
                         </div>
 
                         <div
@@ -59,21 +53,15 @@ export default function SkillsHero() {
                                 background: 'color-mix(in oklab, var(--surface-2) 54%, var(--surface-1))',
                             }}
                         >
-                            <div className="text-sm font-semibold text-(--text-strong)">Ce que j’apporte</div>
+                            <div className="text-sm font-semibold text-(--text-strong)">{whyMeContent.contributionTitle}</div>
 
                             <ul className="mt-3 space-y-2 text-sm opacity-85">
-                                <li className="flex gap-2">
-                                    <span aria-hidden>•</span>
-                                    <span>Interfaces lisibles, hiérarchie claire, CTA “juste”.</span>
-                                </li>
-                                <li className="flex gap-2">
-                                    <span aria-hidden>•</span>
-                                    <span>Composants réutilisables + tokens (design system léger).</span>
-                                </li>
-                                <li className="flex gap-2">
-                                    <span aria-hidden>•</span>
-                                    <span>Perf et accessibilité intégrées dès le départ.</span>
-                                </li>
+                                {whyMeContent.sections.map((section) => (
+                                    <li key={section.icon} className="flex gap-2">
+                                        <span aria-hidden>•</span>
+                                        <span>{section.text}</span>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
 
@@ -87,11 +75,10 @@ export default function SkillsHero() {
                         </div>
                     </div>
 
-                    {/* right */}
                     <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-                        <Stat label="Approche" value="Mobile-first & scannable" />
-                        <Stat label="Qualité" value="A11y · SEO · Perf" />
-                        <Stat label="Style" value="UI premium & sobre" />
+                        {whyMeContent.stats.map((stat) => (
+                            <Stat key={stat.label} label={stat.label} value={stat.value} />
+                        ))}
                     </div>
                 </div>
             </div>

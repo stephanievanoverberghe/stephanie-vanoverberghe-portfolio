@@ -1,6 +1,6 @@
-// src/components/skills/SkillsProjectsBento.tsx
 import type { Project } from '@/lib/projects';
 import SkillsProjectTile from '@/components/skills/SkillsProjectTile';
+import { visionContent } from '@/content/vision';
 
 type Props = {
     projects: Project[];
@@ -48,11 +48,10 @@ export default function SkillsProjectsBento({ projects }: Props) {
     return (
         <section className="space-y-5">
             <div className="space-y-2">
-                <span className="text-xs uppercase tracking-[0.14em] text-(--accent)">Études de cas</span>
-                <h2 className="text-lg font-semibold text-(--text-strong)">Mise en pratique sur projets réels</h2>
-                <p className="text-sm opacity-80 max-w-[85ch]">
-                    Chaque projet illustre une capacité : clarifier un parcours, exécuter une UI premium, et garder une base technique propre (perf/SEO/a11y).
-                </p>
+                <span className="text-xs uppercase tracking-[0.14em] text-(--accent)">{visionContent.kicker}</span>
+                <h2 className="text-lg font-semibold text-(--text-strong)">{visionContent.title}</h2>
+                <p className="text-sm opacity-80 max-w-[85ch]">{visionContent.intro}</p>
+                <p className="text-sm italic opacity-75">{visionContent.quote}</p>
             </div>
 
             <div className="grid gap-6 lg:grid-cols-3">

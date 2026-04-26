@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
-import { HERO } from './home.data';
+import { prefaceContent } from '@/content/preface';
 
 function Badge({ children }: { children: React.ReactNode }) {
     return (
@@ -40,7 +40,6 @@ export default function HomeHero() {
     return (
         <header className="relative overflow-hidden rounded-2xl border p-6 sm:p-10 border-(--border-soft) bg-(--surface-1) shadow-(--shadow-card)">
             <div className="relative grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-                {/* Col gauche */}
                 <div>
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
@@ -48,10 +47,10 @@ export default function HomeHero() {
                         transition={{ duration: 0.35, ease: [0.22, 0.61, 0.36, 1] }}
                         className="flex flex-wrap items-center gap-3"
                     >
-                        <Badge>Open to work</Badge>
+                        <Badge>{prefaceContent.title}</Badge>
                         <span className="inline-flex items-center gap-2 text-xs font-semibold opacity-80">
                             <Sparkles size={14} aria-hidden />
-                            Disponible — React/Next.js
+                            {prefaceContent.availability}
                         </span>
                     </motion.div>
 
@@ -61,7 +60,7 @@ export default function HomeHero() {
                         transition={{ duration: 0.42, delay: 0.05, ease: [0.22, 0.61, 0.36, 1] }}
                         className="mt-4 text-[1.9rem] sm:text-5xl font-semibold leading-[1.05] text-(--text-strong)"
                     >
-                        {HERO.role} <span className="text-gradient-accent">UI/UX · Perf · A11y</span>
+                        {prefaceContent.role} <span className="text-gradient-accent">UI/UX · Perf · A11y</span>
                     </motion.h1>
 
                     <motion.p
@@ -70,7 +69,7 @@ export default function HomeHero() {
                         transition={{ duration: 0.42, delay: 0.12, ease: [0.22, 0.61, 0.36, 1] }}
                         className="mt-4 text-base sm:text-lg max-w-[70ch] opacity-90"
                     >
-                        {HERO.pitch}
+                        {prefaceContent.intro}
                     </motion.p>
 
                     <motion.ul
@@ -79,15 +78,15 @@ export default function HomeHero() {
                         transition={{ duration: 0.42, delay: 0.18, ease: [0.22, 0.61, 0.36, 1] }}
                         className="mt-6 grid gap-2 sm:grid-cols-3 text-sm"
                     >
-                        {HERO.bullets.map((t) => (
+                        {prefaceContent.sections.map((section) => (
                             <li
-                                key={t}
+                                key={section.icon}
                                 className="rounded-xl border px-3 py-2 border-(--border-soft)"
                                 style={{
                                     background: 'color-mix(in oklab, var(--surface-2) 60%, var(--surface-1))',
                                 }}
                             >
-                                {t}
+                                {section.text}
                             </li>
                         ))}
                     </motion.ul>
@@ -110,7 +109,6 @@ export default function HomeHero() {
                     </motion.div>
                 </div>
 
-                {/* Col droite */}
                 <motion.aside
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -133,15 +131,20 @@ export default function HomeHero() {
                         </div>
 
                         <div>
-                            <div className="text-sm font-semibold text-(--text-strong)">Vanoverberghe Stéphanie</div>
-                            <div className="text-sm opacity-80">React · Next.js · TypeScript</div>
+                            <div className="text-sm font-semibold text-(--text-strong)">{prefaceContent.profileName}</div>
+                            <div className="text-sm opacity-80">{prefaceContent.profileStack}</div>
                         </div>
                     </div>
 
                     <div className="mt-5 grid gap-3">
-                        {HERO.stats.map((s) => (
+                        {prefaceContent.stats.map((s) => (
                             <Stat key={s.label} label={s.label} value={s.value} />
                         ))}
+                    </div>
+
+                    <div className="mt-5 rounded-2xl border p-4 text-sm border-(--border-soft) bg-(--surface-1)">
+                        <div className="font-semibold text-(--text-strong)">Vision</div>
+                        <div className="mt-1 opacity-80">{prefaceContent.quote}</div>
                     </div>
 
                     <div className="mt-5 flex flex-wrap gap-2">

@@ -1,4 +1,3 @@
-// src/components/skills/SkillsBento.tsx
 import { Code2, LayoutGrid, Workflow, Boxes } from 'lucide-react';
 import Chip from '@/components/ui/Chip';
 

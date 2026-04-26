@@ -7,6 +7,7 @@ import { Sparkles } from 'lucide-react';
 import ContactForm from '@/components/contact/ContactForm';
 import ContactAside from '@/components/contact/ContactAside';
 import { buildPageMetadata } from '@/lib/seo';
+import { contactContent } from '@/content/contact';
 
 export const metadata: Metadata = buildPageMetadata({
     title: 'Contact — Vanoverberghe Stéphanie',
@@ -25,16 +26,16 @@ export default function ContactPage() {
             <header className="relative overflow-hidden rounded-2xl border p-6 sm:p-10 bg-(--surface-1) border-(--border-soft) shadow-card">
                 <div className="relative space-y-4">
                     <div className="flex flex-wrap items-center gap-3">
-                        <Kicker>Contact</Kicker>
+                        <Kicker>{contactContent.kicker}</Kicker>
                         <span className="inline-flex items-center gap-2 text-xs font-semibold opacity-80">
                             <Sparkles size={14} aria-hidden />
-                            Réponse sous 24–48h
+                            {contactContent.responseDelay}
                         </span>
                     </div>
 
-                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-(--text-strong)">Me contacter</h1>
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-(--text-strong)">{contactContent.title}</h1>
 
-                    <p className="opacity-85 max-w-[75ch]">Un projet, une opportunité, une question ? Laisse-moi un message — je reviens vers toi rapidement.</p>
+                    <p className="opacity-85 max-w-[75ch]">{contactContent.intro}</p>
 
                     <div className="pt-2">
                         <div className="hr-soft" />

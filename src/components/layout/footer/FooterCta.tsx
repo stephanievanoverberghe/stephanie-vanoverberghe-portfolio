@@ -1,7 +1,6 @@
-// src/components/layout/footer/FooterCta.tsx
-
 import Link from 'next/link';
 import { FOOTER } from './footer.data';
+import { collaborationContent } from '@/content/collaboration';
 
 export function FooterCta() {
     return (
@@ -15,16 +14,16 @@ export function FooterCta() {
 
             <div className="relative grid items-center gap-6 sm:grid-cols-2">
                 <div>
-                    <h2 className="text-xl sm:text-2xl font-semibold text-(--text-strong)">Travaillons ensemble</h2>
-                    <p className="mt-2 opacity-80">Je recherche un poste front-end React/Next.js. Je suis disponible pour échanger rapidement.</p>
+                    <h2 className="text-xl sm:text-2xl font-semibold text-(--text-strong)">{collaborationContent.title}</h2>
+                    <p className="mt-2 opacity-80">{collaborationContent.intro}</p>
                 </div>
 
                 <div className="flex flex-wrap gap-3 sm:justify-end">
                     <Link href="/contact" className="btn btn-cta text-(--surface-1)">
-                        Me contacter
+                        {collaborationContent.ctaPrimary}
                     </Link>
                     <a href={FOOTER.cvHref} className="btn btn-secondary" target="_blank" rel="noopener noreferrer">
-                        Télécharger mon CV
+                        {collaborationContent.ctaSecondary}
                     </a>
                 </div>
             </div>
