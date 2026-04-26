@@ -70,7 +70,7 @@ export function HeaderMobileMenu({ open, onClose, isActive }: { open: boolean; o
                                     <motion.div variants={item} className="mt-2">
                                         <Link href="/contact" onClick={onClose} className="btn btn-cta w-full inline-flex items-center justify-center gap-2 text-(--surface-1)">
                                             <Mail size={16} />
-                                            Me contacter / CV
+                                            Me contacter
                                         </Link>
                                     </motion.div>
                                 </motion.div>

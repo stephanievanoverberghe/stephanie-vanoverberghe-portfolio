@@ -1,5 +1,5 @@
 // src/components/contact/ContactAside.tsx
-import { Mail, Github, Linkedin, ArrowRight } from 'lucide-react';
+import { Mail, Phone, FileText, Github, Linkedin, ArrowRight } from 'lucide-react';
 
 function cn(...parts: Array<string | false | null | undefined>) {
     return parts.filter(Boolean).join(' ');
@@ -42,6 +42,13 @@ export default function ContactAside() {
 
                 <div className="mt-4 grid gap-3">
                     <ActionCard
+                        href="mailto:stephanie-vanoverberghe@outlook.fr"
+                        icon={<Mail size={18} aria-hidden />}
+                        title="Email direct"
+                        desc="stephanie-vanoverberghe@outlook.fr"
+                    />
+                    <ActionCard href="tel:+33624874771" icon={<Phone size={18} aria-hidden />} title="Téléphone" desc="06 24 87 47 71" />
+                    <ActionCard
                         href="https://www.linkedin.com/in/stephanie-vanoverberghe/"
                         external
                         icon={<Linkedin size={18} aria-hidden />}
@@ -49,7 +56,7 @@ export default function ContactAside() {
                         desc="Message / opportunités"
                     />
                     <ActionCard href="https://github.com/stephanievanoverberghe" external icon={<Github size={18} aria-hidden />} title="GitHub" desc="Code & projets" />
-                    <ActionCard href="/cv-vanoverberghe-stephanie.pdf" external icon={<Mail size={18} aria-hidden />} title="CV (PDF)" desc="Téléchargement" />
+                    <ActionCard href="/cv-vanoverberghe-stephanie.pdf" external icon={<FileText size={18} aria-hidden />} title="CV (PDF)" desc="Téléchargement" />
                 </div>
 
                 {/* bloc simple, pro, sans “API” */}

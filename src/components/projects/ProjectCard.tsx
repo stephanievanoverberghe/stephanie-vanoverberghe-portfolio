@@ -89,7 +89,7 @@ export default function ProjectCard({ project }: { project: Project }) {
 
                             <span
                                 className="hidden sm:inline-flex shrink-0 rounded-full border px-3 py-1 text-xs font-semibold border-(--border-soft) text-(--text-strong) bg-(--surface-1)"
-                                style={{ background: 'color-mix(in oklab, var(--surface-2) 55%' }}
+                                style={{ background: 'color-mix(in oklab, var(--surface-2) 55%, var(--surface-1))' }}
                             >
                                 Lire →
                             </span>
