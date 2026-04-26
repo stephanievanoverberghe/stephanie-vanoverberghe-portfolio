@@ -13,10 +13,10 @@ type HeaderDesktopNavProps = {
 
 export function HeaderDesktopNav({ isActive }: HeaderDesktopNavProps) {
     return (
-        <nav aria-label="Navigation principale" className="hidden lg:block">
+        <nav aria-label="Navigation principale" className="header-desktop-nav">
             <div className="grid grid-cols-[1fr_auto] items-center gap-6 border-t py-4" style={{ borderColor: 'color-mix(in oklab, var(--sage) 22%, transparent)' }}>
                 <div
-                    className="grid grid-cols-5 overflow-hidden rounded-[1.4rem] border bg-(--surface-1)"
+                    className="grid grid-cols-4 overflow-hidden rounded-[1.4rem] border bg-(--surface-1)"
                     style={{ borderColor: 'color-mix(in oklab, var(--sage) 26%, transparent)' }}
                 >
                     {NAV.map((item: NavItem, index) => {

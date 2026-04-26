@@ -14,7 +14,7 @@ export function HeaderBrand() {
 
             <span className="hidden min-w-0 sm:block">
                 <span className="block text-sm font-semibold uppercase tracking-[0.22em] text-(--text-strong)">Stéphanie</span>
-                <span className="mt-1 block text-[11px] font-bold uppercase tracking-[0.18em] text-(--accent)">Frontend Developer</span>
+                <span className="mt-1 block text-[11px] font-bold uppercase tracking-[0.18em] text-(--accent)">Développeuse Frontend</span>
             </span>
         </Link>
     );

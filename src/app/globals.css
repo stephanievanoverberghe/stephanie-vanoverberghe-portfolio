@@ -84,6 +84,30 @@ a:hover {
   padding-inline: 1rem;
 }
 
+/* Header visibility fallback (desktop/mobile) */
+.header-desktop-nav {
+  display: none;
+}
+
+.header-mobile-toggle {
+  display: inline-flex;
+}
+
+.header-mobile-menu {
+  display: block;
+}
+
+@media (min-width: 1024px) {
+  .header-desktop-nav {
+    display: block;
+  }
+
+  .header-mobile-toggle,
+  .header-mobile-menu {
+    display: none;
+  }
+}
+
 @media (min-width: 640px) {
   .container-page {
     padding-inline: 1.5rem;

@@ -5,7 +5,6 @@ export const NAV = [
     { href: '/projects', label: 'Projets' },
     { href: '/skills', label: 'Compétences' },
     { href: '/about', label: 'À propos' },
-    { href: '/contact', label: 'Contact' },
 ] as const;
 
 export type NavItem = (typeof NAV)[number];

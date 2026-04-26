@@ -61,7 +61,7 @@ export default function Header() {
                             aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
                             aria-expanded={open}
                             aria-controls="primary-mobile-nav"
-                            className="inline-flex items-center gap-2 rounded-full border px-4 py-2.5 text-xs font-bold uppercase tracking-[0.18em] text-(--text-strong) lg:hidden"
+                            className="header-mobile-toggle inline-flex items-center gap-2 rounded-full border px-4 py-2.5 text-xs font-bold uppercase tracking-[0.18em] text-(--text-strong)"
                             style={{
                                 borderColor: 'color-mix(in oklab, var(--sage) 35%, transparent)',
                                 background: 'var(--surface-1)',

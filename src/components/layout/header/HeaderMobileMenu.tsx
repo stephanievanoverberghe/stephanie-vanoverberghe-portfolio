@@ -18,7 +18,7 @@ export function HeaderMobileMenu({ open, onClose, isActive }: HeaderMobileMenuPr
             {open && (
                 <>
                     <motion.div
-                        className="fixed inset-0 z-40 bg-(--ink)/45 backdrop-blur-sm lg:hidden"
+                        className="header-mobile-menu fixed inset-0 z-40 bg-(--ink)/45 backdrop-blur-sm"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -28,14 +28,14 @@ export function HeaderMobileMenu({ open, onClose, isActive }: HeaderMobileMenuPr
                     <motion.nav
                         id="primary-mobile-nav"
                         aria-label="Navigation mobile"
-                        className="fixed inset-x-0 top-[72px] z-50 px-4 lg:hidden"
+                        className="header-mobile-menu fixed inset-x-0 top-18 z-50 px-4"
                         initial={{ opacity: 0, y: -18 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -18 }}
                         transition={{ duration: 0.24 }}
                     >
                         <div
-                            className="relative overflow-hidden rounded-[2rem] border p-5 shadow-2xl"
+                            className="relative overflow-hidden rounded-4xl border p-5 shadow-2xl"
                             style={{
                                 borderColor: 'color-mix(in oklab, var(--sage) 30%, transparent)',
                                 background: 'var(--paper)',
