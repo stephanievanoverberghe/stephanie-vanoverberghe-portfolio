@@ -1,34 +1,53 @@
 import Chip from '@/components/ui/Chip';
 import type { Project } from '@/lib/projects';
 
-function ListCard({ title, items, tone }: { title: string; items?: string[]; tone: 'accent' | 'sage' | 'lilac' | 'gold' }) {
+type Tone = 'accent' | 'sage' | 'lilac' | 'gold';
+
+function DetailCard({ title, items, tone }: { title: string; items?: string[]; tone: Tone }) {
     if (!items?.length) return null;
 
     return (
-        <section className="panel relative overflow-hidden p-6">
+        <article className="relative overflow-hidden rounded-[1.6rem] border bg-(--surface-1) p-5 shadow-(--shadow-card)" style={{ borderColor: 'var(--border-soft)' }}>
             <span
                 aria-hidden
-                className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full opacity-40"
+                className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full opacity-35"
                 style={{
-                    background: `radial-gradient(circle, color-mix(in oklab, var(--${tone}) 30%, transparent), transparent 62%)`,
+                    background: `radial-gradient(circle, color-mix(in oklab, var(--${tone}) 32%, transparent), transparent 65%)`,
                 }}
             />
 
-            <div className="relative flex items-center justify-between gap-3">
-                <h3 className="section-title text-base">{title}</h3>
+            <div className="relative flex items-center justify-between gap-4">
+                <h3 className="text-sm font-bold uppercase tracking-[0.18em] text-(--text-strong)">{title}</h3>
+
                 <Chip size="xs" color={tone}>
                     {items.length}
                 </Chip>
             </div>
 
-            <ul className="relative mt-4 space-y-2 text-sm text-(--text)">
+            <ul className="relative mt-4 space-y-3 text-sm leading-6 text-(--text)">
                 {items.map((item) => (
-                    <li key={item} className="flex gap-2">
-                        <span aria-hidden>•</span>
+                    <li key={item} className="flex gap-3">
+                        <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-(--accent)" />
                         <span>{item}</span>
                     </li>
                 ))}
             </ul>
+        </article>
+    );
+}
+
+function FeaturedSection({ kicker, title, children, tone = 'accent' }: { kicker: string; title: string; children: React.ReactNode; tone?: Tone }) {
+    return (
+        <section className="relative overflow-hidden rounded-4xl border bg-(--surface-1) p-6 shadow-(--shadow-card) sm:p-8" style={{ borderColor: 'var(--border-soft)' }}>
+            <div aria-hidden className="absolute -right-24 -top-24 h-72 w-72 rounded-full opacity-30 blur-3xl" style={{ background: `var(--${tone})` }} />
+
+            <div className="relative">
+                <p className="text-xs font-bold uppercase tracking-[0.24em] text-(--accent)">{kicker}</p>
+
+                <h2 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-(--text-strong)">{title}</h2>
+
+                <div className="mt-4">{children}</div>
+            </div>
         </section>
     );
 }
@@ -56,103 +75,86 @@ export function hasProjectDetails(project: Project) {
 }
 
 export default function ProjectDetails({ project }: { project: Project }) {
-    const p = project;
-
     if (!hasProjectDetails(project)) return null;
 
     return (
-        <section className="space-y-6">
-            {p.vision ? (
-                <section className="panel p-6">
-                    <div className="flex items-center justify-between gap-3">
-                        <h3 className="section-title text-base">Vision produit</h3>
-                        <Chip size="xs" color="accent">
-                            Positionnement
-                        </Chip>
-                    </div>
-                    <p className="mt-3 text-sm text-(--text)">{p.vision}</p>
-                </section>
+        <section className="space-y-8">
+            {project.vision ? (
+                <FeaturedSection kicker="Vision" title="Intention produit">
+                    <p className="max-w-3xl text-base leading-7 text-(--text)">{project.vision}</p>
+                </FeaturedSection>
             ) : null}
 
-            <div className="grid gap-6 md:grid-cols-3">
-                <ListCard title="Objectifs" items={p.objectives} tone="sage" />
-                <ListCard title="Défis" items={p.challenges} tone="gold" />
-                <ListCard title="Solutions" items={p.solutions} tone="lilac" />
+            <div className="grid gap-5 lg:grid-cols-3">
+                <DetailCard title="Objectifs" items={project.objectives} tone="sage" />
+                <DetailCard title="Défis" items={project.challenges} tone="gold" />
+                <DetailCard title="Solutions" items={project.solutions} tone="lilac" />
             </div>
 
-            {p.highlights?.length ? (
-                <section className="panel p-6">
-                    <div className="flex items-center justify-between gap-3">
-                        <h3 className="section-title text-base">Points forts</h3>
-                        <Chip size="xs" color="accent">
-                            Résultats
-                        </Chip>
-                    </div>
-
-                    <ul className="mt-4 grid gap-2 text-sm text-(--text) sm:grid-cols-2">
-                        {p.highlights.map((item) => (
-                            <li key={item} className="flex gap-2">
-                                <span aria-hidden>•</span>
-                                <span>{item}</span>
-                            </li>
+            {project.highlights?.length ? (
+                <FeaturedSection kicker="Impact" title="Points forts" tone="sage">
+                    <div className="grid gap-3 sm:grid-cols-2">
+                        {project.highlights.map((item) => (
+                            <div
+                                key={item}
+                                className="rounded-2xl border px-4 py-3 text-sm leading-6 text-(--text)"
+                                style={{
+                                    borderColor: 'color-mix(in oklab, var(--sage) 26%, var(--border-soft))',
+                                    background: 'color-mix(in oklab, var(--surface-2) 48%, var(--surface-1))',
+                                }}
+                            >
+                                {item}
+                            </div>
                         ))}
-                    </ul>
-                </section>
+                    </div>
+                </FeaturedSection>
             ) : null}
 
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                <ListCard title="Résultats mesurables" items={p.metrics} tone="accent" />
-                <ListCard title="Décisions techniques marquantes" items={p.notableDecisions} tone="gold" />
-                <ListCard title="Principes produit" items={p.productPrinciples} tone="sage" />
-                <ListCard title="Fondations éditoriales" items={p.editorialFoundations} tone="lilac" />
-                <ListCard title="Points UX" items={p.uxHighlights} tone="accent" />
-                <ListCard title="Points UI" items={p.uiHighlights} tone="lilac" />
-                <ListCard title="Prochaines étapes" items={p.nextSteps} tone="sage" />
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                <DetailCard title="Résultats" items={project.metrics} tone="accent" />
+                <DetailCard title="Décisions" items={project.notableDecisions} tone="gold" />
+                <DetailCard title="Principes" items={project.productPrinciples} tone="sage" />
+                <DetailCard title="Éditorial" items={project.editorialFoundations} tone="lilac" />
+                <DetailCard title="UX" items={project.uxHighlights} tone="accent" />
+                <DetailCard title="UI" items={project.uiHighlights} tone="lilac" />
+                <DetailCard title="Suite" items={project.nextSteps} tone="sage" />
             </div>
 
-            {p.testing?.strategy || p.testing?.coverage?.length ? (
-                <section className="panel p-6">
-                    <div className="flex items-center justify-between gap-3">
-                        <h3 className="section-title text-base">Testing & qualité</h3>
-                        <Chip size="xs" color="accent">
-                            Fiabilité
-                        </Chip>
-                    </div>
+            {project.testing?.strategy || project.testing?.coverage?.length ? (
+                <FeaturedSection kicker="Qualité" title="Testing & fiabilité" tone="accent">
+                    {project.testing.strategy ? <p className="max-w-3xl text-sm leading-6 text-(--text)">{project.testing.strategy}</p> : null}
 
-                    {p.testing.strategy ? <p className="mt-3 text-sm text-(--text)">{p.testing.strategy}</p> : null}
-                    {p.testing.coverage?.length ? (
-                        <ul className="mt-4 space-y-2 text-sm text-(--text)">
-                            {p.testing.coverage.map((item) => (
-                                <li key={item} className="flex gap-2">
-                                    <span aria-hidden>•</span>
-                                    <span>{item}</span>
+                    {project.testing.coverage?.length ? (
+                        <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+                            {project.testing.coverage.map((item) => (
+                                <li
+                                    key={item}
+                                    className="rounded-2xl border px-4 py-3 text-sm leading-6 text-(--text)"
+                                    style={{
+                                        borderColor: 'var(--border-soft)',
+                                        background: 'color-mix(in oklab, var(--surface-2) 48%, var(--surface-1))',
+                                    }}
+                                >
+                                    {item}
                                 </li>
                             ))}
                         </ul>
                     ) : null}
-                </section>
+                </FeaturedSection>
             ) : null}
 
-            {p.architecture?.summary || p.architecture?.keyPoints?.length || p.architecture?.sections?.length ? (
-                <section className="panel space-y-4 p-6">
-                    <div className="flex items-center justify-between gap-3">
-                        <h3 className="section-title text-base">Architecture</h3>
-                        <Chip size="xs" color="gold">
-                            Structure
-                        </Chip>
+            {project.architecture?.summary || project.architecture?.keyPoints?.length || project.architecture?.sections?.length ? (
+                <FeaturedSection kicker="Technique" title="Architecture" tone="gold">
+                    {project.architecture.summary ? <p className="max-w-3xl text-sm leading-6 text-(--text)">{project.architecture.summary}</p> : null}
+
+                    <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                        <DetailCard title="Points clés" items={project.architecture.keyPoints} tone="gold" />
+
+                        {project.architecture.sections?.map((section) => (
+                            <DetailCard key={section.title} title={section.title} items={section.items} tone="sage" />
+                        ))}
                     </div>
-
-                    {p.architecture.summary ? <p className="text-sm text-(--text)">{p.architecture.summary}</p> : null}
-                    <ListCard title="Points clés" items={p.architecture.keyPoints} tone="gold" />
-
-                    {p.architecture.sections?.length ? (
-                        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                            {p.architecture.sections.map((section) => (
-                                <ListCard key={section.title} title={section.title} items={section.items} tone="sage" />
-                            ))}
-                        </div>
-                    ) : null}
-                </section>
+                </FeaturedSection>
             ) : null}
         </section>
     );

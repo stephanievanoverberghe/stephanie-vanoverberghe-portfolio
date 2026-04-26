@@ -1,72 +1,65 @@
 {
     "slug": "rivage-photo",
     "title": "Rivage Photo",
-    "subtitle": "Portfolio photo + admin pro — gestion de séries, publication guidée et UX non-tech",
+    "subtitle": "Portfolio photo minimal + admin métier — gérer, organiser et publier sans friction",
     "year": 2026,
     "role": ["Product Design", "Front-end", "UI/UX", "Architecture", "Fullstack"],
-    "stack": ["Next.js 16 (App Router)", "React 19", "TypeScript strict", "Tailwind CSS", "Prisma 6", "PostgreSQL (Neon)", "NextAuth v5 (Credentials)", "Cloudinary", "Vercel"],
-    "context": "Créer un site de photographie public très épuré, et surtout un admin premium utilisable par un photographe non technique : gérer les séries, uploader, ordonner, renseigner les textes ALT, et publier sans erreur.",
-    "vision": "Un back-office qui se pilote comme un outil métier : clair, guidé, tolérant aux erreurs, et centré sur les actions réelles (créer une série, ajouter des images, publier).",
+    "stack": ["Next.js 16 (App Router)", "React 19", "TypeScript strict", "Tailwind CSS", "Prisma 6", "PostgreSQL (Neon)", "NextAuth v5", "Cloudinary", "Vercel"],
+    "context": "Rivage Photo est un portfolio public très épuré, accompagné d’un admin conçu pour un photographe non technique : créer des séries, gérer des images et publier simplement.",
+    "vision": "Construire un back-office qui se manipule comme un outil métier : clair, guidé, sans jargon, centré sur les actions réelles.",
     "objectives": [
-        "Proposer un admin compréhensible sans jargon (pas de “slug”, “id”, “DB”).",
-        "Créer une gestion complète des séries : création, édition, publication/dépublication, suppression.",
-        "Rendre la gestion d’images fluide : upload Cloudinary, tri, ALT obligatoires, suppression.",
-        "Mettre en place une équipe autonome : admins et participants, création/modification/suppression, photo de profil.",
-        "Assurer une base production solide : auth server-only via layouts, Prisma propre, TypeScript strict."
+        "Supprimer toute complexité technique côté admin.",
+        "Permettre une gestion complète des séries (création, édition, publication).",
+        "Rendre la gestion d’images fluide (upload, tri, ALT).",
+        "Créer un espace équipe autonome (admin / participant).",
+        "Maintenir une base technique propre et fiable."
     ],
     "productPrinciples": [
-        "UX orientée action : ‘Prochaine étape’ plutôt que réglages techniques.",
-        "Garde-fous avant publication : cover + ALT cover + ALT images requis.",
-        "Tolérance aux erreurs : messages simples, confirmations de suppression, états ‘brouillon/publié’ visibles.",
-        "Lisibilité : accents orange sur les zones d’action (CTA, statuts, focus)."
+        "Interface orientée action, jamais orientée technique.",
+        "Garde-fous avant publication (images + ALT requis).",
+        "Feedback clair et immédiat sur chaque action.",
+        "Hiérarchie visuelle forte avec une couleur d’action identifiable."
     ],
     "challenges": [
-        "Construire un dashboard ‘pro’ sans bibliothèque lourde ni complexité inutile.",
-        "Gérer l’auth sans middleware Edge (limites Vercel) avec une protection 100% server.",
-        "Concevoir une gestion d’images efficace (upload, reorder, alt) sans dégrader l’UX.",
-        "Maintenir une cohérence UI sombre tout en gardant une hiérarchie visuelle très lisible.",
-        "Éviter les pièges RSC/Client (server actions, handlers) avec une architecture claire."
+        "Créer un admin professionnel sans complexité inutile.",
+        "Gérer l’auth sans middleware Edge (contraintes Vercel).",
+        "Offrir une gestion d’images avancée sans casser l’UX.",
+        "Maintenir une UI sombre lisible et structurée.",
+        "Clarifier l’architecture entre RSC et client."
     ],
     "solutions": [
-        "Admin Shell complet : sidebar persistante + topbar utilisateur (avatar, rôle, actions rapides).",
-        "Pages structurées par tâches : Dashboard → Séries → Édition série (infos/cover/images) → Équipe.",
-        "Workflow guidé : cartes ‘Prochaine action’ + checklist de publication intégrée.",
-        "Gestion images : upload multiple, drag & drop ordre, édition ALT, warnings ALT manquants.",
-        "Équipe autonome : création/modif/suppression d’utilisateurs (admin/participant) + avatar Cloudinary.",
-        "Architecture RSC propre : Server Components par défaut, Client Components uniquement pour interactions (menus, upload, drag)."
+        "Shell admin structuré : sidebar persistante + topbar utilisateur.",
+        "Pages organisées par tâches (dashboard → séries → édition).",
+        "Workflow guidé avec étapes visibles et checklist de publication.",
+        "Upload Cloudinary + tri + édition ALT directement dans l’UI.",
+        "Gestion équipe autonome avec rôles et avatars.",
+        "Architecture RSC par défaut, client uniquement pour interactions."
     ],
     "uxHighlights": [
-        "Dashboard orienté métier : état global, raccourcis, dernières séries, actions prioritaires.",
-        "Pills de statut (Brouillon/Publié) très visibles + CTA publication contextuel.",
-        "Éditeur de série en sections ancrées : Infos / Cover / Images (lecture claire).",
-        "Composants ‘safe’ pour confirmations et actions sensibles (suppression, publication).",
-        "Espace Équipe autonome : modal création/édition, recherche, avatar par membre."
+        "Dashboard orienté actions (état, raccourcis, priorités).",
+        "Statuts brouillon / publié toujours visibles.",
+        "Édition de série en sections claires.",
+        "Confirmations pour les actions sensibles.",
+        "Gestion équipe simple et autonome."
     ],
     "uiHighlights": [
-        "UI sombre premium, contrastes contrôlés, délimitations nettes (cartes, bordures, surfaces).",
-        "Orange utilisé comme ‘couleur d’action’ (focus, CTA, badges, accents du topbar).",
-        "Cartes arrondies (2xl/3xl), micro-éléments rassurants (helper texts, conseils).",
-        "Topbar utilisateur démarquée (accent orange) avec menu profil et déconnexion claire."
+        "Interface sombre structurée et lisible.",
+        "Accent orange pour guider les actions.",
+        "Cartes nettes, hiérarchie claire, feedbacks visibles.",
+        "Topbar utilisateur identifiable et fonctionnelle."
     ],
     "architecture": {
-        "publicRoutes": ["/", "/series/[slug]", "/photos/*", "/contact", "/legal/*"],
-        "adminRoutes": ["/admin/login", "/admin", "/admin/series", "/admin/series/new", "/admin/series/[id]/edit", "/admin/images", "/admin/team", "/admin/settings"],
-        "adminFeatures": [
-            "CRUD séries",
-            "Statut draft/published + garde-fous publication",
-            "Upload cover Cloudinary + ALT cover",
-            "Upload images Cloudinary + tri + ALT obligatoire",
-            "Équipe : CRUD users (admin/participant) + avatars",
-            "Dashboard : dernières séries + actions prioritaires"
-        ],
-        "auth": ["NextAuth v5 (Credentials)", "bcrypt password hashing", "Sessions JWT", "Protection server-only via layouts (sans middleware Edge)"],
-        "seoPerf": ["Pages publiques optimisées (next/image, metadata)", "Admin centré UX (pas d’impact SEO direct)", "Revalidation ciblée après actions admin"]
+        "publicRoutes": ["/", "/series/[slug]", "/photos/*", "/contact"],
+        "adminRoutes": ["/admin", "/admin/series", "/admin/series/[id]/edit", "/admin/team"],
+        "adminFeatures": ["CRUD séries", "Statut draft / publié", "Upload images + tri + ALT", "Gestion équipe", "Dashboard avec actions prioritaires"],
+        "auth": ["NextAuth v5 (Credentials)", "Sessions JWT", "Protection server-only via layouts"],
+        "seoPerf": ["Optimisation images (next/image)", "Metadata dynamique", "Revalidation après actions admin"]
     },
     "highlights": [
-        "Admin premium pensé pour non-tech (photographe) : guidage + garde-fous + langage simple.",
-        "Gestion complète séries/images avec Cloudinary (upload, tri, ALT, publication).",
-        "Espace équipe autonome (admin/participant) avec photos de profil.",
-        "Stack production (Next 16, Prisma/Neon, NextAuth v5) et TypeScript strict."
+        "Admin conçu pour un utilisateur non technique.",
+        "Gestion complète des séries et images.",
+        "Expérience fluide avec garde-fous intégrés.",
+        "Stack moderne avec architecture propre."
     ],
     "links": {
         "demo": "https://rivage-photo.vercel.app/",
@@ -78,24 +71,24 @@
     },
     "hero": {
         "image": "/images/projects/rivage-photo/desktop-hero.webp",
-        "alt": "Homepage Rivage Photo — portfolio photo"
+        "alt": "Portfolio Rivage Photo"
     },
     "gallery": [
         {
             "src": "/images/projects/rivage-photo/desktop-series.webp",
-            "alt": "Édition série — infos, cover, images, publication guidée"
+            "alt": "Édition d’une série avec gestion des images"
         },
         {
             "src": "/images/projects/rivage-photo/desktop-lightbox.webp",
-            "alt": "Lightbox — visualisation images et navigation"
+            "alt": "Visualisation des images en lightbox"
         },
         {
             "src": "/images/projects/rivage-photo/desktop-admin.webp",
-            "alt": "Dashboard admin — vue d’ensemble et prochaines actions"
+            "alt": "Dashboard admin avec actions principales"
         },
         {
             "src": "/images/projects/rivage-photo/desktop-admin-series.webp",
-            "alt": "Gestion des séries — liste avec statuts, filtres, actions rapides"
+            "alt": "Liste des séries avec statuts et actions"
         }
     ]
 }

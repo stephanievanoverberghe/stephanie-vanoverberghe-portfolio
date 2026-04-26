@@ -1,62 +1,62 @@
 {
     "slug": "explorart",
     "title": "Explor’Art",
-    "subtitle": "Blog d’art éditorial — pédagogie douce, UX lumineuse et architecture structurée",
+    "subtitle": "Blog d’art éditorial — apprendre à regarder, comprendre et créer sans jargon",
     "year": 2026,
     "role": ["Product Design", "Front-end", "UI/UX", "Architecture", "Fullstack"],
     "stack": ["Next.js 16 (App Router)", "TypeScript", "Tailwind CSS v4", "MongoDB", "Mongoose", "Vercel"],
-    "context": "Créer un blog d’art moderne, humain et accessible, structuré autour de 7 piliers éditoriaux forts, avec une architecture propre et un admin minimal.",
-    "vision": "Faire d’Explor’Art une école d’art moderne et chaleureuse sans murs : apprendre à voir, comprendre et créer, sans jargon ni intimidation.",
+    "context": "Explor’Art est un blog d’art pensé comme un espace calme, clair et vivant. L’objectif : rendre l’art plus accessible, sans ton scolaire, en structurant les contenus autour de 7 piliers éditoriaux.",
+    "vision": "Créer une école d’art moderne sans murs : un lieu où l’on apprend à regarder autrement, à comprendre une œuvre, à explorer les couleurs, les artistes, les émotions et la pratique.",
     "objectives": [
-        "Décomplexer l’apprentissage artistique avec une pédagogie claire et incarnée.",
-        "Structurer le contenu autour de 7 piliers cohérents et reconnaissables.",
-        "Créer une UX lumineuse et respirante, pensée comme une déambulation.",
-        "Mettre en place une architecture maintenable (App Router + MongoDB).",
-        "Permettre une création d’articles fluide via un admin minimal."
+        "Rendre l’apprentissage artistique plus simple, sensible et accessible.",
+        "Construire une identité éditoriale forte autour de 7 piliers.",
+        "Créer une expérience de lecture lumineuse, fluide et respirante.",
+        "Développer une architecture maintenable avec Next.js et MongoDB.",
+        "Prévoir un admin minimal pour publier et organiser les articles."
     ],
     "editorialFoundations": [
-        "7 piliers éditoriaux distincts (pratique, regard, culture, émotion).",
-        "Formats d’articles officiels (tutorial, artwork-analysis, artist-story, art-history, color-guide, inspiration, art-psychology).",
-        "Vidéo YouTube optionnelle, jamais obligatoire.",
-        "Aucune logique de parcours ou de niveau imposé."
+        "7 piliers pour guider l’exploration : pratique, œuvres, artistes, histoire, couleurs, psychologie et inspirations.",
+        "Des formats d’articles clairs sans imposer de parcours rigide.",
+        "Une vidéo YouTube possible, mais jamais centrale.",
+        "Une approche libre : le lecteur peut apprendre selon sa curiosité."
     ],
     "challenges": [
-        "Créer un blog pédagogique sans tomber dans le ton scolaire.",
-        "Maintenir une forte identité éditoriale tout en restant minimaliste.",
-        "Concilier respiration visuelle et richesse de contenu.",
-        "Construire un admin simple mais extensible."
+        "Créer un blog pédagogique sans le rendre scolaire.",
+        "Garder une identité forte avec une interface minimaliste.",
+        "Faire respirer les pages malgré la richesse éditoriale.",
+        "Préparer un admin simple, mais assez structuré pour évoluer."
     ],
     "solutions": [
-        "Navigation hybride : 4 piliers visibles + menu 'Explorer'.",
-        "Design system basé sur une palette papier chaud + 7 couleurs piliers.",
-        "Composants éditoriaux dédiés (Callout, PillarBadge, SectionLabel, YouTubeEmbed).",
-        "Architecture modulaire : routes publiques / admin / API séparées.",
-        "Modèle Post structuré avec format + youtubeId optionnel."
+        "Navigation pensée autour des piliers, avec un menu Explorer pour ouvrir le contenu sans surcharger l’interface.",
+        "Design system doux : papier chaud, typographies éditoriales, couleurs associées aux piliers.",
+        "Composants dédiés à la lecture : badges, encarts pédagogiques, labels, intégration YouTube.",
+        "Séparation claire entre routes publiques, admin et API.",
+        "Modèle Post structuré avec format, pilier, SEO, statut et youtubeId optionnel."
     ],
     "uxHighlights": [
-        "Hero éditorial sans CTA agressif.",
-        "Home en blocs fins, rythme vertical fluide.",
-        "Pages piliers avec introduction incarnée.",
+        "Hero éditorial sans pression commerciale.",
+        "Accueil organisé en blocs calmes et lisibles.",
+        "Pages piliers pensées comme des portes d’entrée.",
         "Articles aérés avec encarts pédagogiques.",
-        "Lecture optimisée mobile (priorité confort)."
+        "Lecture mobile priorisée pour le confort."
     ],
     "uiHighlights": [
-        "Palette papier chaud (#F9F5EF) + encres piliers feutrées.",
-        "Playfair Display (titres) + Inter (texte courant).",
-        "Cartes douces, ombres subtiles, badges piliers colorés.",
+        "Palette papier chaud et couleurs feutrées par pilier.",
+        "Playfair Display pour le ton éditorial, Inter pour la lisibilité.",
+        "Cartes douces, badges colorés et ombres discrètes.",
         "Navbar sticky translucide avec blur léger.",
-        "Animations lentes et organiques (fade-up, float, parallax doux)."
+        "Animations lentes et organiques."
     ],
     "architecture": {
         "publicRoutes": ["/", "/articles", "/articles/[slug]", "/piliers", "/piliers/[slug]", "/a-propos", "/recherche", "/legal/*"],
-        "adminFeatures": ["CRUD articles", "Gestion piliers", "Statut draft/published", "isFeatured", "SEO fields", "youtubeId optionnel"],
+        "adminFeatures": ["CRUD articles", "Gestion des piliers", "Statut draft/published", "Mise en avant", "Champs SEO", "youtubeId optionnel"],
         "seo": ["Metadata par page", "OpenGraph dynamique", "Sitemap", "Images optimisées avec next/image", "Revalidation côté lecture"]
     },
     "highlights": [
-        "Projet éditorial complet (vision + ligne + UX + UI + archi).",
-        "Design system cohérent basé sur les 7 piliers.",
-        "Admin minimal pensé pour la fluidité.",
-        "Expérience émotionnelle priorisée autant que la performance."
+        "Vision éditoriale complète : ton, piliers, UX, UI et architecture.",
+        "Design system cohérent autour des 7 piliers.",
+        "Admin minimal pensé pour publier sans friction.",
+        "Expérience de lecture douce, accessible et structurée."
     ],
     "links": {
         "demo": "https://explorart-blog.vercel.app/",
@@ -68,16 +68,16 @@
     },
     "hero": {
         "image": "/images/projects/explorart/desktop-hero.webp",
-        "alt": "Hero éditorial — Explor’Art"
+        "alt": "Page d’accueil éditoriale d’Explor’Art"
     },
     "gallery": [
         {
             "src": "/images/projects/explorart/desktop-articles.webp",
-            "alt": "Page catalogue des articles avec filtres piliers"
+            "alt": "Catalogue des articles avec filtres par pilier"
         },
         {
             "src": "/images/projects/explorart/desktop-article.webp",
-            "alt": "Page article avec encarts pédagogiques"
+            "alt": "Article détaillé avec encarts pédagogiques"
         },
         {
             "src": "/images/projects/explorart/desktop-admin.webp",
@@ -85,7 +85,7 @@
         },
         {
             "src": "/images/projects/explorart/desktop-admin-commentaires.webp",
-            "alt": "Admin commentaires avec modération simple"
+            "alt": "Modération des commentaires côté admin"
         }
     ]
 }

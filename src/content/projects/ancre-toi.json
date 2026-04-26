@@ -1,37 +1,89 @@
 {
     "slug": "ancre-toi",
     "title": "Ancre-toi",
-    "subtitle": "Plateforme de formation — achat Stripe + espace membre",
+    "subtitle": "Plateforme de formation — paiement, accès et espace membre unifiés",
     "year": 2025,
-    "role": ["Front-end", "UX Writing", "Conception pédagogique"],
-    "stack": ["React", "Next.js", "TypeScript", "Tailwind", "MongoDB", "Stripe", "Webhooks"],
-    "context": "Plateforme de formation : paiement Stripe et activation automatique de l’accès, avec un espace membre clair.",
+    "role": ["Product Design", "Front-end", "UX Writing", "Conception pédagogique"],
+    "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "MongoDB", "Stripe", "Webhooks"],
+    "context": "Ancre-toi est une plateforme de formation avec un objectif simple : permettre à un utilisateur d’acheter une formation et d’y accéder immédiatement, sans friction ni confusion.",
+    "vision": "Une plateforme de formation doit être invisible dans sa complexité : l’utilisateur ne doit voir qu’un parcours simple, clair et rassurant.",
     "objectives": [
-        "Simplifier l’inscription/connexion et la gestion du compte (mobile-first).",
-        "Fiabiliser achat → activation d’accès via webhooks.",
-        "Proposer un espace membre lisible : achats, accès, modules."
+        "Fluidifier le parcours d’achat et de connexion (mobile-first).",
+        "Fiabiliser l’activation d’accès après paiement.",
+        "Proposer un espace membre lisible et rassurant.",
+        "Structurer les données pour garantir la cohérence des accès."
+    ],
+    "productPrinciples": [
+        "Un parcours simple malgré une logique technique complexe.",
+        "Des états toujours visibles (paiement, accès, erreur).",
+        "Une interface rassurante et progressive.",
+        "Un langage clair pour accompagner chaque étape."
     ],
     "challenges": [
-        "Synchroniser paiement et droits d’accès (délais, erreurs, retours utilisateur).",
-        "Modéliser les données proprement dans MongoDB (users, orders, access).",
-        "Garder une expérience “douce” malgré la logique technique."
+        "Synchroniser paiement Stripe et activation d’accès (latence, erreurs).",
+        "Gérer les cas limites (paiement échoué, webhook retardé, double appel).",
+        "Structurer les données utilisateurs et accès de manière fiable.",
+        "Maintenir une UX fluide malgré la complexité backend."
     ],
     "solutions": [
-        "Stripe Checkout + Webhooks pour valider la commande et activer l’accès.",
-        "Modèle MongoDB simple + index pour les requêtes fréquentes.",
-        "Espace membre structuré + messages d’état clairs (UX writing)."
+        "Stripe Checkout pour externaliser le paiement.",
+        "Webhooks pour valider la commande et activer l’accès côté serveur.",
+        "Modèle MongoDB structuré (users, orders, access).",
+        "Messages d’état clairs pour guider l’utilisateur.",
+        "Espace membre organisé par logique d’usage (achats → accès → modules)."
     ],
-    "highlights": ["Parcours complet : achat → validation → accès activé.", "Espace membre clair (achats, accès, modules).", "UX lisible sur mobile malgré la complexité."],
+    "uxHighlights": [
+        "Parcours achat → accès fluide et compréhensible.",
+        "Feedback utilisateur à chaque étape (chargement, succès, erreur).",
+        "Espace membre structuré et rassurant.",
+        "Expérience mobile priorisée."
+    ],
+    "uiHighlights": [
+        "Interface simple et apaisée.",
+        "Hiérarchie claire entre actions et contenu.",
+        "Utilisation du texte comme élément clé (UX writing).",
+        "Transitions discrètes pour accompagner le parcours."
+    ],
+    "architecture": {
+        "publicRoutes": ["/", "/login", "/checkout", "/confirmation"],
+        "memberRoutes": ["/dashboard", "/modules", "/account"],
+        "dataModel": ["User (authentification, profil)", "Order (paiement Stripe)", "Access (droits d’accès aux contenus)"],
+        "logic": ["Création de session Stripe côté serveur", "Réception webhook → validation paiement", "Activation accès en base", "Lecture des droits côté espace membre"]
+    },
+    "highlights": [
+        "Parcours complet : achat → validation → accès activé.",
+        "Gestion fiable des accès via Stripe + Webhooks.",
+        "Espace membre clair et structuré.",
+        "UX pensée pour simplifier une logique complexe."
+    ],
     "links": {
         "demo": "https://ancretoi.vercel.app/",
         "repo": "https://github.com/stephanievanoverberghe/ancretoi"
     },
-    "logo": { "image": "/images/projects/ancre-toi/logo.png", "alt": "Logo Ancre-toi" },
-    "hero": { "image": "/images/projects/ancre-toi/desktop-hero.webp", "alt": "Espace membre — Ancre-toi" },
+    "logo": {
+        "image": "/images/projects/ancre-toi/logo.png",
+        "alt": "Logo Ancre-toi"
+    },
+    "hero": {
+        "image": "/images/projects/ancre-toi/desktop-hero.webp",
+        "alt": "Espace membre de la plateforme Ancre-toi"
+    },
     "gallery": [
-        { "src": "/images/projects/ancre-toi/desktop-1.webp", "alt": "Espace membre — commandes & accès" },
-        { "src": "/images/projects/ancre-toi/desktop-2.webp", "alt": "Module — objectifs & ressources" },
-        { "src": "/images/projects/ancre-toi/mobile-1.webp", "alt": "Mobile — checkout & confirmation" },
-        { "src": "/images/projects/ancre-toi/mobile-2.webp", "alt": "Mobile — navigation des modules" }
+        {
+            "src": "/images/projects/ancre-toi/desktop-1.webp",
+            "alt": "Dashboard membre avec accès aux formations"
+        },
+        {
+            "src": "/images/projects/ancre-toi/desktop-2.webp",
+            "alt": "Module de formation avec objectifs et contenu"
+        },
+        {
+            "src": "/images/projects/ancre-toi/mobile-1.webp",
+            "alt": "Parcours mobile : paiement et confirmation"
+        },
+        {
+            "src": "/images/projects/ancre-toi/mobile-2.webp",
+            "alt": "Navigation mobile des modules"
+        }
     ]
 }
