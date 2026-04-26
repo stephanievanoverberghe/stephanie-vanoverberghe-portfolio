@@ -1,4 +1,3 @@
-// src/app/projects/[slug]/loading.tsx
 export default function ProjectLoading() {
     return (
         <article className="container-page py-12 animate-pulse">

@@ -17,13 +17,13 @@ export default function ProjectOverview({ project }: { project: Project }) {
         <section className="grid gap-6 md:grid-cols-[1.25fr_.75fr] items-start">
             <article className="panel p-6">
                 <h2 className="text-lg section-title">Contexte</h2>
-                {p.context ? <p className="mt-2 opacity-90 max-w-[80ch]">{p.context}</p> : null}
+                {p.context ? <p className="mt-2 text-(--text) max-w-[80ch]">{p.context}</p> : null}
 
                 {p.highlights?.length ? (
                     <>
                         <div className="mt-6 hr-soft" />
                         <h3 className="mt-6 text-base font-semibold text-(--text-strong)">Points clés</h3>
-                        <ul className="mt-3 grid gap-2 sm:grid-cols-2 text-sm opacity-90">
+                        <ul className="mt-3 grid gap-2 sm:grid-cols-2 text-sm text-(--text)">
                             {p.highlights.slice(0, 4).map((it) => (
                                 <li key={it} className="flex gap-2">
                                     <span aria-hidden>•</span>
@@ -73,7 +73,7 @@ export default function ProjectOverview({ project }: { project: Project }) {
                         {quickFacts.map((row) => (
                             <div key={row.label} className="grid grid-cols-[92px_1fr] gap-3">
                                 <div className="font-semibold text-(--text-strong)">{row.label}</div>
-                                <div className="opacity-85">{excerpt(row.value, 120)}</div>
+                                <div className="text-(--text)">{excerpt(row.value, 120)}</div>
                             </div>
                         ))}
                     </div>

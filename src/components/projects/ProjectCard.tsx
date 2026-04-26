@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 
 import Chip from '@/components/ui/Chip';
+import { projectsPageContent } from '@/content/projects-page';
 import type { Project } from '@/lib/projects';
 
 import { cardBlurb, coverAlt, coverSrc, kindFor, pickStackChips } from './projects.utils';
@@ -21,6 +22,7 @@ export default function ProjectCard({ project, index, featured = false }: Projec
     const stackChips = pickStackChips(project.stack ?? [], featured ? 4 : 3);
     const blurb = cardBlurb(project);
     const tone = tones[index % tones.length];
+    const { listing } = projectsPageContent;
 
     return (
         <article
@@ -70,7 +72,7 @@ export default function ProjectCard({ project, index, featured = false }: Projec
 
                         <div className="absolute left-3 top-3 flex items-center gap-2">
                             <Chip size="xs" color={featured ? 'accent' : 'sage'}>
-                                {featured ? 'Projet principal' : 'Étude de cas'}
+                                {featured ? listing.featuredLabel : listing.caseStudyLabel}
                             </Chip>
                         </div>
 
@@ -87,7 +89,9 @@ export default function ProjectCard({ project, index, featured = false }: Projec
                 <div className={featured ? 'flex flex-col px-1 pt-5 lg:px-7 lg:py-5' : 'px-1 pt-5'}>
                     <div className="flex items-start justify-between gap-4">
                         <div className="min-w-0">
-                            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-(--accent)">Projet 0{index + 1}</p>
+                            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-(--accent)">
+                                {listing.projectIndexLabel} {String(index + 1).padStart(2, '0')}
+                            </p>
 
                             <h3 className={['mt-2 font-semibold leading-tight tracking-[-0.04em] text-(--text-strong)', featured ? 'text-3xl sm:text-4xl' : 'text-xl'].join(' ')}>
                                 {project.title}
@@ -122,7 +126,7 @@ export default function ProjectCard({ project, index, featured = false }: Projec
                     </div>
 
                     <div className="mt-auto pt-5 text-sm font-bold uppercase tracking-[0.14em] text-(--accent)">
-                        Lire la démarche
+                        {listing.cta}
                         <span className="ml-2 inline-block transition group-hover:translate-x-1">→</span>
                     </div>
                 </div>

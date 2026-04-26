@@ -2,12 +2,13 @@ import type { Metadata } from 'next';
 
 import ProjectsGrid from '@/components/projects/ProjectsGrid';
 import ProjectsHero from '@/components/projects/ProjectsHero';
+import { projectsPageContent } from '@/content/projects-page';
 import { getAllProjects } from '@/lib/projects';
 import { buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-    title: 'Projets — Stéphanie Vanoverberghe',
-    description: 'Études de cas front-end React, Next.js et TypeScript : interfaces, design, structure, UX et qualité du code.',
+    title: projectsPageContent.metadata.title,
+    description: projectsPageContent.metadata.description,
     canonical: '/projects',
 });
 

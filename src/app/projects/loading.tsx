@@ -1,4 +1,3 @@
-// src/app/projets/loading.tsx
 export default function Loading() {
     return (
         <section className="container-page py-10 animate-pulse space-y-6">

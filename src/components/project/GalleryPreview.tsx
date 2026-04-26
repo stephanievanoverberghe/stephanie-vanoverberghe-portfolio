@@ -31,7 +31,7 @@ export default function GalleryPreview({ images, title }: Props) {
             <div className="flex items-end justify-between gap-4">
                 <div>
                     <h3 className="text-base font-semibold text-(--text-strong)">Galerie</h3>
-                    <p className="mt-1 text-sm opacity-75">
+                    <p className="mt-1 text-sm text-(--text)">
                         {count} capture{count > 1 ? 's' : ''}
                     </p>
                 </div>

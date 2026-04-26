@@ -8,6 +8,12 @@ type Props = {
     variant?: 'hero' | 'inline' | 'footer';
 };
 
+const labels = {
+    demo: 'Voir la démo',
+    code: 'Voir le code',
+    contact: 'Me contacter',
+} as const;
+
 export default function ProjectActions({ project, variant = 'inline' }: Props) {
     const isHero = variant === 'hero';
 
@@ -23,7 +29,7 @@ export default function ProjectActions({ project, variant = 'inline' }: Props) {
                         background: 'linear-gradient(135deg, var(--accent), color-mix(in oklab, var(--accent) 78%, var(--ink)))',
                     }}
                 >
-                    Voir la démo
+                    {labels.demo}
                     <ArrowUpRight size={17} />
                 </a>
             ) : null}
@@ -40,7 +46,7 @@ export default function ProjectActions({ project, variant = 'inline' }: Props) {
                     }}
                 >
                     <Github size={17} />
-                    Voir le code
+                    {labels.code}
                 </a>
             ) : null}
 
@@ -53,7 +59,7 @@ export default function ProjectActions({ project, variant = 'inline' }: Props) {
                         background: 'color-mix(in oklab, var(--sage) 10%, var(--surface-1))',
                     }}
                 >
-                    Me contacter
+                    {labels.contact}
                 </Link>
             ) : null}
         </div>

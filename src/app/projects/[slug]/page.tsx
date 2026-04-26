@@ -2,13 +2,14 @@ import { cache, type ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { getProjectBySlug, getProjectSlugs } from '@/lib/projects';
+import ProjectActions from '@/components/project/ProjectActions';
+import ProjectDetails, { hasProjectDetails } from '@/components/project/ProjectDetails';
+import GalleryPreview from '@/components/project/GalleryPreview';
 import ProjectHero from '@/components/project/ProjectHero';
 import ProjectOverview from '@/components/project/ProjectOverview';
-import ProjectSections from '@/components/project/ProjectSections';
-import GalleryPreview from '@/components/project/GalleryPreview';
-import ProjectActions from '@/components/project/ProjectActions';
 import { coverAlt, coverSrc } from '@/components/project/project.utils';
+import { projectsPageContent } from '@/content/projects-page';
+import { getProjectBySlug, getProjectSlugs } from '@/lib/projects';
 
 export const dynamic = 'force-static';
 
@@ -98,18 +99,21 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     if (!data) notFound();
 
     const ldJson = buildProjectLdJson(data.slug, data);
+    const hasDetails = hasProjectDetails(data);
 
     return (
-        <section className="container-page py-12 space-y-10">
-            <ProjectHero project={data} />
+        <section className="container-page space-y-10 py-12">
+            <ProjectHero project={data} hasDetails={hasDetails} />
 
             <AnchorSection id="overview">
                 <ProjectOverview project={data} />
             </AnchorSection>
 
-            <AnchorSection id="details">
-                <ProjectSections project={data} />
-            </AnchorSection>
+            {hasDetails ? (
+                <AnchorSection id="details">
+                    <ProjectDetails project={data} />
+                </AnchorSection>
+            ) : null}
 
             {data.gallery?.length ? (
                 <AnchorSection id="gallery">
@@ -119,7 +123,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
             <section className="card p-6 sm:p-8">
                 <div className="flex flex-wrap items-center justify-between gap-4">
-                    <p className="opacity-90">Envie d’un échange ? Je peux vous présenter ce projet comme en entretien : choix techniques, performance, accessibilité.</p>
+                    <p className="text-(--text)">{projectsPageContent.detail.finalCta}</p>
 
                     <ProjectActions project={data} variant="footer" />
                 </div>

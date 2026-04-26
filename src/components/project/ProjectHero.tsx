@@ -3,20 +3,28 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
 import Chip from '@/components/ui/Chip';
+import { projectsPageContent } from '@/content/projects-page';
 import type { Project } from '@/lib/projects';
 
 import ProjectActions from './ProjectActions';
+import ProjectJumpLinks from './ProjectJumpLinks';
 import { coverAlt, coverSrc, excerpt, kindFor } from './project.utils';
 
-export default function ProjectHero({ project }: { project: Project }) {
+type Props = {
+    project: Project;
+    hasDetails: boolean;
+};
+
+export default function ProjectHero({ project, hasDetails }: Props) {
     const src = coverSrc(project);
     const alt = coverAlt(project);
+    const { detail } = projectsPageContent;
 
     return (
         <header className="space-y-5">
             <Link href="/projects" className="inline-flex items-center gap-2 text-sm font-semibold text-(--text-strong) transition hover:text-(--accent)">
                 <ArrowLeft size={16} />
-                Retour aux projets
+                {detail.backToProjects}
             </Link>
 
             <section className="relative overflow-hidden rounded-4xl border border-(--border-soft) bg-(--surface-1) shadow-(--shadow-card)">
@@ -26,7 +34,7 @@ export default function ProjectHero({ project }: { project: Project }) {
                 <div className="relative grid gap-8 p-6 sm:p-8 lg:grid-cols-[1fr_420px] lg:p-10">
                     <div>
                         <div className="flex flex-wrap items-center gap-3">
-                            <p className="text-xs font-bold uppercase tracking-[0.28em] text-(--gold)">Étude de cas</p>
+                            <p className="text-xs font-bold uppercase tracking-[0.28em] text-(--gold)">{detail.caseStudyLabel}</p>
 
                             {project.year ? (
                                 <Chip size="xs" color="gold">
@@ -57,21 +65,7 @@ export default function ProjectHero({ project }: { project: Project }) {
                             <ProjectActions project={project} variant="hero" />
                         </div>
 
-                        <nav className="mt-7 flex flex-wrap gap-2">
-                            <a href="#overview" className="btn btn-secondary">
-                                Résumé
-                            </a>
-
-                            <a href="#details" className="btn btn-secondary">
-                                Démarche
-                            </a>
-
-                            {project.gallery?.length ? (
-                                <a href="#gallery" className="btn btn-secondary">
-                                    Galerie
-                                </a>
-                            ) : null}
-                        </nav>
+                        <ProjectJumpLinks hasDetails={hasDetails} hasGallery={Boolean(project.gallery?.length)} labels={detail.jumpLinks} />
                     </div>
 
                     <aside className="space-y-4">
@@ -106,25 +100,25 @@ export default function ProjectHero({ project }: { project: Project }) {
                                 background: 'color-mix(in oklab, var(--surface-2) 48%, var(--surface-1))',
                             }}
                         >
-                            <p className="text-xs font-bold uppercase tracking-[0.22em] text-(--accent)">En bref</p>
+                            <p className="text-xs font-bold uppercase tracking-[0.22em] text-(--accent)">{detail.shortSummaryLabel}</p>
 
                             <dl className="mt-4 space-y-4 text-sm">
                                 {project.context ? (
                                     <div>
-                                        <dt className="font-semibold text-(--text-strong)">Contexte</dt>
+                                        <dt className="font-semibold text-(--text-strong)">{detail.contextLabel}</dt>
                                         <dd className="mt-1 leading-6 text-(--text)">{excerpt(project.context, 135)}</dd>
                                     </div>
                                 ) : null}
 
                                 {project.objectives?.[0] ? (
                                     <div>
-                                        <dt className="font-semibold text-(--text-strong)">Objectif</dt>
+                                        <dt className="font-semibold text-(--text-strong)">{detail.objectiveLabel}</dt>
                                         <dd className="mt-1 leading-6 text-(--text)">{excerpt(project.objectives[0], 135)}</dd>
                                     </div>
                                 ) : null}
 
                                 <div>
-                                    <dt className="font-semibold text-(--text-strong)">Focus</dt>
+                                    <dt className="font-semibold text-(--text-strong)">{detail.focusLabel}</dt>
                                     <dd className="mt-1 leading-6 text-(--text)">
                                         {project.highlights?.[0] ? excerpt(project.highlights[0], 135) : (project.stack ?? []).slice(0, 4).join(' · ')}
                                     </dd>
