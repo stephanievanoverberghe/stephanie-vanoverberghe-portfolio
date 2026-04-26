@@ -1,116 +1,129 @@
-// src/components/projects/ProjectCard.tsx
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowUpRight } from 'lucide-react';
+
 import Chip from '@/components/ui/Chip';
 import type { Project } from '@/lib/projects';
+
 import { cardBlurb, coverAlt, coverSrc, kindFor, pickStackChips } from './projects.utils';
 
-export default function ProjectCard({ project }: { project: Project }) {
-    const p = project;
-    const src = coverSrc(p);
-    const alt = coverAlt(p);
-    const stackChips = pickStackChips(p.stack ?? [], 2);
-    const blurb = cardBlurb(p);
+const tones = ['accent', 'sage', 'lilac', 'gold'] as const;
+
+type ProjectCardProps = {
+    project: Project;
+    index: number;
+    featured?: boolean;
+};
+
+export default function ProjectCard({ project, index, featured = false }: ProjectCardProps) {
+    const src = coverSrc(project);
+    const alt = coverAlt(project);
+    const stackChips = pickStackChips(project.stack ?? [], featured ? 4 : 3);
+    const blurb = cardBlurb(project);
+    const tone = tones[index % tones.length];
 
     return (
-        <article className="group relative overflow-hidden rounded-2xl border transition hover:shadow-[0_18px_50px_rgba(2,8,23,0.10)] border-(--border-soft) bg-(--surface-1) shadow-(--shadow-card)">
-            <Link href={`/projects/${p.slug}`} className="block">
-                <div className="p-3 sm:p-4">
-                    <div
-                        className="overflow-hidden rounded-2xl border border-(--border-soft)"
-                        style={{
-                            background: 'color-mix(in oklab, var(--surface-2) 72%, var(--surface-1))',
-                        }}
-                    >
+        <article
+            className={[
+                'group relative overflow-hidden rounded-[1.8rem] border bg-(--surface-1) shadow-(--shadow-card) transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(18,19,20,0.09)]',
+                featured ? 'lg:rounded-4xl' : '',
+            ].join(' ')}
+            style={{ borderColor: 'var(--border-soft)' }}
+        >
+            <Link href={`/projects/${project.slug}`} className={featured ? 'grid gap-0 p-4 lg:grid-cols-[1.05fr_0.95fr] lg:p-5' : 'block p-4'}>
+                <div
+                    className="relative overflow-hidden rounded-[1.45rem] border"
+                    style={{
+                        borderColor: 'var(--border-soft)',
+                        background: `linear-gradient(135deg, color-mix(in oklab, var(--${tone}) 16%, var(--surface-1)), var(--surface-1))`,
+                    }}
+                >
+                    <div className={featured ? 'relative aspect-16/10 lg:h-full lg:min-h-90' : 'relative aspect-16/10'}>
+                        {src ? (
+                            <Image
+                                src={src}
+                                alt={alt}
+                                fill
+                                sizes={featured ? '(max-width: 1024px) 100vw, 50vw' : '(max-width: 768px) 100vw, 33vw'}
+                                className="object-cover transition duration-700 group-hover:scale-[1.035]"
+                                style={{ objectPosition: '50% 10%' }}
+                                priority={featured}
+                            />
+                        ) : (
+                            <div
+                                aria-hidden
+                                className="absolute inset-0"
+                                style={{
+                                    background: `radial-gradient(circle at 30% 20%, color-mix(in oklab, var(--${tone}) 34%, transparent), transparent 44%),
+                                    linear-gradient(135deg, var(--surface-2), var(--surface-1))`,
+                                }}
+                            />
+                        )}
+
                         <div
-                            className="flex items-center gap-2 px-3 py-2 border-b border-(--border-soft)"
+                            aria-hidden
+                            className="absolute inset-0"
                             style={{
-                                background: 'color-mix(in oklab, var(--surface-1) 88%, var(--surface-2))',
+                                background: 'linear-gradient(to top, rgba(18,19,20,0.18), transparent 48%)',
+                            }}
+                        />
+
+                        <div className="absolute left-3 top-3 flex items-center gap-2">
+                            <Chip size="xs" color={featured ? 'accent' : 'sage'}>
+                                {featured ? 'Projet principal' : 'Étude de cas'}
+                            </Chip>
+                        </div>
+
+                        {project.year ? (
+                            <div className="absolute right-3 top-3">
+                                <Chip size="xs" color="gold">
+                                    {project.year}
+                                </Chip>
+                            </div>
+                        ) : null}
+                    </div>
+                </div>
+
+                <div className={featured ? 'flex flex-col px-1 pt-5 lg:px-7 lg:py-5' : 'px-1 pt-5'}>
+                    <div className="flex items-start justify-between gap-4">
+                        <div className="min-w-0">
+                            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-(--accent)">Projet 0{index + 1}</p>
+
+                            <h3 className={['mt-2 font-semibold leading-tight tracking-[-0.04em] text-(--text-strong)', featured ? 'text-3xl sm:text-4xl' : 'text-xl'].join(' ')}>
+                                {project.title}
+                            </h3>
+                        </div>
+
+                        <span
+                            className="grid h-10 w-10 shrink-0 place-items-center rounded-full border transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                            style={{
+                                borderColor: `color-mix(in oklab, var(--${tone}) 42%, var(--border-soft))`,
+                                background: `color-mix(in oklab, var(--${tone}) 12%, var(--surface-1))`,
                             }}
                         >
-                            <span className="h-2.5 w-2.5 rounded-full" style={{ background: 'color-mix(in oklab, var(--accent) 60%, #fff)' }} />
-                            <span className="h-2.5 w-2.5 rounded-full" style={{ background: 'color-mix(in oklab, var(--gold) 60%, #fff)' }} />
-                            <span className="h-2.5 w-2.5 rounded-full" style={{ background: 'color-mix(in oklab, var(--sage) 60%, #fff)' }} />
-                            <div className="ml-2 h-2.5 flex-1 rounded-full border border-(--border-soft) bg-(--surface-1)" />
-                        </div>
-
-                        <div className="relative aspect-video">
-                            <div
-                                aria-hidden
-                                className="absolute inset-0 opacity-[0.10]"
-                                style={{
-                                    backgroundImage: 'radial-gradient(1px 1px at 20px 20px, var(--text) 10%, transparent 11%)',
-                                }}
-                            />
-
-                            {src ? (
-                                <Image
-                                    src={src}
-                                    alt={alt}
-                                    fill
-                                    sizes="(max-width: 768px) 100vw, 33vw"
-                                    className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                                    style={{ objectPosition: '50% 12%' }}
-                                    priority={false}
-                                />
-                            ) : null}
-
-                            <div
-                                aria-hidden
-                                className="pointer-events-none absolute inset-0"
-                                style={{
-                                    boxShadow: 'inset 0 0 0 1px rgba(2,8,23,0.04), inset 0 -120px 160px rgba(2,8,23,0.14)',
-                                }}
-                            />
-
-                            <div className="absolute left-3 top-3 flex items-center gap-2">
-                                <Chip size="xs" color="accent">
-                                    Étude de cas
-                                </Chip>
-                            </div>
-
-                            {p.year ? (
-                                <div className="absolute right-3 top-3">
-                                    <Chip size="xs" color="gold">
-                                        {p.year}
-                                    </Chip>
-                                </div>
-                            ) : null}
-                        </div>
+                            <ArrowUpRight size={18} className="text-(--text-strong)" />
+                        </span>
                     </div>
 
-                    {/* Content */}
-                    <div className="pt-4 px-1">
-                        <div className="flex items-start justify-between gap-3">
-                            <div className="min-w-0">
-                                <h2 className="text-base sm:text-lg font-semibold truncate text-(--text-strong)">{p.title}</h2>
-                                {blurb ? <p className="mt-1 text-sm opacity-80 line-clamp-2">{blurb}</p> : null}
-                            </div>
+                    {blurb ? <p className={['mt-3 leading-6 text-(--text)', featured ? 'max-w-xl text-base' : 'line-clamp-3 text-sm'].join(' ')}>{blurb}</p> : null}
 
-                            <span
-                                className="hidden sm:inline-flex shrink-0 rounded-full border px-3 py-1 text-xs font-semibold border-(--border-soft) text-(--text-strong) bg-(--surface-1)"
-                                style={{ background: 'color-mix(in oklab, var(--surface-2) 55%, var(--surface-1))' }}
-                            >
-                                Lire →
-                            </span>
-                        </div>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                        {(project.role ?? []).slice(0, featured ? 2 : 1).map((role) => (
+                            <Chip key={role} size="xs" color="lilac">
+                                {role}
+                            </Chip>
+                        ))}
 
-                        <div className="mt-3 flex flex-wrap gap-2">
-                            {(p.role ?? []).slice(0, 1).map((r) => (
-                                <Chip key={r} kind="design">
-                                    {r}
-                                </Chip>
-                            ))}
-                            {stackChips.map((s) => (
-                                <Chip key={s} kind={kindFor(s)}>
-                                    {s}
-                                </Chip>
-                            ))}
-                        </div>
+                        {stackChips.map((stack) => (
+                            <Chip key={stack} size="xs" kind={kindFor(stack)}>
+                                {stack}
+                            </Chip>
+                        ))}
+                    </div>
 
-                        <div className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-(--text-strong)">
-                            Voir le projet <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
-                        </div>
+                    <div className="mt-auto pt-5 text-sm font-bold uppercase tracking-[0.14em] text-(--accent)">
+                        Lire la démarche
+                        <span className="ml-2 inline-block transition group-hover:translate-x-1">→</span>
                     </div>
                 </div>
             </Link>

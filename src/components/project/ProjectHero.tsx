@@ -1,64 +1,72 @@
-// src/components/project/ProjectHero.tsx
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react';
+
 import Chip from '@/components/ui/Chip';
 import type { Project } from '@/lib/projects';
-import { kindFor, excerpt, coverAlt, coverSrc } from './project.utils';
+
 import ProjectActions from './ProjectActions';
+import { coverAlt, coverSrc, excerpt, kindFor } from './project.utils';
 
 export default function ProjectHero({ project }: { project: Project }) {
-    const p = project;
-    const src = coverSrc(p);
-    const alt = coverAlt(p);
+    const src = coverSrc(project);
+    const alt = coverAlt(project);
 
     return (
         <header className="space-y-5">
-            <div className="flex items-center justify-between gap-4">
-                <Link href="/projects" className="text-sm font-semibold hover:opacity-90 text-(--text-strong)">
-                    ← Retour aux projets
-                </Link>
-                {p.year ? (
-                    <Chip size="xs" color="gold">
-                        {p.year}
-                    </Chip>
-                ) : null}
-            </div>
+            <Link href="/projects" className="inline-flex items-center gap-2 text-sm font-semibold text-(--text-strong) transition hover:text-(--accent)">
+                <ArrowLeft size={16} />
+                Retour aux projets
+            </Link>
 
-            <section className="relative overflow-hidden rounded-2xl border border-(--border-soft) bg-(--surface-1) shadow-(--shadow-card)">
-                <div className="grid gap-6 p-6 sm:p-8 lg:grid-cols-[1.1fr_.9fr]">
-                    {/* Texte */}
+            <section className="relative overflow-hidden rounded-4xl border border-(--border-soft) bg-(--surface-1) shadow-(--shadow-card)">
+                <div aria-hidden className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-(--lilac)/30 blur-3xl" />
+                <div aria-hidden className="absolute -left-24 bottom-0 h-64 w-64 rounded-full bg-(--sage)/20 blur-3xl" />
+
+                <div className="relative grid gap-8 p-6 sm:p-8 lg:grid-cols-[1fr_420px] lg:p-10">
                     <div>
-                        <p className="text-xs uppercase tracking-[0.14em] text-(--accent)">Étude de cas</p>
+                        <div className="flex flex-wrap items-center gap-3">
+                            <p className="text-xs font-bold uppercase tracking-[0.28em] text-(--gold)">Étude de cas</p>
 
-                        <h1 className="mt-2 text-2xl sm:text-3xl md:text-4xl section-title">{p.title}</h1>
-                        {p.subtitle ? <p className="mt-2 text-sm sm:text-base opacity-85 max-w-[70ch]">{p.subtitle}</p> : null}
+                            {project.year ? (
+                                <Chip size="xs" color="gold">
+                                    {project.year}
+                                </Chip>
+                            ) : null}
+                        </div>
 
-                        <div className="mt-4 flex flex-wrap gap-2">
-                            {(p.role ?? []).map((r) => (
-                                <Chip key={r} kind="design">
-                                    {r}
+                        <h1 className="mt-5 max-w-4xl text-[clamp(2.6rem,5.8vw,5.8rem)] font-semibold leading-[0.95] tracking-[-0.075em] text-(--text-strong)">{project.title}</h1>
+
+                        {project.subtitle ? <p className="mt-5 max-w-2xl text-base leading-7 text-(--text)">{project.subtitle}</p> : null}
+
+                        <div className="mt-6 flex flex-wrap gap-2">
+                            {(project.role ?? []).map((role) => (
+                                <Chip key={role} kind="design">
+                                    {role}
                                 </Chip>
                             ))}
-                            {(p.stack ?? []).map((s) => (
-                                <Chip key={s} kind={kindFor(s)}>
-                                    {s}
+
+                            {(project.stack ?? []).slice(0, 7).map((stack) => (
+                                <Chip key={stack} kind={kindFor(stack)}>
+                                    {stack}
                                 </Chip>
                             ))}
                         </div>
 
-                        <div className="mt-5">
-                            <ProjectActions project={p} variant="hero" />
+                        <div className="mt-7">
+                            <ProjectActions project={project} variant="hero" />
                         </div>
 
-                        {/* Jump links (UX) */}
-                        <nav className="mt-6 flex flex-wrap gap-2 text-sm">
+                        <nav className="mt-7 flex flex-wrap gap-2">
                             <a href="#overview" className="btn btn-secondary">
                                 Résumé
                             </a>
+
                             <a href="#details" className="btn btn-secondary">
-                                Détails
+                                Démarche
                             </a>
-                            {p.gallery?.length ? (
+
+                            {project.gallery?.length ? (
                                 <a href="#gallery" className="btn btn-secondary">
                                     Galerie
                                 </a>
@@ -66,53 +74,60 @@ export default function ProjectHero({ project }: { project: Project }) {
                         </nav>
                     </div>
 
-                    {/* Cover + quick facts */}
                     <aside className="space-y-4">
-                        <div className="rounded-2xl border overflow-hidden border-(--border-soft) bg-(--surface-1) shadow-(--shadow-card)">
-                            {src ? (
-                                <>
+                        <div className="overflow-hidden rounded-[1.7rem] border border-(--border-soft) bg-(--paper)">
+                            <div className="relative aspect-16/10">
+                                {src ? (
+                                    <Image
+                                        src={src}
+                                        alt={alt}
+                                        fill
+                                        sizes="(max-width: 1024px) 100vw, 420px"
+                                        className="object-cover"
+                                        style={{ objectPosition: '50% 10%' }}
+                                        priority
+                                    />
+                                ) : (
                                     <div
-                                        className="flex items-center gap-2 px-3 py-2 border-b border-(--border-soft) bg-(--surface-2)"
-                                        style={{ background: 'color-mix(in oklab, var(--surface-1) 88%)' }}
-                                    >
-                                        <span className="h-2.5 w-2.5 rounded-full" style={{ background: 'color-mix(in oklab, var(--accent) 60%, #fff)' }} />
-                                        <span className="h-2.5 w-2.5 rounded-full" style={{ background: 'color-mix(in oklab, var(--gold) 60%, #fff)' }} />
-                                        <span className="h-2.5 w-2.5 rounded-full" style={{ background: 'color-mix(in oklab, var(--sage) 60%, #fff)' }} />
-                                        <div className="ml-2 h-2.5 flex-1 rounded-full border" style={{ borderColor: 'var(--border-soft)', background: 'var(--surface-1)' }} />
-                                    </div>
-
-                                    <div className="relative aspect-21/9">
-                                        <Image src={src} alt={alt} fill sizes="(max-width: 1024px) 100vw, 52vw" className="object-cover" style={{ objectPosition: '50% 12%' }} />
-                                        <div aria-hidden className="pointer-events-none absolute inset-0" style={{ boxShadow: 'inset 0 -160px 200px rgba(2,8,23,0.18)' }} />
-                                    </div>
-                                </>
-                            ) : (
-                                <div className="p-6 text-sm opacity-80">Aperçu non disponible</div>
-                            )}
+                                        aria-hidden
+                                        className="absolute inset-0"
+                                        style={{
+                                            background: 'linear-gradient(135deg, color-mix(in oklab, var(--sage) 18%, var(--surface-1)), var(--surface-1))',
+                                        }}
+                                    />
+                                )}
+                            </div>
                         </div>
 
-                        {/* Mini résumé */}
-                        <div className="rounded-2xl border p-4 sm:p-5 border-(--border-soft)" style={{ background: 'color-mix(in oklab, var(--surface-2) 52%, var(--surface-1))' }}>
-                            <div className="text-sm font-semibold text-(--text-strong)">En bref</div>
+                        <div
+                            className="rounded-[1.7rem] border p-5"
+                            style={{
+                                borderColor: 'var(--border-soft)',
+                                background: 'color-mix(in oklab, var(--surface-2) 48%, var(--surface-1))',
+                            }}
+                        >
+                            <p className="text-xs font-bold uppercase tracking-[0.22em] text-(--accent)">En bref</p>
 
-                            <dl className="mt-4 grid gap-3 text-sm">
-                                {p.context ? (
-                                    <div className="grid grid-cols-[88px_1fr] gap-3">
+                            <dl className="mt-4 space-y-4 text-sm">
+                                {project.context ? (
+                                    <div>
                                         <dt className="font-semibold text-(--text-strong)">Contexte</dt>
-                                        <dd className="opacity-85">{excerpt(p.context, 120)}</dd>
+                                        <dd className="mt-1 leading-6 text-(--text)">{excerpt(project.context, 135)}</dd>
                                     </div>
                                 ) : null}
 
-                                {p.objectives?.[0] ? (
-                                    <div className="grid grid-cols-[88px_1fr] gap-3">
+                                {project.objectives?.[0] ? (
+                                    <div>
                                         <dt className="font-semibold text-(--text-strong)">Objectif</dt>
-                                        <dd className="opacity-85">{excerpt(p.objectives[0], 120)}</dd>
+                                        <dd className="mt-1 leading-6 text-(--text)">{excerpt(project.objectives[0], 135)}</dd>
                                     </div>
                                 ) : null}
 
-                                <div className="grid grid-cols-[88px_1fr] gap-3">
+                                <div>
                                     <dt className="font-semibold text-(--text-strong)">Focus</dt>
-                                    <dd className="opacity-85">{p.highlights?.[0] ? excerpt(p.highlights[0], 120) : (p.stack ?? []).slice(0, 4).join(' · ')}</dd>
+                                    <dd className="mt-1 leading-6 text-(--text)">
+                                        {project.highlights?.[0] ? excerpt(project.highlights[0], 135) : (project.stack ?? []).slice(0, 4).join(' · ')}
+                                    </dd>
                                 </div>
                             </dl>
                         </div>
