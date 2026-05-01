@@ -144,6 +144,8 @@ function parseArchitecture(value: unknown): ProjectArchitecture | undefined {
  */
 function parseStatus(value: unknown): ProjectStatus | undefined {
     if (value === 'published' || value === 'in-progress') return value;
+    if (value === 'termine' || value === 'terminé') return 'published';
+    if (value === 'en-cours' || value === 'en cours') return 'in-progress';
     return undefined;
 }
 

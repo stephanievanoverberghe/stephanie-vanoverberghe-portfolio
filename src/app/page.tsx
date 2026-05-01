@@ -1,7 +1,7 @@
-// src/app/page.tsx
 import type { Metadata } from 'next';
 import { getAllProjects } from '@/lib/projects';
 import { buildPageMetadata } from '@/lib/seo';
+import PageShell from '@/components/layout/PageShell';
 
 import HomeHero from '@/components/home/HomeHero';
 import FeaturedProjects from '@/components/home/FeaturedProjects';
@@ -17,10 +17,10 @@ export default async function HomePage() {
     const projects = await getAllProjects();
 
     return (
-        <div className="container-page py-10 space-y-12">
+        <PageShell className="py-10 space-y-12">
             <HomeHero />
             <FeaturedProjects projects={projects} featuredCount={2} />
             <SkillsSnapshot />
-        </div>
+        </PageShell>
     );
 }

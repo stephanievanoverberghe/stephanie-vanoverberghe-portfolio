@@ -322,6 +322,21 @@ a:hover {
   background: color-mix(in oklab, var(--surface-2) 52%, var(--surface-1));
 }
 
+.surface-accent-soft {
+  border-color: color-mix(in oklab, var(--accent) 28%, var(--border-soft));
+  background: color-mix(in oklab, var(--accent) 8%, var(--surface-1));
+}
+
+.surface-sage-soft {
+  border-color: color-mix(in oklab, var(--sage) 24%, var(--border-soft));
+  background: color-mix(in oklab, var(--surface-2) 48%, var(--surface-1));
+}
+
+.surface-gold-soft {
+  border-color: color-mix(in oklab, var(--gold) 34%, var(--border-soft));
+  background: color-mix(in oklab, var(--gold) 10%, var(--surface-1));
+}
+
 /* =========================================================
    8) A11y / focus
    ========================================================= */

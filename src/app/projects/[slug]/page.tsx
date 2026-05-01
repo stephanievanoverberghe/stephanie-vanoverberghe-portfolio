@@ -2,6 +2,7 @@ import { cache, type ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
+import PageShell from '@/components/layout/PageShell';
 import ProjectActions from '@/components/project/ProjectActions';
 import ProjectDetails, { hasProjectDetails } from '@/components/project/ProjectDetails';
 import GalleryPreview from '@/components/project/GalleryPreview';
@@ -102,7 +103,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     const hasDetails = hasProjectDetails(data);
 
     return (
-        <div className="container-page space-y-10 py-12">
+        <PageShell className="space-y-10 py-12">
             <ProjectHero project={data} hasDetails={hasDetails} />
 
             <AnchorSection id="overview">
@@ -130,6 +131,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </section>
 
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldJson) }} />
-        </div>
+        </PageShell>
     );
 }

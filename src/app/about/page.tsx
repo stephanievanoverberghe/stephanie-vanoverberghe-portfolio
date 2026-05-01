@@ -1,5 +1,6 @@
 import { ArrowRight, Code2, Eye, Layers3, Sparkles } from 'lucide-react';
 
+import PageShell from '@/components/layout/PageShell';
 import LinkButton from '@/components/ui/LinkButton';
 
 import { aboutContent } from '@/content/about';
@@ -8,7 +9,7 @@ const icons = [Eye, Sparkles, Code2];
 
 export default function AboutPage() {
     return (
-        <div className="container-page py-10 sm:py-14 lg:py-16">
+        <PageShell className="py-10 sm:py-14 lg:py-16">
             <section className="relative overflow-hidden rounded-4xl border border-(--border-soft) bg-(--surface-1) p-6 shadow-(--shadow-card) sm:p-8 lg:p-12">
                 <div aria-hidden className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-(--lilac)/30 blur-3xl" />
                 <div aria-hidden className="absolute -left-24 bottom-0 h-64 w-64 rounded-full bg-(--sage)/20 blur-3xl" />
@@ -48,13 +49,7 @@ export default function AboutPage() {
 
                     return (
                         <article key={item.title} className="rounded-[1.7rem] border border-(--border-soft) bg-(--surface-1) p-5 shadow-(--shadow-card)">
-                            <div
-                                className="grid h-11 w-11 place-items-center rounded-2xl border"
-                                style={{
-                                    borderColor: 'color-mix(in oklab, var(--accent) 28%, var(--border-soft))',
-                                    background: 'color-mix(in oklab, var(--accent) 8%, var(--surface-1))',
-                                }}
-                            >
+                            <div className="surface-accent-soft grid h-11 w-11 place-items-center rounded-2xl border">
                                 <Icon size={20} className="text-(--accent)" />
                             </div>
 
@@ -74,14 +69,7 @@ export default function AboutPage() {
 
                     <div className="mt-5 grid gap-3">
                         {aboutContent.principles.map((item) => (
-                            <div
-                                key={item}
-                                className="flex items-center gap-3 rounded-2xl border px-4 py-3"
-                                style={{
-                                    borderColor: 'color-mix(in oklab, var(--sage) 24%, var(--border-soft))',
-                                    background: 'color-mix(in oklab, var(--surface-2) 48%, var(--surface-1))',
-                                }}
-                            >
+                            <div key={item} className="surface-sage-soft flex items-center gap-3 rounded-2xl border px-4 py-3">
                                 <span className="h-2 w-2 rounded-full bg-(--accent)" />
                                 <span className="text-sm font-medium text-(--text-strong)">{item}</span>
                             </div>
@@ -94,14 +82,7 @@ export default function AboutPage() {
 
                     <div className="mt-5 flex flex-wrap gap-2">
                         {aboutContent.stack.map((item) => (
-                            <span
-                                key={item}
-                                className="rounded-full border px-3 py-1.5 text-sm font-semibold text-(--text-strong)"
-                                style={{
-                                    borderColor: 'color-mix(in oklab, var(--gold) 34%, var(--border-soft))',
-                                    background: 'color-mix(in oklab, var(--gold) 10%, var(--surface-1))',
-                                }}
-                            >
+                            <span key={item} className="surface-gold-soft rounded-full border px-3 py-1.5 text-sm font-semibold text-(--text-strong)">
                                 {item}
                             </span>
                         ))}
@@ -144,6 +125,6 @@ export default function AboutPage() {
                     </div>
                 </div>
             </section>
-        </div>
+        </PageShell>
     );
 }
