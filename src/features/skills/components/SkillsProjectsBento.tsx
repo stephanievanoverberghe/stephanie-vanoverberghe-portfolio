@@ -2,7 +2,7 @@
 
 import type { Project } from '@/lib/projects';
 
-import SkillsProjectTile from '@/components/skills/SkillsProjectTile';
+import SkillsProjectTile from '@/features/skills/components/SkillsProjectTile';
 import { skillsPageContent } from '@/content/skills-page';
 
 type Props = {

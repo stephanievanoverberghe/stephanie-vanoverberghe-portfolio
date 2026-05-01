@@ -3,9 +3,9 @@ import { getAllProjects } from '@/lib/projects';
 import { buildPageMetadata } from '@/lib/seo';
 import PageShell from '@/components/layout/PageShell';
 
-import HomeHero from '@/components/home/HomeHero';
-import FeaturedProjects from '@/components/home/FeaturedProjects';
-import SkillsSnapshot from '@/components/home/SkillsSnapshot';
+import HomeHero from '@/features/home/components/HomeHero';
+import FeaturedProjects from '@/features/home/components/FeaturedProjects';
+import SkillsSnapshot from '@/features/home/components/SkillsSnapshot';
 
 export const metadata: Metadata = buildPageMetadata({
     title: 'Vanoverberghe Stéphanie - développeuse front-end React / Next.js',

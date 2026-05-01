@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
-import ContactAside from '@/components/contact/ContactAside';
-import ContactForm from '@/components/contact/ContactForm';
-import ContactHero from '@/components/contact/ContactHero';
+import ContactAside from '@/features/contact/components/ContactAside';
+import ContactForm from '@/features/contact/components/ContactForm';
+import ContactHero from '@/features/contact/components/ContactHero';
 import { contactContent } from '@/content/contact';
 import { buildPageMetadata } from '@/lib/seo';
 import PageShell from '@/components/layout/PageShell';

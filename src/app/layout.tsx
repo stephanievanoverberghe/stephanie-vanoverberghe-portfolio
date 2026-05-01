@@ -6,7 +6,7 @@ import './globals.css';
 
 import Header from '@/components/layout/header/Header';
 import Footer from '@/components/layout/footer/Footer';
-import RouteTransition from '@/components/RouteTransition';
+import RouteTransition from '@/components/layout/RouteTransition';
 
 import AppFallback from './AppFallback';
 import { metadata as siteMetadata, viewport as siteViewport, personJsonLd } from './seo';

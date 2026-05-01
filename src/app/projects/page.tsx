@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
-import ProjectsGrid from '@/components/projects/ProjectsGrid';
-import ProjectsHero from '@/components/projects/ProjectsHero';
+import ProjectsGrid from '@/features/projects/components/ProjectsGrid';
+import ProjectsHero from '@/features/projects/components/ProjectsHero';
 import { projectsPageContent } from '@/content/projects-page';
 import { getAllProjects } from '@/lib/projects';
 import { buildPageMetadata } from '@/lib/seo';

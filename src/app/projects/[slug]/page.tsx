@@ -3,11 +3,11 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import PageShell from '@/components/layout/PageShell';
-import ProjectActions from '@/components/project/ProjectActions';
-import ProjectDetails, { hasProjectDetails } from '@/components/project/ProjectDetails';
-import GalleryPreview from '@/components/project/GalleryPreview';
-import ProjectHero from '@/components/project/ProjectHero';
-import ProjectOverview from '@/components/project/ProjectOverview';
+import ProjectActions from '@/features/projects/components/ProjectActions';
+import ProjectDetails, { hasProjectDetails } from '@/features/projects/components/ProjectDetails';
+import GalleryPreview from '@/features/projects/components/GalleryPreview';
+import ProjectHero from '@/features/projects/components/ProjectHero';
+import ProjectOverview from '@/features/projects/components/ProjectOverview';
 import { projectsPageContent } from '@/content/projects-page';
 import { getProjectBySlug, getProjectSlugs } from '@/lib/projects';
 import { coverAlt, coverSrc } from '@/lib/project-display';

@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 
-import SkillsBento from '@/components/skills/SkillsBento';
-import SkillsHero from '@/components/skills/SkillsHero';
-import SkillsProjectsBento from '@/components/skills/SkillsProjectsBento';
-import SkillsVision from '@/components/skills/SkillsVision';
+import SkillsBento from '@/features/skills/components/SkillsBento';
+import SkillsHero from '@/features/skills/components/SkillsHero';
+import SkillsProjectsBento from '@/features/skills/components/SkillsProjectsBento';
+import SkillsVision from '@/features/skills/components/SkillsVision';
 import { skillsPageContent } from '@/content/skills-page';
 import { getAllProjects } from '@/lib/projects';
 import { buildPageMetadata } from '@/lib/seo';
