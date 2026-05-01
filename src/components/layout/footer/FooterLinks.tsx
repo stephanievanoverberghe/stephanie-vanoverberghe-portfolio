@@ -9,7 +9,7 @@ function ExternalLink({ href, label }: { href: string; label: string }) {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="surface-card surface-card-hover group inline-flex items-center justify-between gap-3 rounded-2xl px-4 py-3 text-sm font-semibold text-(--text-strong)"
+            className="footer-link-motion surface-card group inline-flex items-center justify-between gap-3 rounded-2xl px-4 py-3 text-sm font-semibold text-(--text-strong)"
         >
             {label}
             <ArrowUpRight size={15} className="text-(--accent) transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -50,7 +50,7 @@ export function FooterLinks() {
                         <Link
                             key={link.href}
                             href={link.href}
-                            className="group flex items-center justify-between rounded-2xl px-3 py-2 text-sm font-semibold text-(--text) transition hover:bg-(--surface-2) hover:text-(--text-strong)"
+                            className="footer-link-motion group flex items-center justify-between rounded-2xl px-3 py-2 text-sm font-semibold text-(--text) transition hover:bg-(--surface-2) hover:text-(--text-strong)"
                         >
                             {link.label}
                             <span className="text-(--accent) opacity-0 transition group-hover:opacity-100">→</span>

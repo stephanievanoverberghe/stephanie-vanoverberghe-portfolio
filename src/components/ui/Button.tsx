@@ -30,7 +30,7 @@ type ButtonProps = CommonProps &
     );
 
 function classes(variant: ButtonVariant, size: ButtonSize, className?: string) {
-    return cn('inline-flex items-center gap-2 transition hover:-translate-y-0.5', variantClasses[variant], sizeClasses[size], className);
+    return cn('button-motion inline-flex items-center gap-2', variantClasses[variant], sizeClasses[size], className);
 }
 
 export default function Button(props: ButtonProps) {

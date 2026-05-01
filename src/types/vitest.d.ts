@@ -7,6 +7,7 @@ declare module 'vitest' {
     type ExpectChain = {
         toBe: (expected: unknown) => void;
         toEqual: (expected: unknown) => void;
+        toBeNull: () => void;
         toThrow: (expected?: unknown) => void;
         toHaveBeenCalled: () => void;
         toHaveBeenCalledTimes: (count: number) => void;
@@ -14,6 +15,11 @@ declare module 'vitest' {
         not: {
             toHaveBeenCalled: () => void;
             toHaveBeenCalledTimes: (count: number) => void;
+        };
+        resolves: {
+            toBe: (expected: unknown) => Promise<void>;
+            toEqual: (expected: unknown) => Promise<void>;
+            toBeNull: () => Promise<void>;
         };
         rejects: {
             toThrow: (expected?: unknown) => Promise<void>;
@@ -43,6 +49,9 @@ declare module 'vitest' {
         };
         clearAllMocks: () => void;
         resetModules: () => void;
+        useFakeTimers: () => void;
+        setSystemTime: (value: number | Date) => void;
+        advanceTimersByTime: (ms: number) => void;
         doMock: (path: string, factory: () => unknown) => void;
         importActual: <T>(path: string) => Promise<T>;
         mock: (path: string, factory: () => Record<string, unknown>) => void;

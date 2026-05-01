@@ -32,7 +32,9 @@ describe('projects loader', () => {
         expect(project).toEqual({
             slug: 'demo-projet',
             title: 'Demo Projet',
+            order: undefined,
             subtitle: undefined,
+            status: undefined,
             year: 2025,
             role: undefined,
             stack: ['Next.js', 'TypeScript'],
@@ -65,16 +67,31 @@ describe('projects loader', () => {
         expect(project?.slug).toBe('slug-fallback');
     });
 
-    it('sorts projects by descending year', async () => {
+    it('parses editorial order and published status aliases', async () => {
+        mockedReadFile.mockResolvedValueOnce(
+            JSON.stringify({
+                title: 'Projet Editorial',
+                order: 2,
+                status: 'termine',
+            }),
+        );
+
+        const project = await getProjectBySlug('projet-editorial');
+
+        expect(project?.order).toBe(2);
+        expect(project?.status).toBe('published');
+    });
+
+    it('sorts projects by editorial order before year', async () => {
         mockedReaddir.mockResolvedValueOnce(['alpha.json', 'beta.json', 'gamma.json'] as unknown as Awaited<ReturnType<typeof readdir>>);
 
         mockedReadFile
-            .mockResolvedValueOnce(JSON.stringify({ title: 'Alpha', year: 2022 }))
+            .mockResolvedValueOnce(JSON.stringify({ title: 'Alpha', year: 2022, order: 3 }))
             .mockResolvedValueOnce(JSON.stringify({ title: 'Beta', year: 2025 }))
-            .mockResolvedValueOnce(JSON.stringify({ title: 'Gamma', year: 2024 }));
+            .mockResolvedValueOnce(JSON.stringify({ title: 'Gamma', year: 2024, order: 1 }));
 
         const projects = await getAllProjects();
 
-        expect(projects.map((p) => `${p.title}-${p.year}`)).toEqual(['Beta-2025', 'Gamma-2024', 'Alpha-2022']);
+        expect(projects.map((p) => `${p.title}-${p.order ?? 'na'}-${p.year}`)).toEqual(['Gamma-1-2024', 'Alpha-3-2022', 'Beta-na-2025']);
     });
 });

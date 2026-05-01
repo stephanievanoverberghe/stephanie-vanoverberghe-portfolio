@@ -35,8 +35,9 @@ export default function ProjectActions({ project, variant = 'inline' }: Props) {
             ) : null}
 
             {isHero ? (
-                <Link href="/contact" className="btn-premium inline-flex items-center gap-2 link-card-soft">
+                <Link href="/contact" className="button-motion link-card link-card-soft items-center gap-2">
                     {labels.contact}
+                    <ArrowUpRight size={17} />
                 </Link>
             ) : null}
         </div>

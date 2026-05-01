@@ -25,7 +25,7 @@ export function HeaderDesktopNav({ isActive }: HeaderDesktopNavProps) {
                                 href={item.href}
                                 aria-current={active ? 'page' : undefined}
                                 className={cn(
-                                    'nav-item group relative flex min-h-16 items-center justify-between border-r px-5 transition last:border-r-0',
+                                    'nav-item nav-link-motion group relative flex min-h-16 items-center justify-between border-r px-5 transition last:border-r-0',
                                     active ? 'text-(--text-strong)' : 'text-(--text-muted) hover:text-(--text-strong)',
                                 )}
                             >
@@ -49,7 +49,7 @@ export function HeaderDesktopNav({ isActive }: HeaderDesktopNavProps) {
                         href={headerContent.resumeHref}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn-premium btn-premium-soft inline-flex min-h-16 items-center gap-2 rounded-[1.4rem] px-5 text-xs"
+                        className="button-motion btn-premium btn-premium-soft inline-flex min-h-16 items-center gap-2 rounded-[1.4rem] px-5 text-xs"
                     >
                         <Download size={16} />
                         {headerContent.resumeLabel}
@@ -57,7 +57,7 @@ export function HeaderDesktopNav({ isActive }: HeaderDesktopNavProps) {
 
                     <Link
                         href="/contact"
-                        className="btn-premium btn-premium-primary inline-flex min-h-16 items-center gap-2 rounded-[1.4rem] px-5 text-xs"
+                        className="button-motion btn-premium btn-premium-primary inline-flex min-h-16 items-center gap-2 rounded-[1.4rem] px-5 text-xs"
                     >
                         {headerContent.contactLabel}
                         <ArrowUpRight size={16} />

@@ -60,7 +60,11 @@ export function HeaderMobileMenu({ open, onClose, isActive }: HeaderMobileMenuPr
                                                 href={item.href}
                                                 onClick={onClose}
                                                 aria-current={active ? 'page' : undefined}
-                                                className={active ? 'menu-link menu-link-active group flex items-center justify-between rounded-2xl px-4 py-4 transition' : 'menu-link group flex items-center justify-between rounded-2xl px-4 py-4 transition'}
+                                                className={
+                                                    active
+                                                        ? 'menu-link menu-link-active menu-link-motion group flex items-center justify-between rounded-2xl px-4 py-4 transition'
+                                                        : 'menu-link menu-link-motion group flex items-center justify-between rounded-2xl px-4 py-4 transition'
+                                                }
                                             >
                                                 <span className="flex items-center gap-4">
                                                     <span className="text-xs font-bold text-(--accent)">0{index + 1}</span>
@@ -78,7 +82,7 @@ export function HeaderMobileMenu({ open, onClose, isActive }: HeaderMobileMenuPr
                                     <Link
                                         href="/contact"
                                         onClick={onClose}
-                                        className="btn-premium btn-premium-primary inline-flex items-center justify-center gap-2 rounded-2xl px-4 py-4 text-sm"
+                                        className="button-motion btn-premium btn-premium-primary inline-flex items-center justify-center gap-2 rounded-2xl px-4 py-4 text-sm"
                                     >
                                         <Mail size={16} />
                                         {headerContent.contactLabel}
@@ -89,7 +93,7 @@ export function HeaderMobileMenu({ open, onClose, isActive }: HeaderMobileMenuPr
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         onClick={onClose}
-                                        className="btn-premium btn-premium-soft inline-flex items-center justify-center gap-2 rounded-2xl px-4 py-4 text-sm"
+                                        className="button-motion btn-premium btn-premium-soft inline-flex items-center justify-center gap-2 rounded-2xl px-4 py-4 text-sm"
                                     >
                                         <Download size={16} />
                                         {headerContent.resumeLabel}
