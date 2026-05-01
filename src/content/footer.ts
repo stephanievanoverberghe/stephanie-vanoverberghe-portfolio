@@ -33,5 +33,9 @@ export const footerContent = {
         copyrightTemplate: 'Portfolio conçu avec Next.js, TypeScript et Tailwind.',
         backToTopLabel: 'Revenir en haut ↑',
         backToTopAriaLabel: 'Revenir en haut de page',
+        links: [
+            { href: '/mentions-legales', label: 'Mentions légales' },
+            { href: '/politique-confidentialite', label: 'Confidentialité' },
+        ],
     },
 } as const;
