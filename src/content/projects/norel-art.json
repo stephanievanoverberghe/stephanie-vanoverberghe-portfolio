@@ -1,0 +1,90 @@
+{
+    "slug": "norel-art",
+    "title": "Norel Art",
+    "subtitle": "E-commerce artistique — vente d’œuvres, gestion catalogue et admin évolutif",
+    "year": 2026,
+    "role": ["Product Design", "Front-end", "UI/UX", "Architecture", "Fullstack"],
+    "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "PostgreSQL", "Prisma", "Stripe"],
+    "context": "Norel Art est une plateforme e-commerce dédiée à la vente d’œuvres originales. Le projet vise à proposer une expérience simple et immersive côté client, tout en construisant une base solide pour la gestion des produits, commandes et contenus côté admin.",
+    "vision": "Créer une galerie en ligne qui valorise les œuvres sans les surcharger : une expérience d’achat fluide, sensible et structurée.",
+    "objectives": [
+        "Mettre en valeur les œuvres avec une interface épurée.",
+        "Faciliter l’achat via Stripe avec un parcours simple.",
+        "Construire une base de données claire et évolutive.",
+        "Préparer un back-office pour gérer œuvres, commandes et contenus.",
+        "Assurer une expérience fluide sur mobile et desktop."
+    ],
+    "productPrinciples": [
+        "L’œuvre avant l’interface : le design s’efface au bon moment.",
+        "Simplicité d’achat : réduire chaque friction inutile.",
+        "Clarté : chaque écran doit être compris immédiatement.",
+        "Évolutivité : penser la structure avant la complexité."
+    ],
+    "challenges": [
+        "Trouver l’équilibre entre esthétique artistique et logique e-commerce.",
+        "Structurer les données (œuvres, catégories, commandes).",
+        "Intégrer Stripe proprement (paiement, confirmation).",
+        "Préparer un système d’authentification et d’admin sans complexifier trop tôt."
+    ],
+    "solutions": [
+        "Pages œuvres épurées avec focus visuel (images plein écran, hiérarchie simple).",
+        "Parcours d’achat direct : sélection → paiement → confirmation.",
+        "Modélisation SQL claire (œuvres, commandes, clients).",
+        "Architecture pensée pour accueillir un admin (CRUD œuvres, suivi commandes).",
+        "Utilisation de Prisma pour structurer et sécuriser l’accès aux données."
+    ],
+    "uxHighlights": [
+        "Navigation simple entre les œuvres.",
+        "Lecture visuelle fluide (images prioritaires).",
+        "Parcours d’achat rapide et sans distraction.",
+        "Expérience mobile optimisée."
+    ],
+    "uiHighlights": [
+        "Interface minimaliste centrée sur l’image.",
+        "Typographie sobre pour accompagner les œuvres.",
+        "Palette neutre pour laisser respirer les visuels.",
+        "Micro-interactions discrètes."
+    ],
+    "architecture": {
+        "publicRoutes": ["/", "/oeuvres", "/oeuvres/[slug]", "/commande", "/contact"],
+        "futureAdmin": ["Authentification utilisateur (admin)", "CRUD œuvres", "Gestion des commandes", "Suivi des paiements Stripe", "Gestion des contenus"],
+        "data": ["PostgreSQL avec Prisma", "Modèles : Artwork, Order, User", "Relations propres pour évolutivité"],
+        "payments": ["Stripe Checkout", "Confirmation de paiement", "Préparation webhooks pour automatisation"]
+    },
+    "highlights": [
+        "Projet e-commerce complet (front + data + paiement).",
+        "Base SQL propre et structurée.",
+        "Intégration Stripe fonctionnelle.",
+        "Architecture prête pour un admin évolutif."
+    ],
+    "links": {
+        "demo": "",
+        "repo": ""
+    },
+    "logo": {
+        "image": "/images/projects/norel-art/logo.png",
+        "alt": "Logo Norel Art"
+    },
+    "hero": {
+        "image": "/images/projects/norel-art/desktop-hero.webp",
+        "alt": "Homepage Norel Art — galerie d’art"
+    },
+    "gallery": [
+        {
+            "src": "/images/projects/norel-art/desktop-oeuvres.webp",
+            "alt": "Catalogue des œuvres"
+        },
+        {
+            "src": "/images/projects/norel-art/desktop-oeuvre.webp",
+            "alt": "Page détail d’une œuvre"
+        },
+        {
+            "src": "/images/projects/norel-art/desktop-checkout.webp",
+            "alt": "Parcours d’achat avec Stripe"
+        },
+        {
+            "src": "/images/projects/norel-art/mobile-oeuvres.webp",
+            "alt": "Vue mobile du catalogue"
+        }
+    ]
+}

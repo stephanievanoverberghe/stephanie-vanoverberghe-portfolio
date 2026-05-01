@@ -1,17 +1,15 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
+import PageHero from '@/components/ui/PageHero';
 import { skillsPageContent } from '@/content/skills-page';
 
 export default function SkillsHero() {
     const { hero } = skillsPageContent;
 
     return (
-        <header className="relative overflow-hidden rounded-4xl border border-(--border-soft) bg-(--surface-1) p-6 shadow-(--shadow-card) sm:p-8 lg:p-12">
-            <div aria-hidden className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-(--lilac)/30 blur-3xl" />
-            <div aria-hidden className="absolute -left-24 bottom-0 h-64 w-64 rounded-full bg-(--sage)/20 blur-3xl" />
-
-            <div className="relative max-w-4xl">
+        <PageHero as="header">
+            <div className="max-w-4xl">
                 <p className="text-xs font-bold uppercase tracking-[0.28em] text-(--gold)">{hero.kicker}</p>
 
                 <h1 className="mt-5 max-w-3xl text-[clamp(2.7rem,5.6vw,5.6rem)] font-semibold leading-[0.95] tracking-[-0.07em] text-(--text-strong)">
@@ -26,43 +24,23 @@ export default function SkillsHero() {
 
                 <div className="mt-7 flex flex-wrap gap-2">
                     {hero.tags.map((tag) => (
-                        <span
-                            key={tag}
-                            className="rounded-full border px-3 py-1.5 text-xs font-semibold text-(--text-strong)"
-                            style={{
-                                borderColor: 'color-mix(in oklab, var(--sage) 28%, var(--border-soft))',
-                                background: 'color-mix(in oklab, var(--surface-2) 52%, var(--surface-1))',
-                            }}
-                        >
+                        <span key={tag} className="chip-soft rounded-full border px-3 py-1.5 text-xs font-semibold text-(--text-strong)">
                             {tag}
                         </span>
                     ))}
                 </div>
 
                 <div className="mt-8 flex flex-wrap gap-3">
-                    <Link
-                        href="/projects"
-                        className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-white transition hover:-translate-y-0.5"
-                        style={{
-                            background: 'linear-gradient(135deg, var(--accent), color-mix(in oklab, var(--accent) 78%, var(--ink)))',
-                        }}
-                    >
+                    <Link href="/projects" className="btn-premium btn-premium-primary inline-flex items-center gap-2 transition hover:-translate-y-0.5">
                         {hero.ctaPrimary}
                         <ArrowRight size={17} />
                     </Link>
 
-                    <Link
-                        href="/contact"
-                        className="inline-flex items-center gap-2 rounded-full border px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-(--text-strong) transition hover:-translate-y-0.5"
-                        style={{
-                            borderColor: 'color-mix(in oklab, var(--gold) 46%, var(--border-soft))',
-                            background: 'color-mix(in oklab, var(--gold) 12%, var(--surface-1))',
-                        }}
-                    >
+                    <Link href="/contact" className="btn-premium btn-premium-soft inline-flex items-center gap-2 transition hover:-translate-y-0.5">
                         {hero.ctaSecondary}
                     </Link>
                 </div>
             </div>
-        </header>
+        </PageHero>
     );
 }

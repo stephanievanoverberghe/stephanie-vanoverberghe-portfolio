@@ -252,6 +252,76 @@ a:hover {
   background: var(--surface-1);
 }
 
+
+.page-hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2rem;
+  border: 1px solid var(--border-soft);
+  background: var(--surface-1);
+  box-shadow: var(--shadow-card);
+  padding: 1.5rem;
+}
+
+.page-hero-glow {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(48px);
+}
+
+.page-hero-glow-top {
+  right: -6rem;
+  top: -6rem;
+  height: 18rem;
+  width: 18rem;
+  background: color-mix(in oklab, var(--lilac) 30%, transparent);
+}
+
+.page-hero-glow-bottom {
+  left: -6rem;
+  bottom: 0;
+  height: 16rem;
+  width: 16rem;
+  background: color-mix(in oklab, var(--sage) 20%, transparent);
+}
+
+@media (min-width: 640px) {
+  .page-hero {
+    padding: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-hero {
+    padding: 3rem;
+  }
+}
+
+.btn-premium {
+  border-radius: 999px;
+  padding: .75rem 1.25rem;
+  font-size: .875rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.btn-premium-primary {
+  background: linear-gradient(135deg, var(--accent), color-mix(in oklab, var(--accent) 78%, var(--ink)));
+  color: #fff;
+}
+
+.btn-premium-soft {
+  border: 1px solid color-mix(in oklab, var(--gold) 46%, var(--border-soft));
+  background: color-mix(in oklab, var(--gold) 12%, var(--surface-1));
+  color: var(--text-strong);
+}
+
+.chip-soft {
+  border-color: color-mix(in oklab, var(--sage) 28%, var(--border-soft));
+  background: color-mix(in oklab, var(--surface-2) 52%, var(--surface-1));
+}
+
 /* =========================================================
    8) A11y / focus
    ========================================================= */

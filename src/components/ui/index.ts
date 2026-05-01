@@ -22,5 +22,3 @@ export * from './patterns/BentoGrid';
 export * from './patterns/CTA';
 export * from './patterns/FeatureCard';
 export * from './patterns/Hero';
-
-export * from './hooks/useTheme';
