@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 
 import Chip from '@/components/ui/Chip';
+import SectionHeader from '@/components/ui/SectionHeader';
 import { featuredProjectsContent } from '@/content/home';
 import type { Project } from '@/lib/projects';
 import { chipPropsByKind, kindFor, pickStack } from './home.utils';
@@ -201,16 +202,16 @@ export default function FeaturedProjects({ projects, featuredCount = 2 }: { proj
     return (
         <section className="space-y-8">
             <div className="flex flex-wrap items-end justify-between gap-4">
-                <div>
-                    <p className="text-xs font-bold uppercase tracking-[0.28em] text-(--accent)">{featuredProjectsContent.kicker}</p>
-
-                    <h2 className="mt-3 text-3xl font-semibold tracking-[-0.05em] text-(--text-strong) sm:text-4xl">
-                        {featuredTitleStart}
-                        <br className="hidden sm:block" /> rencontre {featuredTitleEnd}
-                    </h2>
-
-                    <p className="mt-3 max-w-2xl text-sm leading-6 text-(--text)">{featuredProjectsContent.intro}</p>
-                </div>
+                <SectionHeader
+                    kicker={featuredProjectsContent.kicker}
+                    title={
+                        <>
+                            {featuredTitleStart}
+                            <br className="hidden sm:block" /> rencontre {featuredTitleEnd}
+                        </>
+                    }
+                    intro={featuredProjectsContent.intro}
+                />
 
                 <Link
                     href="/projects"

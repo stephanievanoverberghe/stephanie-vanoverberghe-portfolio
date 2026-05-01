@@ -1,6 +1,7 @@
 import { Code2, Eye, Gauge, Layers3 } from 'lucide-react';
 
 import Chip from '@/components/ui/Chip';
+import SectionHeader from '@/components/ui/SectionHeader';
 import { skillsSnapshotContent } from '@/content/home';
 import { chipPropsByKind } from './home.utils';
 
@@ -12,16 +13,16 @@ export default function SkillsSnapshot() {
 
     return (
         <section className="space-y-6">
-            <div className="max-w-2xl">
-                <p className="text-xs font-bold uppercase tracking-[0.28em] text-(--accent)">{skillsSnapshotContent.kicker}</p>
-
-                <h2 className="mt-3 text-3xl font-semibold tracking-[-0.05em] text-(--text-strong) sm:text-4xl">
-                    {skillsTitleStart}
-                    <br className="hidden sm:block" /> à {skillsTitleEnd}
-                </h2>
-
-                <p className="mt-3 text-sm leading-6 text-(--text)">{skillsSnapshotContent.intro}</p>
-            </div>
+            <SectionHeader
+                kicker={skillsSnapshotContent.kicker}
+                title={
+                    <>
+                        {skillsTitleStart}
+                        <br className="hidden sm:block" /> à {skillsTitleEnd}
+                    </>
+                }
+                intro={skillsSnapshotContent.intro}
+            />
 
             <div className="grid gap-4 md:grid-cols-2">
                 {skillsGroups.map(({ icon: Icon, kicker, title, text, chips }) => (

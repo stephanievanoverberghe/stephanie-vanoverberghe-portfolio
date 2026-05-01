@@ -1,6 +1,3 @@
-// src/components/home/home.utils.ts
-import type { Project } from '@/lib/projects';
-
 type Kind = 'tech' | 'tool' | 'architecture' | 'design';
 
 export function kindFor(tag: string): Kind {
@@ -70,9 +67,4 @@ export function pickStack(stack: string[] = [], n = 2): string[] {
     }
 
     return chosen.slice(0, n);
-}
-
-export function pickFeatured(all: Project[], slugs: readonly string[]) {
-    const map = new Map(all.map((p) => [p.slug, p]));
-    return slugs.map((s) => map.get(s)).filter(Boolean) as Project[];
 }

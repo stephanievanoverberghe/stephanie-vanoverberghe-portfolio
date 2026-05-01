@@ -16,13 +16,13 @@ export const dynamic = 'force-static';
 
 export default function ContactPage() {
     return (
-        <main className="container-page space-y-10 py-12">
+        <div className="container-page space-y-10 py-12">
             <ContactHero />
 
             <section className="grid items-start gap-6 lg:grid-cols-[1.1fr_0.9fr]">
                 <ContactForm />
                 <ContactAside />
             </section>
-        </main>
+        </div>
     );
 }
