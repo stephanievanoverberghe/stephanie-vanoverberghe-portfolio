@@ -101,7 +101,7 @@ function SmallProjectCard({ project, index }: { project: Project; index: number 
             <div className="flex items-start justify-between gap-4">
                 <div>
                     <p className="text-[10px] font-bold uppercase tracking-[0.22em]" style={toneTextStyle(tone)}>
-                        {featuredProjectsContent.indexLabel}
+                        {featuredProjectsContent.indexLabel} {String(index + 3).padStart(2, '0')}
                     </p>
 
                     <h3 className="mt-2 text-base font-semibold leading-snug text-(--text-strong)">{project.title}</h3>

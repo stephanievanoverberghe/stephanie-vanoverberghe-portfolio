@@ -10,10 +10,12 @@ export const dynamic = 'force-dynamic';
 const MIN_SUBMISSION_DELAY_MS = 3_000;
 const MAX_SUBMISSION_WINDOW_MS = 1000 * 60 * 60 * 24;
 
+/** Réponse uniforme utilisée quand la requête ne passe pas les validations. */
 function invalidPayloadResponse() {
     return NextResponse.json({ ok: false, error: 'Données de contact invalides.' }, { status: 400 });
 }
 
+/** Vérifie que la soumission provient bien du site lui-même. */
 function isAllowedRequestSource(req: Request): boolean {
     // Défense applicative "low-cost" : on rejette les origines externes pour
     // limiter les soumissions cross-site opportunistes sur l'endpoint public.
@@ -36,6 +38,7 @@ function isAllowedRequestSource(req: Request): boolean {
     }
 }
 
+/** Détecte les soumissions trop rapides ou trop anciennes. */
 function isHumanSubmissionDelay(formStartedAt: number): boolean {
     // Règle métier anti-spam : un humain ne soumet généralement pas le formulaire
     // en moins de quelques secondes, et on ignore aussi les timestamps trop anciens.
@@ -43,6 +46,7 @@ function isHumanSubmissionDelay(formStartedAt: number): boolean {
     return elapsed >= MIN_SUBMISSION_DELAY_MS && elapsed <= MAX_SUBMISSION_WINDOW_MS;
 }
 
+/** Récupère la configuration mail et indique si elle est exploitable. */
 function isMailConfigured() {
     const resendKey = process.env.RESEND_API_KEY;
     const to = process.env.CONTACT_TO;

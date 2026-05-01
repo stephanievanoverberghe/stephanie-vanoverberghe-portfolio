@@ -1,82 +1,90 @@
 {
     "slug": "norel-art",
     "title": "Norel Art",
-    "subtitle": "E-commerce artistique en cours — galerie, paiement Stripe et futur admin",
+    "order": 6,
+    "subtitle": "Galerie d’artiste et back-office éditorial — prototype front structuré, admin mocké et cadrage produit déjà avancé",
     "status": "in-progress",
     "year": 2026,
-    "role": ["Product Design", "Fullstack en progression", "UI/UX", "Architecture"],
-    "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Node.js", "PostgreSQL", "Prisma", "Stripe"],
-    "context": "Norel Art est un projet e-commerce en cours, dédié à la vente d’œuvres originales. La partie client pose les bases de l’expérience : découvrir les œuvres, consulter le détail, préparer l’achat et construire progressivement une architecture prête pour l’admin.",
-    "vision": "Créer une galerie en ligne sobre et sensible, où l’œuvre reste au centre, avec une expérience d’achat simple et une base technique pensée pour évoluer.",
+    "role": ["Product Design", "Front-end", "UI/UX", "Architecture"],
+    "stack": ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS v4", "Lucide React", "CSS variables"],
+    "context": "Norel Art est aujourd’hui un prototype front avancé pour une galerie d’artiste. Le repo expose déjà une zone publique et une zone admin mockée, tandis que plusieurs briques plus ambitieuses — paiement, base de données, emails — sont surtout cadrées dans la documentation produit et technique.",
+    "vision": "Créer une galerie en ligne sobre et sensible, où l’œuvre reste au centre, avec une future administration capable de gérer le contenu sans lourdeur.",
     "objectives": [
-        "Mettre en valeur les œuvres avec une interface épurée.",
-        "Construire un parcours e-commerce clair et rassurant.",
-        "Préparer l’intégration Stripe pour l’achat en ligne.",
-        "Structurer une base SQL propre avec Prisma.",
-        "Prévoir un espace admin avec authentification, gestion des œuvres et suivi des commandes."
+        "Mettre les œuvres au centre avec une interface calme et lisible.",
+        "Structurer un parcours public cohérent : accueil, œuvres, commandes, contact.",
+        "Préparer une zone admin crédible avant d’ajouter les services réels.",
+        "Poser une architecture lisible, documentée et prête à évoluer."
     ],
     "productPrinciples": [
-        "L’œuvre avant l’interface : le design accompagne sans voler l’attention.",
-        "Parcours simple : voir, comprendre, acheter.",
-        "Structure claire : penser la donnée avant d’ajouter de la complexité.",
-        "Évolution progressive : construire proprement étape par étape."
+        "L’œuvre doit garder la priorité sur l’interface.",
+        "Le site public doit rester simple à parcourir.",
+        "L’admin doit simplifier la gestion, pas la compliquer.",
+        "Le cadrage produit et technique doit précéder les intégrations lourdes."
     ],
     "challenges": [
-        "Créer une expérience artistique sans perdre la logique e-commerce.",
-        "Structurer les données : œuvres, catégories, commandes, utilisateurs.",
-        "Préparer Stripe et les webhooks sans complexifier trop tôt.",
-        "Mettre en place une future authentification admin propre.",
-        "Garder une interface premium, lisible et mobile-first."
+        "Concevoir un projet artistique sans tomber dans un front purement décoratif.",
+        "Préparer un back-office crédible sans backend finalisé.",
+        "Faire cohabiter ambition produit et état réel du code.",
+        "Garder une base propre malgré un projet encore en évolution."
     ],
     "solutions": [
-        "Pages œuvres sobres avec priorité aux visuels.",
-        "Architecture Next.js pensée pour accueillir route handlers, logique serveur et webhooks.",
-        "Modélisation PostgreSQL avec Prisma pour préparer les relations entre œuvres, commandes et utilisateurs.",
-        "Préparation d’un futur admin : CRUD œuvres, gestion des commandes, authentification.",
-        "Interface client construite en composants réutilisables pour faciliter les évolutions."
+        "Routes marketing distinctes pour les œuvres, commandes, fresques et contact.",
+        "Composants d’admin déjà présents pour les œuvres, demandes, témoignages et réglages.",
+        "Documentation produit et développement très détaillée pour cadrer la suite.",
+        "Séparation explicite entre contenu, layout, UI, composants métier et docs de référence."
+    ],
+    "highlights": [
+        "Très bon travail de cadrage produit et technique en amont.",
+        "Zone admin déjà visible dans le repo malgré un état encore mocké.",
+        "Positionnement artistique cohérent sans perdre la structure.",
+        "Projet honnêtement montrable comme prototype en cours, pas comme e-commerce terminé."
     ],
     "uxHighlights": [
-        "Navigation simple entre catalogue et détail d’œuvre.",
-        "Lecture visuelle fluide avec focus sur les images.",
-        "Parcours pensé pour limiter les distractions avant l’achat.",
-        "Expérience mobile priorisée."
+        "Parcours public simple entre univers, œuvres et contact.",
+        "Admin pensé comme outil de gestion éditoriale plutôt que comme interface technique brute.",
+        "Bonne attention à la clarté des actions côté back-office.",
+        "Volonté de garder la lecture des œuvres fluide."
     ],
     "uiHighlights": [
-        "Interface minimaliste centrée sur l’image.",
-        "Typographie sobre et élégante.",
-        "Palette neutre pour laisser respirer les œuvres.",
-        "Micro-interactions discrètes et cohérentes."
+        "Direction visuelle sensible autour de la galerie et du trait.",
+        "Typographies et univers visuel déjà distinctifs.",
+        "Composants partagés pour les sections, titres et formulaires.",
+        "Contraste entre front artistique et admin plus sobre."
+    ],
+    "notableDecisions": [
+        "Documenter largement le projet avant d’implémenter toutes les briques promises.",
+        "Commencer par une zone publique et un admin simulé plutôt que brancher trop tôt une stack backend lourde.",
+        "Traiter le futur paiement et la future base comme des étapes suivantes, pas comme des acquis."
+    ],
+    "nextSteps": [
+        "Brancher une vraie persistance pour les œuvres et les demandes.",
+        "Implémenter l’authentification admin réelle.",
+        "Décider clairement si le produit vise la galerie vitrine, l’e-commerce ou les deux."
     ],
     "architecture": {
-        "status": ["Projet en cours", "Partie client avancée", "Admin, auth et paiement en préparation"],
-        "publicRoutes": ["/", "/oeuvres", "/oeuvres/[slug]", "/commandes", "/contact"],
-        "futureAdmin": ["Connexion admin", "CRUD œuvres", "Gestion des commandes", "Suivi des paiements Stripe", "Gestion des contenus"],
-        "serverSide": ["Route handlers Next.js", "Logique serveur avec Node.js", "Préparation webhooks Stripe", "Validation des données côté serveur"],
-        "data": ["PostgreSQL avec Prisma", "Modèles prévus : Artwork, Order, User", "Relations pensées pour l’évolution du projet"],
-        "payments": ["Stripe Checkout", "Confirmation de paiement", "Webhooks prévus pour automatiser les commandes"]
+        "summary": "Prototype App Router avec zone marketing et zone admin distinctes, soutenu par une documentation produit/technique particulièrement développée.",
+        "keyPoints": [
+            "Routes marketing pour les œuvres, commandes et fresques.",
+            "Admin mocké avec écrans œuvres, demandes, témoignages et réglages.",
+            "Composants partagés de layout, UI et formulaires.",
+            "Forte base documentaire pour guider la suite du produit."
+        ],
+        "publicRoutes": ["/", "/oeuvres", "/oeuvres/[slug]", "/a-propos", "/commandes", "/fresques", "/contact"],
+        "adminRoutes": ["/admin", "/admin/login", "/admin/oeuvres", "/admin/demandes", "/admin/temoignages", "/admin/settings"],
+        "plannedIntegrations": ["Paiement", "Emails", "Persistance", "Administration réelle"]
     },
-    "highlights": [
-        "Projet e-commerce en cours avec vraie logique produit.",
-        "Base client déjà pensée pour accueillir paiement, auth et admin.",
-        "Montée fullstack avec Node.js, Prisma, SQL et Stripe.",
-        "Direction artistique sobre au service des œuvres."
-    ],
     "links": {
         "demo": "https://norel-art.vercel.app/",
         "repo": "https://github.com/stephanievanoverberghe/norel-art"
     },
-    "logo": {
-        "image": "/images/projects/norel-art/logo.png",
-        "alt": "Logo Norel Art"
-    },
     "hero": {
         "image": "/images/projects/norel-art/desktop-hero.png",
-        "alt": "Homepage Norel Art — galerie d’art"
+        "alt": "Accueil galerie de Norel Art"
     },
     "gallery": [
         {
             "src": "/images/projects/norel-art/desktop-oeuvres.png",
-            "alt": "Catalogue des œuvres"
+            "alt": "Vue catalogue des œuvres"
         },
         {
             "src": "/images/projects/norel-art/desktop-oeuvre.png",

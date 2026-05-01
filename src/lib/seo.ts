@@ -10,6 +10,12 @@ type PageMetadataArgs = {
     image?: string;
 };
 
+/**
+ * Construit des metadata cohérentes pour les pages statiques du portfolio.
+ *
+ * Cette fonction évite la duplication des blocs Open Graph / Twitter
+ * et garantit une base homogène pour le SEO du site.
+ */
 export function buildPageMetadata({ title, description, canonical, image = DEFAULT_OG_IMAGE }: PageMetadataArgs): Metadata {
     return {
         title,

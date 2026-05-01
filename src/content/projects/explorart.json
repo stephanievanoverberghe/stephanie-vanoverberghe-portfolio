@@ -1,63 +1,78 @@
 {
     "slug": "explorart",
     "title": "Explor’Art",
-    "subtitle": "Blog d’art éditorial — apprendre à regarder, comprendre et créer sans jargon",
+    "order": 5,
+    "subtitle": "Plateforme éditoriale sur l’art — piliers de contenu, lecture longue et admin CMS simulé",
     "year": 2026,
-    "role": ["Product Design", "Front-end", "UI/UX", "Architecture", "Fullstack"],
-    "stack": ["Next.js 16 (App Router)", "TypeScript", "Tailwind CSS v4", "MongoDB", "Mongoose", "Vercel"],
-    "context": "Explor’Art est un blog d’art pensé comme un espace calme, clair et vivant. L’objectif : rendre l’art plus accessible, sans ton scolaire, en structurant les contenus autour de 7 piliers éditoriaux.",
-    "vision": "Créer une école d’art moderne sans murs : un lieu où l’on apprend à regarder autrement, à comprendre une œuvre, à explorer les couleurs, les artistes, les émotions et la pratique.",
+    "role": ["Product Design", "Front-end", "Architecture", "Admin UX", "Content modeling"],
+    "stack": ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS v4", "Tiptap", "Lucide React"],
+    "context": "Explor’Art est un projet éditorial pensé comme un média d’apprentissage autour de l’art. Le repo couvre le site public, un ensemble de piliers, des articles détaillés et une zone admin/CMS actuellement basée sur des services mockés.",
+    "vision": "Créer un espace d’apprentissage visuel et respirant, où l’on peut lire, explorer et organiser des contenus artistiques sans ton scolaire ni surcharge d’interface.",
     "objectives": [
-        "Rendre l’apprentissage artistique plus simple, sensible et accessible.",
-        "Construire une identité éditoriale forte autour de 7 piliers.",
-        "Créer une expérience de lecture lumineuse, fluide et respirante.",
-        "Développer une architecture maintenable avec Next.js et MongoDB.",
-        "Prévoir un admin minimal pour publier et organiser les articles."
+        "Construire une ligne éditoriale claire autour de piliers thématiques.",
+        "Offrir une expérience de lecture longue agréable sur desktop comme mobile.",
+        "Préparer une administration de contenu cohérente avant d’ajouter un backend réel.",
+        "Maintenir une structure de contenu réutilisable pour les articles, médias et commentaires."
     ],
     "editorialFoundations": [
-        "7 piliers pour guider l’exploration : pratique, œuvres, artistes, histoire, couleurs, psychologie et inspirations.",
-        "Des formats d’articles clairs sans imposer de parcours rigide.",
-        "Une vidéo YouTube possible, mais jamais centrale.",
-        "Une approche libre : le lecteur peut apprendre selon sa curiosité."
+        "Les piliers structurent l’exploration et évitent l’effet blog fourre-tout.",
+        "Le contenu doit rester accessible, sensible et progressif.",
+        "La lecture prime sur l’effet décoratif.",
+        "L’admin doit suivre la logique éditoriale, pas l’inverse."
     ],
     "challenges": [
-        "Créer un blog pédagogique sans le rendre scolaire.",
-        "Garder une identité forte avec une interface minimaliste.",
-        "Faire respirer les pages malgré la richesse éditoriale.",
-        "Préparer un admin simple, mais assez structuré pour évoluer."
+        "Donner de la densité éditoriale sans écraser la respiration visuelle.",
+        "Concevoir une zone admin crédible sans backend finalisé.",
+        "Gérer plusieurs types d’objets de contenu : posts, piliers, médias, commentaires, réglages.",
+        "Conserver une cohérence entre expérience publique et outils éditoriaux."
     ],
     "solutions": [
-        "Navigation pensée autour des piliers, avec un menu Explorer pour ouvrir le contenu sans surcharger l’interface.",
-        "Design system doux : papier chaud, typographies éditoriales, couleurs associées aux piliers.",
-        "Composants dédiés à la lecture : badges, encarts pédagogiques, labels, intégration YouTube.",
-        "Séparation claire entre routes publiques, admin et API.",
-        "Modèle Post structuré avec format, pilier, SEO, statut et youtubeId optionnel."
+        "App Router séparé entre zone publique et zone admin.",
+        "Modélisation explicite du contenu : posts, pillars, bricks, comments.",
+        "Services mockés pour tester les flux d’édition avant d’industrialiser le backend.",
+        "Usage de Tiptap pour préparer un vrai confort d’édition côté CMS."
+    ],
+    "highlights": [
+        "Projet éditorial plus structuré qu’un simple blog de démo.",
+        "Public + admin + commentaires + médias dans le même repo.",
+        "Très bon terrain pour montrer content modeling et architecture front.",
+        "Direction visuelle cohérente avec la promesse éditoriale."
     ],
     "uxHighlights": [
-        "Hero éditorial sans pression commerciale.",
-        "Accueil organisé en blocs calmes et lisibles.",
-        "Pages piliers pensées comme des portes d’entrée.",
-        "Articles aérés avec encarts pédagogiques.",
-        "Lecture mobile priorisée pour le confort."
+        "Parcours clair entre page d’accueil, piliers et articles.",
+        "Pages d’articles pensées pour la lecture longue.",
+        "Pages piliers qui servent de porte d’entrée thématique.",
+        "Admin organisé autour des besoins éditoriaux réels."
     ],
     "uiHighlights": [
-        "Palette papier chaud et couleurs feutrées par pilier.",
-        "Playfair Display pour le ton éditorial, Inter pour la lisibilité.",
-        "Cartes douces, badges colorés et ombres discrètes.",
-        "Navbar sticky translucide avec blur léger.",
-        "Animations lentes et organiques."
+        "Univers éditorial doux et lisible.",
+        "Illustrations et médias intégrés sans casser le rythme de lecture.",
+        "Composants dédiés aux cartes article, CTA et navigation secondaire.",
+        "Séparation visuelle nette entre front public et back-office."
+    ],
+    "notableDecisions": [
+        "Préparer l’admin avec des services mockés plutôt que bloquer le projet sur la partie backend.",
+        "Modéliser les contenus avant de brancher une source de vérité persistante.",
+        "Utiliser Tiptap pour viser un vrai workflow d’édition.",
+        "Traiter l’expérience commentaire et média comme des briques de produit, pas comme un ajout tardif."
+    ],
+    "nextSteps": [
+        "Brancher une persistance réelle pour les contenus et les commentaires.",
+        "Renforcer l’authentification admin.",
+        "Stabiliser les flux CRUD et la médiathèque côté back."
     ],
     "architecture": {
-        "publicRoutes": ["/", "/articles", "/articles/[slug]", "/piliers", "/piliers/[slug]", "/a-propos", "/recherche", "/legal/*"],
-        "adminFeatures": ["CRUD articles", "Gestion des piliers", "Statut draft/published", "Mise en avant", "Champs SEO", "youtubeId optionnel"],
-        "seo": ["Metadata par page", "OpenGraph dynamique", "Sitemap", "Images optimisées avec next/image", "Revalidation côté lecture"]
+        "summary": "Architecture App Router découpée entre zone publique et zone admin, avec une couche de modélisation de contenu indépendante de la source de données finale.",
+        "keyPoints": [
+            "Posts, piliers, bricks et commentaires modélisés séparément.",
+            "CMS simulé avec services mockés.",
+            "Édition riche via Tiptap.",
+            "Routes publiques et routes admin déjà distinctes."
+        ],
+        "publicRoutes": ["/", "/articles", "/articles/[slug]", "/piliers", "/piliers/[slug]", "/a-propos", "/contact"],
+        "adminRoutes": ["/admin/connexion", "/admin/tableau-de-bord", "/admin/articles", "/admin/piliers", "/admin/commentaires", "/admin/medias", "/admin/utilisateurs"],
+        "contentModel": ["Posts", "Pillars", "Bricks", "Comments", "Media", "Settings"]
     },
-    "highlights": [
-        "Vision éditoriale complète : ton, piliers, UX, UI et architecture.",
-        "Design system cohérent autour des 7 piliers.",
-        "Admin minimal pensé pour publier sans friction.",
-        "Expérience de lecture douce, accessible et structurée."
-    ],
     "links": {
         "demo": "https://explorart-blog.vercel.app/",
         "repo": "https://github.com/stephanievanoverberghe/explorart-blog"
@@ -73,19 +88,19 @@
     "gallery": [
         {
             "src": "/images/projects/explorart/desktop-articles.webp",
-            "alt": "Catalogue des articles avec filtres par pilier"
+            "alt": "Vue liste des articles et navigation par contenu"
         },
         {
             "src": "/images/projects/explorart/desktop-article.webp",
-            "alt": "Article détaillé avec encarts pédagogiques"
+            "alt": "Page article avec lecture longue et médias"
         },
         {
             "src": "/images/projects/explorart/desktop-admin.webp",
-            "alt": "Dashboard admin minimal"
+            "alt": "Zone admin d’édition et de gestion du contenu"
         },
         {
             "src": "/images/projects/explorart/desktop-admin-commentaires.webp",
-            "alt": "Modération des commentaires côté admin"
+            "alt": "Interface de gestion des commentaires"
         }
     ]
 }

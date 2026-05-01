@@ -1,59 +1,85 @@
 {
     "slug": "alchimiste-creations",
     "title": "Alchimiste Créations",
-    "subtitle": "Studio web indépendant — transformer une idée en interface claire, crédible et conversion-oriented",
+    "order": 3,
+    "subtitle": "Site studio freelance — clarifier l’offre, structurer le discours et faciliter la prise de contact",
     "year": 2025,
-    "role": ["Product Design", "Front-end", "UI/UX"],
-    "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-    "context": "Alchimiste Créations est mon studio freelance. L’objectif : proposer une offre lisible, crédible et structurée, pensée pour des indépendants qui veulent un site clair et efficace.",
-    "vision": "Un site vitrine n’est pas une simple présence. C’est un outil de compréhension, de positionnement et de conversion.",
+    "role": ["Product Design", "Front-end", "UI/UX", "Architecture"],
+    "stack": ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS v4", "Zod", "React Hook Form", "Vitest", "Vercel"],
+    "context": "Alchimiste Créations est mon site studio. Le projet devait répondre à une question simple : comment présenter une offre web de manière claire, crédible et professionnelle, sans tomber dans les codes génériques du site freelance.",
+    "vision": "Transformer un site vitrine en outil de compréhension et de décision : une offre lisible, un parcours rassurant, et une base technique propre à faire évoluer.",
     "objectives": [
         "Rendre l’offre immédiatement compréhensible.",
-        "Créer un parcours fluide vers la prise de contact.",
-        "Installer une image premium sans surcharger l’interface.",
-        "Poser une base technique propre et évolutive."
+        "Structurer un parcours marketing simple : services, process, portfolio, contact.",
+        "Installer une direction visuelle sobre mais identifiable.",
+        "Construire une base maintenable, testable et crédible en contexte pro."
     ],
     "productPrinciples": [
-        "Clarté avant tout : chaque section doit répondre à une question.",
-        "Hiérarchie forte : lecture rapide, compréhension immédiate.",
-        "Pas de superflu : uniquement ce qui sert le message.",
-        "Design au service de la crédibilité."
+        "Chaque section doit répondre à une question concrète.",
+        "La clarté prime sur l’effet.",
+        "Le contenu guide la structure avant le décor.",
+        "Le design doit soutenir la crédibilité, pas l’enrober artificiellement."
     ],
     "challenges": [
-        "Éviter l’effet “site freelance générique”.",
-        "Créer une identité visuelle forte sans complexité.",
-        "Structurer l’information sans perdre la fluidité.",
-        "Trouver le bon équilibre entre design et conversion."
+        "Éviter l’effet “site freelance interchangeable”.",
+        "Donner du relief à l’offre sans surcharger la page.",
+        "Garder une navigation fluide sur mobile comme desktop.",
+        "Faire cohabiter image de marque, SEO, accessibilité et maintenabilité."
     ],
     "solutions": [
-        "Parcours clair : Offres → Process → Projets → FAQ → Contact.",
-        "Sections courtes et scannables, pensées mobile-first.",
-        "CTA visibles et cohérents tout au long de la page.",
-        "Mini design system (tokens, composants réutilisables).",
-        "Optimisation SEO et performance dès la base."
+        "Architecture App Router claire avec pages marketing séparées et contenu centralisé.",
+        "Sections courtes, scannables et orientées décision.",
+        "Formulaire contact validé côté client et API dédiée côté serveur.",
+        "Styles fondation extraits dans un vrai dossier /styles avec tokens, composants et utilitaires."
+    ],
+    "highlights": [
+        "Positionnement plus net que la majorité des sites portfolio/freelance génériques.",
+        "Parcours clair de la promesse jusqu’au contact.",
+        "Base éditoriale centralisée et maintenable.",
+        "Refactor poussé sur l’architecture, le design system et la qualité globale."
     ],
     "uxHighlights": [
-        "Lecture rapide en quelques secondes.",
-        "Navigation fluide sans surcharge cognitive.",
-        "CTA placés au bon moment dans le parcours.",
-        "FAQ pour lever les objections sans friction."
+        "Lecture rapide du message principal et des offres.",
+        "CTA cohérents à travers le parcours.",
+        "Structure responsive pensée pour le scan mobile.",
+        "Contenu éditorial resserré pour limiter le bruit."
     ],
     "uiHighlights": [
-        "Design minimal avec hiérarchie typographique forte.",
-        "Palette sobre avec accents maîtrisés.",
-        "Espaces respirants pour guider la lecture.",
-        "Micro-interactions discrètes mais présentes."
+        "Direction visuelle sobre avec hiérarchie typographique forte.",
+        "Design system simple mais réel : boutons, pills, sections, surfaces.",
+        "Fondations CSS séparées pour éviter le fichier global monolithique.",
+        "Animations discrètes et ciblées."
+    ],
+    "testing": {
+        "strategy": "Le projet intègre une base de tests pragmatique : validations unitaires, contrôles structurels, smoke checks et build de production.",
+        "coverage": [
+            "Tests unitaires sur les zones sensibles (metadata, architecture, validation contact).",
+            "Contrôles de structure et accessibilité sur les écrans clés.",
+            "Build et lint intégrés au flux de vérification."
+        ]
+    },
+    "notableDecisions": [
+        "Séparer UI, layout, marketing, content, application et infrastructure au lieu de tout laisser dans des composants de page.",
+        "Faire du contenu une vraie source de vérité plutôt que du texte dispersé dans l’UI.",
+        "Limiter les animations à des zones utiles pour préserver la lisibilité.",
+        "Consolider la couche styles en plusieurs fichiers spécialisés."
+    ],
+    "nextSteps": [
+        "Ajouter des cas client réels et un portfolio enrichi.",
+        "Pousser les tests end-to-end sur les parcours critiques.",
+        "Mesurer plus finement les performances per-route."
     ],
     "architecture": {
-        "publicRoutes": ["/", "/services", "/portfolio", "/a-propos", "/contact"],
-        "seoPerf": ["SSG avec Next.js", "Metadata et OpenGraph", "Images optimisées (next/image)", "Sitemap et structure propre"]
+        "summary": "Projet modulaire App Router avec séparation explicite entre routing, contenu, UI, logique métier et styles globaux.",
+        "keyPoints": [
+            "Routing marketing + route API contact.",
+            "Contenu éditorial découpé par zone du site.",
+            "Fondations CSS extraites dans /styles.",
+            "Tests unitaires et smoke checks déjà présents."
+        ],
+        "publicRoutes": ["/", "/services", "/portfolio", "/portfolio/[slug]", "/a-propos", "/contact"],
+        "quality": ["Lint", "TypeScript strict", "Vitest", "Smoke tests", "Sitemap", "Robots", "Metadata par page"]
     },
-    "highlights": [
-        "Positionnement clair (offres, process, cible).",
-        "Interface pensée pour convertir sans pression.",
-        "Design simple mais maîtrisé.",
-        "Base technique propre et maintenable."
-    ],
     "links": {
         "demo": "https://alchimiste-creations.vercel.app/",
         "repo": "https://github.com/stephanievanoverberghe/alchimiste-creations-studio"
@@ -64,24 +90,24 @@
     },
     "hero": {
         "image": "/images/projects/alchimiste-creations/desktop-hero.webp",
-        "alt": "Accueil du site Alchimiste Créations"
+        "alt": "Page d’accueil du site Alchimiste Créations"
     },
     "gallery": [
         {
             "src": "/images/projects/alchimiste-creations/desktop-1.webp",
-            "alt": "Section offres avec présentation des prestations"
+            "alt": "Présentation des prestations et du positionnement du studio"
         },
         {
             "src": "/images/projects/alchimiste-creations/desktop-2.webp",
-            "alt": "Section processus avec étapes du projet"
+            "alt": "Section process et logique d’accompagnement"
         },
         {
             "src": "/images/projects/alchimiste-creations/mobile-1.webp",
-            "alt": "Vue mobile des projets"
+            "alt": "Adaptation mobile de la page portfolio"
         },
         {
             "src": "/images/projects/alchimiste-creations/mobile-2.webp",
-            "alt": "Formulaire de contact / devis"
+            "alt": "Parcours de contact sur mobile"
         }
     ]
 }

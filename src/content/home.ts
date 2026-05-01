@@ -5,7 +5,7 @@ import { siteNarrative, siteProfile } from './site';
 export const homeHeroContent: PrefaceContent = {
     title: 'Portfolio frontend',
     role: siteProfile.role,
-    availability: 'Recherche CDI — React / Next.js',
+    availability: 'Recherche CDI - React / Next.js',
     heroKicker: 'Portfolio frontend · React · Next.js · TypeScript',
     heroTitle: {
         first: siteNarrative.heroWords[0],
@@ -14,7 +14,7 @@ export const homeHeroContent: PrefaceContent = {
     },
     heroCtaPrimary: 'Voir mes projets',
     heroCtaSecondary: 'CV',
-    intro: 'Je viens d’un regard créatif et je l’ai prolongé dans le front-end : penser la lecture d’une interface, structurer ses composants, puis livrer une expérience claire et solide.',
+    intro: "Je viens d'un regard créatif et je l'ai prolongé dans le front-end : penser la lecture d'une interface, structurer ses composants, puis livrer une expérience claire et solide.",
     sections: [
         { icon: 'ui', text: 'Design & usage' },
         { icon: 'code', text: 'Code & structure' },
@@ -34,8 +34,8 @@ export const homeHeroContent: PrefaceContent = {
 export const featuredProjectsContent = {
     kicker: 'Études de cas',
     title: 'Des projets où le regard rencontre la structure.',
-    intro: "Chaque projet montre une démarche concrète : cadrer le besoin, organiser l'interface et livrer un front-end crédible en production.",
-    indexLabel: 'Projet',
+    intro: "Je mets d'abord en avant les projets les plus solides pour montrer mon niveau réel en design, architecture front-end et logique produit.",
+    indexLabel: 'Sélection',
     cardCta: "Voir l'étude de cas",
     allProjectsLabel: 'Tous les projets',
     otherProjectsLabel: 'Autres réalisations',

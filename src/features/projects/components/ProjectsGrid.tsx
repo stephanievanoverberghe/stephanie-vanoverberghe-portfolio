@@ -22,6 +22,7 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
                 <div>
                     <p className="text-xs font-bold uppercase tracking-[0.24em] text-(--accent)">{listing.kicker}</p>
                     <h2 className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-(--text-strong)">{listing.title}</h2>
+                    <p className="mt-3 max-w-2xl text-sm leading-6 text-(--text-muted)">{listing.intro}</p>
                 </div>
             </div>
 

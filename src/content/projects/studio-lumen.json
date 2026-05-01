@@ -1,0 +1,75 @@
+{
+    "slug": "studio-lumen",
+    "title": "Studio Lumen",
+    "order": 7,
+    "subtitle": "Site studio conceptuel — direction visuelle, rythme éditorial et structure vitrine minimaliste",
+    "year": 2025,
+    "role": ["Product Design", "Front-end", "UI/UX"],
+    "stack": ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS v4"],
+    "context": "Studio Lumen est une démo portfolio construite comme un site studio créatif. Le projet n’essaie pas de simuler un produit complexe : il travaille plutôt la présence, le rythme des sections, la mise en scène du travail et la cohérence d’une identité studio.",
+    "vision": "Montrer qu’un site vitrine peut être simple, visuel et structuré sans devenir vide ni interchangeable.",
+    "objectives": [
+        "Construire une homepage studio avec un vrai rythme éditorial.",
+        "Présenter des projets conceptuels de manière crédible.",
+        "Conserver une base technique légère et propre.",
+        "Soigner le rapport entre image, titre, respiration et CTA."
+    ],
+    "productPrinciples": [
+        "Le positionnement doit être lisible rapidement.",
+        "Le visuel doit soutenir la perception de qualité sans surcharger.",
+        "Une vitrine reste un produit : hiérarchie, structure, cohérence.",
+        "La simplicité doit être intentionnelle, pas pauvre."
+    ],
+    "challenges": [
+        "Créer de la présence avec peu de pages et peu de complexité fonctionnelle.",
+        "Éviter le cliché du site studio purement décoratif.",
+        "Rendre des projets conceptuels suffisamment crédibles pour être montrables.",
+        "Donner du rythme sans dépendre d’effets lourds."
+    ],
+    "solutions": [
+        "Pages dédiées pour le travail, les fiches projet et le contact.",
+        "Données de work séparées de la composition des sections.",
+        "Hero, process, services et sélection de travaux organisés en blocs lisibles.",
+        "SEO de base déjà branché avec sitemap, robots et manifest."
+    ],
+    "highlights": [
+        "Très bon exercice de présence visuelle sans sur-complexité.",
+        "Structure simple mais propre pour un site studio.",
+        "Bonne cohérence entre ton, identité et sections.",
+        "Projet utile pour montrer la capacité à concevoir une vitrine intentionnelle."
+    ],
+    "uxHighlights": [
+        "Lecture rapide du positionnement et des services.",
+        "Sections courtes avec une bonne respiration.",
+        "Navigation simple entre homepage, work et contact.",
+        "Fiches de travail dédiées pour prolonger la crédibilité."
+    ],
+    "uiHighlights": [
+        "Univers visuel studio cohérent et net.",
+        "Usage maîtrisé des cadres et images de travail.",
+        "Typographie et mise en page orientées rythme.",
+        "Minimalisme plus intentionnel que générique."
+    ],
+    "notableDecisions": [
+        "Traiter les projets comme des entrées de contenu dédiées plutôt que comme une simple grille d’images.",
+        "Garder une base technique volontairement légère pour laisser la direction visuelle respirer."
+    ],
+    "nextSteps": [
+        "Ajouter davantage de matière dans les fiches work si le projet entre réellement dans le portfolio principal.",
+        "Enrichir les contenus contact et services avec plus de preuve sociale."
+    ],
+    "architecture": {
+        "summary": "Site vitrine App Router simple, avec pages dédiées pour work, fiches projet et contact.",
+        "keyPoints": [
+            "Homepage structurée par sections.",
+            "Données de projets séparées dans src/data/work.ts.",
+            "Routes work et work/[slug].",
+            "SEO de base déjà câblé."
+        ],
+        "publicRoutes": ["/", "/work", "/work/[slug]", "/contact"]
+    },
+    "links": {
+        "demo": "https://studio-lumen.vercel.app/",
+        "repo": "https://github.com/stephanievanoverberghe/studio-lumen"
+    }
+}

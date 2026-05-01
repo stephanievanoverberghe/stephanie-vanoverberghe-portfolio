@@ -1,73 +1,86 @@
 {
     "slug": "mysteres-a-la-carte",
     "title": "Mystères à la carte",
-    "subtitle": "Landing immersive — narration visuelle et conversion vers la réservation",
+    "order": 4,
+    "subtitle": "Landing one-page immersive — narration visuelle, micro-FX cadrés et conversion vers la réservation",
     "year": 2025,
     "role": ["Product Design", "Front-end", "UI/UX", "Architecture", "Qualité"],
-    "stack": ["Next.js (App Router)", "React 19", "TypeScript", "Tailwind CSS", "Framer Motion", "React Hook Form", "Zod", "Vitest", "Playwright"],
-    "context": "Concevoir une landing one-page immersive pour une expérience d’escape game culinaire. Le défi : capter l’attention, raconter une ambiance forte, et amener rapidement à l’action sans perdre en clarté.",
-    "vision": "Créer une expérience qui donne envie avant même d’expliquer : immersion d’abord, décision ensuite.",
+    "stack": ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS v4", "Framer Motion", "React Hook Form", "Zod", "Vitest", "Playwright"],
+    "context": "Mystères à la carte est une démo one-page pour un escape game culinaire. Le projet devait tenir un équilibre délicat : créer une ambiance forte, donner envie de réserver vite, et rester lisible malgré une mise en scène visuelle plus démonstrative.",
+    "vision": "Créer une page qui intrigue d’abord, informe au bon moment, puis conduit vers l’action sans friction.",
     "objectives": [
-        "Amener rapidement vers la réservation (CTA visible, navigation fluide).",
-        "Rendre les infos clés immédiatement lisibles (durée, joueurs, menus, tarif).",
-        "Créer une ambiance immersive sans nuire à la lisibilité.",
-        "Garantir une base technique robuste et testée."
+        "Installer une ambiance mémorable dès le hero.",
+        "Rendre les informations clés immédiatement scannables.",
+        "Guider vers la réservation sans casser l’immersion.",
+        "Encadrer les effets visuels pour préserver accessibilité et performance."
     ],
     "productPrinciples": [
-        "Une seule page, un seul objectif : réserver.",
-        "Narration visuelle + informations concrètes.",
-        "Chaque section doit faire avancer la décision.",
-        "Zéro friction dans le formulaire."
+        "Une seule page, un seul objectif principal : réserver.",
+        "Chaque section doit faire progresser la décision.",
+        "Les effets sont au service du récit, pas l’inverse.",
+        "Le parcours mobile doit rester prioritaire."
     ],
     "challenges": [
-        "Équilibrer immersion visuelle et lisibilité réelle.",
-        "Multiplier les animations sans dégrader la performance.",
-        "Maintenir une navigation mobile fluide et accessible.",
-        "Simuler un parcours de réservation crédible sans backend."
+        "Accumuler des micro-FX sans produire de bruit visuel.",
+        "Conserver une vraie lisibilité sur un univers dark et texturé.",
+        "Gérer un formulaire riche sans backend réel.",
+        "Prouver la robustesse technique d’un projet très orienté direction artistique."
     ],
     "solutions": [
-        "One-page structurée avec navigation par ancres + CTA persistant.",
-        "Sections courtes et scannables pour accélérer la prise de décision.",
-        "Formulaire robuste avec validation Zod + feedback instantané.",
-        "Animations ciblées (Framer Motion) avec respect de prefers-reduced-motion.",
-        "Chargement différé des éléments lourds pour préserver la performance."
-    ],
-    "uxHighlights": [
-        "Navigation fluide avec sections actives (scroll tracking).",
-        "CTA “Réserver” toujours accessible.",
-        "Formulaire clair avec états visibles (erreur, succès, loading).",
-        "Expérience mobile pensée en priorité."
-    ],
-    "uiHighlights": [
-        "Direction artistique dark premium.",
-        "Contraste maîtrisé pour garantir la lisibilité.",
-        "Micro-interactions progressives et non intrusives.",
-        "Hiérarchie visuelle forte (titres, sections, CTA)."
-    ],
-    "architecture": {
-        "approach": "Architecture modulaire orientée features.",
-        "structure": ["app (routes)", "features (sections métier)", "shared (UI & utils)", "content (texte centralisé)"],
-        "keyPoints": ["Séparation claire UI / logique / contenu.", "Composants réutilisables.", "Évolutivité sans effet de bord."]
-    },
-    "quality": ["TypeScript strict.", "Tests unitaires + composants + e2e.", "Pipeline complet : lint, typecheck, tests, build.", "Performance contrôlée (lazy loading ciblé)."],
-    "notableDecisions": [
-        "Utiliser une navigation par IntersectionObserver pour refléter la progression réelle.",
-        "Isoler les animations dans des composants dédiés.",
-        "Garder le formulaire front-only mais sécurisé (honeypot + UX claire).",
-        "Limiter les effets aux zones à forte valeur perçue."
-    ],
-    "nextSteps": [
-        "Connexion à une API de réservation.",
-        "Ajout d’email transactionnel.",
-        "Tracking des conversions (CTA, formulaire).",
-        "Renforcement sécurité (rate limit, captcha)."
+        "Architecture feature-based claire entre app, shared, features et content.",
+        "Animations Framer Motion ciblées sur les zones à forte valeur perçue.",
+        "FX montés proprement via un orchestrateur dédié et opt-in.",
+        "Formulaire avec React Hook Form, Zod, honeypot et retours utilisateur explicites."
     ],
     "highlights": [
-        "Landing immersive orientée conversion.",
-        "Parcours utilisateur clair du scroll à la réservation.",
-        "Formulaire robuste et rassurant.",
-        "Qualité technique complète (tests + structure)."
+        "Direction artistique immersive mais techniquement cadrée.",
+        "Parcours one-page clair du hero au formulaire.",
+        "Base qualité plus poussée que sur beaucoup de démos visuelles.",
+        "Très bon exemple de compromis entre effet, accessibilité et structure."
     ],
+    "uxHighlights": [
+        "Navigation ancrée et CTA visibles dans le parcours.",
+        "Formulaire avec états clairs et feedback immédiat.",
+        "Sections courtes et hiérarchisées pour accélérer la décision.",
+        "Prise en compte de prefers-reduced-motion."
+    ],
+    "uiHighlights": [
+        "Univers visuel premium dark avec textures, glow et grain.",
+        "Hiérarchie forte entre récit, infos concrètes et CTA.",
+        "Micro-interactions ciblées plutôt que généralisées.",
+        "Composants FX séparés du rendu principal."
+    ],
+    "testing": {
+        "strategy": "Le projet a été pensé comme une démo visuelle sérieuse : quality gates, tests, vérifications e2e et contrôle du poids de certains effets.",
+        "coverage": [
+            "Tests unitaires Node sur la config et certaines règles de base.",
+            "Tests composants avec Vitest et Testing Library.",
+            "Tests e2e et scénario critique avec Playwright.",
+            "Mesure dédiée de la taille source/gzip des composants FX."
+        ]
+    },
+    "notableDecisions": [
+        "Créer une architecture de référence documentée pour éviter la dérive “one-page désorganisée”.",
+        "Isoler les effets visuels dans shared/ui/fx.",
+        "Charger dynamiquement les parties plus lourdes comme la dataviz.",
+        "Inclure des headers de sécurité et des pages légales malgré le caractère démo."
+    ],
+    "nextSteps": [
+        "Brancher un vrai backend de réservation.",
+        "Mesurer davantage les Web Vitals en production.",
+        "Affiner encore les budgets de performance mobile."
+    ],
+    "architecture": {
+        "summary": "Architecture App Router structurée par features, avec une couche shared claire et des effets visuels volontairement encadrés.",
+        "keyPoints": [
+            "Découpage app / features / shared / content / types.",
+            "FX optionnels et cloisonnés.",
+            "Sécurité HTTP configurée dans next.config.ts.",
+            "Couverture qualité inhabituelle pour une landing démo."
+        ],
+        "publicRoutes": ["/", "/legal-notice", "/privacy-policy", "/terms"],
+        "quality": ["TypeScript strict", "ESLint", "Prettier", "Vitest", "Playwright", "Check all", "FX size budget"]
+    },
     "links": {
         "demo": "https://mysteres-a-la-carte.vercel.app/",
         "repo": "https://github.com/stephanievanoverberghe/mysteres-a-la-carte"
@@ -78,24 +91,24 @@
     },
     "hero": {
         "image": "/images/projects/mysteres-a-la-carte/desktop-hero.webp",
-        "alt": "Landing immersive avec hero et CTA réservation"
+        "alt": "Hero immersif et CTA principal de Mystères à la carte"
     },
     "gallery": [
         {
             "src": "/images/projects/mysteres-a-la-carte/desktop-2.webp",
-            "alt": "Section concept et promesse"
+            "alt": "Section concept et promesse de l’expérience"
         },
         {
             "src": "/images/projects/mysteres-a-la-carte/mobile-1.webp",
-            "alt": "Navigation mobile"
+            "alt": "Navigation mobile et lecture condensée"
         },
         {
             "src": "/images/projects/mysteres-a-la-carte/mobile-2.webp",
-            "alt": "Parcours en étapes"
+            "alt": "Présentation du parcours en étapes"
         },
         {
             "src": "/images/projects/mysteres-a-la-carte/mobile-menu.webp",
-            "alt": "Formulaire de réservation"
+            "alt": "Zone de réservation et conversion sur mobile"
         }
     ]
 }

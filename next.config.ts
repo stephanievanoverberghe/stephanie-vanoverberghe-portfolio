@@ -3,6 +3,7 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
     reactStrictMode: true,
     async redirects() {
+        // Canonical host redirect to keep SEO and shared links consistent.
         return [
             {
                 source: '/:path*',

@@ -1,39 +1,92 @@
-# ✨ Portfolio – Développeuse Front-End React
+# Portfolio - Stephanie Vanoverberghe
 
-Portfolio professionnel développé avec Next.js (App Router) et TypeScript, présentant mes projets, études de cas et mon approche produit.
+Portfolio frontend professionnel construit avec Next.js App Router, React et TypeScript strict.  
+Le projet met en avant des études de cas, une approche UI/UX orientée produit, et une base technique pensée pour rester lisible, cohérente et maintenable.
 
----
+## Stack
 
-## 🚀 Stack Technique
+- Next.js 16
+- React 19
+- TypeScript strict
+- Tailwind CSS v4
+- Vitest
+- Resend
+- Vercel
 
-- Next.js 16+ (App Router)
-- React
-- TypeScript (strict mode)
-- Tailwind CSS
-- Resend (API d’envoi d’emails)
-- Contenu structuré via fichiers JSON typés
+## Objectif du repo
 
----
+Ce repo n'est pas une simple vitrine statique. Il sert aussi de base professionnelle propre pour :
 
-## 📁 Architecture
+- présenter des projets de manière crédible
+- centraliser le contenu éditorial et les études de cas
+- maintenir une UI cohérente avec une logique de design system simple
+- garder une séparation claire entre contenu, interface, logique et services
 
-### Arborescence et conventions par dossier
+## Architecture
 
 ```txt
 src/
- ├── app/                    # Routes App Router (pages/layout/loading/error + route handlers API)
- ├── components/             # UI pure (présentation, composition visuelle, accessibilité)
- ├── hooks/                  # Logique React réutilisable (state, transitions, orchestration UI)
- ├── services/               # Accès I/O (ex: appels HTTP) sans rendu
- ├── lib/                    # Utilitaires métier/techniques et fonctions pures
- │   └── contact/            # Validation, rate-limit, envoi mail pour l'API contact
- ├── content/                # Données éditoriales locales (TS/JSON)
- └── types/                  # Contrats TypeScript partagés entre couches
+├── app/                # App Router: pages, layouts, metadata, API routes
+├── components/
+│   ├── layout/         # Header, footer, shell, transitions de layout
+│   └── ui/             # Primitives UI réutilisables
+├── content/            # Contenu éditorial et fiches projets JSON/TS
+├── features/           # Composants métier regroupés par domaine
+│   ├── contact/
+│   ├── home/
+│   ├── projects/
+│   └── skills/
+├── hooks/              # Logique React réutilisable
+├── lib/                # Helpers purs, parsing, logique d'affichage
+├── services/           # Accès I/O et appels externes
+├── styles/             # Tokens, base, layout, components, utilities
+└── types/              # Contrats TypeScript partagés
 ```
 
----
+## Conventions
 
-## ⚙️ Installation
+- Composants React : `PascalCase.tsx`
+- Hooks : `useXxx.ts`
+- Utilitaires et fichiers de support : `kebab-case.ts`
+- Contenu projet : `src/content/projects/<slug>.json`
+- Styles globaux partagés : `src/styles/*.css`
+
+Principes suivis dans le repo :
+
+- `components/ui` ne connaît pas le métier
+- `features/*` compose les sections et la logique de page
+- `content/*` reste la source de vérité éditoriale
+- `lib/*` contient les fonctions pures et le parsing
+- `services/*` gère les échanges externes
+
+## Design system
+
+Le projet repose sur un design system léger :
+
+- primitives UI dans `src/components/ui`
+- tokens et styles partagés dans `src/styles`
+- usage limité des styles inline, réservés aux cas dynamiques justifiés
+
+Le styleguide interne est disponible sur `/styleguide`.
+
+En production, cette route est désactivée par défaut. Pour l'activer :
+
+```env
+STYLEGUIDE_ENABLED=true
+```
+
+## Scripts
+
+```bash
+npm run dev
+npm run lint
+npm run typecheck
+npm run test:run
+npm run build
+npm run check:all
+```
+
+## Installation
 
 ```bash
 git clone https://github.com/stephanievanoverberghe/stephanie-vanoverberghe-portfolio
@@ -41,38 +94,13 @@ cd stephanie-vanoverberghe-portfolio
 npm install
 ```
 
-### Règle d’architecture UI / logique
+Lancer le projet en local :
 
-- **UI dans `components/`** : un composant ne doit pas embarquer l’accès réseau ou des effets métier complexes.
-- **Logique dans `hooks/` et `services/`** :
-    - `hooks/` gère l’état et les interactions (ex: formulaire, loading, erreurs, succès),
-    - `services/` centralise les appels API.
-- **`lib/` reste framework-agnostic** autant que possible (fonctions pures, validation, helpers).
+```bash
+npm run dev
+```
 
-Exemple déjà appliqué : le formulaire de contact délègue l’envoi à `services/contact.ts` et la gestion d’état au hook `hooks/useContactForm.ts`.
-
-### Contrats types partagés (`types/`)
-
-- Les types transverses vivent dans `src/types/` pour éviter les duplications.
-- Les contrats utilisés à la fois par l’UI et les services (ex: payload/réponse du contact) doivent être déclarés ici.
-- Tout ajout de champ côté payload API doit être répercuté dans ces types pour garantir la cohérence compile-time.
-
-Fichiers de référence :
-
-- `src/types/contact.ts` : contrat de soumission contact et statut de réponse.
-- `src/types/vitest.d.ts` : support de types pour l’environnement de test.
-
----
-
-## 📜 Scripts npm
-
-- `npm run dev` : démarre le serveur de développement (http://localhost:3000)
-- `npm run lint` : lance ESLint
-- `npm run build` : build de production Next.js
-
----
-
-## 🔐 Variables d’environnement
+## Variables d'environnement
 
 Créer un fichier `.env.local` :
 
@@ -80,103 +108,77 @@ Créer un fichier `.env.local` :
 RESEND_API_KEY=your_api_key
 CONTACT_TO=your@email.com
 CONTACT_FROM=portfolio@yourdomain.com
+STYLEGUIDE_ENABLED=false
 ```
 
-- `RESEND_API_KEY` : clé API Resend.
-- `CONTACT_TO` : adresse qui reçoit les messages du formulaire.
-- `CONTACT_FROM` : expéditeur utilisé par Resend (doit être validé côté domaine Resend).
+Variables utiles :
 
----
+- `RESEND_API_KEY` : clé API Resend
+- `CONTACT_TO` : adresse qui reçoit les messages du formulaire
+- `CONTACT_FROM` : adresse expéditrice validée côté Resend
+- `STYLEGUIDE_ENABLED` : active la route `/styleguide` si `true`
 
-## 🛡 API Contact
+## Contact API
 
 Route : `POST /api/contact`
 
 Comportements principaux :
 
-- Validation stricte du payload
-- Honeypot anti-spam
-- Rate limit en mémoire
-- Envoi d’email via Resend
-- Dégradation contrôlée si la config mail est absente (retour `200` sans envoi réel)
-- Statuts HTTP :
-    - `200` : message accepté (envoyé, ou accepté sans envoi email si variables manquantes)
-    - `400` : payload invalide (ou origine/référent non autorisé, délai anti-bot trop court)
-    - `429` : rate limit dépassé
-    - `500` : erreur interne lors de l’envoi mail
+- validation stricte du payload
+- honeypot anti-spam
+- délai minimum avant soumission
+- vérification origin/referer
+- rate limit en mémoire
+- envoi mail via Resend
+- mode dégradé si la configuration email est absente
 
-Variables attendues pour l’envoi réel :
+Statuts principaux :
 
-- `RESEND_API_KEY`
-- `CONTACT_TO`
-- `CONTACT_FROM`
+- `200` : message accepté
+- `400` : payload invalide ou requête bloquée
+- `429` : rate limit dépassé
+- `500` : erreur côté envoi email
 
-> Sans ces variables, l’UI de contact reste fluide mais aucun email n’est envoyé.
+## Ajouter un projet
 
----
-
-## 🔒 Route `/styleguide`
-
-La route de QA visuelle `/styleguide` est :
-
-- non indexée (`noindex`),
-- **désactivée en production** par défaut (retourne 404),
-- activable explicitement avec :
-
-```env
-STYLEGUIDE_ENABLED=true
-```
-
----
-
-## ➕ Ajouter un nouveau projet JSON
-
-1. Créer un fichier dans `src/content/projects/` (ex: `mon-projet.json`).
-2. Respecter la structure des autres fichiers JSON existants (slug, metadata, sections, images, etc.).
-3. Ajouter les assets image dans `public/images/projects/<slug>/`.
+1. Créer un fichier `src/content/projects/<slug>.json`
+2. Respecter la structure des autres fiches projet
+3. Ajouter les assets dans `public/images/projects/<slug>/` si nécessaire
 4. Vérifier localement :
 
 ```bash
 npm run lint
+npm run typecheck
+npm run test:run
 npm run build
 ```
 
-5. Ouvrir `/projects` puis `/projects/<slug>` en local pour valider le rendu.
+Les projets sont ensuite chargés, parsés et ordonnés automatiquement.  
+L'ordre visible dans le portfolio peut être piloté avec le champ `order` dans chaque JSON.
 
-```bash
-npm run lint
-npm run build
-```
+## Tests et qualité
 
----
+La base qualité actuelle couvre notamment :
 
-## 🧪 Tests
+- parsing et chargement des projets
+- logique de contact
+- route API contact
+- hook de formulaire
 
-Des tests ont été ajoutés pour la logique projets (`src/lib/projects.test.ts`) et l’API contact (`src/app/api/contact/route.test.ts`).
-
-> ⚠️ Si `vitest` n’est pas encore installé dans ton environnement, installe-le avec `npm i -D vitest` avant exécution.
-
-Commande recommandée :
-
-```bash
-npx vitest run
-```
-
----
-
-## 🏷 Convention de naming (simple)
-
-- **Composants React** : `PascalCase.tsx` (ex: `ProjectCard.tsx`).
-- **Utilitaires / librairies** : `kebab-case.ts` ou `<feature>.utils.ts` (ex: `projects.utils.ts`, `rate-limit.ts`).
-- **Données de contenu** : `kebab-case.json` et slug cohérent (ex: `ancre-toi.json`).
-- **Routes App Router** : dossiers en `kebab-case`, fichiers Next.js standards (`page.tsx`, `layout.tsx`, `loading.tsx`, `error.tsx`, `route.ts`).
-- **Constantes locales** : `UPPER_SNAKE_CASE` pour les constantes globales, `camelCase` sinon.
-
----
-
-## ✅ Qualité
+Le projet vise une qualité simple et fiable :
 
 - TypeScript strict
-- Parsing JSON robuste
-- Composants modulaires
-- CI GitHub Actions (lint + build)
+- séparation claire des responsabilités
+- contenu centralisé
+- tests ciblés plutôt que sur-ingénierie
+- CI avec lint, typecheck, tests et build
+
+## Déploiement
+
+Le projet est pensé pour Vercel, mais reste exécutable localement sans dépendre d'une architecture complexe.
+
+Build de production :
+
+```bash
+npm run build
+```

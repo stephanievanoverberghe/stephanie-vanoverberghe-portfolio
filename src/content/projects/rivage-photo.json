@@ -1,66 +1,78 @@
 {
     "slug": "rivage-photo",
     "title": "Rivage Photo",
-    "subtitle": "Portfolio photo minimal + admin métier — gérer, organiser et publier sans friction",
+    "order": 1,
+    "subtitle": "Portfolio photo + admin métier — publier des séries, gérer l’équipe et éditer les images sans friction",
     "year": 2026,
     "role": ["Product Design", "Front-end", "UI/UX", "Architecture", "Fullstack"],
-    "stack": ["Next.js 16 (App Router)", "React 19", "TypeScript strict", "Tailwind CSS", "Prisma 6", "PostgreSQL (Neon)", "NextAuth v5", "Cloudinary", "Vercel"],
-    "context": "Rivage Photo est un portfolio public très épuré, accompagné d’un admin conçu pour un photographe non technique : créer des séries, gérer des images et publier simplement.",
-    "vision": "Construire un back-office qui se manipule comme un outil métier : clair, guidé, sans jargon, centré sur les actions réelles.",
+    "stack": ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS v4", "Prisma", "NextAuth v5", "Cloudinary", "PostgreSQL", "Vercel"],
+    "context": "Rivage Photo associe un front public très épuré à un back-office orienté métier. Le projet ne cherche pas seulement à montrer des images : il cherche aussi à simplifier la gestion concrète des séries, de l’équipe et des médias pour un utilisateur non technique.",
+    "vision": "Concevoir un portfolio photo dont l’admin se manipule comme un outil de travail réel : direct, clair, guidé et sans jargon inutile.",
     "objectives": [
-        "Supprimer toute complexité technique côté admin.",
-        "Permettre une gestion complète des séries (création, édition, publication).",
-        "Rendre la gestion d’images fluide (upload, tri, ALT).",
-        "Créer un espace équipe autonome (admin / participant).",
-        "Maintenir une base technique propre et fiable."
+        "Permettre de publier et modifier des séries facilement.",
+        "Rendre la gestion des images plus fluide (upload, tri, ALT).",
+        "Créer un espace admin lisible pour une équipe restreinte.",
+        "Conserver un front public discret où les images restent au centre."
     ],
     "productPrinciples": [
-        "Interface orientée action, jamais orientée technique.",
-        "Garde-fous avant publication (images + ALT requis).",
-        "Feedback clair et immédiat sur chaque action.",
-        "Hiérarchie visuelle forte avec une couleur d’action identifiable."
+        "L’interface publique s’efface devant les images.",
+        "L’admin doit orienter vers l’action plutôt que vers la technique.",
+        "Les garde-fous doivent être intégrés au workflow.",
+        "Les rôles et les états doivent rester visibles."
     ],
     "challenges": [
-        "Créer un admin professionnel sans complexité inutile.",
-        "Gérer l’auth sans middleware Edge (contraintes Vercel).",
-        "Offrir une gestion d’images avancée sans casser l’UX.",
-        "Maintenir une UI sombre lisible et structurée.",
-        "Clarifier l’architecture entre RSC et client."
+        "Faire cohabiter un front minimal et un admin riche.",
+        "Gérer l’auth, les rôles et les sessions sans alourdir l’expérience.",
+        "Construire une édition de séries assez complète pour être utile au quotidien.",
+        "Maintenir une interface sombre lisible malgré la densité fonctionnelle du back-office."
     ],
     "solutions": [
-        "Shell admin structuré : sidebar persistante + topbar utilisateur.",
-        "Pages organisées par tâches (dashboard → séries → édition).",
-        "Workflow guidé avec étapes visibles et checklist de publication.",
-        "Upload Cloudinary + tri + édition ALT directement dans l’UI.",
-        "Gestion équipe autonome avec rôles et avatars.",
-        "Architecture RSC par défaut, client uniquement pour interactions."
+        "Structure publique séparée de la zone admin protégée.",
+        "Authentification NextAuth et contrôle d’accès côté serveur.",
+        "Prisma pour les modèles, Cloudinary pour les images et génération postinstall.",
+        "Composants d’admin dédiés pour la gestion d’équipe, des avatars et des séries."
+    ],
+    "highlights": [
+        "Projet très crédible en contexte produit métier.",
+        "Admin pensé pour l’usage réel, pas juste pour faire joli en démo.",
+        "Intégration cohérente auth + base + médias.",
+        "Front public sobre qui laisse vraiment la place aux séries."
     ],
     "uxHighlights": [
-        "Dashboard orienté actions (état, raccourcis, priorités).",
-        "Statuts brouillon / publié toujours visibles.",
-        "Édition de série en sections claires.",
-        "Confirmations pour les actions sensibles.",
-        "Gestion équipe simple et autonome."
+        "Dashboard et parcours admin orientés tâches.",
+        "Différenciation claire entre brouillon et publié.",
+        "Gestion d’équipe intégrée au back-office.",
+        "Mode focus et navigation simple côté galerie publique."
     ],
     "uiHighlights": [
-        "Interface sombre structurée et lisible.",
-        "Accent orange pour guider les actions.",
-        "Cartes nettes, hiérarchie claire, feedbacks visibles.",
-        "Topbar utilisateur identifiable et fonctionnelle."
+        "Univers sombre, net et maîtrisé.",
+        "Accent couleur utilisé pour guider l’action dans l’admin.",
+        "Cartes, tableaux et shells cohérents entre eux.",
+        "Galerie publique discrète au service des images."
+    ],
+    "notableDecisions": [
+        "Traiter l’admin comme un vrai produit séparé à l’intérieur du même repo.",
+        "Utiliser la protection server-side via auth et layouts plutôt qu’une simple logique client.",
+        "Faire de la gestion d’équipe une brique native du projet.",
+        "Garder la couche publique volontairement minimale."
+    ],
+    "nextSteps": [
+        "Pousser les validations et tests autour du back-office.",
+        "Continuer à affiner les workflows d’édition les plus complexes.",
+        "Ajouter des automatisations autour des publications ou de la modération interne."
     ],
     "architecture": {
-        "publicRoutes": ["/", "/series/[slug]", "/photos/*", "/contact"],
-        "adminRoutes": ["/admin", "/admin/series", "/admin/series/[id]/edit", "/admin/team"],
-        "adminFeatures": ["CRUD séries", "Statut draft / publié", "Upload images + tri + ALT", "Gestion équipe", "Dashboard avec actions prioritaires"],
-        "auth": ["NextAuth v5 (Credentials)", "Sessions JWT", "Protection server-only via layouts"],
-        "seoPerf": ["Optimisation images (next/image)", "Metadata dynamique", "Revalidation après actions admin"]
+        "summary": "Projet App Router séparant clairement la zone publique et la zone admin, avec auth, base de données et gestion média intégrées.",
+        "keyPoints": [
+            "NextAuth v5 et protection serveur.",
+            "Prisma pour la modélisation et la persistance.",
+            "Cloudinary pour la gestion des images.",
+            "Routes admin dédiées pour séries et équipe."
+        ],
+        "publicRoutes": ["/", "/series/[slug]", "/about", "/contact"],
+        "adminRoutes": ["/admin", "/admin/login", "/admin/team"],
+        "adminFeatures": ["Gestion des séries", "Gestion des images", "Gestion d’équipe", "Dashboard", "Avatars utilisateurs"]
     },
-    "highlights": [
-        "Admin conçu pour un utilisateur non technique.",
-        "Gestion complète des séries et images.",
-        "Expérience fluide avec garde-fous intégrés.",
-        "Stack moderne avec architecture propre."
-    ],
     "links": {
         "demo": "https://rivage-photo.vercel.app/",
         "repo": "https://github.com/stephanievanoverberghe/rivage-photo"
@@ -71,24 +83,24 @@
     },
     "hero": {
         "image": "/images/projects/rivage-photo/desktop-hero.webp",
-        "alt": "Portfolio Rivage Photo"
+        "alt": "Accueil du portfolio Rivage Photo"
     },
     "gallery": [
         {
             "src": "/images/projects/rivage-photo/desktop-series.webp",
-            "alt": "Édition d’une série avec gestion des images"
+            "alt": "Vue des séries photographiques"
         },
         {
             "src": "/images/projects/rivage-photo/desktop-lightbox.webp",
-            "alt": "Visualisation des images en lightbox"
+            "alt": "Mode focus sur une image"
         },
         {
             "src": "/images/projects/rivage-photo/desktop-admin.webp",
-            "alt": "Dashboard admin avec actions principales"
+            "alt": "Dashboard admin orienté action"
         },
         {
             "src": "/images/projects/rivage-photo/desktop-admin-series.webp",
-            "alt": "Liste des séries avec statuts et actions"
+            "alt": "Gestion des séries et de leur état"
         }
     ]
 }

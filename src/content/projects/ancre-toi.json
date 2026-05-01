@@ -1,61 +1,79 @@
 {
     "slug": "ancre-toi",
     "title": "Ancre-toi",
-    "subtitle": "Plateforme de formation — paiement, accès et espace membre unifiés",
+    "order": 2,
+    "subtitle": "Plateforme de programmes digitaux — achat, espace apprenant, blog, admin et préférences utilisateur",
     "year": 2025,
-    "role": ["Product Design", "Front-end", "UX Writing", "Conception pédagogique"],
-    "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "MongoDB", "Stripe", "Webhooks"],
-    "context": "Ancre-toi est une plateforme de formation avec un objectif simple : permettre à un utilisateur d’acheter une formation et d’y accéder immédiatement, sans friction ni confusion.",
-    "vision": "Une plateforme de formation doit être invisible dans sa complexité : l’utilisateur ne doit voir qu’un parcours simple, clair et rassurant.",
+    "role": ["Product Design", "Front-end", "Architecture", "Fullstack en progression"],
+    "stack": ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS v4", "MongoDB", "Mongoose", "Stripe", "React Hook Form", "Zod", "Resend"],
+    "context": "Ancre-toi est une plateforme orientée programmes de bien-être. Le repo va au-delà d’une simple landing : il gère l’achat, la progression apprenant, des contenus éditoriaux, des préférences avancées et plusieurs zones d’administration.",
+    "vision": "Concevoir une plateforme où la complexité produit reste invisible : l’utilisateur achète, accède à ses contenus, suit sa progression et gère son compte dans un cadre clair et rassurant.",
     "objectives": [
-        "Fluidifier le parcours d’achat et de connexion (mobile-first).",
-        "Fiabiliser l’activation d’accès après paiement.",
-        "Proposer un espace membre lisible et rassurant.",
-        "Structurer les données pour garantir la cohérence des accès."
+        "Fluidifier le passage du catalogue au programme acheté.",
+        "Structurer un espace apprenant réellement exploitable après l’achat.",
+        "Encadrer les contenus éditoriaux et marketing dans le même système.",
+        "Prévoir un produit durable côté compte, préférences, newsletters et conformité."
     ],
     "productPrinciples": [
-        "Un parcours simple malgré une logique technique complexe.",
-        "Des états toujours visibles (paiement, accès, erreur).",
-        "Une interface rassurante et progressive.",
-        "Un langage clair pour accompagner chaque étape."
+        "Une logique riche ne doit jamais se traduire par une interface confuse.",
+        "Le parcours doit rester lisible à chaque étape : découvrir, acheter, apprendre, gérer.",
+        "Les états utilisateur doivent être explicites.",
+        "Le produit doit rester extensible sans refaire les fondations."
     ],
     "challenges": [
-        "Synchroniser paiement Stripe et activation d’accès (latence, erreurs).",
-        "Gérer les cas limites (paiement échoué, webhook retardé, double appel).",
-        "Structurer les données utilisateurs et accès de manière fiable.",
-        "Maintenir une UX fluide malgré la complexité backend."
+        "Faire coexister vitrine, vente, espace membre, blog et admin dans un même projet.",
+        "Gérer plusieurs types de contenus et de parcours sans effet “usine à gaz”.",
+        "Maintenir une cohérence UX entre pages publiques, pages apprenant et zones admin.",
+        "Introduire Stripe, email, analytics et préférences tout en gardant une base lisible."
     ],
     "solutions": [
-        "Stripe Checkout pour externaliser le paiement.",
-        "Webhooks pour valider la commande et activer l’accès côté serveur.",
-        "Modèle MongoDB structuré (users, orders, access).",
-        "Messages d’état clairs pour guider l’utilisateur.",
-        "Espace membre organisé par logique d’usage (achats → accès → modules)."
+        "Découpage clair des zones : public, learner, admin, API et settings.",
+        "Modèles MongoDB/Mongoose séparés pour les programmes, inscriptions, contenu et état utilisateur.",
+        "Routes dédiées pour le checkout, la progression, l’export de notes, la newsletter et les préférences.",
+        "Composants de sections spécialisés pour le marketing, les programmes et l’apprentissage."
+    ],
+    "highlights": [
+        "Projet nettement plus riche que la moyenne d’un portfolio front classique.",
+        "Vrai produit multi-zones : public, apprenant, admin, paramètres.",
+        "Intégration Stripe et logique d’accès déjà présentes dans l’architecture.",
+        "Bonne base pour démontrer une montée fullstack progressive."
     ],
     "uxHighlights": [
-        "Parcours achat → accès fluide et compréhensible.",
-        "Feedback utilisateur à chaque étape (chargement, succès, erreur).",
-        "Espace membre structuré et rassurant.",
-        "Expérience mobile priorisée."
+        "Parcours catalogue → programme → espace apprenant cohérent.",
+        "Zone settings avancée avec préférences, sessions, sécurité et export.",
+        "Espace membre structuré autour de l’usage réel.",
+        "Présence de contenus annexes utiles : blog, inspirations, méthode, quiz."
     ],
     "uiHighlights": [
-        "Interface simple et apaisée.",
-        "Hiérarchie claire entre actions et contenu.",
-        "Utilisation du texte comme élément clé (UX writing).",
-        "Transitions discrètes pour accompagner le parcours."
+        "Univers visuel doux et cohérent avec le sujet.",
+        "Nombreuses sections éditoriales sans casser la lecture.",
+        "Séparation perceptible entre zones marketing, learner et admin.",
+        "Utilisation de l’image et du rythme pour soutenir le parcours."
+    ],
+    "notableDecisions": [
+        "Isoler les parcours apprenant dans un groupe de routes dédié.",
+        "Développer une zone settings particulièrement riche, rarement traitée dans un projet portfolio.",
+        "Prévoir des APIs internes pour les états d’apprentissage, les préférences et les exports.",
+        "Faire vivre le produit au-delà du checkout grâce aux espaces learner et admin."
+    ],
+    "nextSteps": [
+        "Renforcer les tests autour des flux de checkout et d’accès.",
+        "Stabiliser encore les parcours admin les plus riches.",
+        "Clarifier les dépendances front vs logique serveur au fur et à mesure de l’évolution."
     ],
     "architecture": {
-        "publicRoutes": ["/", "/login", "/checkout", "/confirmation"],
-        "memberRoutes": ["/dashboard", "/modules", "/account"],
-        "dataModel": ["User (authentification, profil)", "Order (paiement Stripe)", "Access (droits d’accès aux contenus)"],
-        "logic": ["Création de session Stripe côté serveur", "Réception webhook → validation paiement", "Activation accès en base", "Lecture des droits côté espace membre"]
+        "summary": "Projet App Router dense avec séparation entre zone publique, zone apprenant, administration, APIs métier et paramètres utilisateur.",
+        "keyPoints": [
+            "Checkout et confirmation côté serveur.",
+            "Zone learner avec progression, bibliothèque et résumé.",
+            "Admin étendu : programmes, inspirations, blog, utilisateurs, newsletter.",
+            "Paramètres utilisateur avancés avec sécurité et export."
+        ],
+        "publicRoutes": ["/", "/programs", "/programs/[slug]", "/blog", "/inspirations", "/methode", "/quiz/boussole"],
+        "learnerRoutes": ["/member", "/library", "/learn/[slug]/intro", "/learn/[slug]/day/[day]", "/notes", "/continue"],
+        "adminRoutes": ["/admin", "/admin/programs", "/admin/inspirations", "/admin/blog", "/admin/users", "/admin/newsletter"],
+        "integrations": ["Stripe", "MongoDB + Mongoose", "Resend", "Analytics", "PDF export"]
     },
-    "highlights": [
-        "Parcours complet : achat → validation → accès activé.",
-        "Gestion fiable des accès via Stripe + Webhooks.",
-        "Espace membre clair et structuré.",
-        "UX pensée pour simplifier une logique complexe."
-    ],
     "links": {
         "demo": "https://ancretoi.vercel.app/",
         "repo": "https://github.com/stephanievanoverberghe/ancretoi"
@@ -66,24 +84,24 @@
     },
     "hero": {
         "image": "/images/projects/ancre-toi/desktop-hero.webp",
-        "alt": "Espace membre de la plateforme Ancre-toi"
+        "alt": "Accueil de la plateforme Ancre-toi"
     },
     "gallery": [
         {
             "src": "/images/projects/ancre-toi/desktop-1.webp",
-            "alt": "Dashboard membre avec accès aux formations"
+            "alt": "Espace membre avec accès aux programmes"
         },
         {
             "src": "/images/projects/ancre-toi/desktop-2.webp",
-            "alt": "Module de formation avec objectifs et contenu"
+            "alt": "Page programme et structure de contenu"
         },
         {
             "src": "/images/projects/ancre-toi/mobile-1.webp",
-            "alt": "Parcours mobile : paiement et confirmation"
+            "alt": "Parcours mobile vers l’achat et la confirmation"
         },
         {
             "src": "/images/projects/ancre-toi/mobile-2.webp",
-            "alt": "Navigation mobile des modules"
+            "alt": "Navigation mobile dans la plateforme"
         }
     ]
 }

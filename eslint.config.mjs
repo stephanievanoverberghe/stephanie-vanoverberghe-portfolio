@@ -3,7 +3,14 @@ import nextVitals from 'eslint-config-next/core-web-vitals';
 import nextTypescript from 'eslint-config-next/typescript';
 
 export default defineConfig([
-  ...nextVitals,
-  ...nextTypescript,
-  globalIgnores(['node_modules/**', '.next/**', 'out/**', 'build/**', 'next-env.d.ts']),
+    ...nextVitals,
+    ...nextTypescript,
+    globalIgnores([
+        'node_modules/**',
+        '.next/**',
+        'out/**',
+        'build/**',
+        'repo-audit/**',
+        'next-env.d.ts',
+    ]),
 ]);

@@ -13,6 +13,7 @@ export type ProjectStatus = 'published' | 'in-progress';
 export type Project = {
     slug: string;
     title: string;
+    order?: number;
     subtitle?: string;
     status?: ProjectStatus;
     year?: number;
@@ -42,21 +43,25 @@ export type Project = {
 const DIR = path.join(process.cwd(), 'src', 'content', 'projects');
 
 /** ---------- tiny type guards ---------- */
+/** Vérifie qu'une valeur inconnue peut être manipulée comme objet simple. */
 function isRecord(value: unknown): value is Record<string, unknown> {
     return !!value && typeof value === 'object' && !Array.isArray(value);
 }
 
+/** Nettoie une chaîne potentielle et ignore les valeurs vides. */
 function getString(value: unknown): string | undefined {
     if (typeof value !== 'string') return undefined;
     const s = value.trim();
     return s.length ? s : undefined;
 }
 
+/** Accepte uniquement les nombres finis. */
 function getNumber(value: unknown): number | undefined {
     if (typeof value !== 'number') return undefined;
     return Number.isFinite(value) ? value : undefined;
 }
 
+/** Filtre un tableau pour ne garder que des chaînes non vides. */
 function getStringArray(value: unknown): string[] | undefined {
     if (!Array.isArray(value)) return undefined;
     const arr = value
@@ -67,6 +72,7 @@ function getStringArray(value: unknown): string[] | undefined {
 }
 
 /** ---------- structured parsers ---------- */
+/** Parse un bloc média minimal de type `{ image, alt? }`. */
 function parseMedia(value: unknown): ProjectMedia | undefined {
     if (!isRecord(value)) return undefined;
 
@@ -78,6 +84,7 @@ function parseMedia(value: unknown): ProjectMedia | undefined {
     return alt ? { image, alt } : { image };
 }
 
+/** Parse les liens externes d'un projet. */
 function parseLinks(value: unknown): ProjectLinkMap | undefined {
     if (!isRecord(value)) return undefined;
 
@@ -88,6 +95,7 @@ function parseLinks(value: unknown): ProjectLinkMap | undefined {
     return { demo, repo };
 }
 
+/** Parse la galerie visuelle d'un projet en ignorant les entrées invalides. */
 function parseGallery(value: unknown): ProjectGalleryImage[] | undefined {
     if (!Array.isArray(value)) return undefined;
 
@@ -106,6 +114,7 @@ function parseGallery(value: unknown): ProjectGalleryImage[] | undefined {
     return items.length ? items : undefined;
 }
 
+/** Parse la section de stratégie de test si elle est présente. */
 function parseTesting(value: unknown): ProjectTesting | undefined {
     if (!isRecord(value)) return undefined;
 
@@ -117,6 +126,10 @@ function parseTesting(value: unknown): ProjectTesting | undefined {
     return { strategy, coverage };
 }
 
+/**
+ * Parse la section architecture en conservant à la fois le résumé,
+ * les points clés et les listes structurées supplémentaires.
+ */
 function parseArchitecture(value: unknown): ProjectArchitecture | undefined {
     if (!isRecord(value)) return undefined;
 
@@ -149,6 +162,12 @@ function parseStatus(value: unknown): ProjectStatus | undefined {
     return undefined;
 }
 
+/**
+ * Transforme un JSON brut en `Project` sûr pour le rendu.
+ *
+ * Le parseur reste volontairement tolérant : il ignore les champs incomplets
+ * pour éviter qu'une seule fiche de contenu casse toute la page projets.
+ */
 function parseProject(raw: unknown, fallbackSlug: string): Project | null {
     if (!isRecord(raw)) return null;
 
@@ -160,6 +179,7 @@ function parseProject(raw: unknown, fallbackSlug: string): Project | null {
     const project: Project = {
         slug,
         title,
+        order: getNumber(raw.order),
         subtitle: getString(raw.subtitle),
         status: parseStatus(raw.status),
         year: getNumber(raw.year),
@@ -190,6 +210,7 @@ function parseProject(raw: unknown, fallbackSlug: string): Project | null {
 }
 
 /** ---------- public API ---------- */
+/** Retourne tous les slugs de projets trouvés sur le disque. */
 export async function getProjectSlugs(): Promise<string[]> {
     try {
         const files = await readdir(DIR);
@@ -199,6 +220,7 @@ export async function getProjectSlugs(): Promise<string[]> {
     }
 }
 
+/** Charge et parse un projet unique à partir de son slug. */
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
     try {
         const file = await readFile(path.join(DIR, `${slug}.json`), 'utf8');
@@ -222,6 +244,10 @@ export async function getAllProjects(): Promise<Project[]> {
     return all
         .filter((p): p is Project => p !== null)
         .sort((a, b) => {
+            const oa = a.order ?? Infinity;
+            const ob = b.order ?? Infinity;
+            if (oa !== ob) return oa - ob;
+
             const ya = a.year ?? -Infinity;
             const yb = b.year ?? -Infinity;
             if (yb !== ya) return yb - ya;

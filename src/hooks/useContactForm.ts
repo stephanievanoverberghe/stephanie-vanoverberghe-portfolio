@@ -13,6 +13,12 @@ const INITIAL_VALUES: ContactFormValues = {
     company: '',
 };
 
+/**
+ * Gère l'état complet du formulaire de contact côté client.
+ *
+ * Le hook centralise les valeurs, le statut réseau et les messages UI
+ * pour garder le composant de formulaire aussi déclaratif que possible.
+ */
 export function useContactForm() {
     const [formStartedAt] = React.useState(() => Date.now());
     const [values, setValues] = React.useState<ContactFormValues>(INITIAL_VALUES);
@@ -27,10 +33,12 @@ export function useContactForm() {
                 ? `Erreur lors de l’envoi : ${status.message}`
                 : '';
 
+    /** Met à jour un champ du formulaire sans exposer la logique d'état au composant appelant. */
     const updateField = React.useCallback((field: keyof ContactFormValues, value: string) => {
         setValues((prev) => ({ ...prev, [field]: value }));
     }, []);
 
+    /** Soumet les valeurs courantes et propage un statut directement exploitable dans l'UI. */
     const onSubmit = React.useCallback(
         async (e: React.FormEvent<HTMLFormElement>) => {
             e.preventDefault();

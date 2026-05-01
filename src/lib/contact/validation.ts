@@ -4,6 +4,7 @@ function isEmail(value: string): boolean {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
+/** Normalise une valeur inconnue en chaîne trimée, ou chaîne vide. */
 function asString(value: unknown): string {
     return typeof value === 'string' ? value.trim() : '';
 }

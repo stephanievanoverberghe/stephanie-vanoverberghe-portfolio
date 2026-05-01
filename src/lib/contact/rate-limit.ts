@@ -6,7 +6,7 @@ const rateLimitStore = new Map<string, number[]>();
 /**
  * Extrait une clé client pragmatique depuis les en-têtes proxy.
  *
- * En environnement serverless, l'IP n'est pas toujours fiable/unique :
+ * En environnement serverless, l'IP n'est pas toujours fiable ou unique :
  * cette clé sert uniquement à freiner les abus, pas à identifier un utilisateur.
  */
 export function getClientKey(req: Request): string {
@@ -19,8 +19,8 @@ export function getClientKey(req: Request): string {
 /**
  * Applique une fenêtre glissante en mémoire par clé client.
  *
- * Choix assumé : stockage local au process (simple et sans dépendance externe),
- * suffisant pour un portfolio mais non distribué entre plusieurs instances.
+ * Choix assumé : stockage local au process, simple et sans dépendance externe.
+ * C'est suffisant pour un portfolio, mais non distribué entre plusieurs instances.
  */
 export function isRateLimited(clientKey: string): boolean {
     const now = Date.now();

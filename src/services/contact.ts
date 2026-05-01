@@ -1,5 +1,11 @@
 import type { ContactApiResponse, ContactPayload } from '@/types/contact';
 
+/**
+ * Soumet le formulaire de contact à l'API interne.
+ *
+ * Le service normalise toujours la réponse pour éviter d'exposer
+ * les composants UI aux détails de `fetch` ou aux branches d'erreur HTTP.
+ */
 export async function submitContact(payload: ContactPayload): Promise<ContactApiResponse> {
     const res = await fetch('/api/contact', {
         method: 'POST',
