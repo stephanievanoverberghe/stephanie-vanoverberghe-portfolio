@@ -27,16 +27,14 @@ export default function ProjectCard({ project, index, featured = false }: Projec
     return (
         <article
             className={[
-                'group relative overflow-hidden rounded-[1.8rem] border bg-(--surface-1) shadow-(--shadow-card) transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(18,19,20,0.09)]',
+                'project-card-surface group relative overflow-hidden rounded-[1.8rem] transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(18,19,20,0.09)]',
                 featured ? 'lg:rounded-4xl' : '',
             ].join(' ')}
-            style={{ borderColor: 'var(--border-soft)' }}
         >
             <Link href={`/projects/${project.slug}`} className={featured ? 'grid p-4 lg:min-h-105 lg:grid-cols-[1.05fr_0.95fr] lg:p-5' : 'block p-4'}>
                 <div
-                    className={['relative overflow-hidden rounded-[1.45rem] border', featured ? 'lg:h-full' : ''].join(' ')}
+                    className={['project-card-visual relative overflow-hidden rounded-[1.45rem]', featured ? 'lg:h-full' : ''].join(' ')}
                     style={{
-                        borderColor: 'var(--border-soft)',
                         background: `linear-gradient(135deg, color-mix(in oklab, var(--${tone}) 16%, var(--surface-1)), var(--surface-1))`,
                     }}
                 >
@@ -62,13 +60,7 @@ export default function ProjectCard({ project, index, featured = false }: Projec
                             />
                         )}
 
-                        <div
-                            aria-hidden
-                            className="absolute inset-0"
-                            style={{
-                                background: 'linear-gradient(to top, rgba(18,19,20,0.18), transparent 48%)',
-                            }}
-                        />
+                        <div aria-hidden className="project-card-overlay absolute inset-0" />
 
                         <div className="absolute left-3 top-3 flex items-center gap-2">
                             <Chip size="xs" color={featured ? 'accent' : 'sage'}>

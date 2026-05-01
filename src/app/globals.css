@@ -551,6 +551,41 @@ a:hover {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
+.project-card-surface {
+  border: 1px solid var(--border-soft);
+  background: var(--surface-1);
+  box-shadow: var(--shadow-card);
+}
+
+.project-card-visual {
+  border: 1px solid var(--border-soft);
+}
+
+.project-card-overlay {
+  background: linear-gradient(to top, rgba(18, 19, 20, 0.18), transparent 48%);
+}
+
+.featured-card-overlay {
+  background: linear-gradient(to top, rgba(18, 19, 20, 0.18), transparent 42%);
+}
+
+.detail-card {
+  border: 1px solid var(--border-soft);
+  background: var(--surface-1);
+  box-shadow: var(--shadow-card);
+}
+
+.detail-section {
+  border: 1px solid var(--border-soft);
+  background: var(--surface-1);
+  box-shadow: var(--shadow-card);
+}
+
+.detail-pill {
+  border: 1px solid color-mix(in oklab, var(--sage) 26%, var(--border-soft));
+  background: color-mix(in oklab, var(--surface-2) 48%, var(--surface-1));
+}
+
 /* =========================================================
    8) A11y / focus
    ========================================================= */

@@ -7,7 +7,7 @@ function DetailCard({ title, items, tone }: { title: string; items?: string[]; t
     if (!items?.length) return null;
 
     return (
-        <article className="relative overflow-hidden rounded-[1.6rem] border bg-(--surface-1) p-5 shadow-(--shadow-card)" style={{ borderColor: 'var(--border-soft)' }}>
+        <article className="detail-card relative overflow-hidden rounded-[1.6rem] p-5">
             <span
                 aria-hidden
                 className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full opacity-35"
@@ -38,7 +38,7 @@ function DetailCard({ title, items, tone }: { title: string; items?: string[]; t
 
 function FeaturedSection({ kicker, title, children, tone = 'accent' }: { kicker: string; title: string; children: React.ReactNode; tone?: Tone }) {
     return (
-        <section className="relative overflow-hidden rounded-4xl border bg-(--surface-1) p-6 shadow-(--shadow-card) sm:p-8" style={{ borderColor: 'var(--border-soft)' }}>
+        <section className="detail-section relative overflow-hidden rounded-4xl p-6 sm:p-8">
             <div aria-hidden className="absolute -right-24 -top-24 h-72 w-72 rounded-full opacity-30 blur-3xl" style={{ background: `var(--${tone})` }} />
 
             <div className="relative">
@@ -97,11 +97,7 @@ export default function ProjectDetails({ project }: { project: Project }) {
                         {project.highlights.map((item) => (
                             <div
                                 key={item}
-                                className="rounded-2xl border px-4 py-3 text-sm leading-6 text-(--text)"
-                                style={{
-                                    borderColor: 'color-mix(in oklab, var(--sage) 26%, var(--border-soft))',
-                                    background: 'color-mix(in oklab, var(--surface-2) 48%, var(--surface-1))',
-                                }}
+                                className="detail-pill rounded-2xl px-4 py-3 text-sm leading-6 text-(--text)"
                             >
                                 {item}
                             </div>
@@ -127,14 +123,7 @@ export default function ProjectDetails({ project }: { project: Project }) {
                     {project.testing.coverage?.length ? (
                         <ul className="mt-5 grid gap-3 sm:grid-cols-2">
                             {project.testing.coverage.map((item) => (
-                                <li
-                                    key={item}
-                                    className="rounded-2xl border px-4 py-3 text-sm leading-6 text-(--text)"
-                                    style={{
-                                        borderColor: 'var(--border-soft)',
-                                        background: 'color-mix(in oklab, var(--surface-2) 48%, var(--surface-1))',
-                                    }}
-                                >
+                                <li key={item} className="detail-pill rounded-2xl px-4 py-3 text-sm leading-6 text-(--text)">
                                     {item}
                                 </li>
                             ))}

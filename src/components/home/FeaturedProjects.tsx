@@ -39,9 +39,8 @@ function ProjectVisual({ project, tone }: { project: Project; tone: Tone }) {
 
     return (
         <div
-            className="relative overflow-hidden rounded-[1.6rem] border"
+            className="project-card-visual relative overflow-hidden rounded-[1.6rem]"
             style={{
-                borderColor: 'color-mix(in oklab, var(--border-soft) 82%, var(--paper))',
                 background: `linear-gradient(135deg, color-mix(in oklab, var(--${tone}) 18%, var(--surface-1)), var(--surface-1))`,
             }}
         >
@@ -66,13 +65,7 @@ function ProjectVisual({ project, tone }: { project: Project; tone: Tone }) {
                     />
                 )}
 
-                <div
-                    aria-hidden
-                    className="absolute inset-0"
-                    style={{
-                        background: 'linear-gradient(to top, rgba(18,19,20,0.18), transparent 42%)',
-                    }}
-                />
+                <div aria-hidden className="featured-card-overlay absolute inset-0" />
             </div>
         </div>
     );
@@ -87,8 +80,7 @@ function FeaturedProjectCard({ project, index }: { project: Project; index: numb
     return (
         <Link
             href={`/projects/${project.slug}`}
-            className="group grid overflow-hidden rounded-4xl border bg-(--surface-1) shadow-(--shadow-card) transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(18,19,20,0.09)] lg:grid-cols-[0.95fr_1.05fr]"
-            style={{ borderColor: 'var(--border-soft)' }}
+            className="project-card-surface group grid overflow-hidden rounded-4xl transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(18,19,20,0.09)] lg:grid-cols-[0.95fr_1.05fr]"
         >
             <ProjectVisual project={project} tone={tone} />
 
@@ -160,8 +152,7 @@ function SmallProjectCard({ project, index }: { project: Project; index: number 
     return (
         <Link
             href={`/projects/${project.slug}`}
-            className="group rounded-[1.6rem] border bg-(--surface-1) p-4 transition hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(18,19,20,0.08)]"
-            style={{ borderColor: 'var(--border-soft)' }}
+            className="project-card-surface group rounded-[1.6rem] p-4 transition hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(18,19,20,0.08)]"
         >
             <div className="flex items-start justify-between gap-4">
                 <div>
