@@ -1,7 +1,10 @@
+import type { ReactNode } from 'react';
+
 import Chip from '@/components/ui/Chip';
 import type { Project } from '@/lib/projects';
 
 type Tone = 'accent' | 'sage' | 'lilac' | 'gold';
+type DetailGroup = { title: string; items?: string[]; tone: Tone };
 
 function DetailCard({ title, items, tone }: { title: string; items?: string[]; tone: Tone }) {
     if (!items?.length) return null;
@@ -36,7 +39,7 @@ function DetailCard({ title, items, tone }: { title: string; items?: string[]; t
     );
 }
 
-function FeaturedSection({ kicker, title, children, tone = 'accent' }: { kicker: string; title: string; children: React.ReactNode; tone?: Tone }) {
+function FeaturedSection({ kicker, title, children, tone = 'accent' }: { kicker: string; title: string; children: ReactNode; tone?: Tone }) {
     return (
         <section className="detail-section relative overflow-hidden rounded-4xl p-6 sm:p-8">
             <div aria-hidden className="absolute -right-24 -top-24 h-72 w-72 rounded-full opacity-30 blur-3xl" style={{ background: `var(--${tone})` }} />
@@ -55,27 +58,43 @@ function FeaturedSection({ kicker, title, children, tone = 'accent' }: { kicker:
 export function hasProjectDetails(project: Project) {
     return Boolean(
         project.vision ||
-        project.objectives?.length ||
-        project.challenges?.length ||
-        project.solutions?.length ||
-        project.highlights?.length ||
-        project.metrics?.length ||
-        project.notableDecisions?.length ||
-        project.productPrinciples?.length ||
-        project.editorialFoundations?.length ||
-        project.uxHighlights?.length ||
-        project.uiHighlights?.length ||
-        project.nextSteps?.length ||
-        project.testing?.strategy ||
-        project.testing?.coverage?.length ||
-        project.architecture?.summary ||
-        project.architecture?.keyPoints?.length ||
-        project.architecture?.sections?.length,
+            project.objectives?.length ||
+            project.challenges?.length ||
+            project.solutions?.length ||
+            project.highlights?.length ||
+            project.metrics?.length ||
+            project.notableDecisions?.length ||
+            project.productPrinciples?.length ||
+            project.editorialFoundations?.length ||
+            project.uxHighlights?.length ||
+            project.uiHighlights?.length ||
+            project.nextSteps?.length ||
+            project.testing?.strategy ||
+            project.testing?.coverage?.length ||
+            project.architecture?.summary ||
+            project.architecture?.keyPoints?.length ||
+            project.architecture?.sections?.length,
     );
 }
 
 export default function ProjectDetails({ project }: { project: Project }) {
     if (!hasProjectDetails(project)) return null;
+
+    const coreDetails: DetailGroup[] = [
+        { title: 'Objectifs', items: project.objectives, tone: 'sage' },
+        { title: 'Defis', items: project.challenges, tone: 'gold' },
+        { title: 'Solutions', items: project.solutions, tone: 'lilac' },
+    ];
+
+    const extendedDetails: DetailGroup[] = [
+        { title: 'Resultats', items: project.metrics, tone: 'accent' },
+        { title: 'Decisions', items: project.notableDecisions, tone: 'gold' },
+        { title: 'Principes', items: project.productPrinciples, tone: 'sage' },
+        { title: 'Editorial', items: project.editorialFoundations, tone: 'lilac' },
+        { title: 'UX', items: project.uxHighlights, tone: 'accent' },
+        { title: 'UI', items: project.uiHighlights, tone: 'lilac' },
+        { title: 'Suite', items: project.nextSteps, tone: 'sage' },
+    ];
 
     return (
         <section className="space-y-8">
@@ -86,19 +105,16 @@ export default function ProjectDetails({ project }: { project: Project }) {
             ) : null}
 
             <div className="grid gap-5 lg:grid-cols-3">
-                <DetailCard title="Objectifs" items={project.objectives} tone="sage" />
-                <DetailCard title="Défis" items={project.challenges} tone="gold" />
-                <DetailCard title="Solutions" items={project.solutions} tone="lilac" />
+                {coreDetails.map((detail) => (
+                    <DetailCard key={detail.title} title={detail.title} items={detail.items} tone={detail.tone} />
+                ))}
             </div>
 
             {project.highlights?.length ? (
                 <FeaturedSection kicker="Impact" title="Points forts" tone="sage">
                     <div className="grid gap-3 sm:grid-cols-2">
                         {project.highlights.map((item) => (
-                            <div
-                                key={item}
-                                className="detail-pill rounded-2xl px-4 py-3 text-sm leading-6 text-(--text)"
-                            >
+                            <div key={item} className="detail-pill rounded-2xl px-4 py-3 text-sm leading-6 text-(--text)">
                                 {item}
                             </div>
                         ))}
@@ -107,17 +123,13 @@ export default function ProjectDetails({ project }: { project: Project }) {
             ) : null}
 
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                <DetailCard title="Résultats" items={project.metrics} tone="accent" />
-                <DetailCard title="Décisions" items={project.notableDecisions} tone="gold" />
-                <DetailCard title="Principes" items={project.productPrinciples} tone="sage" />
-                <DetailCard title="Éditorial" items={project.editorialFoundations} tone="lilac" />
-                <DetailCard title="UX" items={project.uxHighlights} tone="accent" />
-                <DetailCard title="UI" items={project.uiHighlights} tone="lilac" />
-                <DetailCard title="Suite" items={project.nextSteps} tone="sage" />
+                {extendedDetails.map((detail) => (
+                    <DetailCard key={detail.title} title={detail.title} items={detail.items} tone={detail.tone} />
+                ))}
             </div>
 
             {project.testing?.strategy || project.testing?.coverage?.length ? (
-                <FeaturedSection kicker="Qualité" title="Testing & fiabilité" tone="accent">
+                <FeaturedSection kicker="Qualite" title="Testing & fiabilite" tone="accent">
                     {project.testing.strategy ? <p className="max-w-3xl text-sm leading-6 text-(--text)">{project.testing.strategy}</p> : null}
 
                     {project.testing.coverage?.length ? (
@@ -137,7 +149,7 @@ export default function ProjectDetails({ project }: { project: Project }) {
                     {project.architecture.summary ? <p className="max-w-3xl text-sm leading-6 text-(--text)">{project.architecture.summary}</p> : null}
 
                     <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                        <DetailCard title="Points clés" items={project.architecture.keyPoints} tone="gold" />
+                        <DetailCard title="Points cles" items={project.architecture.keyPoints} tone="gold" />
 
                         {project.architecture.sections?.map((section) => (
                             <DetailCard key={section.title} title={section.title} items={section.items} tone="sage" />

@@ -1,6 +1,5 @@
-// src/components/skills/SkillsProjectsBento.tsx
-
 import type { Project } from '@/lib/projects';
+import { coverAlt, coverSrc, pickProjectTags, sortProjectsByRecent, toneForIndex } from '@/lib/project-display';
 
 import SkillsProjectTile from '@/features/skills/components/SkillsProjectTile';
 import { skillsPageContent } from '@/content/skills-page';
@@ -9,34 +8,9 @@ type Props = {
     projects: Project[];
 };
 
-function coverSrc(project: Project) {
-    return project.hero?.image ?? project.logo?.image ?? '/images/projects/placeholder.png';
-}
-
-function coverAlt(project: Project) {
-    return project.hero?.alt ?? project.logo?.alt ?? project.title;
-}
-
-function pickTags(project: Project) {
-    return [...(project.stack ?? []), ...(project.role ?? [])].filter(Boolean).slice(0, 6);
-}
-
-function pickHighlights(project: Project) {
-    const highlights = (project.highlights ?? []).filter(Boolean);
-    return highlights.length ? highlights.slice(0, 3) : ['Interface', 'Structure', 'Expérience utilisateur'];
-}
-
-function sortMostRecentFirst(projects: Project[]) {
-    return [...projects].sort((a, b) => {
-        const ay = typeof a.year === 'number' ? a.year : -1;
-        const by = typeof b.year === 'number' ? b.year : -1;
-        return by - ay;
-    });
-}
-
 export default function SkillsProjectsBento({ projects }: Props) {
     const { projects: content } = skillsPageContent;
-    const ordered = sortMostRecentFirst(projects).slice(0, 3);
+    const ordered = sortProjectsByRecent(projects).slice(0, 3);
 
     if (!ordered.length) {
         return (
@@ -48,7 +22,6 @@ export default function SkillsProjectsBento({ projects }: Props) {
 
     const labels = {
         caseStudy: content.caseStudyLabel,
-        demo: content.demoLabel,
         read: content.readLabel,
     };
 
@@ -72,16 +45,13 @@ export default function SkillsProjectsBento({ projects }: Props) {
                     {ordered.map((project, index) => (
                         <SkillsProjectTile
                             key={project.slug}
-                            size="sm"
                             title={project.title}
                             subtitle={project.subtitle ?? content.caseStudyLabel}
                             hrefCase={`/projects/${project.slug}`}
-                            demoUrl={project.links?.demo}
-                            cover={coverSrc(project)}
+                            cover={coverSrc(project, '/images/projects/placeholder.png') ?? '/images/projects/placeholder.png'}
                             coverAlt={coverAlt(project)}
-                            tags={pickTags(project)}
-                            highlights={pickHighlights(project)}
-                            tone={index === 0 ? 'accent' : index === 1 ? 'lilac' : 'sage'}
+                            tags={pickProjectTags(project)}
+                            tone={toneForIndex(index === 1 ? 2 : index)}
                             labels={labels}
                         />
                     ))}

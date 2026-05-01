@@ -1,6 +1,10 @@
 import type { ChipKind } from '@/components/ui/chip-utils';
 import type { Project } from '@/lib/projects';
 
+export type ProjectTone = 'accent' | 'sage' | 'lilac' | 'gold';
+
+const projectTones: readonly ProjectTone[] = ['accent', 'sage', 'lilac', 'gold'];
+
 export function kindFor(tag: string): ChipKind {
     const value = tag.toLowerCase();
 
@@ -19,8 +23,8 @@ export function kindFor(tag: string): ChipKind {
     return 'tech';
 }
 
-export function coverSrc(project: Project) {
-    return project.hero?.image ?? project.logo?.image ?? null;
+export function coverSrc(project: Project, fallback: string | null = null) {
+    return project.hero?.image ?? project.logo?.image ?? fallback;
 }
 
 export function coverAlt(project: Project) {
@@ -53,6 +57,20 @@ export function excerpt(text?: string, max = 150) {
 
 export function cardBlurb(project: Project) {
     return excerpt(project.subtitle, 130) || excerpt(project.context, 130) || excerpt(project.vision, 130) || excerpt(project.objectives?.[0], 130);
+}
+
+export function toneForIndex(index: number): ProjectTone {
+    return projectTones[index % projectTones.length];
+}
+
+export function sortProjectsByRecent(projects: Project[]) {
+    return [...projects].sort((a, b) => {
+        const ya = typeof a.year === 'number' ? a.year : -1;
+        const yb = typeof b.year === 'number' ? b.year : -1;
+
+        if (yb !== ya) return yb - ya;
+        return a.title.localeCompare(b.title, 'fr');
+    });
 }
 
 export function pickStackChips(stack: string[] = [], limit = 3) {
@@ -136,6 +154,15 @@ export function pickStack(stack: string[] = [], count = 2): string[] {
     }
 
     return chosen.slice(0, count);
+}
+
+export function pickProjectTags(project: Project, limit = 6) {
+    return [...(project.stack ?? []), ...(project.role ?? [])].map((item) => item.trim()).filter(Boolean).slice(0, limit);
+}
+
+export function pickProjectHighlights(project: Project, limit = 3) {
+    const highlights = (project.highlights ?? []).map((item) => item.trim()).filter(Boolean);
+    return highlights.length ? highlights.slice(0, limit) : ['Interface', 'Structure', 'Experience utilisateur'];
 }
 
 export function isProjectInProgress(project: Project) {

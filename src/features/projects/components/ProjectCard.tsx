@@ -1,13 +1,12 @@
-import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
 
 import Chip from '@/components/ui/Chip';
 import { projectsPageContent } from '@/content/projects-page';
 import type { Project } from '@/lib/projects';
-import { cardBlurb, coverAlt, coverSrc, getProjectStatusLabel, kindFor, pickStackChips } from '@/lib/project-display';
+import { cardBlurb, coverAlt, coverSrc, getProjectStatusLabel, kindFor, pickStackChips, toneForIndex } from '@/lib/project-display';
 
-const tones = ['accent', 'sage', 'lilac', 'gold'] as const;
+import ProjectLinkBadge from './ProjectLinkBadge';
+import ProjectMedia from './ProjectMedia';
 
 type ProjectCardProps = {
     project: Project;
@@ -20,7 +19,7 @@ export default function ProjectCard({ project, index, featured = false }: Projec
     const alt = coverAlt(project);
     const stackChips = pickStackChips(project.stack ?? [], featured ? 4 : 3);
     const blurb = cardBlurb(project);
-    const tone = tones[index % tones.length];
+    const tone = toneForIndex(index);
     const { listing } = projectsPageContent;
     const statusLabel = getProjectStatusLabel(project);
 
@@ -32,56 +31,34 @@ export default function ProjectCard({ project, index, featured = false }: Projec
             ].join(' ')}
         >
             <Link href={`/projects/${project.slug}`} className={featured ? 'grid p-4 lg:min-h-105 lg:grid-cols-[1.05fr_0.95fr] lg:p-5' : 'block p-4'}>
-                <div
-                    className={['project-card-visual relative overflow-hidden rounded-[1.45rem]', featured ? 'lg:h-full' : ''].join(' ')}
-                    style={{
-                        background: `linear-gradient(135deg, color-mix(in oklab, var(--${tone}) 16%, var(--surface-1)), var(--surface-1))`,
-                    }}
+                <ProjectMedia
+                    src={src}
+                    alt={alt}
+                    tone={tone}
+                    sizes={featured ? '(max-width: 1024px) 100vw, 50vw' : '(max-width: 768px) 100vw, 33vw'}
+                    priority={featured}
+                    frameClassName={['project-card-visual rounded-[1.45rem]', featured ? 'lg:h-full' : ''].join(' ')}
+                    mediaClassName={featured ? 'lg:h-full lg:aspect-auto' : undefined}
                 >
-                    <div className={featured ? 'relative aspect-16/10 lg:h-full lg:aspect-auto' : 'relative aspect-16/10'}>
-                        {src ? (
-                            <Image
-                                src={src}
-                                alt={alt}
-                                fill
-                                sizes={featured ? '(max-width: 1024px) 100vw, 50vw' : '(max-width: 768px) 100vw, 33vw'}
-                                className="object-cover transition duration-700 group-hover:scale-[1.035]"
-                                style={{ objectPosition: '50% 10%' }}
-                                priority={featured}
-                            />
-                        ) : (
-                            <div
-                                aria-hidden
-                                className="absolute inset-0"
-                                style={{
-                                    background: `radial-gradient(circle at 30% 20%, color-mix(in oklab, var(--${tone}) 34%, transparent), transparent 44%),
-                                    linear-gradient(135deg, var(--surface-2), var(--surface-1))`,
-                                }}
-                            />
-                        )}
-
-                        <div aria-hidden className="project-card-overlay absolute inset-0" />
-
-                        <div className="absolute left-3 top-3 flex items-center gap-2">
-                            <Chip size="xs" color={featured ? 'accent' : 'sage'}>
-                                {featured ? listing.featuredLabel : listing.caseStudyLabel}
+                    <div className="absolute left-3 top-3 flex items-center gap-2">
+                        <Chip size="xs" color={featured ? 'accent' : 'sage'}>
+                            {featured ? listing.featuredLabel : listing.caseStudyLabel}
+                        </Chip>
+                        {statusLabel ? (
+                            <Chip size="xs" color="gold">
+                                {statusLabel}
                             </Chip>
-                            {statusLabel ? (
-                                <Chip size="xs" color="gold">
-                                    {statusLabel}
-                                </Chip>
-                            ) : null}
-                        </div>
-
-                        {project.year ? (
-                            <div className="absolute right-3 top-3">
-                                <Chip size="xs" color="gold">
-                                    {project.year}
-                                </Chip>
-                            </div>
                         ) : null}
                     </div>
-                </div>
+
+                    {project.year ? (
+                        <div className="absolute right-3 top-3">
+                            <Chip size="xs" color="gold">
+                                {project.year}
+                            </Chip>
+                        </div>
+                    ) : null}
+                </ProjectMedia>
 
                 <div className={featured ? 'flex flex-col px-1 pt-5 lg:px-7 lg:py-5' : 'px-1 pt-5'}>
                     <div className="flex items-start justify-between gap-4">
@@ -95,15 +72,7 @@ export default function ProjectCard({ project, index, featured = false }: Projec
                             </h3>
                         </div>
 
-                        <span
-                            className="grid h-10 w-10 shrink-0 place-items-center rounded-full border transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                            style={{
-                                borderColor: `color-mix(in oklab, var(--${tone}) 42%, var(--border-soft))`,
-                                background: `color-mix(in oklab, var(--${tone}) 12%, var(--surface-1))`,
-                            }}
-                        >
-                            <ArrowUpRight size={18} className="text-(--text-strong)" />
-                        </span>
+                        <ProjectLinkBadge tone={tone} />
                     </div>
 
                     {blurb ? <p className={['mt-3 leading-6 text-(--text)', featured ? 'max-w-xl text-base' : 'line-clamp-3 text-sm'].join(' ')}>{blurb}</p> : null}

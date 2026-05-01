@@ -1,88 +1,40 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
+import type { CSSProperties } from 'react';
 
-import Chip from '@/components/ui/Chip';
-import SectionHeader from '@/components/ui/SectionHeader';
 import LinkButton from '@/components/ui/LinkButton';
+import SectionHeader from '@/components/ui/SectionHeader';
+import Chip from '@/components/ui/Chip';
 import { featuredProjectsContent } from '@/content/home';
+import ProjectLinkBadge from '@/features/projects/components/ProjectLinkBadge';
+import ProjectMedia from '@/features/projects/components/ProjectMedia';
 import type { Project } from '@/lib/projects';
-import { chipPropsByKind, getProjectStatusLabel, kindFor, pickStack } from '@/lib/project-display';
+import { cardBlurb, chipPropsByKind, coverAlt, coverSrc, getProjectStatusLabel, kindFor, pickStack, sortProjectsByRecent, toneForIndex } from '@/lib/project-display';
 
-type Tone = 'accent' | 'sage' | 'lilac' | 'gold';
-
-const tones: Tone[] = ['accent', 'sage', 'lilac', 'gold'];
-
-function excerpt(text?: string, max = 115) {
-    const value = (text ?? '').trim();
-    if (!value) return '';
-    if (value.length <= max) return value;
-    return `${value.slice(0, max).replace(/\s+\S*$/, '')}…`;
-}
-
-function coverSrc(project: Project) {
-    return project.hero?.image ?? project.logo?.image ?? null;
-}
-
-function coverAlt(project: Project) {
-    return project.hero?.alt ?? project.logo?.alt ?? project.title;
-}
-
-function getYearScore(project: Project) {
-    const year = Number(project.year ?? 0);
-    return Number.isFinite(year) ? year : 0;
-}
-
-function ProjectVisual({ project, tone }: { project: Project; tone: Tone }) {
-    const src = coverSrc(project);
-    const alt = coverAlt(project);
-
-    return (
-        <div
-            className="project-card-visual relative overflow-hidden rounded-[1.6rem]"
-            style={{
-                background: `linear-gradient(135deg, color-mix(in oklab, var(--${tone}) 18%, var(--surface-1)), var(--surface-1))`,
-            }}
-        >
-            <div className="relative aspect-16/10 overflow-hidden">
-                {src ? (
-                    <Image
-                        src={src}
-                        alt={alt}
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 44vw"
-                        className="object-cover transition duration-700 group-hover:scale-[1.035]"
-                        style={{ objectPosition: '50% 8%' }}
-                    />
-                ) : (
-                    <div
-                        aria-hidden
-                        className="absolute inset-0"
-                        style={{
-                            background: `radial-gradient(circle at 30% 20%, color-mix(in oklab, var(--${tone}) 36%, transparent), transparent 42%),
-                            linear-gradient(135deg, var(--surface-2), var(--surface-1))`,
-                        }}
-                    />
-                )}
-
-                <div aria-hidden className="featured-card-overlay absolute inset-0" />
-            </div>
-        </div>
-    );
+function toneTextStyle(tone: string): CSSProperties {
+    return { color: `var(--${tone})` };
 }
 
 function FeaturedProjectCard({ project, index }: { project: Project; index: number }) {
-    const tone = tones[index % tones.length];
+    const tone = toneForIndex(index);
     const pickedStack = pickStack(project.stack, 3);
     const statusLabel = getProjectStatusLabel(project);
-    const description = excerpt(project.context) || excerpt(project.subtitle) || excerpt(project.vision);
+    const description = cardBlurb(project);
 
     return (
         <Link
             href={`/projects/${project.slug}`}
             className="project-card-surface group grid overflow-hidden rounded-4xl transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(18,19,20,0.09)] lg:grid-cols-[0.95fr_1.05fr]"
         >
-            <ProjectVisual project={project} tone={tone} />
+            <ProjectMedia
+                src={coverSrc(project)}
+                alt={coverAlt(project)}
+                tone={tone}
+                sizes="(max-width: 1024px) 100vw, 44vw"
+                objectPosition="50% 8%"
+                frameClassName="project-card-visual rounded-[1.6rem]"
+                overlayClassName="featured-card-overlay"
+            />
 
             <div className="flex flex-col p-5 sm:p-6">
                 <div className="flex items-start justify-between gap-4">
@@ -96,15 +48,7 @@ function FeaturedProjectCard({ project, index }: { project: Project; index: numb
                         {project.subtitle ? <p className="mt-2 text-sm leading-6 text-(--text-muted)">{project.subtitle}</p> : null}
                     </div>
 
-                    <span
-                        className="grid h-10 w-10 shrink-0 place-items-center rounded-full border transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                        style={{
-                            borderColor: `color-mix(in oklab, var(--${tone}) 42%, var(--border-soft))`,
-                            background: `color-mix(in oklab, var(--${tone}) 12%, var(--surface-1))`,
-                        }}
-                    >
-                        <ArrowUpRight size={18} className="text-(--text-strong)" />
-                    </span>
+                    <ProjectLinkBadge tone={tone} />
                 </div>
 
                 {description ? <p className="mt-5 text-sm leading-6 text-(--text)">{description}</p> : null}
@@ -145,7 +89,7 @@ function FeaturedProjectCard({ project, index }: { project: Project; index: numb
 }
 
 function SmallProjectCard({ project, index }: { project: Project; index: number }) {
-    const tone = tones[index % tones.length];
+    const tone = toneForIndex(index);
     const pickedStack = pickStack(project.stack, 2);
     const statusLabel = getProjectStatusLabel(project);
 
@@ -156,7 +100,7 @@ function SmallProjectCard({ project, index }: { project: Project; index: number 
         >
             <div className="flex items-start justify-between gap-4">
                 <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.22em]" style={{ color: `var(--${tone})` }}>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.22em]" style={toneTextStyle(tone)}>
                         {featuredProjectsContent.indexLabel}
                     </p>
 
@@ -174,6 +118,7 @@ function SmallProjectCard({ project, index }: { project: Project; index: number 
                         {statusLabel}
                     </Chip>
                 ) : null}
+
                 {pickedStack.map((stack) => (
                     <Chip key={stack} size="xs" {...chipPropsByKind(kindFor(stack))}>
                         {stack}
@@ -185,7 +130,7 @@ function SmallProjectCard({ project, index }: { project: Project; index: number 
 }
 
 export default function FeaturedProjects({ projects, featuredCount = 2 }: { projects: Project[]; featuredCount?: number }) {
-    const sorted = [...projects].sort((a, b) => getYearScore(b) - getYearScore(a));
+    const sorted = sortProjectsByRecent(projects);
     const featured = sorted.slice(0, featuredCount);
     const rest = sorted.slice(featuredCount);
     const [featuredTitleStart, featuredTitleEnd = ''] = featuredProjectsContent.title.split(' rencontre ');

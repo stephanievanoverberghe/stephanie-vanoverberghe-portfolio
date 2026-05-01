@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
@@ -10,6 +9,7 @@ import { coverAlt, coverSrc, excerpt, getProjectStatusLabel, kindFor } from '@/l
 
 import ProjectActions from './ProjectActions';
 import ProjectJumpLinks from './ProjectJumpLinks';
+import ProjectMedia from './ProjectMedia';
 
 type Props = {
     project: Project;
@@ -77,29 +77,15 @@ export default function ProjectHero({ project, hasDetails }: Props) {
                     </div>
 
                     <aside className="space-y-4">
-                        <div className="overflow-hidden rounded-[1.7rem] border border-(--border-soft) bg-(--paper)">
-                            <div className="relative aspect-16/10">
-                                {src ? (
-                                    <Image
-                                        src={src}
-                                        alt={alt}
-                                        fill
-                                        sizes="(max-width: 1024px) 100vw, 420px"
-                                        className="object-cover"
-                                        style={{ objectPosition: '50% 10%' }}
-                                        priority
-                                    />
-                                ) : (
-                                    <div
-                                        aria-hidden
-                                        className="absolute inset-0"
-                                        style={{
-                                            background: 'linear-gradient(135deg, color-mix(in oklab, var(--sage) 18%, var(--surface-1)), var(--surface-1))',
-                                        }}
-                                    />
-                                )}
-                            </div>
-                        </div>
+                        <ProjectMedia
+                            src={src}
+                            alt={alt}
+                            tone="sage"
+                            sizes="(max-width: 1024px) 100vw, 420px"
+                            priority
+                            frameClassName="rounded-[1.7rem] border border-(--border-soft) bg-(--paper)"
+                            overlayClassName="hidden"
+                        />
 
                         <div className="surface-sage-soft rounded-[1.7rem] border p-5">
                             <p className="text-xs font-bold uppercase tracking-[0.22em] text-(--accent)">{detail.shortSummaryLabel}</p>

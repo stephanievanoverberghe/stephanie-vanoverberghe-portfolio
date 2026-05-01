@@ -382,12 +382,26 @@
   border: 1px solid var(--border-soft);
 }
 
+.project-tone-frame {
+  background: linear-gradient(135deg, color-mix(in oklab, var(--project-tone) 16%, var(--surface-1)), var(--surface-1));
+}
+
+.project-tone-fallback {
+  background: radial-gradient(circle at 30% 20%, color-mix(in oklab, var(--project-tone) 34%, transparent), transparent 44%),
+    linear-gradient(135deg, var(--surface-2), var(--surface-1));
+}
+
 .project-card-overlay {
   background: linear-gradient(to top, rgba(18, 19, 20, 0.18), transparent 48%);
 }
 
 .featured-card-overlay {
   background: linear-gradient(to top, rgba(18, 19, 20, 0.18), transparent 42%);
+}
+
+.project-link-badge {
+  border-color: color-mix(in oklab, var(--project-tone) 42%, var(--border-soft));
+  background: color-mix(in oklab, var(--project-tone) 12%, var(--surface-1));
 }
 
 .detail-card {
