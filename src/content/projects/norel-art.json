@@ -1,90 +1,85 @@
 {
     "slug": "norel-art",
     "title": "Norel Art",
-    "subtitle": "E-commerce artistique — vente d’œuvres, gestion catalogue et admin évolutif",
+    "subtitle": "E-commerce artistique en cours — galerie, paiement Stripe et futur admin",
     "year": 2026,
-    "role": ["Product Design", "Front-end", "UI/UX", "Architecture", "Fullstack"],
-    "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "PostgreSQL", "Prisma", "Stripe"],
-    "context": "Norel Art est une plateforme e-commerce dédiée à la vente d’œuvres originales. Le projet vise à proposer une expérience simple et immersive côté client, tout en construisant une base solide pour la gestion des produits, commandes et contenus côté admin.",
-    "vision": "Créer une galerie en ligne qui valorise les œuvres sans les surcharger : une expérience d’achat fluide, sensible et structurée.",
+    "role": ["Product Design", "Front-end", "UI/UX", "Architecture", "Fullstack en progression"],
+    "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Node.js", "PostgreSQL", "Prisma", "Stripe"],
+    "context": "Norel Art est un projet e-commerce en cours, dédié à la vente d’œuvres originales. La partie client pose les bases de l’expérience : découvrir les œuvres, consulter le détail, préparer l’achat et construire progressivement une architecture prête pour l’admin.",
+    "vision": "Créer une galerie en ligne sobre et sensible, où l’œuvre reste au centre, avec une expérience d’achat simple et une base technique pensée pour évoluer.",
     "objectives": [
         "Mettre en valeur les œuvres avec une interface épurée.",
-        "Faciliter l’achat via Stripe avec un parcours simple.",
-        "Construire une base de données claire et évolutive.",
-        "Préparer un back-office pour gérer œuvres, commandes et contenus.",
-        "Assurer une expérience fluide sur mobile et desktop."
+        "Construire un parcours e-commerce clair et rassurant.",
+        "Préparer l’intégration Stripe pour l’achat en ligne.",
+        "Structurer une base SQL propre avec Prisma.",
+        "Prévoir un espace admin avec authentification, gestion des œuvres et suivi des commandes."
     ],
     "productPrinciples": [
-        "L’œuvre avant l’interface : le design s’efface au bon moment.",
-        "Simplicité d’achat : réduire chaque friction inutile.",
-        "Clarté : chaque écran doit être compris immédiatement.",
-        "Évolutivité : penser la structure avant la complexité."
+        "L’œuvre avant l’interface : le design accompagne sans voler l’attention.",
+        "Parcours simple : voir, comprendre, acheter.",
+        "Structure claire : penser la donnée avant d’ajouter de la complexité.",
+        "Évolution progressive : construire proprement étape par étape."
     ],
     "challenges": [
-        "Trouver l’équilibre entre esthétique artistique et logique e-commerce.",
-        "Structurer les données (œuvres, catégories, commandes).",
-        "Intégrer Stripe proprement (paiement, confirmation).",
-        "Préparer un système d’authentification et d’admin sans complexifier trop tôt."
+        "Créer une expérience artistique sans perdre la logique e-commerce.",
+        "Structurer les données : œuvres, catégories, commandes, utilisateurs.",
+        "Préparer Stripe et les webhooks sans complexifier trop tôt.",
+        "Mettre en place une future authentification admin propre.",
+        "Garder une interface premium, lisible et mobile-first."
     ],
     "solutions": [
-        "Pages œuvres épurées avec focus visuel (images plein écran, hiérarchie simple).",
-        "Parcours d’achat direct : sélection → paiement → confirmation.",
-        "Modélisation SQL claire (œuvres, commandes, clients).",
-        "Architecture pensée pour accueillir un admin (CRUD œuvres, suivi commandes).",
-        "Utilisation de Prisma pour structurer et sécuriser l’accès aux données."
+        "Pages œuvres sobres avec priorité aux visuels.",
+        "Architecture Next.js pensée pour accueillir route handlers, logique serveur et webhooks.",
+        "Modélisation PostgreSQL avec Prisma pour préparer les relations entre œuvres, commandes et utilisateurs.",
+        "Préparation d’un futur admin : CRUD œuvres, gestion des commandes, authentification.",
+        "Interface client construite en composants réutilisables pour faciliter les évolutions."
     ],
     "uxHighlights": [
-        "Navigation simple entre les œuvres.",
-        "Lecture visuelle fluide (images prioritaires).",
-        "Parcours d’achat rapide et sans distraction.",
-        "Expérience mobile optimisée."
+        "Navigation simple entre catalogue et détail d’œuvre.",
+        "Lecture visuelle fluide avec focus sur les images.",
+        "Parcours pensé pour limiter les distractions avant l’achat.",
+        "Expérience mobile priorisée."
     ],
     "uiHighlights": [
         "Interface minimaliste centrée sur l’image.",
-        "Typographie sobre pour accompagner les œuvres.",
-        "Palette neutre pour laisser respirer les visuels.",
-        "Micro-interactions discrètes."
+        "Typographie sobre et élégante.",
+        "Palette neutre pour laisser respirer les œuvres.",
+        "Micro-interactions discrètes et cohérentes."
     ],
     "architecture": {
-        "publicRoutes": ["/", "/oeuvres", "/oeuvres/[slug]", "/commande", "/contact"],
-        "futureAdmin": ["Authentification utilisateur (admin)", "CRUD œuvres", "Gestion des commandes", "Suivi des paiements Stripe", "Gestion des contenus"],
-        "data": ["PostgreSQL avec Prisma", "Modèles : Artwork, Order, User", "Relations propres pour évolutivité"],
-        "payments": ["Stripe Checkout", "Confirmation de paiement", "Préparation webhooks pour automatisation"]
+        "status": ["Projet en cours", "Partie client avancée", "Admin, auth et paiement en préparation"],
+        "publicRoutes": ["/", "/oeuvres", "/oeuvres/[slug]", "/commandes", "/contact"],
+        "futureAdmin": ["Connexion admin", "CRUD œuvres", "Gestion des commandes", "Suivi des paiements Stripe", "Gestion des contenus"],
+        "serverSide": ["Route handlers Next.js", "Logique serveur avec Node.js", "Préparation webhooks Stripe", "Validation des données côté serveur"],
+        "data": ["PostgreSQL avec Prisma", "Modèles prévus : Artwork, Order, User", "Relations pensées pour l’évolution du projet"],
+        "payments": ["Stripe Checkout", "Confirmation de paiement", "Webhooks prévus pour automatiser les commandes"]
     },
     "highlights": [
-        "Projet e-commerce complet (front + data + paiement).",
-        "Base SQL propre et structurée.",
-        "Intégration Stripe fonctionnelle.",
-        "Architecture prête pour un admin évolutif."
+        "Projet e-commerce en cours avec vraie logique produit.",
+        "Base client déjà pensée pour accueillir paiement, auth et admin.",
+        "Montée fullstack avec Node.js, Prisma, SQL et Stripe.",
+        "Direction artistique sobre au service des œuvres."
     ],
     "links": {
-        "demo": "",
-        "repo": ""
+        "demo": "https://norel-art.vercel.app/",
+        "repo": "https://github.com/stephanievanoverberghe/norel-art"
     },
     "logo": {
         "image": "/images/projects/norel-art/logo.png",
         "alt": "Logo Norel Art"
     },
     "hero": {
-        "image": "/images/projects/norel-art/desktop-hero.webp",
+        "image": "/images/projects/norel-art/desktop-hero.png",
         "alt": "Homepage Norel Art — galerie d’art"
     },
     "gallery": [
         {
-            "src": "/images/projects/norel-art/desktop-oeuvres.webp",
+            "src": "/images/projects/norel-art/desktop-oeuvres.png",
             "alt": "Catalogue des œuvres"
         },
         {
-            "src": "/images/projects/norel-art/desktop-oeuvre.webp",
+            "src": "/images/projects/norel-art/desktop-oeuvre.png",
             "alt": "Page détail d’une œuvre"
-        },
-        {
-            "src": "/images/projects/norel-art/desktop-checkout.webp",
-            "alt": "Parcours d’achat avec Stripe"
-        },
-        {
-            "src": "/images/projects/norel-art/mobile-oeuvres.webp",
-            "alt": "Vue mobile du catalogue"
         }
     ]
 }
