@@ -1,0 +1,57 @@
+:root {
+  --ink: hsl(220 12% 8%);
+  --paper: hsl(210 40% 98%);
+  --accent: hsl(11 67% 47%);
+  --sage: hsl(156 18% 63%);
+  --lilac: hsl(262 42% 82%);
+  --gold: hsl(41 62% 64%);
+
+  --surface-1: hsl(0 0% 100%);
+  --surface-2: hsl(258 30% 96%);
+
+  --text-strong: hsl(220 15% 14%);
+  --text: hsl(220 10% 22%);
+  --text-muted: hsl(220 9% 48%);
+
+  --border-soft: hsl(214 17% 90%);
+  --ring-focus: hsl(11 67% 47%);
+
+  --bg: var(--paper);
+
+  --radius-card: 1.25rem;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 8px 30px hsl(220 38% 10% / 0.06);
+  --shadow-elevated: 0 16px 40px hsl(220 38% 10% / 0.1);
+
+  --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-entrance: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --heading-display-size: clamp(2.6rem, 6vw, 5.8rem);
+  --heading-display-leading: 0.95;
+  --heading-display-tracking: -0.075em;
+
+  --heading-h1-size: clamp(2.1rem, 4.2vw, 3.6rem);
+  --heading-h1-leading: 1.02;
+  --heading-h1-tracking: -0.05em;
+
+  --heading-h2-size: clamp(1.55rem, 2.8vw, 2.2rem);
+  --heading-h2-leading: 1.1;
+  --heading-h2-tracking: -0.03em;
+
+  --heading-h3-size: clamp(1.2rem, 2vw, 1.5rem);
+  --heading-h3-leading: 1.2;
+  --heading-h3-tracking: -0.02em;
+
+  --text-body-size: clamp(1rem, 1.1vw, 1.075rem);
+  --text-body-leading: 1.75;
+  --text-body-tracking: -0.005em;
+
+  --text-muted-size: 0.95rem;
+  --text-muted-leading: 1.65;
+  --text-muted-tracking: -0.002em;
+
+  --text-small-size: 0.8125rem;
+  --text-small-leading: 1.5;
+  --text-small-tracking: 0.01em;
+}

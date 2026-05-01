@@ -7,10 +7,10 @@ import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { GalleryGrid } from './GalleryGrid';
 import { GalleryThumbStrip } from './GalleryThumbStrip';
-import { getGalleryAlt } from './gallery.utils';
-import type { GalleryItem } from './gallery.types';
+import { getGalleryAlt } from './gallery-utils';
+import type { GalleryItem } from './gallery-types';
 
-export type { GalleryItem } from './gallery.types';
+export type { GalleryItem } from './gallery-types';
 
 type Props = {
     images: GalleryItem[];

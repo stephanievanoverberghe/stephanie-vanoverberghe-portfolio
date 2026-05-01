@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
-import { getGalleryAlt, getGalleryObjectPosition } from './gallery.utils';
-import type { GalleryItem } from './gallery.types';
+import { getGalleryAlt, getGalleryObjectPosition } from './gallery-utils';
+import type { GalleryItem } from './gallery-types';
 
 type Props = {
     images: GalleryItem[];

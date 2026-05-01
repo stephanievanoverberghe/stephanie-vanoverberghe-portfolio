@@ -6,7 +6,7 @@ import { ArrowUpRight, Images } from 'lucide-react';
 
 import Button from '@/components/ui/Button';
 import GalleryLightbox, { type GalleryItem } from '@/components/project/GalleryLightbox';
-import { getGalleryAlt, getGalleryObjectPosition } from '@/components/project/gallery.utils';
+import { getGalleryAlt, getGalleryObjectPosition } from '@/components/project/gallery-utils';
 
 type Props = {
     images: GalleryItem[];

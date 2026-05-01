@@ -6,7 +6,7 @@ import Link from 'next/link';
 import * as React from 'react';
 
 import { cn } from '@/lib/cn';
-import { colorFromKind, getChipBaseColor, sizeClasses, softStyle, type ChipColor, type ChipKind, type ChipSize } from './chip.utils';
+import { colorFromKind, getChipBaseColor, sizeClasses, softStyle, type ChipColor, type ChipKind, type ChipSize } from './chip-utils';
 
 type LegacyAppearance = 'soft' | 'solid' | 'outline' | 'ghost';
 type LegacyTone = 'subtle' | 'normal' | 'bold';

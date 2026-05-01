@@ -1,4 +1,4 @@
-import type { ChipKind } from '@/components/ui/chip.utils';
+import type { ChipKind } from '@/components/ui/chip-utils';
 import type { Project } from '@/lib/projects';
 
 export function kindFor(tag: string): ChipKind {

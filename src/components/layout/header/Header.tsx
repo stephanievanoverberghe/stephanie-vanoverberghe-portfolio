@@ -8,7 +8,7 @@ import { Menu, X } from 'lucide-react';
 import { HeaderBrand } from './HeaderBrand';
 import { HeaderDesktopNav } from './HeaderDesktopNav';
 import { HeaderMobileMenu } from './HeaderMobileMenu';
-import { ribbonStyle } from './header.styles';
+import { ribbonStyle } from './header-styles';
 import { useScrollState } from './useScrollState';
 import { headerContent } from '@/content/navigation';
 

@@ -1,4 +1,4 @@
-import type { GalleryItem } from './gallery.types';
+import type { GalleryItem } from './gallery-types';
 
 export function getGalleryAlt(image: GalleryItem, title?: string, fallback = 'Capture du projet') {
     return image.alt?.trim() || title || fallback;
