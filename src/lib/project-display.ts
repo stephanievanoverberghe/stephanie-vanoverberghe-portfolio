@@ -70,3 +70,11 @@ export function pickStackChips(stack: string[] = [], limit = 3) {
 
     return selected;
 }
+
+export function isProjectInProgress(project: Project) {
+    return project.status === 'in-progress';
+}
+
+export function getProjectStatusLabel(project: Project) {
+    return isProjectInProgress(project) ? 'En cours' : null;
+}

@@ -1,1 +1,1 @@
-export { cardBlurb, coverAlt, coverSrc, excerpt, kindFor, pickStackChips } from '@/lib/project-display';
+export { cardBlurb, coverAlt, coverSrc, excerpt, getProjectStatusLabel, kindFor, pickStackChips } from '@/lib/project-display';

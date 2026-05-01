@@ -8,7 +8,7 @@ import type { Project } from '@/lib/projects';
 
 import ProjectActions from './ProjectActions';
 import ProjectJumpLinks from './ProjectJumpLinks';
-import { coverAlt, coverSrc, excerpt, kindFor } from './project.utils';
+import { coverAlt, coverSrc, excerpt, getProjectStatusLabel, kindFor } from './project.utils';
 
 type Props = {
     project: Project;
@@ -19,6 +19,7 @@ export default function ProjectHero({ project, hasDetails }: Props) {
     const src = coverSrc(project);
     const alt = coverAlt(project);
     const { detail } = projectsPageContent;
+    const statusLabel = getProjectStatusLabel(project);
 
     return (
         <header className="space-y-5">
@@ -35,6 +36,12 @@ export default function ProjectHero({ project, hasDetails }: Props) {
                     <div>
                         <div className="flex flex-wrap items-center gap-3">
                             <p className="text-xs font-bold uppercase tracking-[0.28em] text-(--gold)">{detail.caseStudyLabel}</p>
+
+                            {statusLabel ? (
+                                <Chip size="xs" color="gold" title="Projet en cours de développement">
+                                    {statusLabel}
+                                </Chip>
+                            ) : null}
 
                             {project.year ? (
                                 <Chip size="xs" color="gold">

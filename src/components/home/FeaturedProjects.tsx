@@ -115,6 +115,12 @@ function FeaturedProjectCard({ project, index }: { project: Project; index: numb
                 {description ? <p className="mt-5 text-sm leading-6 text-(--text)">{description}</p> : null}
 
                 <div className="mt-5 flex flex-wrap gap-2">
+                    {statusLabel ? (
+                        <Chip size="xs" color="gold" title="Projet en cours de développement">
+                            {statusLabel}
+                        </Chip>
+                    ) : null}
+
                     {project.year ? (
                         <Chip size="xs" color="gold">
                             {project.year}
@@ -146,6 +152,7 @@ function FeaturedProjectCard({ project, index }: { project: Project; index: numb
 function SmallProjectCard({ project, index }: { project: Project; index: number }) {
     const tone = tones[index % tones.length];
     const pickedStack = pickStack(project.stack, 2);
+    const statusLabel = getProjectStatusLabel(project);
 
     return (
         <Link
@@ -168,6 +175,11 @@ function SmallProjectCard({ project, index }: { project: Project; index: number 
             </div>
 
             <div className="mt-4 flex flex-wrap gap-2">
+                {statusLabel ? (
+                    <Chip size="xs" color="gold" title="Projet en cours de développement">
+                        {statusLabel}
+                    </Chip>
+                ) : null}
                 {pickedStack.map((stack) => (
                     <Chip key={stack} size="xs" {...chipPropsByKind(kindFor(stack))}>
                         {stack}

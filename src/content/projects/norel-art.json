@@ -3,7 +3,7 @@
     "title": "Norel Art",
     "subtitle": "E-commerce artistique en cours — galerie, paiement Stripe et futur admin",
     "year": 2026,
-    "role": ["Product Design", "Front-end", "UI/UX", "Architecture", "Fullstack en progression"],
+    "role": ["Product Design", "Fullstack en progression", "UI/UX", "Architecture"],
     "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Node.js", "PostgreSQL", "Prisma", "Stripe"],
     "context": "Norel Art est un projet e-commerce en cours, dédié à la vente d’œuvres originales. La partie client pose les bases de l’expérience : découvrir les œuvres, consulter le détail, préparer l’achat et construire progressivement une architecture prête pour l’admin.",
     "vision": "Créer une galerie en ligne sobre et sensible, où l’œuvre reste au centre, avec une expérience d’achat simple et une base technique pensée pour évoluer.",

@@ -1,1 +1,1 @@
-export { coverAlt, coverSrc, excerpt, kindFor } from '@/lib/project-display';
+export { coverAlt, coverSrc, excerpt, getProjectStatusLabel, kindFor } from '@/lib/project-display';

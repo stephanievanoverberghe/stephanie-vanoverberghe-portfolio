@@ -8,10 +8,13 @@ type ProjectGalleryImage = { src: string; alt?: string };
 type ProjectTesting = { strategy?: string; coverage?: string[] };
 type ProjectArchitecture = { summary?: string; keyPoints?: string[]; sections?: Array<{ title: string; items: string[] }> };
 
+export type ProjectStatus = 'published' | 'in-progress';
+
 export type Project = {
     slug: string;
     title: string;
     subtitle?: string;
+    status?: ProjectStatus;
     year?: number;
     role?: string[];
     stack?: string[];
@@ -139,6 +142,11 @@ function parseArchitecture(value: unknown): ProjectArchitecture | undefined {
  * Règle métier implicite : seul `title` est obligatoire pour conserver
  * la résilience du site si un JSON contenu est incomplet en production.
  */
+function parseStatus(value: unknown): ProjectStatus | undefined {
+    if (value === 'published' || value === 'in-progress') return value;
+    return undefined;
+}
+
 function parseProject(raw: unknown, fallbackSlug: string): Project | null {
     if (!isRecord(raw)) return null;
 
@@ -151,6 +159,7 @@ function parseProject(raw: unknown, fallbackSlug: string): Project | null {
         slug,
         title,
         subtitle: getString(raw.subtitle),
+        status: parseStatus(raw.status),
         year: getNumber(raw.year),
         role: getStringArray(raw.role),
         stack: getStringArray(raw.stack),

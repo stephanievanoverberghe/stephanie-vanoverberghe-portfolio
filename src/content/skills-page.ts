@@ -67,6 +67,18 @@ export const skillsPageContent = {
                 ],
             },
             {
+                key: 'backend',
+                title: 'Backend en progression',
+                desc: 'Je consolide mes bases côté serveur avec Node.js, SQL, Prisma et Stripe, à travers des projets concrets.',
+                tone: 'sage',
+                chips: [
+                    { kind: 'tech', label: 'Node.js' },
+                    { kind: 'architecture', label: 'SQL' },
+                    { kind: 'tool', label: 'Prisma' },
+                    { kind: 'tool', label: 'Stripe' },
+                ],
+            },
+            {
                 key: 'workflow',
                 title: 'Workflow & livraison',
                 desc: 'Organisation du code, hygiène de repo, déploiement, vérifications et progression continue.',

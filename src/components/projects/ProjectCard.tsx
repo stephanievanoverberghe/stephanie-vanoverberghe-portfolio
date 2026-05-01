@@ -6,7 +6,7 @@ import Chip from '@/components/ui/Chip';
 import { projectsPageContent } from '@/content/projects-page';
 import type { Project } from '@/lib/projects';
 
-import { cardBlurb, coverAlt, coverSrc, kindFor, pickStackChips } from './projects.utils';
+import { cardBlurb, coverAlt, coverSrc, getProjectStatusLabel, kindFor, pickStackChips } from './projects.utils';
 
 const tones = ['accent', 'sage', 'lilac', 'gold'] as const;
 
@@ -23,6 +23,7 @@ export default function ProjectCard({ project, index, featured = false }: Projec
     const blurb = cardBlurb(project);
     const tone = tones[index % tones.length];
     const { listing } = projectsPageContent;
+    const statusLabel = getProjectStatusLabel(project);
 
     return (
         <article
@@ -74,6 +75,11 @@ export default function ProjectCard({ project, index, featured = false }: Projec
                             <Chip size="xs" color={featured ? 'accent' : 'sage'}>
                                 {featured ? listing.featuredLabel : listing.caseStudyLabel}
                             </Chip>
+                            {statusLabel ? (
+                                <Chip size="xs" color="gold" title="Projet en cours de développement">
+                                    {statusLabel}
+                                </Chip>
+                            ) : null}
                         </div>
 
                         {project.year ? (
