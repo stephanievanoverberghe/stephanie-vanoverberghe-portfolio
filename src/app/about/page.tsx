@@ -1,5 +1,6 @@
-import Link from 'next/link';
 import { ArrowRight, Code2, Eye, Layers3, Sparkles } from 'lucide-react';
+
+import LinkButton from '@/components/ui/LinkButton';
 
 import { aboutContent } from '@/content/about';
 
@@ -132,27 +133,14 @@ export default function AboutPage() {
                     </div>
 
                     <div className="flex flex-wrap gap-3">
-                        <Link
-                            href="/projects"
-                            className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-white"
-                            style={{
-                                background: 'linear-gradient(135deg, var(--accent), color-mix(in oklab, var(--accent) 78%, var(--ink)))',
-                            }}
-                        >
+                        <LinkButton href="/projects" variant="primary">
                             {aboutContent.cta.primary}
                             <ArrowRight size={17} />
-                        </Link>
+                        </LinkButton>
 
-                        <Link
-                            href="/contact"
-                            className="inline-flex items-center gap-2 rounded-full border px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-(--text-strong)"
-                            style={{
-                                borderColor: 'color-mix(in oklab, var(--gold) 46%, var(--border-soft))',
-                                background: 'color-mix(in oklab, var(--gold) 12%, var(--surface-1))',
-                            }}
-                        >
+                        <LinkButton href="/contact" variant="secondary">
                             {aboutContent.cta.secondary}
-                        </Link>
+                        </LinkButton>
                     </div>
                 </div>
             </section>

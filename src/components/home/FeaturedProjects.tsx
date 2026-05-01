@@ -4,6 +4,7 @@ import { ArrowUpRight } from 'lucide-react';
 
 import Chip from '@/components/ui/Chip';
 import SectionHeader from '@/components/ui/SectionHeader';
+import LinkButton from '@/components/ui/LinkButton';
 import { featuredProjectsContent } from '@/content/home';
 import type { Project } from '@/lib/projects';
 import { chipPropsByKind, kindFor, pickStack } from './home.utils';
@@ -213,17 +214,10 @@ export default function FeaturedProjects({ projects, featuredCount = 2 }: { proj
                     intro={featuredProjectsContent.intro}
                 />
 
-                <Link
-                    href="/projects"
-                    className="inline-flex items-center gap-2 rounded-full border px-4 py-2.5 text-xs font-bold uppercase tracking-[0.14em] text-(--text-strong) transition hover:-translate-y-0.5"
-                    style={{
-                        borderColor: 'color-mix(in oklab, var(--accent) 42%, var(--border-soft))',
-                        background: 'color-mix(in oklab, var(--accent) 8%, var(--surface-1))',
-                    }}
-                >
+                <LinkButton href="/projects" variant="secondary" className="px-4 py-2.5 text-xs">
                     {featuredProjectsContent.allProjectsLabel}
                     <ArrowUpRight size={15} />
-                </Link>
+                </LinkButton>
             </div>
 
             <div className="grid gap-6">
