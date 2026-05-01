@@ -60,11 +60,38 @@ export type ContactAction = {
 };
 
 export type ContactContent = {
-    kicker: string;
-    responseDelay: string;
-    title: string;
-    intro: string;
-    quickResponseTitle: string;
-    quickResponseText: string;
+    metadata: {
+        title: string;
+        description: string;
+    };
+
+    hero: {
+        kicker: string;
+        responseDelay: string;
+        title: {
+            first: string;
+            accent: string;
+        };
+        intro: string;
+        ctaPrimary: string;
+        ctaSecondary: string;
+    };
+
+    form: {
+        kicker: string;
+        title: string;
+        intro: string;
+        submitLabel: string;
+        loadingLabel: string;
+    };
+
+    aside: {
+        kicker: string;
+        title: string;
+        intro: string;
+        noteTitle: string;
+        note: string;
+    };
+
     actions: ReadonlyArray<ContactAction>;
 };

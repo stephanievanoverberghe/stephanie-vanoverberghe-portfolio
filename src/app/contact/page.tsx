@@ -1,65 +1,28 @@
-// src/app/contact/page.tsx
-
-import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import { Sparkles } from 'lucide-react';
-import ContactForm from '@/components/contact/ContactForm';
+
 import ContactAside from '@/components/contact/ContactAside';
-import { buildPageMetadata } from '@/lib/seo';
+import ContactForm from '@/components/contact/ContactForm';
+import ContactHero from '@/components/contact/ContactHero';
 import { contactContent } from '@/content/contact';
+import { buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-    title: 'Contact — Vanoverberghe Stéphanie',
-    description: 'Contactez Vanoverberghe Stéphanie, développeuse front-end React / Next.js, pour discuter de votre projet ou d’une opportunité.',
+    title: contactContent.metadata.title,
+    description: contactContent.metadata.description,
     canonical: '/contact',
 });
 
-function Kicker({ children }: { children: ReactNode }) {
-    return <span className="text-xs uppercase tracking-[0.14em] text-(--accent)">{children}</span>;
-}
+export const dynamic = 'force-static';
 
 export default function ContactPage() {
     return (
-        <div className="container-page py-12 space-y-8">
-            {/* HERO */}
-            <header className="relative overflow-hidden rounded-2xl border p-6 sm:p-10 bg-(--surface-1) border-(--border-soft) shadow-card">
-                <div className="relative space-y-4">
-                    <div className="flex flex-wrap items-center gap-3">
-                        <Kicker>{contactContent.kicker}</Kicker>
-                        <span className="inline-flex items-center gap-2 text-xs font-semibold opacity-80">
-                            <Sparkles size={14} aria-hidden />
-                            {contactContent.responseDelay}
-                        </span>
-                    </div>
+        <main className="container-page space-y-10 py-12">
+            <ContactHero />
 
-                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-(--text-strong)">{contactContent.title}</h1>
-
-                    <p className="opacity-85 max-w-[75ch]">{contactContent.intro}</p>
-
-                    <div className="pt-2">
-                        <div className="hr-soft" />
-                    </div>
-
-                    <div className="flex flex-wrap gap-3">
-                        <Link href="/projects" className="btn btn-secondary">
-                            Voir mes projets
-                        </Link>
-                        <Link href="/skills" className="btn btn-ghost">
-                            Compétences
-                        </Link>
-                        <a href="/cv-vanoverberghe-stephanie.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
-                            Télécharger mon CV
-                        </a>
-                    </div>
-                </div>
-            </header>
-
-            {/* CONTENT */}
-            <div className="grid gap-6 md:grid-cols-[1.2fr_.8fr] items-start">
+            <section className="grid items-start gap-6 lg:grid-cols-[1.1fr_0.9fr]">
                 <ContactForm />
                 <ContactAside />
-            </div>
-        </div>
+            </section>
+        </main>
     );
 }

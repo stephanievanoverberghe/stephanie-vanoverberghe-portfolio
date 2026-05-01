@@ -1,13 +1,41 @@
 import { FileText, Github, Linkedin, Mail, Phone } from 'lucide-react';
+
 import type { ContactContent } from './types';
 
 export const contactContent: ContactContent = {
-    kicker: 'Contact',
-    responseDelay: 'Disponible pour échanger',
-    title: 'Et maintenant ?',
-    intro: 'Vous avez mes coordonnées, j’ai la motivation. Si mon profil vous parle, je serais ravie d’échanger avec vous autour d’une opportunité frontend React / Next.js.',
-    quickResponseTitle: 'À très bientôt',
-    quickResponseText: 'Je réponds avec plaisir aux messages liés à une opportunité CDI, une alternance d’évolution ou un échange professionnel.',
+    metadata: {
+        title: 'Contact — Vanoverberghe Stéphanie',
+        description: 'Contacter Stéphanie Vanoverberghe, développeuse front-end React / Next.js, pour une opportunité professionnelle ou un échange autour d’un projet web.',
+    },
+
+    hero: {
+        kicker: 'Contact',
+        responseDelay: 'Disponible pour échanger',
+        title: {
+            first: 'Et maintenant ?',
+            accent: 'On échange.',
+        },
+        intro: 'Si mon profil vous parle, je serais ravie d’échanger autour d’une opportunité frontend React / Next.js, d’un projet web ou simplement d’une première discussion professionnelle.',
+        ctaPrimary: 'Voir mes projets',
+        ctaSecondary: 'Télécharger mon CV',
+    },
+
+    form: {
+        kicker: 'Message',
+        title: 'Écrivez-moi simplement.',
+        intro: 'Pas besoin d’un brief parfait. Quelques lignes suffisent : contexte, besoin, opportunité, lien utile… et je vous répondrai avec attention.',
+        submitLabel: 'Envoyer',
+        loadingLabel: 'Envoi…',
+    },
+
+    aside: {
+        kicker: 'Coordonnées',
+        title: 'Contact direct',
+        intro: 'Vous pouvez aussi me retrouver ici. Email, LinkedIn, GitHub ou CV : tout est centralisé.',
+        noteTitle: 'À très bientôt',
+        note: 'Je réponds avec plaisir aux messages liés à une opportunité CDI, une mission frontend ou un échange professionnel.',
+    },
+
     actions: [
         {
             href: 'mailto:stephanie-vanoverberghe@outlook.fr',
