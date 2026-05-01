@@ -6,6 +6,7 @@ import Chip from '@/components/ui/Chip';
 import { featuredProjectsContent } from '@/content/home';
 import type { Project } from '@/lib/projects';
 import { chipPropsByKind, kindFor, pickStack } from './home.utils';
+import { getProjectStatusLabel } from '@/lib/project-display';
 
 type Tone = 'accent' | 'sage' | 'lilac' | 'gold';
 
@@ -79,6 +80,7 @@ function ProjectVisual({ project, tone }: { project: Project; tone: Tone }) {
 function FeaturedProjectCard({ project, index }: { project: Project; index: number }) {
     const tone = tones[index % tones.length];
     const pickedStack = pickStack(project.stack, 3);
+    const statusLabel = getProjectStatusLabel(project);
     const description = excerpt(project.context) || excerpt(project.subtitle) || excerpt(project.vision);
 
     return (
@@ -116,7 +118,7 @@ function FeaturedProjectCard({ project, index }: { project: Project; index: numb
 
                 <div className="mt-5 flex flex-wrap gap-2">
                     {statusLabel ? (
-                        <Chip size="xs" color="gold" title="Projet en cours de développement">
+                        <Chip size="xs" color="gold">
                             {statusLabel}
                         </Chip>
                     ) : null}
@@ -176,7 +178,7 @@ function SmallProjectCard({ project, index }: { project: Project; index: number 
 
             <div className="mt-4 flex flex-wrap gap-2">
                 {statusLabel ? (
-                    <Chip size="xs" color="gold" title="Projet en cours de développement">
+                    <Chip size="xs" color="gold">
                         {statusLabel}
                     </Chip>
                 ) : null}

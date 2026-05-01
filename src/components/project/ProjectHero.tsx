@@ -38,7 +38,7 @@ export default function ProjectHero({ project, hasDetails }: Props) {
                             <p className="text-xs font-bold uppercase tracking-[0.28em] text-(--gold)">{detail.caseStudyLabel}</p>
 
                             {statusLabel ? (
-                                <Chip size="xs" color="gold" title="Projet en cours de développement">
+                                <Chip size="xs" color="gold">
                                     {statusLabel}
                                 </Chip>
                             ) : null}

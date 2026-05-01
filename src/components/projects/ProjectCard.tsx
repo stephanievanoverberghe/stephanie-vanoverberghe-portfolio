@@ -33,15 +33,15 @@ export default function ProjectCard({ project, index, featured = false }: Projec
             ].join(' ')}
             style={{ borderColor: 'var(--border-soft)' }}
         >
-            <Link href={`/projects/${project.slug}`} className={featured ? 'grid gap-0 p-4 lg:grid-cols-[1.05fr_0.95fr] lg:p-5' : 'block p-4'}>
+            <Link href={`/projects/${project.slug}`} className={featured ? 'grid p-4 lg:min-h-105 lg:grid-cols-[1.05fr_0.95fr] lg:p-5' : 'block p-4'}>
                 <div
-                    className="relative overflow-hidden rounded-[1.45rem] border"
+                    className={['relative overflow-hidden rounded-[1.45rem] border', featured ? 'lg:h-full' : ''].join(' ')}
                     style={{
                         borderColor: 'var(--border-soft)',
                         background: `linear-gradient(135deg, color-mix(in oklab, var(--${tone}) 16%, var(--surface-1)), var(--surface-1))`,
                     }}
                 >
-                    <div className={featured ? 'relative aspect-16/10 lg:h-full lg:min-h-90' : 'relative aspect-16/10'}>
+                    <div className={featured ? 'relative aspect-16/10 lg:h-full lg:aspect-auto' : 'relative aspect-16/10'}>
                         {src ? (
                             <Image
                                 src={src}
@@ -76,7 +76,7 @@ export default function ProjectCard({ project, index, featured = false }: Projec
                                 {featured ? listing.featuredLabel : listing.caseStudyLabel}
                             </Chip>
                             {statusLabel ? (
-                                <Chip size="xs" color="gold" title="Projet en cours de développement">
+                                <Chip size="xs" color="gold">
                                     {statusLabel}
                                 </Chip>
                             ) : null}

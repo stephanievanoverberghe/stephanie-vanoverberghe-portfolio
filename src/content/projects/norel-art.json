@@ -2,6 +2,7 @@
     "slug": "norel-art",
     "title": "Norel Art",
     "subtitle": "E-commerce artistique en cours — galerie, paiement Stripe et futur admin",
+    "status": "in-progress",
     "year": 2026,
     "role": ["Product Design", "Fullstack en progression", "UI/UX", "Architecture"],
     "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Node.js", "PostgreSQL", "Prisma", "Stripe"],
