@@ -13,7 +13,7 @@ export const homeHeroContent: PrefaceContent = {
     },
     heroCtaPrimary: 'Voir mes projets',
     heroCtaSecondary: 'CV',
-    intro: "Je conçois et développe des interfaces React / Next.js claires, soignées et maintenables. Mon point d'appui : un regard UI/UX, une vraie attention à la lisibilité et une base technique propre.",
+    intro: 'Depuis toujours, la création fait partie de mon quotidien. Dessiner, composer, imaginer : c’est ce regard qui m’a naturellement menée vers l’UI design. Puis le JavaScript m’a permis de passer de l’idée à l’interaction.',
     sections: [
         { icon: 'ui', text: 'Design & usage' },
         { icon: 'code', text: 'Code & structure' },
@@ -61,7 +61,7 @@ export const skillsSnapshotContent = {
             icon: 'code2',
             kicker: 'Structure',
             title: 'Frontend React / Next.js',
-            text: "Je transforme une intention visuelle en composants React propres, maintenables et réutilisables, avec une attention particulière à la qualité du code.",
+            text: 'Je transforme une intention visuelle en composants React propres, maintenables et réutilisables, avec une attention particulière à la qualité du code.',
             chips: [
                 { label: 'React', kind: 'tech' },
                 { label: 'Next.js App Router', kind: 'tech' },

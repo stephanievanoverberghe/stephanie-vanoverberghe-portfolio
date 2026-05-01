@@ -6,8 +6,8 @@ export const aboutContent = {
             line2: 'Comprendre.',
             line3: 'Construire.',
         },
-        intro: "Je suis développeuse front-end React / Next.js. J'aime transformer une intention en interface claire : hiérarchie lisible, composants propres, responsive soigné et expérience cohérente.",
-        note: "Je cherche un contexte où je peux contribuer sur des interfaces utiles, progresser techniquement et apporter une vraie sensibilité produit côté front.",
+        intro: 'Je suis développeuse front-end React / Next.js. Mon parcours part d’un univers créatif — le dessin, la composition, l’observation — et s’est progressivement transformé en une manière de concevoir des interfaces web avec du sens, de la clarté et de la structure.',
+        note: 'Je cherche un contexte où je peux contribuer sur des interfaces utiles, progresser techniquement et apporter une vraie sensibilité produit côté front.',
     },
 
     journey: [
