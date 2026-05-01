@@ -155,7 +155,7 @@ export default function FeaturedProjects({ projects, featuredCount = 2 }: { proj
                 </LinkButton>
             </div>
 
-            <div className="grid gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-1 gap-6">
                 {featured.map((project, index) => (
                     <FeaturedProjectCard key={project.slug} project={project} index={index} />
                 ))}
