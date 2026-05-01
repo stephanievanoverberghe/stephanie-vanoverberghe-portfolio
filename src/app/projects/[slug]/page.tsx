@@ -3,14 +3,14 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import PageShell from '@/components/layout/PageShell';
+import GalleryPreview from '@/features/projects/components/GalleryPreview';
 import ProjectActions from '@/features/projects/components/ProjectActions';
 import ProjectDetails, { hasProjectDetails } from '@/features/projects/components/ProjectDetails';
-import GalleryPreview from '@/features/projects/components/GalleryPreview';
 import ProjectHero from '@/features/projects/components/ProjectHero';
 import ProjectOverview from '@/features/projects/components/ProjectOverview';
 import { projectsPageContent } from '@/content/projects-page';
-import { getProjectBySlug, getProjectSlugs } from '@/lib/projects';
 import { coverAlt, coverSrc } from '@/lib/project-display';
+import { getProjectBySlug, getProjectSlugs } from '@/lib/projects';
 
 export const dynamic = 'force-static';
 
@@ -68,8 +68,10 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 
     if (!data) return { title: 'Projet introuvable' };
 
-    const title = `${data.title} — Étude de cas`;
-    const description = data.context ?? `Étude de cas front-end : ${data.title}${data.subtitle ? ` — ${data.subtitle}` : ''}.`;
+    const title = `${data.title} — Étude de cas frontend`;
+    const description =
+        data.context ??
+        `Étude de cas frontend : ${data.title}${data.subtitle ? ` — ${data.subtitle}` : ''}. Interface, structure des composants et décisions produit.`;
     const ogImage = coverSrc(data) ?? '/og-cover.webp';
 
     return {

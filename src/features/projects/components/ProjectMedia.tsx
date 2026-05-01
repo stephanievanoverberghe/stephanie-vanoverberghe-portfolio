@@ -4,6 +4,8 @@ import type { CSSProperties, ReactNode } from 'react';
 import { cn } from '@/lib/cn';
 import type { ProjectTone } from '@/lib/project-display';
 
+type ToneStyle = CSSProperties & { '--project-tone': string };
+
 type ProjectMediaProps = {
     src?: string | null;
     alt: string;
@@ -17,8 +19,8 @@ type ProjectMediaProps = {
     children?: ReactNode;
 };
 
-function toneStyle(tone: ProjectTone): CSSProperties {
-    return { ['--project-tone' as '--project-tone']: `var(--${tone})` } as CSSProperties;
+function toneStyle(tone: ProjectTone): ToneStyle {
+    return { '--project-tone': `var(--${tone})` };
 }
 
 export default function ProjectMedia({

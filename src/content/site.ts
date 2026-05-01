@@ -25,6 +25,17 @@ export const siteProfile: SiteProfile = {
     },
 };
 
+export const siteNarrative = {
+    heroWords: ['Créer.', 'Comprendre.', 'Construire.'],
+    elevatorPitch: 'Je développe des interfaces React / Next.js claires, cohérentes et maintenables, avec une attention forte portée au design, à l’usage et à la structure du code.',
+    qualityLine: 'Le design sert la lecture, le code sert la durée.',
+    quotePair: {
+        strong: "Le code m'a appris la rigueur.",
+        accent: "Le design m'a appris le regard.",
+    },
+    professionalFocus: 'Je cherche un contexte où je peux contribuer sur des interfaces utiles, progresser techniquement et apporter une vraie sensibilité produit côté front.',
+} as const;
+
 export const siteMeta = {
     siteName: 'Portfolio — Vanoverberghe Stéphanie',
     portfolioTitle: 'Vanoverberghe Stéphanie - Développeuse Front-End (React/Next)',

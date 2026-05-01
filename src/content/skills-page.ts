@@ -1,3 +1,5 @@
+import { siteNarrative } from './site';
+
 export const skillsPageContent = {
     metadata: {
         title: 'Compétences — Stéphanie Vanoverberghe',
@@ -11,7 +13,7 @@ export const skillsPageContent = {
             second: "l'interface.",
             third: 'Structurer le code.',
         },
-        intro: "Je développe des interfaces React / Next.js avec une priorité claire : rendre le produit compréhensible, fiable et agréable à utiliser. Le design sert la lecture, le code sert la durée.",
+        intro: `${siteNarrative.elevatorPitch} ${siteNarrative.qualityLine}`,
         ctaPrimary: 'Voir les projets',
         ctaSecondary: 'Me contacter',
         tags: ['React', 'Next.js', 'TypeScript', 'UI/UX'],
@@ -21,7 +23,7 @@ export const skillsPageContent = {
         kicker: 'Vision',
         title: 'Apprendre en construisant.',
         intro: "Je progresse surtout par les projets concrets. Chaque interface est un terrain pour mieux cadrer un besoin, structurer une réponse et améliorer la qualité du rendu final.",
-        quote: "Le code m'a appris la rigueur. Le design m'a appris le regard.",
+        quote: `${siteNarrative.quotePair.strong} ${siteNarrative.quotePair.accent}`,
     },
 
     pillars: {
@@ -99,7 +101,6 @@ export const skillsPageContent = {
         intro: "Les projets servent ici de preuve : ils montrent ma manière de structurer une interface, d'organiser le code et de tenir une direction produit cohérente.",
         empty: "Aucun projet n'est encore disponible.",
         caseStudyLabel: 'Étude de cas',
-        demoLabel: 'Voir la démo',
         readLabel: 'Lire la démarche',
     },
 } as const;

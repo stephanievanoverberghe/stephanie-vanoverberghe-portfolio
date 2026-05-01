@@ -4,6 +4,8 @@ import type { CSSProperties } from 'react';
 import { cn } from '@/lib/cn';
 import type { ProjectTone } from '@/lib/project-display';
 
+type ToneStyle = CSSProperties & { '--project-tone': string };
+
 type ProjectLinkBadgeProps = {
     tone: ProjectTone;
     className?: string;
@@ -11,8 +13,8 @@ type ProjectLinkBadgeProps = {
     iconSize?: number;
 };
 
-function toneStyle(tone: ProjectTone): CSSProperties {
-    return { ['--project-tone' as '--project-tone']: `var(--${tone})` } as CSSProperties;
+function toneStyle(tone: ProjectTone): ToneStyle {
+    return { '--project-tone': `var(--${tone})` };
 }
 
 export default function ProjectLinkBadge({ tone, className, iconClassName, iconSize = 18 }: ProjectLinkBadgeProps) {

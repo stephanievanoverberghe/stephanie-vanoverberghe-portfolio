@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { ArrowRight, Code2, Eye, Layers3, Sparkles } from 'lucide-react';
 
+import PageShell from '@/components/layout/PageShell';
 import Button from '@/components/ui/Button';
 import HeroTitle from '@/components/ui/HeroTitle';
-import PageShell from '@/components/layout/PageShell';
 import { aboutContent } from '@/content/about';
 import { buildPageMetadata } from '@/lib/seo';
 

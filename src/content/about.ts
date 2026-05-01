@@ -1,13 +1,15 @@
+import { siteNarrative } from './site';
+
 export const aboutContent = {
     hero: {
         kicker: 'À propos',
         title: {
-            line1: 'Créer.',
-            line2: 'Comprendre.',
-            line3: 'Construire.',
+            line1: siteNarrative.heroWords[0],
+            line2: siteNarrative.heroWords[1],
+            line3: siteNarrative.heroWords[2],
         },
-        intro: 'Je suis développeuse front-end React / Next.js. Mon parcours part d’un univers créatif — le dessin, la composition, l’observation — et s’est progressivement transformé en une manière de concevoir des interfaces web avec du sens, de la clarté et de la structure.',
-        note: 'Je cherche un contexte où je peux contribuer sur des interfaces utiles, progresser techniquement et apporter une vraie sensibilité produit côté front.',
+        intro: 'Mon parcours part d’un univers créatif — le dessin, la composition, l’observation — et s’est progressivement transformé en une manière de concevoir des interfaces web avec du sens, de la clarté et de la structure.',
+        note: siteNarrative.professionalFocus,
     },
 
     journey: [
@@ -38,10 +40,7 @@ export const aboutContent = {
 
     stack: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'UI/UX', 'Accessibilité', 'Performance Web'],
 
-    quote: {
-        strong: "Le code m'a appris la rigueur.",
-        accent: "Le design m'a appris le regard.",
-    },
+    quote: siteNarrative.quotePair,
 
     cta: {
         title: 'Découvrir ma manière de construire.',
