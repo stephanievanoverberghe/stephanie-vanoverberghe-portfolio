@@ -14,11 +14,8 @@ type HeaderDesktopNavProps = {
 export function HeaderDesktopNav({ isActive }: HeaderDesktopNavProps) {
     return (
         <nav aria-label={headerContent.desktopNavAriaLabel} className="header-desktop-nav">
-            <div className="grid grid-cols-[1fr_auto] items-center gap-6 border-t py-4" style={{ borderColor: 'color-mix(in oklab, var(--sage) 22%, transparent)' }}>
-                <div
-                    className="grid grid-cols-4 overflow-hidden rounded-[1.4rem] border bg-(--surface-1)"
-                    style={{ borderColor: 'color-mix(in oklab, var(--sage) 26%, transparent)' }}
-                >
+            <div className="nav-shell grid grid-cols-[1fr_auto] items-center gap-6 py-4">
+                <div className="nav-grid grid grid-cols-4 overflow-hidden rounded-[1.4rem]">
                     {primaryNavigation.map((item, index) => {
                         const active = isActive(item.href);
 
@@ -28,23 +25,12 @@ export function HeaderDesktopNav({ isActive }: HeaderDesktopNavProps) {
                                 href={item.href}
                                 aria-current={active ? 'page' : undefined}
                                 className={cn(
-                                    'group relative flex min-h-16 items-center justify-between border-r px-5 transition last:border-r-0',
+                                    'nav-item group relative flex min-h-16 items-center justify-between border-r px-5 transition last:border-r-0',
                                     active ? 'text-(--text-strong)' : 'text-(--text-muted) hover:text-(--text-strong)',
                                 )}
-                                style={{
-                                    borderColor: 'color-mix(in oklab, var(--sage) 18%, transparent)',
-                                }}
                             >
                                 {active && (
-                                    <motion.span
-                                        layoutId="desktop-nav-block"
-                                        className="absolute inset-0"
-                                        style={{
-                                            background:
-                                                'linear-gradient(135deg, color-mix(in oklab, var(--accent) 10%, var(--surface-1)), color-mix(in oklab, var(--gold) 14%, var(--surface-1)))',
-                                        }}
-                                        transition={{ type: 'spring', stiffness: 420, damping: 36 }}
-                                    />
+                                    <motion.span layoutId="desktop-nav-block" className="nav-item-active absolute inset-0" transition={{ type: 'spring', stiffness: 420, damping: 36 }} />
                                 )}
 
                                 <span className="relative z-10">
@@ -63,11 +49,7 @@ export function HeaderDesktopNav({ isActive }: HeaderDesktopNavProps) {
                         href={headerContent.resumeHref}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex min-h-16 items-center gap-2 rounded-[1.4rem] border px-5 text-xs font-bold uppercase tracking-[0.16em] text-(--text-strong)"
-                        style={{
-                            borderColor: 'color-mix(in oklab, var(--gold) 46%, transparent)',
-                            background: 'color-mix(in oklab, var(--gold) 14%, var(--surface-1))',
-                        }}
+                        className="btn-premium btn-premium-soft inline-flex min-h-16 items-center gap-2 rounded-[1.4rem] px-5 text-xs"
                     >
                         <Download size={16} />
                         {headerContent.resumeLabel}
@@ -75,10 +57,7 @@ export function HeaderDesktopNav({ isActive }: HeaderDesktopNavProps) {
 
                     <Link
                         href="/contact"
-                        className="inline-flex min-h-16 items-center gap-2 rounded-[1.4rem] px-5 text-xs font-bold uppercase tracking-[0.16em] text-white"
-                        style={{
-                            background: 'linear-gradient(135deg, var(--accent), color-mix(in oklab, var(--accent) 78%, var(--ink)))',
-                        }}
+                        className="btn-premium btn-premium-primary inline-flex min-h-16 items-center gap-2 rounded-[1.4rem] px-5 text-xs"
                     >
                         {headerContent.contactLabel}
                         <ArrowUpRight size={16} />

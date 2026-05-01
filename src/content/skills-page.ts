@@ -8,10 +8,10 @@ export const skillsPageContent = {
         kicker: 'Compétences',
         title: {
             first: 'Penser',
-            second: 'l’interface.',
+            second: "l'interface.",
             third: 'Structurer le code.',
         },
-        intro: 'Je développe des interfaces React / Next.js avec une attention particulière portée à la lisibilité, à l’expérience utilisateur et à la qualité du code. Mon approche mélange regard créatif, logique produit et construction front-end maintenable.',
+        intro: "Je développe des interfaces React / Next.js avec une priorité claire : rendre le produit compréhensible, fiable et agréable à utiliser. Le design sert la lecture, le code sert la durée.",
         ctaPrimary: 'Voir les projets',
         ctaSecondary: 'Me contacter',
         tags: ['React', 'Next.js', 'TypeScript', 'UI/UX'],
@@ -20,19 +20,19 @@ export const skillsPageContent = {
     vision: {
         kicker: 'Vision',
         title: 'Apprendre en construisant.',
-        intro: 'Je crois aux projets concrets. Chaque interface est une manière de comprendre un besoin, structurer une réponse et affiner mon regard. Je cherche à construire des expériences web claires, cohérentes et utiles.',
-        quote: 'Le code m’a appris la rigueur. Le design m’a appris le regard.',
+        intro: "Je progresse surtout par les projets concrets. Chaque interface est un terrain pour mieux cadrer un besoin, structurer une réponse et améliorer la qualité du rendu final.",
+        quote: "Le code m'a appris la rigueur. Le design m'a appris le regard.",
     },
 
     pillars: {
         kicker: 'Piliers',
         title: 'Du regard créatif à la structure front-end.',
-        intro: 'Mes compétences se construisent autour d’un équilibre : concevoir une interface lisible, la transformer en composants propres, puis soigner les détails qui rendent l’expérience solide.',
+        intro: "Mes compétences reposent sur un équilibre simple : penser une interface lisible, la transformer en composants propres, puis fiabiliser l'expérience jusque dans les détails.",
         items: [
             {
                 key: 'frontend',
                 title: 'Front-end React / Next.js',
-                desc: 'Composants réutilisables, App Router, TypeScript, rendu, routing et logique d’interface.',
+                desc: "Composants réutilisables, App Router, TypeScript strict, logique d'interface et rendu fiable.",
                 tone: 'accent',
                 chips: [
                     { kind: 'tech', label: 'React' },
@@ -45,7 +45,7 @@ export const skillsPageContent = {
             {
                 key: 'design',
                 title: 'UI/UX & lisibilité',
-                desc: 'Hiérarchie visuelle, contraste, responsive, micro-interactions et cohérence d’ensemble.',
+                desc: "Hiérarchie visuelle, contraste, responsive et cohérence d'ensemble au service de l'usage.",
                 tone: 'lilac',
                 chips: [
                     { kind: 'design', label: 'UI/UX' },
@@ -57,7 +57,7 @@ export const skillsPageContent = {
             {
                 key: 'quality',
                 title: 'Qualité & finition',
-                desc: 'Performance web, accessibilité, SEO technique, images optimisées et rendu propre.',
+                desc: 'Performance web, accessibilité, SEO technique et rendu propre sur desktop comme mobile.',
                 tone: 'sage',
                 chips: [
                     { kind: 'architecture', label: 'A11y' },
@@ -69,7 +69,7 @@ export const skillsPageContent = {
             {
                 key: 'backend',
                 title: 'Backend en progression',
-                desc: 'Je consolide mes bases côté serveur avec Node.js, SQL, Prisma et Stripe, à travers des projets concrets.',
+                desc: 'Je consolide mes bases côté serveur avec Node.js, SQL, Prisma et Stripe à travers des cas concrets.',
                 tone: 'sage',
                 chips: [
                     { kind: 'tech', label: 'Node.js' },
@@ -96,8 +96,8 @@ export const skillsPageContent = {
     projects: {
         kicker: 'Preuves concrètes',
         title: 'Des compétences mises en pratique.',
-        intro: 'Mes projets montrent ma manière de passer d’une intention à une interface réelle : design, composants, responsive, logique front-end et qualité du rendu.',
-        empty: 'Aucun projet n’est encore disponible.',
+        intro: "Les projets servent ici de preuve : ils montrent ma manière de structurer une interface, d'organiser le code et de tenir une direction produit cohérente.",
+        empty: "Aucun projet n'est encore disponible.",
         caseStudyLabel: 'Étude de cas',
         demoLabel: 'Voir la démo',
         readLabel: 'Lire la démarche',

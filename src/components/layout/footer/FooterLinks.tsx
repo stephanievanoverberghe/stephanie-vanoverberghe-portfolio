@@ -9,11 +9,7 @@ function ExternalLink({ href, label }: { href: string; label: string }) {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center justify-between gap-3 rounded-2xl border px-4 py-3 text-sm font-semibold text-(--text-strong) transition hover:-translate-y-0.5"
-            style={{
-                borderColor: 'var(--border-soft)',
-                background: 'var(--surface-1)',
-            }}
+            className="surface-card surface-card-hover group inline-flex items-center justify-between gap-3 rounded-2xl px-4 py-3 text-sm font-semibold text-(--text-strong)"
         >
             {label}
             <ArrowUpRight size={15} className="text-(--accent) transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -24,7 +20,7 @@ function ExternalLink({ href, label }: { href: string; label: string }) {
 export function FooterLinks() {
     return (
         <section className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
-            <div className="rounded-[1.6rem] border bg-(--surface-1) p-5" style={{ borderColor: 'var(--border-soft)' }}>
+            <div className="surface-card rounded-[1.6rem] p-5">
                 <p className="text-xs font-bold uppercase tracking-[0.24em] text-(--accent)">{footerContent.profile.signature}</p>
                 <h3 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-(--text-strong)">{footerContent.profile.name}</h3>
 
@@ -34,14 +30,7 @@ export function FooterLinks() {
 
                 <div className="mt-5 flex flex-wrap gap-2">
                     {footerContent.profile.stack.map((item) => (
-                        <span
-                            key={item}
-                            className="rounded-full border px-3 py-1.5 text-xs font-semibold text-(--text-strong)"
-                            style={{
-                                borderColor: 'color-mix(in oklab, var(--sage) 24%, var(--border-soft))',
-                                background: 'color-mix(in oklab, var(--surface-2) 52%, var(--surface-1))',
-                            }}
-                        >
+                        <span key={item} className="pill pill-soft">
                             {item}
                         </span>
                     ))}
@@ -53,7 +42,7 @@ export function FooterLinks() {
                 </div>
             </div>
 
-            <nav aria-label="Navigation rapide" className="rounded-[1.6rem] border bg-(--surface-1) p-5" style={{ borderColor: 'var(--border-soft)' }}>
+            <nav aria-label="Navigation rapide" className="surface-card rounded-[1.6rem] p-5">
                 <p className="text-xs font-bold uppercase tracking-[0.22em] text-(--gold)">{footerContent.navigation.title}</p>
 
                 <div className="mt-4 grid gap-2">
@@ -70,7 +59,7 @@ export function FooterLinks() {
                 </div>
             </nav>
 
-            <div className="rounded-[1.6rem] border bg-(--surface-1) p-5" style={{ borderColor: 'var(--border-soft)' }}>
+            <div className="surface-card rounded-[1.6rem] p-5">
                 <p className="text-xs font-bold uppercase tracking-[0.22em] text-(--gold)">{footerContent.links.title}</p>
 
                 <div className="mt-4 grid gap-3">

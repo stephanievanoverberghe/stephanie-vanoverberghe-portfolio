@@ -35,13 +35,7 @@ export function HeaderMobileMenu({ open, onClose, isActive }: HeaderMobileMenuPr
                         exit={{ opacity: 0, y: -18 }}
                         transition={{ duration: 0.24 }}
                     >
-                        <div
-                            className="relative overflow-hidden rounded-4xl border p-5 shadow-2xl"
-                            style={{
-                                borderColor: 'color-mix(in oklab, var(--sage) 30%, transparent)',
-                                background: 'var(--paper)',
-                            }}
-                        >
+                        <div className="menu-panel relative overflow-hidden rounded-4xl p-5 shadow-2xl">
                             <div className="absolute -right-20 -top-20 h-52 w-52 rounded-full bg-(--lilac)/35 blur-2xl" />
                             <div className="absolute -left-16 bottom-10 h-40 w-40 rounded-full bg-(--sage)/25 blur-2xl" />
 
@@ -66,15 +60,7 @@ export function HeaderMobileMenu({ open, onClose, isActive }: HeaderMobileMenuPr
                                                 href={item.href}
                                                 onClick={onClose}
                                                 aria-current={active ? 'page' : undefined}
-                                                className="group flex items-center justify-between rounded-2xl border px-4 py-4 transition"
-                                                style={{
-                                                    borderColor: active
-                                                        ? 'color-mix(in oklab, var(--accent) 35%, transparent)'
-                                                        : 'color-mix(in oklab, var(--sage) 18%, transparent)',
-                                                    background: active
-                                                        ? 'linear-gradient(135deg, color-mix(in oklab, var(--accent) 10%, var(--paper)), color-mix(in oklab, var(--gold) 14%, var(--paper)))'
-                                                        : 'color-mix(in oklab, var(--surface-1) 82%, transparent)',
-                                                }}
+                                                className={active ? 'menu-link menu-link-active group flex items-center justify-between rounded-2xl px-4 py-4 transition' : 'menu-link group flex items-center justify-between rounded-2xl px-4 py-4 transition'}
                                             >
                                                 <span className="flex items-center gap-4">
                                                     <span className="text-xs font-bold text-(--accent)">0{index + 1}</span>
@@ -92,10 +78,7 @@ export function HeaderMobileMenu({ open, onClose, isActive }: HeaderMobileMenuPr
                                     <Link
                                         href="/contact"
                                         onClick={onClose}
-                                        className="inline-flex items-center justify-center gap-2 rounded-2xl px-4 py-4 text-sm font-bold uppercase tracking-[0.16em] text-white"
-                                        style={{
-                                            background: 'linear-gradient(135deg, var(--accent), color-mix(in oklab, var(--accent) 78%, var(--ink)))',
-                                        }}
+                                        className="btn-premium btn-premium-primary inline-flex items-center justify-center gap-2 rounded-2xl px-4 py-4 text-sm"
                                     >
                                         <Mail size={16} />
                                         {headerContent.contactLabel}
@@ -106,11 +89,7 @@ export function HeaderMobileMenu({ open, onClose, isActive }: HeaderMobileMenuPr
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         onClick={onClose}
-                                        className="inline-flex items-center justify-center gap-2 rounded-2xl border px-4 py-4 text-sm font-bold uppercase tracking-[0.16em] text-(--text-strong)"
-                                        style={{
-                                            borderColor: 'color-mix(in oklab, var(--gold) 45%, transparent)',
-                                            background: 'color-mix(in oklab, var(--gold) 14%, var(--surface-1))',
-                                        }}
+                                        className="btn-premium btn-premium-soft inline-flex items-center justify-center gap-2 rounded-2xl px-4 py-4 text-sm"
                                     >
                                         <Download size={16} />
                                         {headerContent.resumeLabel}

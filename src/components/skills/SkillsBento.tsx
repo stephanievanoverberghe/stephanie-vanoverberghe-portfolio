@@ -15,8 +15,7 @@ function SkillCard({ item }: { item: (typeof skillsPageContent.pillars.items)[nu
 
     return (
         <article
-            className="group relative overflow-hidden rounded-[1.8rem] border bg-(--surface-1) p-5 shadow-(--shadow-card) transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(18,19,20,0.08)]"
-            style={{ borderColor: 'var(--border-soft)' }}
+            className="surface-card surface-card-hover group relative overflow-hidden rounded-[1.8rem] p-5"
         >
             <span
                 aria-hidden
@@ -27,13 +26,7 @@ function SkillCard({ item }: { item: (typeof skillsPageContent.pillars.items)[nu
             />
 
             <div className="relative">
-                <div
-                    className="grid h-12 w-12 place-items-center rounded-2xl border"
-                    style={{
-                        borderColor: `color-mix(in oklab, var(--${item.tone}) 30%, var(--border-soft))`,
-                        background: `color-mix(in oklab, var(--${item.tone}) 10%, var(--surface-1))`,
-                    }}
-                >
+                <div className="grid h-12 w-12 place-items-center rounded-2xl border tone-accent-soft">
                     <Icon size={22} className="text-(--text-strong)" />
                 </div>
 
