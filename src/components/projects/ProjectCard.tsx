@@ -5,8 +5,7 @@ import { ArrowUpRight } from 'lucide-react';
 import Chip from '@/components/ui/Chip';
 import { projectsPageContent } from '@/content/projects-page';
 import type { Project } from '@/lib/projects';
-
-import { cardBlurb, coverAlt, coverSrc, getProjectStatusLabel, kindFor, pickStackChips } from './projects.utils';
+import { cardBlurb, coverAlt, coverSrc, getProjectStatusLabel, kindFor, pickStackChips } from '@/lib/project-display';
 
 const tones = ['accent', 'sage', 'lilac', 'gold'] as const;
 

@@ -5,8 +5,7 @@ import { ArrowUpRight, Github, MessageCircle } from 'lucide-react';
 
 import Chip from '@/components/ui/Chip';
 import type { Project } from '@/lib/projects';
-
-import { excerpt } from './project.utils';
+import { excerpt } from '@/lib/project-display';
 
 export default function ProjectOverview({ project }: { project: Project }) {
     const quickFacts = [

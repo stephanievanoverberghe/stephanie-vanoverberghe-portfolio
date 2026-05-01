@@ -252,6 +252,29 @@ a:hover {
   background: var(--surface-1);
 }
 
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-soft);
+  padding: .375rem .75rem;
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.pill-soft {
+  border-color: color-mix(in oklab, var(--sage) 28%, var(--border-soft));
+  background: color-mix(in oklab, var(--surface-2) 52%, var(--surface-1));
+}
+
+.pill-accent {
+  border-color: color-mix(in oklab, var(--accent) 34%, var(--border-soft));
+  background: color-mix(in oklab, var(--accent) 8%, var(--surface-1));
+  color: var(--accent);
+}
+
 
 .page-hero {
   position: relative;
@@ -317,6 +340,13 @@ a:hover {
   color: var(--text-strong);
 }
 
+.hero-title {
+  font-size: clamp(2.7rem, 5.6vw, 5.6rem);
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.07em;
+}
+
 .chip-soft {
   border-color: color-mix(in oklab, var(--sage) 28%, var(--border-soft));
   background: color-mix(in oklab, var(--surface-2) 52%, var(--surface-1));
@@ -335,6 +365,45 @@ a:hover {
 .surface-gold-soft {
   border-color: color-mix(in oklab, var(--gold) 34%, var(--border-soft));
   background: color-mix(in oklab, var(--gold) 10%, var(--surface-1));
+}
+
+.field-input,
+.field-textarea {
+  width: 100%;
+  border-radius: 1rem;
+  border: 1px solid var(--border-soft);
+  background: var(--surface-1);
+  color: var(--text);
+  transition: border-color .2s, box-shadow .2s, background-color .2s;
+}
+
+.field-input {
+  padding: .75rem 1rem;
+}
+
+.field-textarea {
+  resize: none;
+  padding: .75rem 1rem;
+}
+
+.field-input::placeholder,
+.field-textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.surface-card {
+  border: 1px solid var(--border-soft);
+  background: var(--surface-1);
+  box-shadow: var(--shadow-card);
+}
+
+.surface-card-hover {
+  transition: transform .2s, box-shadow .2s;
+}
+
+.surface-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(18, 19, 20, 0.08);
 }
 
 /* =========================================================

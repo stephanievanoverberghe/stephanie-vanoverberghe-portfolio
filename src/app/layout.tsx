@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Suspense } from 'react';
 import Script from 'next/script';
-import { Inter, Plus_Jakarta_Sans } from 'next/font/google';
 
 import './globals.css';
 
@@ -12,15 +11,12 @@ import RouteTransition from '@/components/RouteTransition';
 import AppFallback from './AppFallback';
 import { metadata as siteMetadata, viewport as siteViewport, personJsonLd } from './seo';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
-const display = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-display', display: 'swap' });
-
 export const metadata: Metadata = siteMetadata;
 export const viewport: Viewport = siteViewport;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="fr" className={`${inter.variable} ${display.variable}`}>
+        <html lang="fr">
             <body id="top" className="bg-(--bg) text-(--text) antialiased">
                 <a
                     href="#main"

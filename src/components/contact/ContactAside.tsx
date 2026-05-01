@@ -16,16 +16,10 @@ function ActionCard({ href, icon: Icon, title, description, external }: ActionCa
             href={href}
             target={external ? '_blank' : undefined}
             rel={external ? 'noopener noreferrer' : undefined}
-            className="group flex items-center justify-between gap-4 rounded-[1.4rem] border border-(--border-soft) bg-(--surface-1) p-4 transition hover:-translate-y-0.5 hover:shadow-[0_16px_42px_rgba(18,19,20,0.08)]"
+            className="surface-card surface-card-hover group flex items-center justify-between gap-4 rounded-[1.4rem] p-4"
         >
             <span className="flex min-w-0 items-center gap-3">
-                <span
-                    className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border"
-                    style={{
-                        borderColor: 'color-mix(in oklab, var(--sage) 28%, var(--border-soft))',
-                        background: 'color-mix(in oklab, var(--sage) 10%, var(--surface-1))',
-                    }}
-                >
+                <span className="surface-sage-soft grid h-11 w-11 shrink-0 place-items-center rounded-2xl border">
                     <Icon size={18} className="text-(--text-strong)" />
                 </span>
 
@@ -45,7 +39,7 @@ export default function ContactAside() {
 
     return (
         <aside className="space-y-5 lg:sticky lg:top-24">
-            <section className="relative overflow-hidden rounded-4xl border border-(--border-soft) bg-(--surface-1) p-5 shadow-(--shadow-card) sm:p-6">
+            <section className="surface-card relative overflow-hidden rounded-4xl p-5 sm:p-6">
                 <div aria-hidden className="absolute -right-20 -top-20 h-52 w-52 rounded-full bg-(--lilac)/25 blur-3xl" />
 
                 <div className="relative">
@@ -63,12 +57,7 @@ export default function ContactAside() {
                 </div>
             </section>
 
-            <section
-                className="rounded-[1.7rem] border border-(--border-soft) p-5"
-                style={{
-                    background: 'color-mix(in oklab, var(--sage) 10%, var(--surface-1))',
-                }}
-            >
+            <section className="surface-sage-soft rounded-[1.7rem] border p-5">
                 <p className="text-sm font-semibold text-(--text-strong)">{aside.noteTitle}</p>
                 <p className="mt-2 text-sm leading-6 text-(--text)">{aside.note}</p>
             </section>

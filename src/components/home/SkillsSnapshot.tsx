@@ -3,7 +3,7 @@ import { Code2, Eye, Gauge, Layers3 } from 'lucide-react';
 import Chip from '@/components/ui/Chip';
 import SectionHeader from '@/components/ui/SectionHeader';
 import { skillsSnapshotContent } from '@/content/home';
-import { chipPropsByKind } from './home.utils';
+import { chipPropsByKind } from '@/lib/project-display';
 
 const iconByKey = { eye: Eye, code2: Code2, gauge: Gauge, layers3: Layers3 } as const;
 const skillsGroups = skillsSnapshotContent.groups.map((group) => ({ ...group, icon: iconByKey[group.icon] }));
@@ -28,17 +28,10 @@ export default function SkillsSnapshot() {
                 {skillsGroups.map(({ icon: Icon, kicker, title, text, chips }) => (
                     <article
                         key={title}
-                        className="group rounded-[1.6rem] border bg-(--surface-1) p-5 shadow-(--shadow-card) transition hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(18,19,20,0.08)]"
-                        style={{ borderColor: 'var(--border-soft)' }}
+                        className="surface-card surface-card-hover group rounded-[1.6rem] p-5"
                     >
                         <div className="flex items-start gap-4">
-                            <div
-                                className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border"
-                                style={{
-                                    borderColor: 'color-mix(in oklab, var(--accent) 28%, var(--border-soft))',
-                                    background: 'color-mix(in oklab, var(--accent) 8%, var(--surface-1))',
-                                }}
-                            >
+                            <div className="surface-accent-soft grid h-11 w-11 shrink-0 place-items-center rounded-2xl border">
                                 <Icon size={20} className="text-(--accent)" />
                             </div>
 

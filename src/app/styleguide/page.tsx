@@ -88,8 +88,8 @@ export default function StyleguidePage() {
                 <h2 className="text-lg font-semibold text-(--text-strong)">Chips</h2>
                 <div className="flex flex-wrap gap-2">
                     <span className="chip">Default</span>
-                    <span className="chip chip--accent">Accent</span>
-                    <span className="chip chip--lilac">Lilas</span>
+                    <span className="pill pill-accent">Accent</span>
+                    <span className="surface-sage-soft rounded-full border px-3 py-1.5 text-sm font-semibold text-(--text-strong)">Sauge</span>
                 </div>
             </section>
 

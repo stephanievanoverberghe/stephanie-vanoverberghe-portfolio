@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { Send } from 'lucide-react';
 
+import Button from '@/components/ui/Button';
 import { contactContent } from '@/content/contact';
 import { useContactForm } from '@/hooks/useContactForm';
 import { cn } from '@/lib/cn';
@@ -16,39 +17,11 @@ function FieldLabel({ htmlFor, children }: { htmlFor: string; children: React.Re
 }
 
 function InputBase(props: React.InputHTMLAttributes<HTMLInputElement>) {
-    return (
-        <input
-            {...props}
-            className={cn(
-                'w-full rounded-2xl border px-4 py-3 text-sm text-(--text) transition',
-                'border-(--border-soft) bg-(--surface-1)',
-                'placeholder:text-(--text-muted)',
-                'focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2',
-                props.className,
-            )}
-            style={{
-                outlineColor: 'var(--ring-focus)',
-            }}
-        />
-    );
+    return <input {...props} className={cn('field-input text-sm focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2', props.className)} />;
 }
 
 function TextareaBase(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
-    return (
-        <textarea
-            {...props}
-            className={cn(
-                'w-full resize-none rounded-2xl border px-4 py-3 text-sm text-(--text) transition',
-                'border-(--border-soft) bg-(--surface-1)',
-                'placeholder:text-(--text-muted)',
-                'focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2',
-                props.className,
-            )}
-            style={{
-                outlineColor: 'var(--ring-focus)',
-            }}
-        />
-    );
+    return <textarea {...props} className={cn('field-textarea text-sm focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2', props.className)} />;
 }
 
 export default function ContactForm() {
@@ -56,7 +29,7 @@ export default function ContactForm() {
     const { form } = contactContent;
 
     return (
-        <form onSubmit={onSubmit} className="relative overflow-hidden rounded-4xl border border-(--border-soft) bg-(--surface-1) p-5 shadow-(--shadow-card) sm:p-6 lg:p-8">
+        <form onSubmit={onSubmit} className="surface-card relative overflow-hidden rounded-4xl p-5 sm:p-6 lg:p-8">
             <div aria-hidden className="absolute -left-24 bottom-0 h-64 w-64 rounded-full bg-(--gold)/15 blur-3xl" />
 
             <div className="sr-only" role={status.state === 'error' ? 'alert' : 'status'} aria-live={status.state === 'error' ? 'assertive' : 'polite'}>
@@ -126,29 +99,15 @@ export default function ContactForm() {
                 ) : null}
 
                 {status.state === 'success' ? (
-                    <div
-                        className="mt-4 rounded-2xl border px-4 py-3 text-sm text-(--text)"
-                        role="status"
-                        style={{
-                            borderColor: 'color-mix(in oklab, var(--sage) 42%, var(--border-soft))',
-                            background: 'color-mix(in oklab, var(--sage) 10%, var(--surface-1))',
-                        }}
-                    >
+                    <div className="surface-sage-soft mt-4 rounded-2xl border px-4 py-3 text-sm text-(--text)" role="status">
                         <strong className="text-(--text-strong)">Merci !</strong> Votre message est bien parti.
                     </div>
                 ) : null}
 
-                <button
-                    type="submit"
-                    disabled={status.state === 'loading'}
-                    className="mt-6 inline-flex cursor-pointer items-center gap-2 rounded-full px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-white transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
-                    style={{
-                        background: 'linear-gradient(135deg, var(--accent), color-mix(in oklab, var(--accent) 78%, var(--ink)))',
-                    }}
-                >
+                <Button type="submit" disabled={status.state === 'loading'} className="mt-6 cursor-pointer disabled:cursor-not-allowed disabled:opacity-60">
                     <Send size={16} />
                     {status.state === 'loading' ? form.loadingLabel : form.submitLabel}
-                </button>
+                </Button>
             </div>
         </form>
     );

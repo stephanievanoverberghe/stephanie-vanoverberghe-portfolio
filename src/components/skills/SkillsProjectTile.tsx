@@ -27,8 +27,7 @@ type Props = {
 export default function SkillsProjectTile({ title, subtitle, hrefCase, cover, coverAlt, tags, tone, labels }: Props) {
     return (
         <article
-            className="group overflow-hidden rounded-[1.6rem] border bg-(--surface-1) shadow-(--shadow-card) transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(18,19,20,0.08)]"
-            style={{ borderColor: 'var(--border-soft)' }}
+            className="surface-card surface-card-hover group overflow-hidden rounded-[1.6rem]"
         >
             <Link href={hrefCase} className="block">
                 <div className="relative aspect-16/10 overflow-hidden border-b border-(--border-soft)">

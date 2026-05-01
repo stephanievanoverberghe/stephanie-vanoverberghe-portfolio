@@ -7,8 +7,7 @@ import SectionHeader from '@/components/ui/SectionHeader';
 import LinkButton from '@/components/ui/LinkButton';
 import { featuredProjectsContent } from '@/content/home';
 import type { Project } from '@/lib/projects';
-import { chipPropsByKind, kindFor, pickStack } from './home.utils';
-import { getProjectStatusLabel } from '@/lib/project-display';
+import { chipPropsByKind, getProjectStatusLabel, kindFor, pickStack } from '@/lib/project-display';
 
 type Tone = 'accent' | 'sage' | 'lilac' | 'gold';
 

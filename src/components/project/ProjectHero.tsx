@@ -3,12 +3,13 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
 import Chip from '@/components/ui/Chip';
+import HeroTitle from '@/components/ui/HeroTitle';
 import { projectsPageContent } from '@/content/projects-page';
 import type { Project } from '@/lib/projects';
+import { coverAlt, coverSrc, excerpt, getProjectStatusLabel, kindFor } from '@/lib/project-display';
 
 import ProjectActions from './ProjectActions';
 import ProjectJumpLinks from './ProjectJumpLinks';
-import { coverAlt, coverSrc, excerpt, getProjectStatusLabel, kindFor } from './project.utils';
 
 type Props = {
     project: Project;
@@ -50,7 +51,7 @@ export default function ProjectHero({ project, hasDetails }: Props) {
                             ) : null}
                         </div>
 
-                        <h1 className="mt-5 max-w-3xl text-[clamp(2.7rem,5.6vw,5.6rem)] font-semibold leading-[0.95] tracking-[-0.07em] text-(--text-strong)">{project.title}</h1>
+                        <HeroTitle>{project.title}</HeroTitle>
 
                         {project.subtitle ? <p className="mt-5 max-w-2xl text-base leading-7 text-(--text)">{project.subtitle}</p> : null}
 
@@ -100,13 +101,7 @@ export default function ProjectHero({ project, hasDetails }: Props) {
                             </div>
                         </div>
 
-                        <div
-                            className="rounded-[1.7rem] border p-5"
-                            style={{
-                                borderColor: 'var(--border-soft)',
-                                background: 'color-mix(in oklab, var(--surface-2) 48%, var(--surface-1))',
-                            }}
-                        >
+                        <div className="surface-sage-soft rounded-[1.7rem] border p-5">
                             <p className="text-xs font-bold uppercase tracking-[0.22em] text-(--accent)">{detail.shortSummaryLabel}</p>
 
                             <dl className="mt-4 space-y-4 text-sm">

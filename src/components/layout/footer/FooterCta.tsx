@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import { ArrowRight, Download } from 'lucide-react';
 
+import Button from '@/components/ui/Button';
 import { footerContent } from '@/content/footer';
 import { siteProfile } from '@/content/site';
 
@@ -8,8 +8,7 @@ export function FooterCta() {
     return (
         <section
             aria-label={footerContent.cta.ariaLabel}
-            className="relative overflow-hidden rounded-4xl border bg-(--surface-1) p-6 shadow-(--shadow-card) sm:p-8 lg:p-10"
-            style={{ borderColor: 'var(--border-soft)' }}
+            className="surface-card relative overflow-hidden rounded-4xl p-6 sm:p-8 lg:p-10"
         >
             <div aria-hidden className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-(--lilac)/30 blur-3xl" />
             <div aria-hidden className="absolute -left-24 bottom-0 h-64 w-64 rounded-full bg-(--sage)/25 blur-3xl" />
@@ -24,30 +23,15 @@ export function FooterCta() {
                 </div>
 
                 <div className="flex flex-wrap gap-3 lg:justify-end">
-                    <Link
-                        href="/contact"
-                        className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-white transition hover:-translate-y-0.5"
-                        style={{
-                            background: 'linear-gradient(135deg, var(--accent), color-mix(in oklab, var(--accent) 78%, var(--ink)))',
-                        }}
-                    >
+                    <Button href="/contact">
                         {footerContent.cta.contactLabel}
                         <ArrowRight size={17} />
-                    </Link>
+                    </Button>
 
-                    <a
-                        href={siteProfile.resumeHref}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 rounded-full border px-5 py-3 text-sm font-bold uppercase tracking-[0.14em] text-(--text-strong) transition hover:-translate-y-0.5"
-                        style={{
-                            borderColor: 'color-mix(in oklab, var(--gold) 46%, var(--border-soft))',
-                            background: 'color-mix(in oklab, var(--gold) 12%, var(--surface-1))',
-                        }}
-                    >
+                    <Button href={siteProfile.resumeHref} external variant="secondary">
                         <Download size={17} />
                         {footerContent.cta.resumeLabel}
-                    </a>
+                    </Button>
                 </div>
             </div>
         </section>

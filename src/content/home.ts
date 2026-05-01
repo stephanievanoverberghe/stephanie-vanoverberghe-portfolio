@@ -1,4 +1,4 @@
-import type { PrefaceContent } from './types';
+import type { PrefaceContent } from '@/types/content';
 import { siteProfile } from './site';
 
 export const homeHeroContent: PrefaceContent = {

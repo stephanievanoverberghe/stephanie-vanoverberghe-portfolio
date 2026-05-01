@@ -1,11 +1,19 @@
+import type { Metadata } from 'next';
 import { ArrowRight, Code2, Eye, Layers3, Sparkles } from 'lucide-react';
 
+import Button from '@/components/ui/Button';
+import HeroTitle from '@/components/ui/HeroTitle';
 import PageShell from '@/components/layout/PageShell';
-import LinkButton from '@/components/ui/LinkButton';
-
 import { aboutContent } from '@/content/about';
+import { buildPageMetadata } from '@/lib/seo';
 
 const icons = [Eye, Sparkles, Code2];
+
+export const metadata: Metadata = buildPageMetadata({
+    title: 'À propos — Stéphanie Vanoverberghe',
+    description: 'Parcours, approche frontend et manière de concevoir des interfaces React / Next.js claires, utiles et maintenables.',
+    canonical: '/about',
+});
 
 export default function AboutPage() {
     return (
@@ -18,13 +26,13 @@ export default function AboutPage() {
                     <div>
                         <p className="text-xs font-bold uppercase tracking-[0.28em] text-(--gold)">{aboutContent.hero.kicker}</p>
 
-                        <h1 className="mt-5 max-w-3xl text-[clamp(2.7rem,5.6vw,5.6rem)] font-semibold leading-[0.95] tracking-[-0.07em] text-(--text-strong)">
+                        <HeroTitle>
                             {aboutContent.hero.title.line1}
                             <br />
                             {aboutContent.hero.title.line2}
                             <br />
                             <span className="italic text-(--accent)">{aboutContent.hero.title.line3}</span>
-                        </h1>
+                        </HeroTitle>
 
                         <p className="mt-7 max-w-3xl text-base leading-7 text-(--text)">{aboutContent.hero.intro}</p>
                     </div>
@@ -114,14 +122,14 @@ export default function AboutPage() {
                     </div>
 
                     <div className="flex flex-wrap gap-3">
-                        <LinkButton href="/projects" variant="primary">
+                        <Button href="/projects">
                             {aboutContent.cta.primary}
                             <ArrowRight size={17} />
-                        </LinkButton>
+                        </Button>
 
-                        <LinkButton href="/contact" variant="secondary">
+                        <Button href="/contact" variant="secondary">
                             {aboutContent.cta.secondary}
-                        </LinkButton>
+                        </Button>
                     </div>
                 </div>
             </section>

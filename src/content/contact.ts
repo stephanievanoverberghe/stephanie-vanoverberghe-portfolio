@@ -1,6 +1,6 @@
 import { FileText, Github, Linkedin, Mail, Phone } from 'lucide-react';
 
-import type { ContactContent } from './types';
+import type { ContactContent } from '@/types/content';
 
 export const contactContent: ContactContent = {
     metadata: {

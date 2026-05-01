@@ -24,6 +24,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         { route: '/', sourceFile: resolveFromRoot('src', 'app', 'page.tsx'), priority: 1 },
         { route: '/projects', sourceFile: resolveFromRoot('src', 'app', 'projects', 'page.tsx'), priority: 0.8 },
         { route: '/skills', sourceFile: resolveFromRoot('src', 'app', 'skills', 'page.tsx'), priority: 0.7 },
+        { route: '/about', sourceFile: resolveFromRoot('src', 'app', 'about', 'page.tsx'), priority: 0.7 },
         { route: '/contact', sourceFile: resolveFromRoot('src', 'app', 'contact', 'page.tsx'), priority: 0.6 },
     ] as const;
 

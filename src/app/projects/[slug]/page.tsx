@@ -8,9 +8,9 @@ import ProjectDetails, { hasProjectDetails } from '@/components/project/ProjectD
 import GalleryPreview from '@/components/project/GalleryPreview';
 import ProjectHero from '@/components/project/ProjectHero';
 import ProjectOverview from '@/components/project/ProjectOverview';
-import { coverAlt, coverSrc } from '@/components/project/project.utils';
 import { projectsPageContent } from '@/content/projects-page';
 import { getProjectBySlug, getProjectSlugs } from '@/lib/projects';
+import { coverAlt, coverSrc } from '@/lib/project-display';
 
 export const dynamic = 'force-static';
 

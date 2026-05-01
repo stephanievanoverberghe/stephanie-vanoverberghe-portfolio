@@ -27,6 +27,21 @@ export function coverAlt(project: Project) {
     return project.hero?.alt ?? project.logo?.alt ?? project.title;
 }
 
+export function chipPropsByKind(kind: ChipKind) {
+    switch (kind) {
+        case 'design':
+            return { color: 'lilac' as const };
+        case 'tool':
+            return { color: 'gold' as const };
+        case 'architecture':
+            return { color: 'sage' as const };
+        case 'tech':
+        case 'neutral':
+        default:
+            return { color: 'accent' as const };
+    }
+}
+
 export function excerpt(text?: string, max = 150) {
     const value = (text ?? '').trim();
 
@@ -69,6 +84,58 @@ export function pickStackChips(stack: string[] = [], limit = 3) {
     }
 
     return selected;
+}
+
+export function pickStack(stack: string[] = [], count = 2): string[] {
+    const base = stack.map((item) => item.trim()).filter(Boolean);
+    const baseline = /(react|next\.?js|typescript|tailwind|framer)/i;
+    const tiers = [/(mongodb|postgres|prisma|zod)/i, /(stripe|vercel|analytics|eslint|prettier|pnpm|npm|git)/i, /(rsc|ssg|ssr|isr|caching)/i];
+
+    const chosen: string[] = [];
+    const used = new Set<string>();
+
+    const pick = (regex: RegExp) => {
+        for (const item of base) {
+            if (!used.has(item) && regex.test(item)) {
+                chosen.push(item);
+                used.add(item);
+
+                if (chosen.length >= count) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    };
+
+    for (const regex of tiers) {
+        if (pick(regex)) {
+            break;
+        }
+    }
+
+    if (chosen.length < count) {
+        for (const item of base) {
+            if (!used.has(item) && !baseline.test(item)) {
+                chosen.push(item);
+                used.add(item);
+                if (chosen.length >= count) break;
+            }
+        }
+    }
+
+    if (chosen.length < count) {
+        for (const item of base) {
+            if (!used.has(item)) {
+                chosen.push(item);
+                used.add(item);
+                if (chosen.length >= count) break;
+            }
+        }
+    }
+
+    return chosen.slice(0, count);
 }
 
 export function isProjectInProgress(project: Project) {

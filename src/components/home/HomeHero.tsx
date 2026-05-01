@@ -1,10 +1,11 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, Download } from 'lucide-react';
 
+import Button from '@/components/ui/Button';
+import HeroTitle from '@/components/ui/HeroTitle';
 import PageHero from '@/components/ui/PageHero';
 import { homeHeroContent } from '@/content/home';
 import { siteProfile } from '@/content/site';
@@ -31,33 +32,30 @@ export default function HomeHero() {
                         {homeHeroContent.title} · {homeHeroContent.availability}
                     </motion.p>
 
-                    <motion.h1 variants={fadeUp} className="mt-5 max-w-3xl text-[clamp(2.7rem,5.6vw,5.6rem)] font-semibold leading-[0.95] tracking-[-0.07em] text-(--text-strong)">
+                    <motion.div variants={fadeUp}>
+                        <HeroTitle className="mt-0">
                         {homeHeroContent.heroTitle.first}
                         <br />
                         {homeHeroContent.heroTitle.second}
                         <br />
                         <span className="italic text-(--accent)">{homeHeroContent.heroTitle.third}</span>
-                    </motion.h1>
+                        </HeroTitle>
+                    </motion.div>
 
                     <motion.p variants={fadeUp} className="mt-6 max-w-2xl text-base leading-7 text-(--text)">
                         {homeHeroContent.intro}
                     </motion.p>
 
                     <motion.div variants={fadeUp} className="mt-7 flex flex-wrap gap-3">
-                        <Link href="/projects" className="btn-premium btn-premium-primary inline-flex items-center gap-2 transition hover:-translate-y-0.5">
+                        <Button href="/projects">
                             {homeHeroContent.heroCtaPrimary}
                             <ArrowRight size={17} />
-                        </Link>
+                        </Button>
 
-                        <a
-                            href="/cv-vanoverberghe-stephanie.pdf"
-                            target="_blank"
-                            rel="noreferrer"
-                            className="btn-premium btn-premium-soft inline-flex items-center gap-2 transition hover:-translate-y-0.5"
-                        >
+                        <Button href="/cv-vanoverberghe-stephanie.pdf" external variant="secondary">
                             <Download size={17} />
                             {homeHeroContent.heroCtaSecondary}
-                        </a>
+                        </Button>
                     </motion.div>
                 </div>
 
