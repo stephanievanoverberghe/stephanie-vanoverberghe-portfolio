@@ -12,10 +12,23 @@ type HeaderDesktopNavProps = {
 };
 
 export function HeaderDesktopNav({ isActive }: HeaderDesktopNavProps) {
+    const activeIndex = Math.max(
+        0,
+        primaryNavigation.findIndex((item) => isActive(item.href)),
+    );
+
     return (
         <nav aria-label={headerContent.desktopNavAriaLabel} className="header-desktop-nav">
             <div className="nav-shell grid grid-cols-[1fr_auto] items-center gap-6 py-4">
-                <div className="nav-grid grid grid-cols-4 overflow-hidden rounded-[1.4rem]">
+                <div className="nav-grid relative grid grid-cols-4 overflow-hidden rounded-[1.4rem]">
+                    <motion.span
+                        aria-hidden
+                        className="nav-item-active absolute inset-y-0 left-0"
+                        style={{ width: `${100 / primaryNavigation.length}%` }}
+                        animate={{ x: `${activeIndex * 100}%` }}
+                        transition={{ type: 'spring', stiffness: 360, damping: 34, mass: 0.7 }}
+                    />
+
                     {primaryNavigation.map((item, index) => {
                         const active = isActive(item.href);
 
@@ -29,16 +42,10 @@ export function HeaderDesktopNav({ isActive }: HeaderDesktopNavProps) {
                                     active ? 'text-(--text-strong)' : 'text-(--text-muted) hover:text-(--text-strong)',
                                 )}
                             >
-                                {active && (
-                                    <motion.span layoutId="desktop-nav-block" className="nav-item-active absolute inset-0" transition={{ type: 'spring', stiffness: 420, damping: 36 }} />
-                                )}
-
                                 <span className="relative z-10">
                                     <span className="block text-[10px] font-bold tracking-[0.2em] text-(--accent)">0{index + 1}</span>
                                     <span className="mt-1 block text-[12px] font-bold uppercase tracking-[0.2em]">{item.label}</span>
                                 </span>
-
-                                <span className="relative z-10 text-(--accent) opacity-0 transition group-hover:opacity-100">/</span>
                             </Link>
                         );
                     })}
@@ -55,10 +62,7 @@ export function HeaderDesktopNav({ isActive }: HeaderDesktopNavProps) {
                         {headerContent.resumeLabel}
                     </Link>
 
-                    <Link
-                        href="/contact"
-                        className="button-motion btn-premium btn-premium-primary inline-flex min-h-16 items-center gap-2 rounded-[1.4rem] px-5 text-xs"
-                    >
+                    <Link href="/contact" className="button-motion btn-premium btn-premium-primary inline-flex min-h-16 items-center gap-2 rounded-[1.4rem] px-5 text-xs">
                         {headerContent.contactLabel}
                         <ArrowUpRight size={16} />
                     </Link>
