@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Image from 'next/image';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
 import { cn } from '@/lib/cn';
 import { GalleryGrid } from './GalleryGrid';
@@ -80,17 +80,7 @@ export default function GalleryLightbox({ images, title, className, open, startI
     const idx = openIndex ?? 0;
 
     const ctrlCls =
-        'inline-flex items-center justify-center rounded-full border transition ' +
-        'focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 ' +
-        'hover:scale-[1.04] active:scale-[0.98]';
-
-    const ctrlStyle: React.CSSProperties = {
-        outlineColor: 'var(--ring-focus)',
-        borderColor: 'color-mix(in oklab, var(--surface-1) 40%, transparent)',
-        color: 'var(--surface-1)',
-        background: 'color-mix(in oklab, var(--ink) 42%, transparent)',
-        boxShadow: '0 10px 30px rgba(2,8,23,0.35)',
-    };
+        'gallery-focus gallery-control inline-flex items-center justify-center rounded-full transition focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 hover:scale-[1.04] active:scale-[0.98]';
 
     return (
         <>
@@ -109,33 +99,17 @@ export default function GalleryLightbox({ images, title, className, open, startI
 
             {isOpen && current ? (
                 <div role="dialog" aria-modal="true" aria-label="Visionneuse" className="fixed inset-0 z-999">
-                    <button
-                        type="button"
-                        aria-label="Fermer"
-                        onClick={close}
-                        className="absolute inset-0"
-                        style={{ background: 'color-mix(in oklab, var(--ink) 74%, transparent)' }}
-                    />
+                    <button type="button" aria-label="Fermer" onClick={close} className="absolute inset-0 bg-(--ink)/75" />
                     <div className="absolute inset-0 backdrop-blur-[10px]" />
 
                     <div className="relative mx-auto flex h-full max-w-6xl flex-col px-3 py-4 md:px-6 md:py-6">
                         <div className="flex items-center justify-between gap-3">
-                            <div
-                                className="rounded-full border px-3 py-1 text-xs opacity-85 md:text-sm"
-                                style={{
-                                    color: 'var(--surface-1)',
-                                    borderColor: 'color-mix(in oklab, var(--surface-1) 28%, transparent)',
-                                    background: 'color-mix(in oklab, var(--ink) 40%, transparent)',
-                                }}
-                            >
-                                {idx + 1} / {images.length}
-                            </div>
+                            <div className="gallery-control rounded-full px-3 py-1 text-xs opacity-85 md:text-sm">{idx + 1} / {images.length}</div>
 
                             <button
                                 type="button"
                                 onClick={close}
                                 className={cn(ctrlCls, 'h-10 w-10 cursor-pointer md:h-12 md:w-12')}
-                                style={ctrlStyle}
                                 aria-label="Fermer la visionneuse"
                             >
                                 <X className="h-5 w-5" />
@@ -143,29 +117,12 @@ export default function GalleryLightbox({ images, title, className, open, startI
                         </div>
 
                         <div className="relative mt-3 flex-1">
-                            <div
-                                className="absolute inset-0 overflow-hidden rounded-2xl border"
-                                style={{
-                                    borderColor: 'color-mix(in oklab, var(--surface-1) 24%, transparent)',
-                                    background: 'color-mix(in oklab, var(--ink) 18%, transparent)',
-                                    boxShadow: '0 30px 90px rgba(2,8,23,0.45)',
-                                }}
-                            />
+                            <div className="gallery-control-surface absolute inset-0 overflow-hidden rounded-2xl border" />
+
                             <div className="relative h-full overflow-hidden rounded-2xl">
                                 <div className="absolute inset-0 flex items-center justify-center p-3 md:p-6">
-                                    <div
-                                        className="relative h-full w-full overflow-hidden rounded-xl"
-                                        style={{ background: 'color-mix(in oklab, var(--surface-1) 70%, transparent)' }}
-                                    >
-                                        <Image
-                                            key={current.src}
-                                            src={current.src}
-                                            alt={getGalleryAlt(current, title, 'Image en grand format')}
-                                            fill
-                                            sizes="100vw"
-                                            className="object-contain"
-                                            priority
-                                        />
+                                    <div className="relative h-full w-full overflow-hidden rounded-xl bg-white/70">
+                                        <Image key={current.src} src={current.src} alt={getGalleryAlt(current, title, 'Image en grand format')} fill sizes="100vw" className="object-contain" priority />
                                     </div>
                                 </div>
 
@@ -177,7 +134,6 @@ export default function GalleryLightbox({ images, title, className, open, startI
                                             prev();
                                         }}
                                         className={cn(ctrlCls, 'h-10 w-10 cursor-pointer md:h-12 md:w-12')}
-                                        style={ctrlStyle}
                                         aria-label="Image précédente"
                                     >
                                         <ChevronLeft className="h-5 w-5" />
@@ -190,7 +146,6 @@ export default function GalleryLightbox({ images, title, className, open, startI
                                             next();
                                         }}
                                         className={cn(ctrlCls, 'h-10 w-10 cursor-pointer md:h-12 md:w-12')}
-                                        style={ctrlStyle}
                                         aria-label="Image suivante"
                                     >
                                         <ChevronRight className="h-5 w-5" />
@@ -200,11 +155,7 @@ export default function GalleryLightbox({ images, title, className, open, startI
                         </div>
 
                         <div className="mt-3 space-y-3">
-                            {current.alt ? (
-                                <div className="text-center text-sm opacity-90" style={{ color: 'var(--surface-1)' }}>
-                                    {current.alt}
-                                </div>
-                            ) : null}
+                            {current.alt ? <div className="text-center text-sm text-white/90">{current.alt}</div> : null}
 
                             <GalleryThumbStrip
                                 images={images}

@@ -486,6 +486,71 @@ a:hover {
   background: linear-gradient(135deg, color-mix(in oklab, var(--accent) 10%, var(--paper)), color-mix(in oklab, var(--gold) 14%, var(--paper)));
 }
 
+.gallery-surface {
+  border: 1px solid var(--border-soft);
+  background: var(--surface-1);
+  box-shadow: var(--shadow-card);
+}
+
+.gallery-frame {
+  border: 1px solid var(--border-soft);
+  background: linear-gradient(135deg, color-mix(in oklab, var(--surface-2) 70%, var(--surface-1)), var(--surface-1));
+}
+
+.gallery-focus {
+  outline-color: var(--ring-focus);
+}
+
+.gallery-overlay {
+  background: linear-gradient(to top, rgba(18, 19, 20, 0.55), transparent 62%);
+}
+
+.gallery-overlay-soft {
+  background: linear-gradient(to top, rgba(18, 19, 20, 0.34), transparent 60%);
+}
+
+.gallery-overlay-strong {
+  background: linear-gradient(to top, rgba(18, 19, 20, 0.54), transparent 58%);
+}
+
+.gallery-control {
+  border: 1px solid color-mix(in oklab, var(--surface-1) 40%, transparent);
+  color: var(--surface-1);
+  background: color-mix(in oklab, var(--ink) 42%, transparent);
+  box-shadow: 0 10px 30px rgba(2, 8, 23, 0.35);
+}
+
+.gallery-control-surface {
+  border-color: color-mix(in oklab, var(--surface-1) 24%, transparent);
+  background: color-mix(in oklab, var(--ink) 18%, transparent);
+  box-shadow: 0 30px 90px rgba(2, 8, 23, 0.45);
+}
+
+.gallery-thumb-active {
+  border-color: color-mix(in oklab, var(--accent) 58%, var(--surface-1));
+  box-shadow: 0 10px 28px rgba(2, 8, 23, 0.35);
+}
+
+.gallery-thumb-inactive {
+  border-color: color-mix(in oklab, var(--surface-1) 22%, transparent);
+}
+
+.gallery-thumb-active::after,
+.gallery-thumb-inactive::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.gallery-thumb-active::after {
+  box-shadow: inset 0 0 0 2px color-mix(in oklab, var(--accent) 65%, transparent);
+}
+
+.gallery-thumb-inactive::after {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
 /* =========================================================
    8) A11y / focus
    ========================================================= */
