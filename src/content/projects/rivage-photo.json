@@ -2,76 +2,97 @@
     "slug": "rivage-photo",
     "title": "Rivage Photo",
     "order": 1,
-    "subtitle": "Portfolio photo + admin métier — publier des séries, gérer l’équipe et éditer les images sans friction",
-    "year": 2026,
+    "subtitle": "Portfolio photographe + back-office métier — publier des séries, gérer les images, les demandes et les réglages sans friction",
+    "year": 2025,
     "role": ["Product Design", "Front-end", "UI/UX", "Architecture", "Fullstack"],
     "stack": ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS v4", "Prisma", "NextAuth v5", "Cloudinary", "PostgreSQL", "Vercel"],
-    "context": "Rivage Photo associe un front public très épuré à un back-office orienté métier. Le projet ne cherche pas seulement à montrer des images : il cherche aussi à simplifier la gestion concrète des séries, de l’équipe et des médias pour un utilisateur non technique.",
-    "vision": "Concevoir un portfolio photo dont l’admin se manipule comme un outil de travail réel : direct, clair, guidé et sans jargon inutile.",
+    "context": "Rivage Photo associe un front public très épuré à un back-office orienté métier. Le projet ne cherche pas seulement à montrer des images : il simplifie aussi la gestion concrète des séries, des médias, des demandes de contact, de l’équipe et des réglages du site pour un usage quotidien.",
+    "vision": "Concevoir un portfolio photographe dont l’admin se manipule comme un véritable outil de travail : direct, clair, guidé et sans jargon inutile, tout en laissant la partie publique s’effacer devant les images.",
     "objectives": [
-        "Permettre de publier et modifier des séries facilement.",
-        "Rendre la gestion des images plus fluide (upload, tri, ALT).",
+        "Permettre de publier, modifier et dépublier des séries facilement.",
+        "Rendre la gestion des images plus fluide : upload, tri, couverture, textes ALT.",
         "Créer un espace admin lisible pour une équipe restreinte.",
-        "Conserver un front public discret où les images restent au centre."
+        "Conserver un front public discret où les images restent au centre.",
+        "Faire remonter les demandes de contact dans un back-office réellement exploitable."
     ],
     "productPrinciples": [
         "L’interface publique s’efface devant les images.",
         "L’admin doit orienter vers l’action plutôt que vers la technique.",
         "Les garde-fous doivent être intégrés au workflow.",
-        "Les rôles et les états doivent rester visibles."
+        "Les rôles, statuts et états doivent rester visibles.",
+        "Le site public et l’admin doivent partager la même source de vérité."
     ],
     "challenges": [
-        "Faire cohabiter un front minimal et un admin riche.",
-        "Gérer l’auth, les rôles et les sessions sans alourdir l’expérience.",
+        "Faire cohabiter un front minimal et un admin riche dans le même produit.",
+        "Gérer l’authentification, les rôles et les sessions sans alourdir l’expérience.",
         "Construire une édition de séries assez complète pour être utile au quotidien.",
-        "Maintenir une interface sombre lisible malgré la densité fonctionnelle du back-office."
+        "Maintenir une interface sombre lisible malgré la densité fonctionnelle du back-office.",
+        "Reconnecter le front public à la vraie donnée métier au lieu d’un simple catalogue statique."
     ],
     "solutions": [
         "Structure publique séparée de la zone admin protégée.",
         "Authentification NextAuth et contrôle d’accès côté serveur.",
-        "Prisma pour les modèles, Cloudinary pour les images et génération postinstall.",
-        "Composants d’admin dédiés pour la gestion d’équipe, des avatars et des séries."
+        "Prisma pour les modèles métier et la persistance.",
+        "Cloudinary pour la gestion des images.",
+        "Composants admin dédiés pour les séries, les images, l’équipe, les avatars et les réglages.",
+        "Demandes de contact stockées en base et visibles dans l’admin."
     ],
     "highlights": [
-        "Projet très crédible en contexte produit métier.",
-        "Admin pensé pour l’usage réel, pas juste pour faire joli en démo.",
-        "Intégration cohérente auth + base + médias.",
-        "Front public sobre qui laisse vraiment la place aux séries."
+        "Projet crédible en contexte produit métier.",
+        "Admin pensé pour l’usage réel, pas juste pour une démo.",
+        "Intégration cohérente entre auth, base de données et médias.",
+        "Front public sobre qui laisse vraiment la place aux séries.",
+        "Refonte structurelle du projet pour aligner architecture, contenus et parcours."
     ],
     "uxHighlights": [
         "Dashboard et parcours admin orientés tâches.",
         "Différenciation claire entre brouillon et publié.",
         "Gestion d’équipe intégrée au back-office.",
+        "Médiathèque et gestion d’images pensées pour l’usage quotidien.",
+        "Demandes de contact visibles et pilotables depuis l’admin.",
         "Mode focus et navigation simple côté galerie publique."
     ],
     "uiHighlights": [
         "Univers sombre, net et maîtrisé.",
         "Accent couleur utilisé pour guider l’action dans l’admin.",
-        "Cartes, tableaux et shells cohérents entre eux.",
-        "Galerie publique discrète au service des images."
+        "Cartes, shells, formulaires et listes harmonisés.",
+        "Galerie publique discrète au service des images.",
+        "Composants de formulaires et dropdowns retravaillés sur mesure dans l’admin."
     ],
     "notableDecisions": [
         "Traiter l’admin comme un vrai produit séparé à l’intérieur du même repo.",
-        "Utiliser la protection server-side via auth et layouts plutôt qu’une simple logique client.",
+        "Utiliser une protection server-side via auth, layouts et routes sécurisées plutôt qu’une simple logique client.",
         "Faire de la gestion d’équipe une brique native du projet.",
-        "Garder la couche publique volontairement minimale."
+        "Rebrancher le site public sur la vraie source Prisma.",
+        "Garder la couche publique volontairement minimale pour protéger la lecture des images."
     ],
     "nextSteps": [
         "Pousser les validations et tests autour du back-office.",
         "Continuer à affiner les workflows d’édition les plus complexes.",
-        "Ajouter des automatisations autour des publications ou de la modération interne."
+        "Ajouter des automatisations autour des publications ou de la modération interne.",
+        "Renforcer encore les retours système et les garde-fous métier."
     ],
     "architecture": {
-        "summary": "Projet App Router séparant clairement la zone publique et la zone admin, avec auth, base de données et gestion média intégrées.",
+        "summary": "Projet Next.js App Router séparant clairement la zone publique et la zone admin, avec authentification, base de données, réglages éditoriaux et gestion média intégrés.",
         "keyPoints": [
             "NextAuth v5 et protection serveur.",
             "Prisma pour la modélisation et la persistance.",
             "Cloudinary pour la gestion des images.",
-            "Routes admin dédiées pour séries et équipe."
+            "Routes admin dédiées pour séries, images, équipe, contacts et réglages.",
+            "Source de données unifiée entre front public et back-office."
         ],
-        "publicRoutes": ["/", "/series/[slug]", "/about", "/contact"],
-        "adminRoutes": ["/admin", "/admin/login", "/admin/team"],
-        "adminFeatures": ["Gestion des séries", "Gestion des images", "Gestion d’équipe", "Dashboard", "Avatars utilisateurs"]
+        "publicRoutes": ["/", "/series/[slug]", "/a-propos", "/contact", "/commandes"],
+        "adminRoutes": ["/admin", "/admin/login", "/admin/activity", "/admin/series", "/admin/images", "/admin/contacts", "/admin/team", "/admin/settings"],
+        "adminFeatures": [
+            "Gestion des séries",
+            "Gestion des images",
+            "Gestion d’équipe",
+            "Dashboard",
+            "Activité",
+            "Demandes de contact",
+            "Réglages du site",
+            "Avatars utilisateurs"
+        ]
     },
     "links": {
         "demo": "https://rivage-photo.vercel.app/",
