@@ -95,19 +95,19 @@
     "gallery": [
         {
             "src": "/images/projects/alchimiste-creations/desktop-1.webp",
-            "alt": "Présentation des prestations et du positionnement du studio"
+            "alt": "Présentation du portfolio et du projet phare"
         },
         {
             "src": "/images/projects/alchimiste-creations/desktop-2.webp",
-            "alt": "Section process et logique d’accompagnement"
+            "alt": "Lightbox série du projet Rivage Photo"
         },
         {
             "src": "/images/projects/alchimiste-creations/mobile-1.webp",
-            "alt": "Adaptation mobile de la page portfolio"
+            "alt": "Formulaire de contact"
         },
         {
             "src": "/images/projects/alchimiste-creations/mobile-2.webp",
-            "alt": "Parcours de contact sur mobile"
+            "alt": "Mise en avant des 3 offres principales"
         }
     ]
 }
